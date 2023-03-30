@@ -6,7 +6,7 @@ function UserProfile(props) {
   return (
     <div className="user-profile">
       <div className="left">
-        <div className="pfp"><img src={props.pfp} alt="pfp" /></div>
+        <div className="pic"><img src={props.pic} alt="pic" /></div>
         <p className="username">{props.username}</p>
       </div>
       <div className="right">
