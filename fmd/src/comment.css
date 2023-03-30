@@ -21,32 +21,34 @@ body {
 
 .comment {
   width: 52%;
+  height: 30%;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: max(1%,10px);
   border-radius: 20px;
   margin-right : 7%;
   margin-left : 7%;
-  margin-top : 20px;
-  margin-bottom: 20px;
+  margin-top : max(1.5%,20px);
+  margin-bottom: max(1.5%,20px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  gap: 11.25px;
+  gap: max(10%,10px);
 }
 
 .comment-header {
   margin: 0;
   display: flex;
-  width: 14.3%;
+  height: 10%;
+  width: 100%;
   flex-direction : row;
   align-items: center;
 }
 
 .pfp {
-  width: 15px;
-  height: 15px;
+  height: 1em;
+  aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 7.5px;
+  margin-right: 1.5%;
 }
 
 .pfp img {
@@ -60,7 +62,7 @@ body {
   color: #742BBA;
   font-weight: 500;
   font-style: normal;
-  font-size: 15px;
+  font-size: 0.9em;
   margin: 0;
 }
 
@@ -75,7 +77,7 @@ body {
 
 .comment-body p{
   color: #742BBA;
-  font-size: 15px;
+  font-size: 0.8em;
   line-height: 1.2;
   text-align: left;
   margin: 0;
