@@ -21,7 +21,6 @@ body {
 
 .comment {
   width: 52%;
-  height: 30%;
   display: flex;
   flex-direction: column;
   padding: max(1%,10px);
@@ -36,8 +35,8 @@ body {
 
 .comment-header {
   margin: 0;
+  height: 13.88%;
   display: flex;
-  height: 10%;
   width: 100%;
   flex-direction : row;
   align-items: center;
@@ -45,7 +44,7 @@ body {
 
 .pfp {
   height: 1em;
-  aspect-ratio: 1;
+  width: 1em;
   border-radius: 50%;
   overflow: hidden;
   margin-right: 1.5%;
@@ -62,7 +61,7 @@ body {
   color: #742BBA;
   font-weight: 500;
   font-style: normal;
-  font-size: 0.9em;
+  font-size: 90%;
   margin: 0;
 }
 
