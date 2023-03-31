@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('./Roboto/Roboto-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('./Roboto/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+.card {
+    width:60%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    padding: max(1%,10px);
+    border-radius: 20px;
+    margin-right : 5%;
+    margin-left : 5%;
+    margin-top : max(1.5%,20px);
+    margin-bottom: max(1.5%,20px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    gap: max(5%,10px);
+}
+
+.poster {
+    width: 35%;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+    margin: 0;
+}
+.poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.data {
+    width: 60%;
+    min-height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-family: 'Roboto', sans-serif;
+    color: #742BBA;
+    text-align: left;
+    gap: 10%;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
+}
+
+#movietitle {
+    font-size: 2.5em;
+    font-weight: 500;
+    margin: 0;
+}
+#year {
+    font-size: 1em;
+    font-weight: 300;
+    margin: 0;
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
+}
+
+#rating {
+    font-size: 1em;
+    font-weight: 400;
+    margin: 0;
+}
+#duration {
+    font-size: 1em;
+    font-weight: 400;
+    margin: 0;
+}
+
+#season {
+    font-size: 1.em;
+    font-weight: 400;
+    margin: 0;
+}
+
+.bottom {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
+
+}
+#cast {
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 0;
+}
+
+.genrelist {
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}

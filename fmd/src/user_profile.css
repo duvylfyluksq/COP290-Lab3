@@ -22,9 +22,9 @@
 .user-profile {
     display: flex;
     flex-direction: row;
-    gap: 5%;
-    width: 50%;
-    height: 40%;
+    width: 35%;
+    height: auto;
+    gap: 4.25%;
     padding: 0;
     margin: 50px;
 }
@@ -34,19 +34,22 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
-    min-height: 100%;
-    width: 25%;
-    gap: 10%;
-    border-radius: 30px;
-    padding: 3%;
+    align-items: center;
+    height: inherit;
+    width: 20%;
+    border-radius: 20px;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
 .pic {
-    height: 1;
+    width: 51%;
     aspect-ratio: 1;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 10%;
+    margin: 0;
 }
   
 .pic img {
@@ -64,7 +67,7 @@
     font-weight: 500;
     font-style: normal;
     color: #742BBA;
-    font-size: 80%;
+    font-size: 60%;
     margin: 0;
 }
 
@@ -73,11 +76,15 @@
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    min-height: 100%;
-    width: 55%;
-    border-radius: 30px;
-    padding: 3%;
+    justify-content: space-between;
+    height:inherit;
+    width: 67%;
+    border-radius: 20px;
     gap: 15%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .bio {
@@ -85,7 +92,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 30%;
+    justify-content: space-between;
+    gap: 15%;
 }
 
 .bio h6 {
@@ -94,8 +102,7 @@
     font-style: normal;
     margin: 0;
     text-align: left;
-    font-size: 80%;
-    margin-bottom: 2.5%;
+    font-size: 60%;
 }
 
 .bio p {
@@ -104,14 +111,16 @@
     font-style: normal;
     margin: 0;
     text-align: left;
-    font-size: 40%;
+    font-size: 30%;
 }
 
 .interests{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 30%;
+    justify-content: space-between;
+    margin: 0;
+    gap: 15%;
 }
 
 .interests h6 {
@@ -121,8 +130,7 @@
     color: #742BBA;
     margin: 0;
     text-align: left;
-    font-size: 80%;
-    margin-bottom: 2.5%;
+    font-size: 60%;
 }
 
 .interestList {
@@ -130,6 +138,7 @@
     flex-direction: row;
     width: 100%;
     height: 50%;
+    margin: 0;
     gap: 5%;
 }
 
@@ -137,7 +146,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 30%;
+    justify-content: space-between;
+    margin: 0;
+    gap: 15%;
 }
 
 .stats h6 {
@@ -147,8 +158,7 @@
     color: #742BBA;
     margin: 0;
     text-align: left;
-    font-size: 80%;
-    margin-bottom: 2.5%;
+    font-size: 60%;
 }
 
 .statList {
@@ -165,7 +175,7 @@
     font-weight: 400;
     font-style: normal;
     gap: 5%;
-    font-size: 40%;
+    font-size: 30%;
 }
 
 .statField p{
@@ -173,5 +183,5 @@
     font-weight: 300;
     font-style: normal;
     margin: 0;
-    font-size: 40%;
+    font-size: 30%;
 }

@@ -20,7 +20,7 @@
   }
 
 .card {
-    width: 60%;
+    width:60%;
     height: 30%;
     display: flex;
     flex-direction: row;
@@ -35,10 +35,8 @@
 }
 
 .poster {
-    width: 40%;
-    aspect-ratio: 1;
-    border-radius: 0;
-    margin: 0;
+    width: 35%;
+    aspect-ratio: 3/2;
     overflow: hidden;
     margin: 0;
 }
@@ -54,6 +52,9 @@
     margin: 0;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    padding-top: 1%;
+    padding-bottom: 1%;
     font-family: 'Roboto', sans-serif;
     color: #742BBA;
     text-align: left;
@@ -61,48 +62,58 @@
 }
 
 .top {
-    margin: 0;
-    vertical-align: top;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
 }
 
 #movietitle {
-    font-size: 3.5em;
+    font-size: 2.5em;
     font-weight: 500;
     margin: 0;
 }
+
 #year {
-    font-size: 1.5em;
-    font-weight: 100;
+    font-size: 1em;
+    font-weight: 300;
     margin: 0;
 }
 
 .middle {
-    margin: 0;
-    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
 }
 
 #rating {
     font-size: 1em;
-    font-weight: 200;
+    font-weight: 400;
     margin: 0;
 }
 #duration {
     font-size: 1em;
-    font-weight: 200;
+    font-weight: 400;
     margin: 0;
 }
 
 .bottom {
     margin: 0;
-    vertical-align: bottom;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    width: 100%;
+
 }
 #cast {
     font-size: 1.5em;
-    font-weight: 300;
+    font-weight: 400;
     margin: 0;
 }
 
 .genrelist {
     display: flex;
     flex-direction: row;
+    gap: 5%;
 }

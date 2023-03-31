@@ -1,8 +1,7 @@
 import React from 'react';
-import './browsecard.css';
+import './browsecard_movie.css';
 import GenreTile from './genre_tile'
-// title, poster, year, rating, duration, cast, genres...
-function Browsecard(props) {
+function BrowsecardMovie(props) {
     return (
         <div className="card">
           <div className="poster">
@@ -29,4 +28,4 @@ function Browsecard(props) {
         </div>
       );
 }
-export default Browsecard;
+export default BrowsecardMovie;
