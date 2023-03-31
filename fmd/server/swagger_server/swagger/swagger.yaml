@@ -1,0 +1,837 @@
+openapi: 3.0.3
+info:
+  title: FMD
+  description: A website for movies' and TV shows' reviews
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: om.dehlantube@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 3.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/VINAYTAYAL28/FMD_API3.0/3.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: Reviews
+  description: Everything about reviews
+- name: Titles
+  description: Everything about shows or movies
+- name: User
+  description: Operations about user
+paths:
+  /search:
+    get:
+      description: Obtain the list of all movies that matches the expression
+      operationId: search_get
+      parameters:
+      - name: expression
+        in: query
+        description: the expression to be searched
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: inception
+      - name: language
+        in: query
+        description: language of the movie
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: English
+      responses:
+        "200":
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        "404":
+          description: Movie Not found
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /review:
+    post:
+      tags:
+      - Reviews
+      summary: Add a new post or review
+      operationId: review_post
+      parameters:
+      - name: title
+        in: query
+        description: the title of the show or movie to add the review
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: Joker
+      - name: rating
+        in: query
+        description: rating by the user
+        required: true
+        style: form
+        explode: true
+        schema:
+          maximum: 10
+          minimum: 1
+          type: integer
+      - name: review_title
+        in: query
+        description: the review title of the review to be added
+        required: true
+        style: form
+        explode: true
+        schema:
+          maximum: 120
+          type: string
+          example: Joker
+      - name: content
+        in: query
+        description: content of the review
+        required: true
+        style: form
+        explode: true
+        schema:
+          maximum: 500
+          type: string
+      responses:
+        "200":
+          description: ok
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
+  /Movies:
+    get:
+      tags:
+      - Titles
+      summary: Get movies by genre and sorting type
+      operationId: movies_get
+      parameters:
+      - name: genre
+        in: query
+        description: Filter by genre (comma-separated list of values)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: "Sort by type and order (format: type-order)"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'
+                x-content-type: application/json
+        "400":
+          description: Invalid request
+        "404":
+          description: No movies found
+      x-openapi-router-controller: swagger_server.controllers.titles_controller
+  /TVs:
+    get:
+      tags:
+      - Titles
+      summary: Get TV shows by genre and sorting type
+      operationId: t_vs_get
+      parameters:
+      - name: genre
+        in: query
+        description: Filter by genre (comma-separated list of values)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: "Sort by type and order (format: type-order)"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shows'
+                x-content-type: application/json
+        "400":
+          description: Invalid request
+        "404":
+          description: No TV shows found
+      x-openapi-router-controller: swagger_server.controllers.titles_controller
+  /users/signin:
+    post:
+      tags:
+      - User
+      summary: Sign in user with credentials
+      operationId: users_signin_post
+      parameters:
+      - name: Username
+        in: query
+        description: Username
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: bobdylan
+      - name: Password
+        in: query
+        description: Password
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: the_og_om
+      responses:
+        "200":
+          description: User signed in successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Bad request
+        "401":
+          description: Invalid credentials
+        "500":
+          description: Internal server error
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+  /users/signup:
+    post:
+      tags:
+      - User
+      summary: Create a new user account
+      operationId: users_signup_post
+      parameters:
+      - name: Username
+        in: query
+        description: Username
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: bobdylan
+      - name: Password
+        in: query
+        description: Password
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: the_og_om
+      - name: Confirm_Password
+        in: query
+        description: Confirm Password
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: the_og_om
+      - name: interests
+        in: query
+        description: Filter by genre (comma-separated list of values)
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: bio
+        in: query
+        description: about user
+        required: true
+        style: form
+        explode: true
+        schema:
+          maximum: 200
+          type: string
+          example: I am bobdylan. Hello world.
+      responses:
+        "200":
+          description: User account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Bad request
+        "409":
+          description: User already exists
+        "500":
+          description: Internal server error
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+  /Reviews/{Title}:
+    get:
+      tags:
+      - Reviews
+      summary: Get all reviews of a title
+      description: Returns a list of reviews for a particular title
+      operationId: reviews_title_get
+      parameters:
+      - name: Title
+        in: path
+        description: Title of the movie or TV show
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Sort order for the reviews. Use + for ascending order and - for
+          descending order. Default is ascending order.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - +rating
+          - -rating
+          - +date
+          - -date
+      responses:
+        "200":
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+                x-content-type: application/json
+        "400":
+          description: Invalid request
+        "404":
+          description: Title not found
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
+  /reviews/{review_id}/comments:
+    post:
+      tags:
+      - Reviews
+      summary: Add comment to review
+      operationId: reviews_review_id_comments_post
+      parameters:
+      - name: review_id
+        in: path
+        description: ID of the review
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: comment
+        in: query
+        description: Comment to be added to review
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/comment'
+      responses:
+        "201":
+          description: Comment added successfully to review
+        "400":
+          description: Bad request. Invalid review ID or missing required fields
+        "404":
+          description: Review not found
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
+  /reviews/{review_id}/likes:
+    post:
+      tags:
+      - Reviews
+      summary: Add like to review
+      operationId: reviews_review_id_likes_post
+      parameters:
+      - name: review_id
+        in: path
+        description: ID of the review
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: ID of the user who likes the review
+        required: true
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/user_id'
+      responses:
+        "201":
+          description: Like added successfully to review
+        "400":
+          description: Bad request. Invalid review ID or missing required fields
+        "404":
+          description: Review not found
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
+  /Title/{Title}:
+    get:
+      tags:
+      - Titles
+      summary: Get information about a title
+      description: "Returns information about a particular title, including its title,\
+        \ genre, director, actors, release date, and description."
+      operationId: title_title_get
+      parameters:
+      - name: Title
+        in: path
+        description: Name of the movie or book
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Information about the title
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Title'
+        "400":
+          description: Invalid request
+        "404":
+          description: Title not found
+      x-openapi-router-controller: swagger_server.controllers.titles_controller
+  /Reviews/{user_id}:
+    get:
+      tags:
+      - Reviews
+      summary: Get all reviews of a user
+      description: Returns a list of reviews for a particular user
+      operationId: reviews_user_id_get
+      parameters:
+      - name: user_id
+        in: path
+        description: user id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: sort
+        in: query
+        description: Sort order for the reviews. Use + for ascending order and - for
+          descending order. Default is ascending order.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - +rating
+          - -rating
+          - +date
+          - -date
+      responses:
+        "200":
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+                x-content-type: application/json
+        "400":
+          description: Invalid request
+        "404":
+          description: Title not found
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
+  /watchlist/{user_id}:
+    get:
+      tags:
+      - User
+      summary: Get all titles in user watchlist
+      operationId: watchlist_user_id_get
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: List of titles in user watchlist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                x-content-type: application/json
+        "400":
+          description: Bad request. Invalid user ID
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+    post:
+      tags:
+      - User
+      summary: Add a title to user watchlist
+      operationId: watchlist_user_id_post
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: title
+        in: query
+        description: Title to be added to the watchlist
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "201":
+          description: Title added successfully
+        "400":
+          description: Bad request. Invalid user ID or title not provided
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+  /watchlist/{user_id}/remove:
+    put:
+      tags:
+      - User
+      summary: Remove title from user's watchlist
+      operationId: watchlist_user_id_remove_put
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: title
+        in: query
+        description: Title to be removed from user's watchlist
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Title removed successfully from user's wishlist
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
+        "404":
+          description: User not found or title not found in user's wishlist
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+  /profile/{user_id}/name:
+    put:
+      tags:
+      - User
+      summary: Update user name
+      operationId: profile_user_id_name_put
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: name
+        in: query
+        description: New name of the user
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Name updated successfully
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
+        "404":
+          description: User not found
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+  /profile/{user_id}/pic:
+    put:
+      tags:
+      - User
+      summary: Update user pic
+      operationId: profile_user_id_pic_put
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: pic
+        in: query
+        description: New pic
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: pic updated successfully
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
+        "404":
+          description: User not found
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+  /profile/{user_id}/bio:
+    put:
+      tags:
+      - User
+      summary: Update user bio
+      operationId: profile_user_id_bio_put
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: address
+        in: query
+        description: New bio
+        required: true
+        style: form
+        explode: true
+        schema:
+          maximum: 200
+          type: string
+      responses:
+        "200":
+          description: Address updated successfully
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
+        "404":
+          description: User not found
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+components:
+  schemas:
+    Movie:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Inception
+        year:
+          type: integer
+          example: 1999
+        genre:
+          type: string
+          example: Thriller
+        director:
+          type: string
+          example: Christopher Nolan
+        writer:
+          type: string
+          example: Christopher Nolan
+        cast:
+          type: array
+          example: {}
+          items:
+            type: string
+        rating:
+          type: number
+          example: 8.3
+        poster:
+          type: string
+      example:
+        cast: {}
+        year: 1999
+        director: Christopher Nolan
+        genre: Thriller
+        rating: 8.3
+        writer: Christopher Nolan
+        title: Inception
+        poster: poster
+    Shows:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Stranger Things season 3
+        year:
+          type: integer
+          example: 1999
+        genre:
+          type: string
+          example: Thriller
+        director:
+          type: string
+          example: Christopher Nolan
+        writer:
+          type: string
+          example: Christopher Nolan
+        cast:
+          type: array
+          example: {}
+          items:
+            type: string
+        rating:
+          type: number
+          example: 8.3
+        poster:
+          type: string
+      example:
+        cast: {}
+        year: 1999
+        director: Christopher Nolan
+        genre: Thriller
+        rating: 8.3
+        writer: Christopher Nolan
+        title: Stranger Things season 3
+        poster: poster
+    Title:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Stranger Things season 3
+        year:
+          type: integer
+          example: 1999
+        genre:
+          type: string
+          example: Thriller
+        director:
+          type: string
+          example: Christopher Nolan
+        writer:
+          type: string
+          example: Christopher Nolan
+        cast:
+          type: array
+          example: {}
+          items:
+            type: string
+        rating:
+          type: number
+          example: 8.3
+        poster:
+          type: string
+      example:
+        cast: {}
+        year: 1999
+        director: Christopher Nolan
+        genre: Thriller
+        rating: 8.3
+        writer: Christopher Nolan
+        title: Stranger Things season 3
+        poster: poster
+    Review:
+      type: object
+      properties:
+        review_id:
+          type: string
+        movie_id:
+          type: string
+        user_id:
+          type: string
+        likes:
+          type: integer
+        rating:
+          type: number
+        review:
+          type: string
+      example:
+        review_id: review_id
+        user_id: user_id
+        review: review
+        rating: 6.027456183070403
+        movie_id: movie_id
+        likes: 0
+    User:
+      type: object
+      properties:
+        user_id:
+          type: string
+        name:
+          type: string
+        userpic:
+          type: string
+        bio:
+          type: string
+        interests:
+          type: string
+        watchlist:
+          type: string
+        created_at:
+          type: string
+      example:
+        userpic: userpic
+        user_id: user_id
+        name: name
+        bio: bio
+        created_at: created_at
+        interests: interests
+        watchlist: watchlist
+    inline_response_200:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      example:
+        user:
+          userpic: userpic
+          user_id: user_id
+          name: name
+          bio: bio
+          created_at: created_at
+          interests: interests
+          watchlist: watchlist
+        token: token
+    comment:
+      type: object
+      properties:
+        comment:
+          type: string
+        user_id:
+          type: integer
+    user_id:
+      type: object
+      properties:
+        user_id:
+          type: integer
+
