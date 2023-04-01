@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <!-- <link rel="stylesheet" href="style_navbar.css"> -->
+        <link rel="stylesheet" href="style_signin.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    </head>
+    <body>
+        <iframe id="navbar" class="nav" src="navbar1.html" frameborder="0" scrolling="no" position="fixed" width="100%" height="240px"></iframe>
+        <center><div class="mainbox">
+            <img src="images/navbar/Logo.jpg" class="resize">
+            <span class="welcome">Welcome Back!</span>
+            <!-- <br> -->
+            <input type="text" placeholder="Username" class="username">
+            <div class="paswrd">
+            <i class="fa fa-eye" id="your-img" onclick="toggleVisibility()"></i>
+            <input type="password" placeholder="Password" class="password" id="psswrd">
+            </div>
+            <a href="navbar2.html" class="login">Login</a>
+            <span class="notsignin">Don't have an account? <a href="signup.html" class="signup"><strong>Sign up now</strong></a></span>
+        </div></center>
+        <script>
+        const image = document.getElementById("your-img");
+        image.addEventListener("click", function toggleVisibility() {   
+            var getPasword = document.getElementById("psswrd");
+            if (getPasword.type == "password") {  
+              getPasword.type = "text";
+              image.classList.toggle("fa-eye"); 
+              image.classList.toggle("fa-eye-slash");
+            } else {  
+              getPasword.type = "password";
+              image.classList.toggle("fa-eye");  
+              image.classList.toggle("fa-eye-slash");
+            }  
+          });  
+
+        </script>
+    </body>
+</html>
