@@ -1,10 +1,10 @@
 # Connect to the database
-from typing import Optional, Union
+from typing import Optional
 import os
 import json
 import pymysql
 
-from models import comment, movie, tvshow, review, user, user_id
+from models import comment, movie, tvtvshow, review, user, user_id
 
 db_host = os.getenv("DB_HOST")
 db_user = os.getenv("DB_USER")
@@ -94,7 +94,7 @@ def get_review_for_movie(Movie: movie):
             return l
 
 
-def get_review_for_show(Show: shows):
+def get_review_for_show(Show: tvshows):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
         cursor.execture(sql, (Show.show_id))
@@ -140,7 +140,7 @@ def get_reviews_fromMovie(Movie: movie):
         return r
 
 
-def get_reviews_fromShow(Shows: shows) -> Optional[review]:
+def get_reviews_fromShow(Shows: tvshows) -> Optional[review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
         cursor.execture(sql, (Shows.show_id))
@@ -220,7 +220,7 @@ def count_comments(Review: review) -> int:
             return len(r)
 
 
-def count_posts(User: user_id):
+def count_posts(User: user):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'user_id'=%d"""
         cursor.execture(sql, (User.user_id))
