@@ -19,7 +19,7 @@ connection = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor,
 )
 
-
+# -------------------------------------------------------------------------------------------------------------------------------
 def add_user(User: user) -> None:
     assert User.id is None
     with connection.cursor() as cursor:
@@ -30,6 +30,43 @@ def add_user(User: user) -> None:
         connection.commit()
         User.user_id = cursor.lastrowid
 
+def edit_username(User: user,newname) -> None:
+    assert User.id is None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE User SET username = %s WHERE user_id = %d"
+        cursor.execute(sql, (newname, User.user_id))
+        connection.commit()
+        User.user_id = cursor.lastrowid
+
+def edit_password(User: user, password) -> None:
+    assert User.id is None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE User SET password = %s WHERE user_id = %d"
+        cursor.execute(sql, (password, User.user_id))
+        connection.commit()
+        User.user_id = cursor.lastrowid
+
+def edit_bio(User: user,newbio) -> None:
+    assert User.id is None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE User SET bio = %s WHERE user_id = %d"
+        cursor.execute(sql, (newbio, User.user_id))
+        connection.commit()
+        User.user_id = cursor.lastrowid
+def edit_pfp(User: user,newpfp) -> None:
+    assert User.id is None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE User SET pfp = %s WHERE user_id = %d"
+        cursor.execute(sql, (newpfp, User.user_id))
+        connection.commit()
+        User.user_id = cursor.lastrowid
+def edit_interests(User:user, newinterest):
+    assert User.id is None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE User Set Interest = %s WHERE user_id = %d "
+        cursor.execute(sql,(newinterest,User.user_id))
+        connection.commit()
+        User.user_id = cursor.lastrowid
 
 def add_comment(Comment: comment) -> None:
     assert Comment.comment_id is None
@@ -37,7 +74,7 @@ def add_comment(Comment: comment) -> None:
         sql = f"INSERT INTO comment (comment_id,review_id,user_id,content)" \
               f"(%d,%d,%d,%s)"
         cursor.execute(sql, (Comment.comment_id, Comment.review_id,
-                       Comment.user_id, Comment_content))
+                       Comment.user_id, Comment.content))
     connection.commit()
     Comment.comment_id = cursor.lastrowid
 
@@ -53,40 +90,40 @@ def add_review(Review: review) -> None:
     Review.review_id = cursor.lastrowid
 
 
-def get_reviews_fromMovie(Movie: Movie) -> Optional[Review]:
+def get_reviews_fromMovie(Movie: movie) -> Optional[review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'movie_id'=%d"""
         cursor.execture(sql, (Movie.movie_id))
         r = cursor.fetchone()
         if r is None:
             return None
-        return Review.from_dict(r)
+        return review.from_dict(r)
 
 
-def get_reviews_fromShow(Shows: Show) -> Optional[Review]:
+def get_reviews_fromShow(Shows: shows) -> Optional[review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
-        cursor.execture(sql, (Show.show_id))
+        cursor.execture(sql, (Shows.show_id))
         r = cursor.fetchone()
         if r is None:
             return None
-        return Review.from_dict(r)
+        return review.from_dict(r)
 
 
-def get_reviews_fromUser(User: User) -> Optional[Review]:
+def get_reviews_fromUser(User: user) -> Optional[review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'user_id'=%d"""
         cursor.execture(sql, (User.user_id))
         r = cursor.fetchone()
         if r is None:
             return None
-        return Review.from_dict(r)
+        return review.from_dict(r)
 
 
-def review_like(Review: review, User: user):
-    if Review.likes.get() != None:
 
-        # ------------------------------------
+
+
+ # -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 def get_category_from_id(id: int) -> Optional[Category]:
