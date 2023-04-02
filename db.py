@@ -1,10 +1,10 @@
 # Connect to the database
-from typing import Optional
+from typing import Optional, Union
 import os
 import json
 import pymysql
 
-from models import comment, movie, tvtvshow, review, user, user_id
+from models import comment, movie, show, review, user
 
 db_host = os.getenv("DB_HOST")
 db_user = os.getenv("DB_USER")
@@ -244,7 +244,7 @@ def autocomplete_search(prefix):
             return r
 
 
-def add_or_delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
+def add_or_delete_fromWatchlist(User: user, title: Union[movie, show]):
     if isinstance(title, movie):
         with connection.cursor() as cursor:
             sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
@@ -258,7 +258,7 @@ def add_or_delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
             sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
             cursor.execute(sql, (json.dumps(d), User.user_id))
             connection.commit()
-    elif isinstance(title, tvshow):
+    elif isinstance(title, show):
         with connection.cursor() as cursor:
             sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
             cursor.execute(sql, (User.user_id))
@@ -273,7 +273,7 @@ def add_or_delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
             connection.commit()
 
 
-def delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
+def delete_fromWatchlist(User: user, title: Union[movie, show]):
     if isinstance(title, movie):
         with connection.cursor() as cursor:
             sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
