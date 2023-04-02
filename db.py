@@ -4,7 +4,7 @@ import os
 import json
 import pymysql
 
-from models import comment, movie, shows, review, title, user, user_id
+from models import comment, movie, tvshows, review, title, user, user_id
 
 db_host = os.getenv("DB_HOST")
 db_user = os.getenv("DB_USER")
@@ -48,6 +48,103 @@ def edit_password(User: user, password) -> None:
         connection.commit()
         User.user_id = cursor.lastrowid
 
+
+def sort_rating_movies(order:bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'movie' ORDER BY 'rating' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(movie.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+def sort_rating_shows(order:bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'shows' ORDER BY 'rating' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(tvshows.from_dict(a))
+        if order is True:
+            return l.reverse()
+
+        return l
+def sort_rating_reviews(order:bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'review' ORDER BY 'rating' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(review.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+def sort_most_recent_reviews(order:bool):
+    if order is None:
+        order = False
+
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'review' ORDER BY 'date' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(review.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+def sort_most_recent_shows(order:bool):
+    if order is None:
+        order = False
+
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'tvshows' ORDER BY 'date' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(tvshows.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+def sort_most_recent_movies(order:bool):
+    if order is None:
+        order = False
+
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'movie' ORDER BY 'date' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(movie.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+
+
 def edit_bio(User: user,newbio) -> None:
     assert User.id is None
     with connection.cursor() as cursor:
@@ -86,11 +183,11 @@ def get_review_for_movie(Movie: movie):
 
             
 
-
+    
 
     
     
-def get_review_for_show(Show: shows):
+def get_review_for_show(Show: tvshows):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
         cursor.execture(sql, (Show.show_id))
@@ -136,7 +233,7 @@ def get_reviews_fromMovie(Movie: movie):
         return r
 
 
-def get_reviews_fromShow(Shows: shows) -> Optional[review]:
+def get_reviews_fromShow(Shows: tvshows) -> Optional[review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
         cursor.execture(sql, (Shows.show_id))
@@ -206,8 +303,6 @@ def count_likes_user(User: user) -> int:
 
 
 
-
-
 def count_comments(Review: review) -> int:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'comment' where 'review_id'=%d"""
@@ -218,7 +313,7 @@ def count_comments(Review: review) -> int:
         else:
             return len(r)
 
-def count_posts(User: user_id):
+def count_posts(User: user):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'user_id'=%d"""
         cursor.execture(sql, (User.user_id))
