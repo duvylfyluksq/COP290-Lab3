@@ -1,16 +1,14 @@
 # Connect to the database
+# Connect to the database
 from typing import Optional, Union
 import os
 import json
 import pymysql
-
-from models import comment, movie, show, review, user
-
+from models import comment, movie, tvshow, review, user, user_id
 db_host = os.getenv("DB_HOST")
 db_user = os.getenv("DB_USER")
 db_password = os.getenv("DB_PASSWORD")
 db_name = os.getenv("DB_NAME")
-
 connection = pymysql.connect(
     host=db_host,
     user=db_user,
@@ -18,7 +16,6 @@ connection = pymysql.connect(
     database=db_name,
     cursorclass=pymysql.cursors.DictCursor,
 )
-
 # -------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -51,6 +48,108 @@ def edit_password(User: user, password) -> None:
         cursor.execute(sql, (password, User.user_id))
         connection.commit()
         User.user_id = cursor.lastrowid
+
+
+def sort_rating_movies(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'movie' ORDER BY 'rating' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(movie.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+
+
+def sort_rating_shows(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'shows' ORDER BY 'rating' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(tvshow.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+
+
+def sort_rating_reviews(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'review' ORDER BY 'rating' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(review.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+
+
+def sort_most_recent_reviews(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'review' ORDER BY 'date' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(review.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+
+
+def sort_most_recent_shows(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'tvshow' ORDER BY 'date' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(tvshow.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+
+
+def sort_most_recent_movies(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'movie' ORDER BY 'date' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(movie.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
 
 
 def edit_bio(User: user, newbio) -> None:
@@ -94,7 +193,7 @@ def get_review_for_movie(Movie: movie):
             return l
 
 
-def get_review_for_show(Show: tvshows):
+def get_review_for_show(Show: tvshow):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
         cursor.execture(sql, (Show.show_id))
@@ -140,7 +239,7 @@ def get_reviews_fromMovie(Movie: movie):
         return r
 
 
-def get_reviews_fromShow(Shows: tvshows) -> Optional[review]:
+def get_reviews_fromShow(Shows: tvshow) -> Optional[review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
         cursor.execture(sql, (Shows.show_id))
@@ -205,7 +304,6 @@ def count_likes_user(User: user) -> int:
                 if key in r:
                     if r[key] == True:
                         count += 1
-
     return count
 
 
@@ -229,7 +327,6 @@ def count_posts(User: user):
             return 0
         else:
             return len(r)
-
 # function to match prefix for autocomplete
 
 
@@ -242,6 +339,78 @@ def autocomplete_search(prefix):
             return None
         else:
             return r
+
+
+def add_or_delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
+    if isinstance(title, movie):
+        with connection.cursor() as cursor:
+            sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
+            cursor.execute(sql, (User.user_id))
+            r = cursor.fetchone()
+            d = json.dumps(r[0]) if r else {}
+            if ((title.movie_id in d) and d[title.movie_id]):
+                d[title.movie_id] = not d[title.movie_id]
+            else:
+                d[title.movie_id] = True
+            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            connection.commit()
+    elif isinstance(title, tvshow):
+        with connection.cursor() as cursor:
+            sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
+            cursor.execute(sql, (User.user_id))
+            r = cursor.fetchone()
+            d = json.dumps(r[0]) if r else {}
+            if ((title.show_id in d) and d[title.show_id]):
+                d[title.show_id] = not d[title.show_id]
+            else:
+                d[title.show_id] = True
+            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            connection.commit()
+
+
+def delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
+    if isinstance(title, movie):
+        with connection.cursor() as cursor:
+            sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
+            cursor.execute(sql, (User.user_id))
+            r = cursor.fetchone()
+            d = json.dumps(r[0]) if r else {}
+            d[title.movie_id] = False
+            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            connection.commit()
+    elif isinstance(title, tvshow):
+        with connection.cursor() as cursor:
+            sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
+            cursor.execute(sql, (User.user_id))
+            r = cursor.fetchone()
+            d = json.dumps(r[0]) if r else {}
+            d[title.show_id] = False
+            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            connection.commit()
+
+
+def get_watchlist_fromUser(User: user):
+    L = []
+    with connection.cursor() as cursor:
+        sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
+        cursor.execute(sql, (User.user_id))
+        r = cursor.fetchone()
+        d = json.dumps(r[0]) if r else {}
+        for i in d:
+            if (d[i]):
+                L.append(i)
+        sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
+        cursor.execute(sql, (User.user_id))
+        r = cursor.fetchone()
+        d = json.dumps(r[0]) if r else {}
+        for i in d:
+            if (d[i]):
+                L.append(i)
+    return L
 
     # -------------------------------------------------------------------------------------------------------------------------------------------------------
 
