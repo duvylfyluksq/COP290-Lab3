@@ -1,7 +1,7 @@
 # Connect to the database
 from typing import Optional
 import os
-
+import json
 import pymysql
 
 from models import comment, movie, shows, review, title, user, user_id
@@ -25,8 +25,10 @@ def add_user(User: user) -> None:
     with connection.cursor() as cursor:
         sql = f"INSERT INTO User (username,password,watchlist_movies,watchlist_shows,bio,pfp,interests) VALUES " \
               f"(%s, %s, %s, %s,%s,%s,%s)"
+        watchlist_movies = json.dumps(User.watchlist_movies)
+        watchlist_shows = json.dumps(User.watchlist_shows)
         cursor.execute(sql, (User.username, User.password,
-                       User.watchlist_movie, User.watchlist_show, User.bio, User.pfp, User.interests))
+                       watchlist_movies,watchlist_shows, User.bio, User.pfp, User.interests))
         connection.commit()
         User.user_id = cursor.lastrowid
 
@@ -178,12 +180,28 @@ def check_login(username, password) -> bool:
                 return False
 
 
-def count_likes(Review: review) -> int:
+def count_likes_review(Review: review) -> int:
     count = 0
     for key in Review.likes:
         if Review.likes[key] == 1:
             count += 1
     return count
+
+def count_likes_user(User: user) -> int:
+    count = 0
+    with connection.cursor() as cursor:
+        sql = """SELECT 'likes' FROM 'review'"""
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return 0
+        else:
+            for key in r:
+                if r[key] == 1:
+                    count += 1
+    return count
+
+    
 
 
 
