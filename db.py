@@ -197,11 +197,14 @@ def count_likes_user(User: user) -> int:
             return 0
         else:
             for key in r:
-                if r[key] == 1:
-                    count += 1
+                if key in r:
+                    if r[key] == True :
+                        count += 1
+
     return count
 
-    
+
+
 
 
 
