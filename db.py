@@ -105,7 +105,7 @@ def sort_most_recent_reviews(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' ORDER BY 'date' DESC"""
+        sql = """SELECT * FROM 'review' ORDER BY 'creation_time' DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -122,7 +122,7 @@ def sort_most_recent_shows(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'tvshow' ORDER BY 'date' DESC"""
+        sql = """SELECT * FROM 'tvshow' ORDER BY 'creation_time' DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -139,7 +139,7 @@ def sort_most_recent_movies(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'movie' ORDER BY 'date' DESC"""
+        sql = """SELECT * FROM 'movie' ORDER BY 'creation_time' DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -150,6 +150,148 @@ def sort_most_recent_movies(order: bool):
         if order is True:
             return l.reverse()
         return l
+
+def sort_alpha_movies(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'movie' ORDER BY 'title' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(movie.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+def sort_alpha_shows(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'tvshow' ORDER BY 'title' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(tvshow.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+def sort_alpha_reviews(order: bool):
+    if order is None:
+        order = False
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'review' ORDER BY 'title' DESC"""
+        cursor.execture(sql)
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        l = []
+        for a in r:
+            l.append(review.from_dict(a))
+        if order is True:
+            return l.reverse()
+        return l
+def sort_byMostReviews_movie(order: int):
+    with connection.cursor() as cursor:
+        sql = """SELECT movie.*, COUNT(review.id) AS review_count
+                 FROM movie LEFT JOIN review ON movie.id = review.movie_id
+                 GROUP BY movie.id
+                 ORDER BY review_count %s"""
+        if order == 1:
+            sql += " ASC"
+        else:
+            sql += " DESC"
+        cursor.execute(sql, ("ASC" if order == 1 else "DESC",))
+        rows = cursor.fetchall()
+        movies = [movie.from_dict(row) for row in rows]
+        return movies
+def sort_byMostReviews_shows(order: int):
+    with connection.cursor() as cursor:
+        sql = """SELECT tvshow.*, COUNT(review.id) AS review_count
+                 FROM movie LEFT JOIN review ON tvshow.id = review.movie_id
+                 GROUP BY tvshow.id
+                 ORDER BY review_count %s"""
+        if order == 1:
+            sql += " ASC"
+        else:
+            sql += " DESC"
+        cursor.execute(sql, ("ASC" if order == 1 else "DESC",))
+        rows = cursor.fetchall()
+        shows = [tvshow.from_dict(row) for row in rows]
+        return shows
+def mergesort_rating(a, b):
+    c = []
+    while len(a) > 0 and len(b) > 0:
+        if a[0].rating > b[0].rating:
+            c.append(a[0])
+            a.pop(0)
+        else:
+            c.append(b[0])
+            b.pop(0)
+    if len(a) > 0:
+        c += a
+    if len(b) > 0:
+        c += b
+    return c
+def mergesort_review_count(a, b):
+    c = []
+    while len(a) > 0 and len(b) > 0:
+        if a[0].review_count > b[0].review_count:
+            c.append(a[0])
+            a.pop(0)
+        else:
+            c.append(b[0])
+            b.pop(0)
+    if len(a) > 0:
+        c += a
+    if len(b) > 0:
+        c += b
+    return c
+def mergesort_alpha(a, b):
+    c = []
+    while len(a) > 0 and len(b) > 0:
+        if a[0].title > b[0].title:
+            c.append(a[0])
+            a.pop(0)
+        else:
+            c.append(b[0])
+            b.pop(0)
+    if len(a) > 0:
+        c += a
+    if len(b) > 0:
+        c += b
+    return c
+def mergesort_creation_time(a, b):
+    c = []
+    while len(a) > 0 and len(b) > 0:
+        if a[0].creation_time > b[0].creation_time:
+            c.append(a[0])
+            a.pop(0)
+        else:
+            c.append(b[0])
+            b.pop(0)
+    if len(a) > 0:
+        c += a
+    if len(b) > 0:
+        c += b
+    return c
+
+def sort_rating_review(rat,lex,pop,rel,order):
+    if rat is True:
+        return mergesort_rating(sort_rating_movies(order),sort_rating_shows(order))
+    elif pop is True:
+        return mergesort_review_count(sort_byMostReviews_shows(order),sort_byMostReviews_movie(order))
+    elif lex is True:
+        return mergesort_alpha(sort_alpha_movies(order),sort_alpha_shows(order))
+    elif rel is True:
+        return mergesort_creation_time(sort_most_recent_movies(order),sort_most_recent_shows(order))
+
+
 
 
 def edit_bio(User: user, newbio) -> None:
@@ -327,6 +469,8 @@ def count_posts(User: user):
             return 0
         else:
             return len(r)
+
+
 # function to match prefix for autocomplete
 
 
