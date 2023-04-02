@@ -11,7 +11,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 3.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/VINAYTAYAL28/FMD_API3.0/3.0.0
+- url: https://virtserver.swaggerhub.com/VEDANTANEOGI_1/FMD_API3.0/3.0.0
   description: SwaggerHub API Auto Mocking
 tags:
 - name: Reviews
@@ -20,107 +20,117 @@ tags:
   description: Everything about shows or movies
 - name: User
   description: Operations about user
+  
 paths:
   /search:
     get:
-      description: Obtain the list of all movies that matches the expression
+      tags:
+      - Titles
+      description: Obtain all movies/shows whose prefix matches the input expression
       parameters:
       - name: expression
         in: query
         description: the expression to be searched
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           type: string
-          example: inception
-      - name: language
-        in: query
-        description: language of the movie
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          example: English
+          example: the dark knight
       responses:
         "200":
           description: Successful search
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Movie'
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/movie'
+                    - $ref: '#/components/schemas/tvshow'
         "404":
-          description: Movie Not found
+          description: Movie/TV Show Not found
+          
   /review:
     post:
       tags:
       - Reviews
-      summary: Add a new post or review
+      summary: Add a new review
       parameters:
-      - name: title
+      - name: movie_id
         in: query
-        description: the title of the show or movie to add the review
+        description: ID of the movie for which the review is being posted(null if TVShow)
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
-          type: string
-          example: Joker
+          allOf:
+            - $ref: '#/components/schemas/movie_id'
+            - nullable: true
+      - name: show_id
+        in: query
+        description: ID of the TVShow for which the review is being posted(null if Movie)
+        required: true
+        style: form
+        explode: false
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/show_id'
+            - nullable: true
+      - name: user_id
+        in: query
+        description: ID of the user who is posting the review
+        required: true
+        style: form
+        explode: false
+        schema:
+          $ref: '#/components/schemas/user_id'
       - name: rating
         in: query
         description: rating by the user
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
+          type: integer
           maximum: 10
           minimum: 1
-          type: integer
-      - name: review title
+          example: 10
+      - name: title
         in: query
         description: the review title of the review to be added
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
-          maximum: 120
           type: string
-          example: Joker
+          maxLength: 50
+          example: Amazing Watch!
       - name: content
         in: query
         description: content of the review
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
-          maximum: 500
           type: string
+          maxLength: 500
+          example: have you got colour in your cheeks? do you ever get that feel' that you can't shift the tide that sticks around like sumats in your teeth.
       responses:
         "200":
-          description: ok
-  /Movies:
+          description: Review added successfully
+        "400":
+          description: Invalid request body
+          
+  /movie:
     get:
       tags:
       - Titles
-      summary: Get movies by genre and sorting type
+      summary: Sort/Filter movies
       parameters:
-      - name: genre
-        in: query
-        description: Filter by genre (comma-separated list of values)
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: sort
-        in: query
-        description: 'Sort by type and order (format: type-order)'
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
+      - $ref: '#/components/parameters/genre'
+      - $ref: '#/components/parameters/sort_type_browse'
+      - $ref: '#/components/parameters/sort_order'
       responses:
         "200":
           description: Successful response
@@ -129,33 +139,21 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Movie'
+                  $ref: '#/components/schemas/movie'
         "400":
           description: Invalid request
         "404":
           description: No movies found
-  /TVs:
+
+  /tvshow:
     get:
       tags:
       - Titles
-      summary: Get TV shows by genre and sorting type
+      summary: Sort/Filter TV Shows
       parameters:
-      - name: genre
-        in: query
-        description: Filter by genre (comma-separated list of values)
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: sort
-        in: query
-        description: 'Sort by type and order (format: type-order)'
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
+      - $ref: '#/components/parameters/genre'
+      - $ref: '#/components/parameters/sort_type_browse'
+      - $ref: '#/components/parameters/sort_order'
       responses:
         "200":
           description: Successful response
@@ -164,12 +162,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Shows'
+                  $ref: '#/components/schemas/tvshow'
         "400":
           description: Invalid request
         "404":
-          description: No TV shows found
-  /users/signin:
+          description: No TV Shows found
+
+  /user/signin:
     post:
       tags:
       - User
@@ -180,33 +179,36 @@ paths:
         description: Username
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           type: string
+          maxLength: 25
           example: bobdylan
       - name: Password
         in: query
         description: Password
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           type: string
-          example: the_og_om
+          maxLength: 25
+          example: godofnoobs_42
       responses:
         "200":
           description: User signed in successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/user'
         "400":
           description: Bad request
         "401":
           description: Invalid credentials
         "500":
           description: Internal server error
-  /users/signup:
+
+  /user/signup:
     post:
       tags:
       - User
@@ -217,101 +219,114 @@ paths:
         description: Username
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           type: string
+          maxLength: 25
           example: bobdylan
       - name: Password
         in: query
         description: Password
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           type: string
-          example: the_og_om
+          maxLength: 25
+          example: godofnoobs_42
       - name: Confirm Password
         in: query
         description: Confirm Password
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           type: string
-          example: the_og_om
+          maxLength: 25
+          example: godofnoobs_42
       - name: interests
         in: query
-        description: Filter by genre (comma-separated list of values)
+        description: Favourite Genres
         required: true
         style: form
         explode: true
         schema:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          example:
+            - Adventure
+            - Comedy
+            - Thriller
+      - name: pfp
+        in: query
+        description: profile picture
+        required: true
+        style: form
+        explode: false
+        schema:
           type: string
+          format: uri
+          example: https://fmd.com/pfp.jpeg
       - name: bio
         in: query
         description: about user
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
-          maximum: 200
           type: string
-          example: I am bobdylan. Hello world.
+          example: i am bobdylan, i work with duvylfyluksq
+          maxLength: 100
       responses:
         "200":
           description: User account created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/user'
         "400":
           description: Bad request
         "409":
           description: User already exists
         "500":
           description: Internal server error
-  /Reviews/{Title}:
+
+  /review/{title}:
     get:
       tags:
       - Reviews
       summary: Get all reviews of a title
       description: Returns a list of reviews for a particular title
       parameters:
-      - name: Title
+      - name: title
         in: path
-        description: Title of the movie or TV show
+        description: ID of the review
         required: true
         style: simple
         explode: false
         schema:
-          type: string
-      - name: sort
-        in: query
-        description: Sort order for the reviews. Use + for ascending order and - for descending order. Default is ascending order.
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - +rating
-          - -rating
-          - +date
-          - -date
+          oneOf:
+            - $ref: '#/components/schemas/movie_id'
+            - $ref: '#/components/schemas/show_id'
+      - $ref: '#/components/parameters/sort_type_reviews'
+      - $ref: '#/components/parameters/sort_order'
       responses:
         "200":
-          description: List of reviews
+          description: List of reviews for Movie/TVShow
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Review'
+                  $ref: '#/components/schemas/review'
         "400":
           description: Invalid request
         "404":
           description: Title not found
-  /reviews/{review_id}/comments:
+
+  /review/{review_id}/comment:
     post:
       tags:
       - Reviews
@@ -324,27 +339,42 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-      - name: comment
+          $ref: '#/components/schemas/review_id'
+      - name: user_id
+        in: query
+        description: ID of the commentor
+        required: true
+        style: form
+        explode: false
+        schema:
+          $ref: '#/components/schemas/user_id'
+      - name: content
         in: query
         description: Comment to be added to review
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
-          $ref: '#/components/schemas/comment'
+          type: string
+          maxLength: 200
+          example: im a puppet on a string, tracy island time travelling diamond, coulda shaped heartaches
       responses:
         "201":
           description: Comment added successfully to review
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/comment'
         "400":
           description: Bad request. Invalid review ID or missing required fields
         "404":
           description: Review not found
-  /reviews/{review_id}/likes:
-    post:
+
+  /review/{review_id}/likes:
+    put:
       tags:
       - Reviews
-      summary: Add like to review
+      summary: Like/Unlike Review
       parameters:
       - name: review_id
         in: path
@@ -353,49 +383,55 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
+          $ref: '#/components/schemas/review_id'
       - name: user_id
         in: query
         description: ID of the user who likes the review
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           $ref: '#/components/schemas/user_id'
       responses:
         "201":
-          description: Like added successfully to review
+          description: Like added or removed
         "400":
           description: Bad request. Invalid review ID or missing required fields
         "404":
           description: Review not found
-  /Title/{Title}:
+
+  /title/{id}:
     get:
       tags:
       - Titles
-      summary: Get information about a title
-      description: Returns information about a particular title, including its title, genre, director, actors, release date, and description.
+      summary: Get information about a Movie/TV Show
+      description: Returns information about a particular Movie/TV Show, including its title, genre, director, actors, release date, and description.
       parameters:
-      - name: Title
+      - name: id
         in: path
-        description: Name of the movie or book
+        description: ID of the Movie or TV Show
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          oneOf:
+            - $ref: '#/components/schemas/movie_id'
+            - $ref: '#/components/schemas/show_id'
       responses:
         "200":
-          description: Information about the title
+          description: Information about the Movie/TV Show
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Title'
+                oneOf:
+                  - $ref: '#/components/schemas/movie'
+                  - $ref: '#/components/schemas/tvshow'
         "400":
           description: Invalid request
         "404":
-          description: Title not found
-  /Reviews/{user_id}:
+          description: Movie/TV Show not found
+
+  /review/{user_id}:
     get:
       tags:
       - Reviews
@@ -404,38 +440,28 @@ paths:
       parameters:
       - name: user_id
         in: path
-        description: user id
+        description: ID of the user 
         required: true
         style: simple
         explode: false
         schema:
-          type: integer
-      - name: sort
-        in: query
-        description: Sort order for the reviews. Use + for ascending order and - for descending order. Default is ascending order.
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - +rating
-          - -rating
-          - +date
-          - -date
+          $ref: '#/components/schemas/user_id'
+      - $ref: '#/components/parameters/sort_type_reviews'
+      - $ref: '#/components/parameters/sort_order'
       responses:
         "200":
-          description: List of reviews
+          description: List of reviews by the User
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Review'
+                  $ref: '#/components/schemas/review'
         "400":
           description: Invalid request
         "404":
           description: Title not found
+
   /watchlist/{user_id}:
     get:
       tags:
@@ -449,7 +475,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
+          $ref: '#/components/schemas/user_id'
       responses:
         "200":
           description: List of titles in user watchlist
@@ -458,13 +484,16 @@ paths:
               schema:
                 type: array
                 items:
-                  type: string
+                  oneOf:
+                    - $ref: '#/components/schemas/movie'
+                    - $ref: '#/components/schemas/tvshow'
         "400":
           description: Bad request. Invalid user ID
-    post:
+
+    put:
       tags:
       - User
-      summary: Add a title to user watchlist
+      summary: Add/Remove title from watchlist
       parameters:
       - name: user_id
         in: path
@@ -473,20 +502,23 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-      - name: title
+          $ref: '#/components/schemas/user_id'
+      - name: id
         in: query
-        description: Title to be added to the watchlist
+        description: id of TVShow/Movie to be added to the watchlist
         required: true
         style: form
         explode: true
         schema:
-          type: string
+          oneOf:
+            - $ref: '#/components/schemas/movie_id'
+            - $ref: '#/components/schemas/show_id'
       responses:
         "201":
-          description: Title added successfully
+          description: Title added/removed successfully
         "400":
           description: Bad request. Invalid user ID or title not provided
+
   /watchlist/{user_id}/remove:
     put:
       tags:
@@ -500,15 +532,17 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-      - name: title
+          $ref: '#/components/schemas/user_id'
+      - name: id
         in: query
-        description: Title to be removed from user's watchlist
+        description: id of the Title to be removed from user's watchlist
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
-          type: string
+          oneOf:
+            - $ref: '#/components/schemas/movie_id'
+            - $ref: '#/components/schemas/show_id'
       responses:
         "200":
           description: Title removed successfully from user's wishlist
@@ -516,11 +550,12 @@ paths:
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found or title not found in user's wishlist
-  /profile/{user_id}/name:
+
+  /profile/{user_id}/username:
     put:
       tags:
       - User
-      summary: Update user name
+      summary: Update username
       parameters:
       - name: user_id
         in: path
@@ -529,27 +564,30 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-      - name: name
+          $ref: '#/components/schemas/user_id'
+      - name: username
         in: query
-        description: New name of the user
+        description: New username
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           type: string
+          maxLength: 25
+          example: bobdylan
       responses:
         "200":
-          description: Name updated successfully
+          description: Username updated successfully
         "400":
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found
-  /profile/{user_id}/pic:
+
+  /profile/{user_id}/pfp:
     put:
       tags:
       - User
-      summary: Update user pic
+      summary: Update profile picture
       parameters:
       - name: user_id
         in: path
@@ -558,22 +596,94 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-      - name: pic
+          $ref: '#/components/schemas/user_id'
+      - name: pfp
         in: query
-        description: New pic
+        description: New Profile Picture
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
           type: string
+          format: uri
+          example: https://fmd.com/pfp.jpeg
       responses:
         "200":
-          description: pic updated successfully
+          description: Profile Picture updated successfully
         "400":
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found
+
+  /profile/{user_id}/password:
+    put:
+      tags:
+      - User
+      summary: Update Password
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/user_id'
+      - name: password
+        in: query
+        description: New password
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          maxLength: 25
+          example: godofnoobs_42
+      responses:
+        "200":
+          description: Password updated successfully
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
+        "404":
+          description: User not found
+
+  /profile/{user_id}/interests:
+    put:
+      tags:
+      - User
+      summary: Update interests
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/user_id'
+      - name: pfp
+        in: query
+        description: New Profile Picture
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          example:
+            - Adventure
+            - Comedy
+            - Thriller
+      responses:
+        "200":
+          description: Interests updated successfully
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
+        "404":
+          description: User not found
+
   /profile/{user_id}/bio:
     put:
       tags:
@@ -587,157 +697,296 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-      - name: address
+          $ref: '#/components/schemas/user_id'
+      - name: bio
         in: query
         description: New bio
         required: true
         style: form
-        explode: true
+        explode: false
         schema:
-          maximum: 200
           type: string
+          example: i am bobdylan, i work with duvylfyluksq
+          maxLength: 100
       responses:
         "200":
-          description: Address updated successfully
+          description: Bio updated successfully
         "400":
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found
+
 components:
+  parameters:
+    genre:
+      name: genre
+      in: query
+      description: Genres to be filtered by 
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
+          type: string
+    sort_type_browse:
+      name: sort_type_browse
+      in: query
+      description: Parameter based on which titles will be sorted
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+          - Lex
+          - Pop
+          - Rel
+          - Rat
+    sort_type_reviews:
+      name: sort_type_reviews
+      in: query
+      description: Parameter based on which reviews will be sorted
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+          - Likes
+          - Recent
+    sort_order:
+      name: sort_order
+      in: query
+      description: sorting order
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: boolean
+        enum:
+          - true
+          - false
+
+
   schemas:
-    Movie:
+
+    user_id:
+      type: integer
+      example: 42
+
+    movie_id:
+      type: integer
+      example: 42
+
+    show_id:
+      type: integer
+      example: 42
+
+    review_id:
+      type: integer
+      example: 42
+
+    user:
       type: object
       properties:
+        user_id:
+          $ref: '#/components/schemas/user_id'
+        username:
+          type: string
+          maxLength: 25
+          example: bobdylan
+        password:
+          type: string
+          maxLength: 25
+          example: godofnoobs_42
+        bio:
+          type: string
+          example: i am bobdylan, i work with duvylfyluksq
+          maxLength: 100
+        pfp:
+          type: string
+          format: uri
+          example: https://fmd.com/pfp.jpeg
+        watchlist_movies:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            1 : True
+            2 : False
+            42 : True
+        watchlist_shows:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            1 : True
+            2 : False
+            42 : True
+        interests:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          example:
+            - Adventure
+            - Comedy
+            - Thriller
+
+    movie:
+      type: object
+      properties:
+        movie_id:
+          $ref: '#/components/schemas/movie_id'
         title:
           type: string
           example: Inception
-        year:
-          type: integer
-          example: 1999
-        genre:
-          type: string
-          example: Thriller
+        cast:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          example:
+            - Leonardo Di Caprio
+            - Kate Winslet
+            - Bradd Pitt
         director:
           type: string
           example: Christopher Nolan
         writer:
           type: string
-          example: Christopher Nolan
-        cast:
-          type: array
-          example: {}
-          items:
-            type: string
+          example: Todd Phillips
         rating:
           type: number
-          example: 8.3
+          format: float
+          example: 9.36
+        genres:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          example:
+            - Adventure
+            - Comedy
+            - Thriller
+        release_date:
+          type: string
+          format: date
+          example: '2001-08-19'
+        duration:
+          type: string
+          pattern: '^\d+hrs \d+mins$'
+          example: 2hrs 2mins
         poster:
           type: string
-    Shows:
+          example: https://fmd.com/poster.jpeg
+
+    tvshow:
       type: object
       properties:
+        show_id:
+          $ref: '#/components/schemas/show_id'
         title:
           type: string
-          example: Stranger Things season 3
-        year:
+          example: Peaky Blinders
+        season:
           type: integer
-          example: 1999
-        genre:
-          type: string
-          example: Thriller
+          example: 2
+        cast:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          example:
+            - Leonardo Di Caprio
+            - Kate Winslet
+            - Bradd Pitt
         director:
           type: string
           example: Christopher Nolan
         writer:
           type: string
-          example: Christopher Nolan
-        cast:
-          type: array
-          example: {}
-          items:
-            type: string
+          example: Todd Phillips
         rating:
           type: number
-          example: 8.3
-        poster:
-          type: string
-    Title:
-      type: object
-      properties:
-        title:
-          type: string
-          example: Stranger Things season 3
-        year:
-          type: integer
-          example: 1999
-        genre:
-          type: string
-          example: Thriller
-        director:
-          type: string
-          example: Christopher Nolan
-        writer:
-          type: string
-          example: Christopher Nolan
-        cast:
+          format: float
+          example: 9.36
+        genres:
           type: array
-          example: {}
           items:
             type: string
-        rating:
-          type: number
-          example: 8.3
+          maxItems: 3
+          example:
+            - Adventure
+            - Comedy
+            - Thriller
+        release_date:
+          type: string
+          format: date
+          example: '2001-08-19'
+        duration:
+          type: string
+          pattern: '^\d+mins$'
+          example: 55mins
         poster:
           type: string
-    Review:
+          example: https://fmd.com/poster.jpeg
+
+    review:
       type: object
       properties:
         review_id:
+          $ref: '#/components/schemas/review_id'
+        title:
           type: string
+          maxLength: 50
+          example: Amazing Watch!
         movie_id:
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/movie_id'
+            - nullable: true
+        show_id:
+          allOf:
+            - $ref: '#/components/schemas/show_id'
+            - nullable: true
         user_id:
-          type: string
+          $ref: '#/components/schemas/user_id'
         likes:
-          type: integer
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            1 : True
+            2 : False
+            42 : True
         rating:
-          type: number
-        review:
+          type: integer
+          maximum: 10
+          minimum: 1
+          example: 10
+        content:
           type: string
-    User:
-      type: object
-      properties:
-        user_id:
+          maxLength: 500
+          example:
+            have you got colour in your cheeks? do you ever get that feel' that you can't shift the tide that sticks around like sumats in your teeth.
+        creation_time:
           type: string
-        name:
-          type: string
-        userpic:
-          type: string
-        bio:
-          type: string
-        interests:
-          type: string
-        watchlist:
-          type: string
-        created_at:
-          type: string
-    inline_response_200:
-      type: object
-      properties:
-        token:
-          type: string
-        user:
-          $ref: '#/components/schemas/User'
+          format: date-time
+          example: '2023-04-02T12:30:45Z'
+
     comment:
       type: object
       properties:
-        comment:
+        comment_id:
+          type: integer
+          example: 42
+        review_id:
+          $ref: '#/components/schemas/review_id'
+        user_id:
+          $ref: '#/components/schemas/user_id'
+        content:
           type: string
-        user_id:
-          type: integer
-    user_id:
-      type: object
-      properties:
-        user_id:
-          type: integer
+          maxLength: 200
+          example: im a puppet on a string, tracy island time travelling diamond, coulda shaped heartaches
+

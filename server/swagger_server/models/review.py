@@ -6,6 +6,10 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.review_id import ReviewId  # noqa: F401,E501
+from swagger_server.models.user_id import UserId  # noqa: F401,E501
+from swagger_server.models.all_ofreview_movie_id import AllOfreviewMovieId  # noqa: F401,E501
+from swagger_server.models.all_ofreview_show_id import AllOfreviewShowId  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -14,45 +18,60 @@ class Review(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, review_id: str=None, movie_id: str=None, user_id: str=None, likes: int=None, rating: float=None, review: str=None):  # noqa: E501
+    def __init__(self, review_id: ReviewId=None, title: str=None, movie_id: AllOfreviewMovieId=None, show_id: AllOfreviewShowId=None, user_id: UserId=None, likes: Dict[str, bool]=None, rating: int=None, content: str=None, creation_time: datetime=None):  # noqa: E501
         """Review - a model defined in Swagger
 
         :param review_id: The review_id of this Review.  # noqa: E501
-        :type review_id: str
+        :type review_id: ReviewId
+        :param title: The title of this Review.  # noqa: E501
+        :type title: str
         :param movie_id: The movie_id of this Review.  # noqa: E501
-        :type movie_id: str
+        :type movie_id: AllOfreviewMovieId
+        :param show_id: The show_id of this Review.  # noqa: E501
+        :type show_id: AllOfreviewShowId
         :param user_id: The user_id of this Review.  # noqa: E501
-        :type user_id: str
+        :type user_id: UserId
         :param likes: The likes of this Review.  # noqa: E501
-        :type likes: int
+        :type likes: Dict[str, bool]
         :param rating: The rating of this Review.  # noqa: E501
-        :type rating: float
-        :param review: The review of this Review.  # noqa: E501
-        :type review: str
+        :type rating: int
+        :param content: The content of this Review.  # noqa: E501
+        :type content: str
+        :param creation_time: The creation_time of this Review.  # noqa: E501
+        :type creation_time: datetime
         """
         self.swagger_types = {
-            'review_id': str,
-            'movie_id': str,
-            'user_id': str,
-            'likes': int,
-            'rating': float,
-            'review': str
+            'review_id': ReviewId,
+            'title': str,
+            'movie_id': AllOfreviewMovieId,
+            'show_id': AllOfreviewShowId,
+            'user_id': UserId,
+            'likes': Dict[str, bool],
+            'rating': int,
+            'content': str,
+            'creation_time': datetime
         }
 
         self.attribute_map = {
             'review_id': 'review_id',
+            'title': 'title',
             'movie_id': 'movie_id',
+            'show_id': 'show_id',
             'user_id': 'user_id',
             'likes': 'likes',
             'rating': 'rating',
-            'review': 'review'
+            'content': 'content',
+            'creation_time': 'creation_time'
         }
         self._review_id = review_id
+        self._title = title
         self._movie_id = movie_id
+        self._show_id = show_id
         self._user_id = user_id
         self._likes = likes
         self._rating = rating
-        self._review = review
+        self._content = content
+        self._creation_time = creation_time
 
     @classmethod
     def from_dict(cls, dikt) -> 'Review':
@@ -60,133 +79,196 @@ class Review(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The Review of this Review.  # noqa: E501
+        :return: The review of this Review.  # noqa: E501
         :rtype: Review
         """
         return util.deserialize_model(dikt, cls)
 
     @property
-    def review_id(self) -> str:
+    def review_id(self) -> ReviewId:
         """Gets the review_id of this Review.
 
 
         :return: The review_id of this Review.
-        :rtype: str
+        :rtype: ReviewId
         """
         return self._review_id
 
     @review_id.setter
-    def review_id(self, review_id: str):
+    def review_id(self, review_id: ReviewId):
         """Sets the review_id of this Review.
 
 
         :param review_id: The review_id of this Review.
-        :type review_id: str
+        :type review_id: ReviewId
         """
 
         self._review_id = review_id
 
     @property
-    def movie_id(self) -> str:
+    def title(self) -> str:
+        """Gets the title of this Review.
+
+
+        :return: The title of this Review.
+        :rtype: str
+        """
+        return self._title
+
+    @title.setter
+    def title(self, title: str):
+        """Sets the title of this Review.
+
+
+        :param title: The title of this Review.
+        :type title: str
+        """
+
+        self._title = title
+
+    @property
+    def movie_id(self) -> AllOfreviewMovieId:
         """Gets the movie_id of this Review.
 
 
         :return: The movie_id of this Review.
-        :rtype: str
+        :rtype: AllOfreviewMovieId
         """
         return self._movie_id
 
     @movie_id.setter
-    def movie_id(self, movie_id: str):
+    def movie_id(self, movie_id: AllOfreviewMovieId):
         """Sets the movie_id of this Review.
 
 
         :param movie_id: The movie_id of this Review.
-        :type movie_id: str
+        :type movie_id: AllOfreviewMovieId
         """
 
         self._movie_id = movie_id
 
     @property
-    def user_id(self) -> str:
+    def show_id(self) -> AllOfreviewShowId:
+        """Gets the show_id of this Review.
+
+
+        :return: The show_id of this Review.
+        :rtype: AllOfreviewShowId
+        """
+        return self._show_id
+
+    @show_id.setter
+    def show_id(self, show_id: AllOfreviewShowId):
+        """Sets the show_id of this Review.
+
+
+        :param show_id: The show_id of this Review.
+        :type show_id: AllOfreviewShowId
+        """
+
+        self._show_id = show_id
+
+    @property
+    def user_id(self) -> UserId:
         """Gets the user_id of this Review.
 
 
         :return: The user_id of this Review.
-        :rtype: str
+        :rtype: UserId
         """
         return self._user_id
 
     @user_id.setter
-    def user_id(self, user_id: str):
+    def user_id(self, user_id: UserId):
         """Sets the user_id of this Review.
 
 
         :param user_id: The user_id of this Review.
-        :type user_id: str
+        :type user_id: UserId
         """
 
         self._user_id = user_id
 
     @property
-    def likes(self) -> int:
+    def likes(self) -> Dict[str, bool]:
         """Gets the likes of this Review.
 
 
         :return: The likes of this Review.
-        :rtype: int
+        :rtype: Dict[str, bool]
         """
         return self._likes
 
     @likes.setter
-    def likes(self, likes: int):
+    def likes(self, likes: Dict[str, bool]):
         """Sets the likes of this Review.
 
 
         :param likes: The likes of this Review.
-        :type likes: int
+        :type likes: Dict[str, bool]
         """
 
         self._likes = likes
 
     @property
-    def rating(self) -> float:
+    def rating(self) -> int:
         """Gets the rating of this Review.
 
 
         :return: The rating of this Review.
-        :rtype: float
+        :rtype: int
         """
         return self._rating
 
     @rating.setter
-    def rating(self, rating: float):
+    def rating(self, rating: int):
         """Sets the rating of this Review.
 
 
         :param rating: The rating of this Review.
-        :type rating: float
+        :type rating: int
         """
 
         self._rating = rating
 
     @property
-    def review(self) -> str:
-        """Gets the review of this Review.
+    def content(self) -> str:
+        """Gets the content of this Review.
 
 
-        :return: The review of this Review.
+        :return: The content of this Review.
         :rtype: str
         """
-        return self._review
+        return self._content
 
-    @review.setter
-    def review(self, review: str):
-        """Sets the review of this Review.
+    @content.setter
+    def content(self, content: str):
+        """Sets the content of this Review.
 
 
-        :param review: The review of this Review.
-        :type review: str
+        :param content: The content of this Review.
+        :type content: str
         """
 
-        self._review = review
+        self._content = content
+
+    @property
+    def creation_time(self) -> datetime:
+        """Gets the creation_time of this Review.
+
+
+        :return: The creation_time of this Review.
+        :rtype: datetime
+        """
+        return self._creation_time
+
+    @creation_time.setter
+    def creation_time(self, creation_time: datetime):
+        """Sets the creation_time of this Review.
+
+
+        :param creation_time: The creation_time of this Review.
+        :type creation_time: datetime
+        """
+
+        self._creation_time = creation_time
