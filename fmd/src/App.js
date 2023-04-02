@@ -6,6 +6,7 @@ import pfp from './profilePicture_comment.jpeg'
 import userpfp from './profilePicture_user.jpeg'
 import BrowsecardShow from './browsecard_show';
 import BrowsecardMovie from './browsecard_movie';
+import Review from './review';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Comment name="duvylfyluksq" profilePic={pfp} body="well, well, well, well hello, baby for one day, youre here and then youre gone i’m waking up to another day, it’s amazing its getting crazy, thats why i wonder how i keep escaping touching that pain, maybe its just my prayers speak as in the strange ways stuck in."/>
       <Comment name="duvylfyluksq" profilePic={pfp} body="well, well, well, well hello, baby for one day, youre here and then youre gone i’m waking up to another day, it’s amazing its getting crazy, thats why i wonder how i keep escaping touching that pain, maybe its just my prayers speak as in the strange ways stuck in."/>
       <GenreTile genre="Adventure"/>
+      <Review reviewtitle="AChha hai" username="johnwick" profilePic={pfp} rating="8.9" body="ifasjdfbasjdjbnvkjsdnSJKDNF Adkdfnja dnfdfjANDDJan  AJASNK FNAJDAFNF"/>
     </div>
   );
 }

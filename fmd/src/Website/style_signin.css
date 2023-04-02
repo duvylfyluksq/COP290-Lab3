@@ -1,0 +1,158 @@
+::placeholder{
+    color: #742BBA;
+}
+body{
+    background-color: white;
+    font-family: 'Roboto';
+    color: #742BBA;
+}
+
+
+.paswrd i{
+    position: absolute;
+    margin-top:15px;
+    margin-left: 145px;
+    cursor:pointer;
+}
+
+.mainbox{
+    box-sizing: border-box;
+
+/* Auto layout */
+
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+padding: 50px 0px 50px 10px;
+gap: 70px;
+
+width: 562px;
+height: 796px;
+
+background: #FFFFFF;
+border: 7px solid rgba(116, 43, 186, 0.75);
+box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+border-radius: 50px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+.resize{
+    display: flex;
+flex-direction: row;
+justify-content: space-between;
+/* text-align: center; */
+/* padding: 43px 37px; */
+/* gap: 10px; */
+
+width: 100px;
+height: 100px;
+
+background: #FFFFFF;
+border-radius: 11px;
+
+/* Inside auto layout */
+
+/* flex: none;
+order: 0;
+flex-grow: 0; */
+}
+
+.welcome{
+    /* width: 282px;
+height: 44px; */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 40px;
+border:5px;
+color: #742BBA;
+
+
+/* Inside auto layout */
+/* 
+flex: none;
+order: 1;
+flex-grow: 0; */
+}
+
+
+.username{
+    display: flex;
+flex-direction: row;
+align-items: center;
+padding: 17px 14px;
+gap: 10px;
+
+width: 366px;
+height: 49px;
+border:none;
+background: #FFFFFF;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+.password{
+    display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 17px 14px;
+gap: 10px;
+
+width: 366px;
+height: 49px;
+
+background: #FFFFFF;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+border:none;
+/* Inside auto layout */
+
+/* flex: none;
+order: 1;
+flex-grow: 0; */
+}
+
+.login{
+    display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 14px;
+gap: 10px;
+font-size: 25px;
+font-weight:500px;
+width: 300px;
+height: 45px;
+
+background: #742BBA;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+
+/* Inside auto layout */
+
+/* flex: none;
+order: 0;
+flex-grow: 0; */
+text-decoration:none;
+color:#FFc055;
+}
+
+.signup{
+    text-decoration:none;
+    color:#742BBA;
+}
+
