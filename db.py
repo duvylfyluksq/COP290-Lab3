@@ -68,6 +68,40 @@ def edit_interests(User:user, newinterest):
         connection.commit()
         User.user_id = cursor.lastrowid
 
+def get_review_for_movie(Movie: movie):
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'review' where 'movie_id'=%d"""
+        cursor.execture(sql, (Movie.movie_id))
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        else:
+            l  = []
+            for a in r:
+                l.append(review.from_dict(a))
+            return l
+
+
+            
+
+
+
+    
+    
+def get_review_for_show(Show: shows):
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'review' where 'show_id'=%d"""
+        cursor.execture(sql, (Show.show_id))
+        r = cursor.fetchall()
+        
+        if r is None:
+            return None
+        l  = []
+        for a in r:
+            l.append(review.from_dict(a))
+        return l
+
+
 def add_comment(Comment: comment) -> None:
     assert Comment.comment_id is None
     with connection.cursor() as cursor:
@@ -90,36 +124,99 @@ def add_review(Review: review) -> None:
     Review.review_id = cursor.lastrowid
 
 
-def get_reviews_fromMovie(Movie: movie) -> Optional[review]:
+def get_reviews_fromMovie(Movie: movie):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'movie_id'=%d"""
         cursor.execture(sql, (Movie.movie_id))
-        r = cursor.fetchone()
+        r = cursor.fetchall()
         if r is None:
             return None
-        return review.from_dict(r)
+        return r
 
 
 def get_reviews_fromShow(Shows: shows) -> Optional[review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
         cursor.execture(sql, (Shows.show_id))
-        r = cursor.fetchone()
+        r = cursor.fetchall()
         if r is None:
             return None
-        return review.from_dict(r)
+        return r
 
 
 def get_reviews_fromUser(User: user) -> Optional[review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'user_id'=%d"""
         cursor.execture(sql, (User.user_id))
-        r = cursor.fetchone()
+        r = cursor.fetchall()
         if r is None:
             return None
-        return review.from_dict(r)
+        return r
 
 
+def get_comments_fromReview(Review: review) -> Optional[comment]:
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'comment' where 'review_id'=%d"""
+        cursor.execture(sql, (Review.review_id))
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        return r
+
+
+def check_login(username, password) -> bool:
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'User' where 'username'=%s"""
+        cursor.execute(sql, (username))
+        r = cursor.fetchone()
+        if r is None:
+            return False
+        else:
+            if r['password'] == password:
+                return True
+            else:
+                return False
+
+
+def count_likes(Review: review) -> int:
+    count = 0
+    for key in Review.likes:
+        if Review.likes[key] == 1:
+            count += 1
+    return count
+
+
+
+def count_comments(Review: review) -> int:
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'comment' where 'review_id'=%d"""
+        cursor.execture(sql, (Review.review_id))
+        r = cursor.fetchone()
+        if r is None:
+            return 0
+        else:
+            return len(r)
+
+def count_posts(User: user_id):
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'review' where 'user_id'=%d"""
+        cursor.execture(sql, (User.user_id))
+        r = cursor.fetchone()
+        if r is None:
+            return 0
+        else:
+            return len(r)
+
+# function to match prefix for autocomplete
+def autocomplete_search(prefix):
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM 'movie' where 'title' LIKE %s"""
+        cursor.execute(sql, (prefix + '%'))
+        r = cursor.fetchall()
+        if r is None:
+            return None
+        else:
+            return r
 
 
 
