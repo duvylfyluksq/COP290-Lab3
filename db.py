@@ -1,10 +1,10 @@
 # Connect to the database
-from typing import Optional
+from typing import Optional, Union
 import os
 import json
 import pymysql
 
-from models import comment, movie, shows, review, title, user, user_id
+from models import comment, movie, tvshow, review, user, user_id
 
 db_host = os.getenv("DB_HOST")
 db_user = os.getenv("DB_USER")
@@ -20,6 +20,8 @@ connection = pymysql.connect(
 )
 
 # -------------------------------------------------------------------------------------------------------------------------------
+
+
 def add_user(User: user) -> None:
     assert User.id is None
     with connection.cursor() as cursor:
@@ -28,17 +30,19 @@ def add_user(User: user) -> None:
         watchlist_movies = json.dumps(User.watchlist_movies)
         watchlist_shows = json.dumps(User.watchlist_shows)
         cursor.execute(sql, (User.username, User.password,
-                       watchlist_movies,watchlist_shows, User.bio, User.pfp, User.interests))
+                       watchlist_movies, watchlist_shows, User.bio, User.pfp, User.interests))
         connection.commit()
         User.user_id = cursor.lastrowid
 
-def edit_username(User: user,newname) -> None:
+
+def edit_username(User: user, newname) -> None:
     assert User.id is None
     with connection.cursor() as cursor:
         sql = f"UPDATE User SET username = %s WHERE user_id = %d"
         cursor.execute(sql, (newname, User.user_id))
         connection.commit()
         User.user_id = cursor.lastrowid
+
 
 def edit_password(User: user, password) -> None:
     assert User.id is None
@@ -48,27 +52,33 @@ def edit_password(User: user, password) -> None:
         connection.commit()
         User.user_id = cursor.lastrowid
 
-def edit_bio(User: user,newbio) -> None:
+
+def edit_bio(User: user, newbio) -> None:
     assert User.id is None
     with connection.cursor() as cursor:
         sql = f"UPDATE User SET bio = %s WHERE user_id = %d"
         cursor.execute(sql, (newbio, User.user_id))
         connection.commit()
         User.user_id = cursor.lastrowid
-def edit_pfp(User: user,newpfp) -> None:
+
+
+def edit_pfp(User: user, newpfp) -> None:
     assert User.id is None
     with connection.cursor() as cursor:
         sql = f"UPDATE User SET pfp = %s WHERE user_id = %d"
         cursor.execute(sql, (newpfp, User.user_id))
         connection.commit()
         User.user_id = cursor.lastrowid
-def edit_interests(User:user, newinterest):
+
+
+def edit_interests(User: user, newinterest):
     assert User.id is None
     with connection.cursor() as cursor:
         sql = f"UPDATE User Set Interest = %s WHERE user_id = %d "
-        cursor.execute(sql,(newinterest,User.user_id))
+        cursor.execute(sql, (newinterest, User.user_id))
         connection.commit()
         User.user_id = cursor.lastrowid
+
 
 def get_review_for_movie(Movie: movie):
     with connection.cursor() as cursor:
@@ -78,27 +88,21 @@ def get_review_for_movie(Movie: movie):
         if r is None:
             return None
         else:
-            l  = []
+            l = []
             for a in r:
                 l.append(review.from_dict(a))
             return l
 
 
-            
-
-
-
-    
-    
 def get_review_for_show(Show: shows):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'show_id'=%d"""
         cursor.execture(sql, (Show.show_id))
         r = cursor.fetchall()
-        
+
         if r is None:
             return None
-        l  = []
+        l = []
         for a in r:
             l.append(review.from_dict(a))
         return l
@@ -187,6 +191,7 @@ def count_likes_review(Review: review) -> int:
             count += 1
     return count
 
+
 def count_likes_user(User: user) -> int:
     count = 0
     with connection.cursor() as cursor:
@@ -198,14 +203,10 @@ def count_likes_user(User: user) -> int:
         else:
             for key in r:
                 if key in r:
-                    if r[key] == True :
+                    if r[key] == True:
                         count += 1
 
     return count
-
-
-
-
 
 
 def count_comments(Review: review) -> int:
@@ -218,6 +219,7 @@ def count_comments(Review: review) -> int:
         else:
             return len(r)
 
+
 def count_posts(User: user_id):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'review' where 'user_id'=%d"""
@@ -229,6 +231,8 @@ def count_posts(User: user_id):
             return len(r)
 
 # function to match prefix for autocomplete
+
+
 def autocomplete_search(prefix):
     with connection.cursor() as cursor:
         sql = """SELECT * FROM 'movie' where 'title' LIKE %s"""
@@ -240,8 +244,78 @@ def autocomplete_search(prefix):
             return r
 
 
+def add_or_delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
+    if isinstance(title, movie):
+        with connection.cursor() as cursor:
+            sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
+            cursor.execute(sql, (User.user_id))
+            r = cursor.fetchone()
+            d = json.dumps(r[0]) if r else {}
+            if ((title.movie_id in d) and d[title.movie_id]):
+                d[title.movie_id] = not d[title.movie_id]
+            else:
+                d[title.movie_id] = True
+            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            connection.commit()
+    elif isinstance(title, tvshow):
+        with connection.cursor() as cursor:
+            sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
+            cursor.execute(sql, (User.user_id))
+            r = cursor.fetchone()
+            d = json.dumps(r[0]) if r else {}
+            if ((title.show_id in d) and d[title.show_id]):
+                d[title.show_id] = not d[title.show_id]
+            else:
+                d[title.show_id] = True
+            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            connection.commit()
 
- # -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+def delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
+    if isinstance(title, movie):
+        with connection.cursor() as cursor:
+            sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
+            cursor.execute(sql, (User.user_id))
+            r = cursor.fetchone()
+            d = json.dumps(r[0]) if r else {}
+            d[title.movie_id] = False
+            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            connection.commit()
+    elif isinstance(title, tvshow):
+        with connection.cursor() as cursor:
+            sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
+            cursor.execute(sql, (User.user_id))
+            r = cursor.fetchone()
+            d = json.dumps(r[0]) if r else {}
+            d[title.show_id] = False
+            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            connection.commit()
+
+
+def get_watchlist_fromUser(User: user):
+    L = []
+    with connection.cursor() as cursor:
+        sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
+        cursor.execute(sql, (User.user_id))
+        r = cursor.fetchone()
+        d = json.dumps(r[0]) if r else {}
+        for i in d:
+            if (d[i]):
+                L.append(i)
+        sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
+        cursor.execute(sql, (User.user_id))
+        r = cursor.fetchone()
+        d = json.dumps(r[0]) if r else {}
+        for i in d:
+            if (d[i]):
+                L.append(i)
+    return L
+
+    # -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 def get_category_from_id(id: int) -> Optional[Category]:
