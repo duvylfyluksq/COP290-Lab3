@@ -1,3 +1,4 @@
+import React from 'react';
 import { useMemo } from "react";
 import "./Navbar2.css";
 

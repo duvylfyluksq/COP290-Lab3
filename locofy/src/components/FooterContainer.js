@@ -1,3 +1,4 @@
+import React from 'react';
 import "./FooterContainer.css";
 
 const FooterContainer = ({ onLoginContainerClick, onSignUpTextClick }) => {

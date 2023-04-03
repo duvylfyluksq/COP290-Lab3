@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCallback } from "react";
 import BrowsePageContainer from "../components/BrowsePageContainer";
 import LeftContainer from "../components/LeftContainer";

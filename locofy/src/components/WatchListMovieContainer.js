@@ -1,3 +1,4 @@
+import React from 'react';
 import "./WatchListMovieContainer.css";
 
 const WatchListMovieContainer = ({ productId }) => {

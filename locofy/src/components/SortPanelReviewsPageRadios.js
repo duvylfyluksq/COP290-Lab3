@@ -1,3 +1,4 @@
+import React from 'react';
 import "./SortPanelReviewsPageRadios.css";
 
 const SortPanelReviewsPageRadios = () => {

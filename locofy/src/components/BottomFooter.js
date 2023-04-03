@@ -1,3 +1,4 @@
+import React from 'react';
 import "./BottomFooter.css";
 
 const BottomFooter = () => {

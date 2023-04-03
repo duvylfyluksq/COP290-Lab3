@@ -1,3 +1,4 @@
+import React from 'react';
 import { ReportHandler } from "web-vitals";
 
 const reportWebVitals = (onPerfEntry?: ReportHandler) => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import "./BrowsePageContainer.css";
 
 const BrowsePageContainer = ({

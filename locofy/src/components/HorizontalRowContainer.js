@@ -1,3 +1,4 @@
+import React from 'react';
 import "./HorizontalRowContainer.css";
 
 const HorizontalRowContainer = ({

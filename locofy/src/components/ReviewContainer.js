@@ -1,3 +1,4 @@
+import React from 'react';
 import "./ReviewContainer.css";
 
 const ReviewContainer = ({ onPictureIconClick, onDuvylfyluksqTextClick }) => {
