@@ -13,7 +13,7 @@
 }
 
 .comment {
-  width: 52%;
+  width: 58%;
   display: flex;
   flex-direction: column;
   padding: max(1%,10px);

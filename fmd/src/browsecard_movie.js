@@ -13,8 +13,8 @@ function BrowsecardMovie(props) {
                 <p id="year">({props.year})</p>
             </div>
             <div className="middle">
-                <p id="rating">{props.rating}/10</p>
-                <p id="duration">{props.duration}</p>
+                <p id="rating"><span id="rating_hd">Rating:</span> {props.rating}/10</p>
+                <p id="duration"><span id="rating_hd">Duration:</span> {props.duration}</p>
             </div>
             <div className="bottom">
                 <p id="cast">Cast: {props.cast}</p>

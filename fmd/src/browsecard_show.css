@@ -69,12 +69,12 @@
 }
 
 #movietitle {
-    font-size: 2.5em;
+    font-size: 30px;
     font-weight: 500;
     margin: 0;
 }
 #year {
-    font-size: 1em;
+    font-size: 15px;
     font-weight: 300;
     margin: 0;
 }
@@ -87,7 +87,7 @@
 }
 
 #rating {
-    font-size: 1em;
+    font-size: 13px;
     font-weight: 400;
     margin: 0;
 }
@@ -96,9 +96,13 @@
     font-weight: 400;
     margin: 0;
 }
-
+#rating_hd {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+}
 #season {
-    font-size: 1.em;
+    font-size: 13px;
     font-weight: 400;
     margin: 0;
 }

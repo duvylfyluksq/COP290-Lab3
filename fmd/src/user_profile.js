@@ -11,11 +11,11 @@ function UserProfile(props) {
       </div>
       <div className="right">
         <div className="bio">
-            <h6>Bio</h6>
+            <h3>Bio</h3>
             <p>{props.bio}</p>
         </div>
         <div className="interests">
-            <h6>Interests</h6>
+            <h3>Interests</h3>
             <div className="interestList">
                 <GenreTile genre={props.interest1}/>
                 <GenreTile genre={props.interest2}/>
@@ -23,7 +23,7 @@ function UserProfile(props) {
             </div>
         </div>
         <div className="stats">
-            <h6>Stats</h6>
+            <h3>Stats</h3>
             <div className="statList">
                 <div className="statField">{props.posts}<p>Posts</p></div>
                 <div className="statField">{props.likes}<p>Likes</p></div>

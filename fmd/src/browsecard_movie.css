@@ -69,7 +69,7 @@
 }
 
 #movietitle {
-    font-size: 2.5em;
+    font-size: 30px;
     font-weight: 500;
     margin: 0;
 }
@@ -88,16 +88,20 @@
 }
 
 #rating {
-    font-size: 1em;
+    font-size: 13px;
     font-weight: 400;
     margin: 0;
 }
 #duration {
-    font-size: 1em;
+    font-size: 13px;
     font-weight: 400;
     margin: 0;
 }
-
+#rating_hd {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+}
 .bottom {
     margin: 0;
     display: flex;
@@ -107,7 +111,7 @@
 
 }
 #cast {
-    font-size: 1.5em;
+    font-size: 20px;
     font-weight: 400;
     margin: 0;
 }

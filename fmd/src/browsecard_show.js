@@ -14,8 +14,8 @@ function BrowsecardShow(props) {
                 <p id="year">({props.year})</p>
             </div>
             <div className="middle">
-                <p id="rating">{props.rating}/10</p>
-                <p id="duration">{props.duration}</p>
+                <p id="rating"><span id="rating hd">Rating: </span>{props.rating}/10</p>
+                <p id="duration"><span id="rating hd">Duration: </span>{props.duration}</p>
             </div>
             <div className="bottom">
                 <p id="cast">Cast: {props.cast}</p>
