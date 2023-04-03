@@ -1,10 +1,10 @@
 # Connect to the database
 # Connect to the database
-from typing import Optional, Union
+from typing import Union, List
 import os
 import json
 import pymysql
-from models import comment, movie, tvshow, review, user, user_id
+from models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
 db_host = os.getenv("DB_HOST")
 db_user = os.getenv("DB_USER")
 db_password = os.getenv("DB_PASSWORD")
@@ -19,42 +19,54 @@ connection = pymysql.connect(
 # -------------------------------------------------------------------------------------------------------------------------------
 
 
-def add_user(User: user) -> None:
-    assert User.id is None
+def addUser(User: User) -> None:
+    assert User.user_id is None
     with connection.cursor() as cursor:
-        sql = f"INSERT INTO User (username,password,watchlist_movies,watchlist_shows,bio,pfp,interests) VALUES " \
+        sql = f"INSERT INTO `user` (username,password,watchlist_movies,watchlist_shows,bio,pfp,interests) VALUES " \
               f"(%s, %s, %s, %s,%s,%s,%s)"
-        watchlist_movies = json.dumps(User.watchlist_movies)
-        watchlist_shows = json.dumps(User.watchlist_shows)
         cursor.execute(sql, (User.username, User.password,
-                       watchlist_movies, watchlist_shows, User.bio, User.pfp, User.interests))
+                       json.dumps(User.watchlist_movies), json.dumps(User.watchlist_shows), User.bio, User.pfp, json.dumps(User.interests)))
         connection.commit()
         User.user_id = cursor.lastrowid
 
 
-def edit_username(User: user, newname) -> None:
-    assert User.id is None
+def editUsername(User: User, username) -> None:
+    assert User.user_id is not None
     with connection.cursor() as cursor:
-        sql = f"UPDATE User SET username = %s WHERE user_id = %d"
-        cursor.execute(sql, (newname, User.user_id))
+        sql = f"UPDATE `user` SET `username` = %s WHERE `user_id` = %s"
+        cursor.execute(sql, (username, User.user_id))
         connection.commit()
-        User.user_id = cursor.lastrowid
 
 
-def edit_password(User: user, password) -> None:
-    assert User.id is None
+def editPassword(User: User, password) -> None:
+    assert User.user_id is not None
     with connection.cursor() as cursor:
-        sql = f"UPDATE User SET password = %s WHERE user_id = %d"
+        sql = f"UPDATE `user` SET `password` = %s WHERE `user_id` = %s"
         cursor.execute(sql, (password, User.user_id))
         connection.commit()
-        User.user_id = cursor.lastrowid
+
+
+def editBio(User: User, bio) -> None:
+    assert User.user_id is not None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE `user` SET `bio` = %s WHERE `user_id` = %s"
+        cursor.execute(sql, (bio, User.user_id))
+        connection.commit()
+
+
+def editInterests(User: User, interests) -> None:
+    assert User.user_id is not None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE `user` SET `interests` = %s WHERE `user_id` = %s"
+        cursor.execute(sql, (json.dumps(interests), User.user_id))
+        connection.commit()
 
 
 def sort_rating_movies(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'movie' ORDER BY 'rating' DESC"""
+        sql = """SELECT * FROM `movie` ORDER BY `rating` DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -71,7 +83,7 @@ def sort_rating_shows(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'shows' ORDER BY 'rating' DESC"""
+        sql = """SELECT * FROM `tvshow` ORDER BY `rating` DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -88,7 +100,7 @@ def sort_rating_reviews(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' ORDER BY 'rating' DESC"""
+        sql = """SELECT * FROM `review` ORDER BY `rating` DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -105,7 +117,7 @@ def sort_most_recent_reviews(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' ORDER BY 'creation_time' DESC"""
+        sql = """SELECT * FROM `review` ORDER BY `date` DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -122,7 +134,7 @@ def sort_most_recent_shows(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'tvshow' ORDER BY 'creation_time' DESC"""
+        sql = """SELECT * FROM `tvshow` ORDER BY `date` DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -139,7 +151,7 @@ def sort_most_recent_movies(order: bool):
     if order is None:
         order = False
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'movie' ORDER BY 'creation_time' DESC"""
+        sql = """SELECT * FROM `movie` ORDER BY `date` DESC"""
         cursor.execture(sql)
         r = cursor.fetchall()
         if r is None:
@@ -151,229 +163,56 @@ def sort_most_recent_movies(order: bool):
             return l.reverse()
         return l
 
-def sort_alpha_movies(order: bool):
-    if order is None:
-        order = False
+
+def getReview_forMovie(Movie: Movie) -> List[Review]:
+    assert Movie.movie_id is not None
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'movie' ORDER BY 'title' DESC"""
-        cursor.execture(sql)
+        sql = """SELECT * FROM `review` where `movie_id`=%s"""
+        cursor.execute(sql, (Movie.movie_id,))
         r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(movie.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
-def sort_alpha_shows(order: bool):
-    if order is None:
-        order = False
+        L = []
+        for i in r:
+            L.append(Review.from_dict(i))
+        return L
+
+
+def getReview_forShow(Tvshow: Tvshow) -> List[Review]:
+    assert Tvshow.show_id is not None
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'tvshow' ORDER BY 'title' DESC"""
-        cursor.execture(sql)
+        sql = """SELECT * FROM `review` where `show_id`=%s"""
+        cursor.execute(sql, (Tvshow.show_id,))
         r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(tvshow.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
-def sort_alpha_reviews(order: bool):
-    if order is None:
-        order = False
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' ORDER BY 'title' DESC"""
-        cursor.execture(sql)
-        r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(review.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
-def sort_byMostReviews_movie(order: int):
-    with connection.cursor() as cursor:
-        sql = """SELECT movie.*, COUNT(review.id) AS review_count
-                 FROM movie LEFT JOIN review ON movie.id = review.movie_id
-                 GROUP BY movie.id
-                 ORDER BY review_count %s"""
-        if order == 1:
-            sql += " ASC"
-        else:
-            sql += " DESC"
-        cursor.execute(sql, ("ASC" if order == 1 else "DESC",))
-        rows = cursor.fetchall()
-        movies = [movie.from_dict(row) for row in rows]
-        return movies
-def sort_byMostReviews_shows(order: int):
-    with connection.cursor() as cursor:
-        sql = """SELECT tvshow.*, COUNT(review.id) AS review_count
-                 FROM movie LEFT JOIN review ON tvshow.id = review.movie_id
-                 GROUP BY tvshow.id
-                 ORDER BY review_count %s"""
-        if order == 1:
-            sql += " ASC"
-        else:
-            sql += " DESC"
-        cursor.execute(sql, ("ASC" if order == 1 else "DESC",))
-        rows = cursor.fetchall()
-        shows = [tvshow.from_dict(row) for row in rows]
-        return shows
-def mergesort_rating(a, b):
-    c = []
-    while len(a) > 0 and len(b) > 0:
-        if a[0].rating > b[0].rating:
-            c.append(a[0])
-            a.pop(0)
-        else:
-            c.append(b[0])
-            b.pop(0)
-    if len(a) > 0:
-        c += a
-    if len(b) > 0:
-        c += b
-    return c
-def mergesort_review_count(a, b):
-    c = []
-    while len(a) > 0 and len(b) > 0:
-        if a[0].review_count > b[0].review_count:
-            c.append(a[0])
-            a.pop(0)
-        else:
-            c.append(b[0])
-            b.pop(0)
-    if len(a) > 0:
-        c += a
-    if len(b) > 0:
-        c += b
-    return c
-def mergesort_alpha(a, b):
-    c = []
-    while len(a) > 0 and len(b) > 0:
-        if a[0].title > b[0].title:
-            c.append(a[0])
-            a.pop(0)
-        else:
-            c.append(b[0])
-            b.pop(0)
-    if len(a) > 0:
-        c += a
-    if len(b) > 0:
-        c += b
-    return c
-def mergesort_creation_time(a, b):
-    c = []
-    while len(a) > 0 and len(b) > 0:
-        if a[0].creation_time > b[0].creation_time:
-            c.append(a[0])
-            a.pop(0)
-        else:
-            c.append(b[0])
-            b.pop(0)
-    if len(a) > 0:
-        c += a
-    if len(b) > 0:
-        c += b
-    return c
-
-def sort_rating_review(rat,lex,pop,rel,order):
-    if rat is True:
-        return mergesort_rating(sort_rating_movies(order),sort_rating_shows(order))
-    elif pop is True:
-        return mergesort_review_count(sort_byMostReviews_shows(order),sort_byMostReviews_movie(order))
-    elif lex is True:
-        return mergesort_alpha(sort_alpha_movies(order),sort_alpha_shows(order))
-    elif rel is True:
-        return mergesort_creation_time(sort_most_recent_movies(order),sort_most_recent_shows(order))
+        L = []
+        for i in r:
+            L.append(Review.from_dict(i))
+        return L
 
 
-
-
-def edit_bio(User: user, newbio) -> None:
-    assert User.id is None
-    with connection.cursor() as cursor:
-        sql = f"UPDATE User SET bio = %s WHERE user_id = %d"
-        cursor.execute(sql, (newbio, User.user_id))
-        connection.commit()
-        User.user_id = cursor.lastrowid
-
-
-def edit_pfp(User: user, newpfp) -> None:
-    assert User.id is None
-    with connection.cursor() as cursor:
-        sql = f"UPDATE User SET pfp = %s WHERE user_id = %d"
-        cursor.execute(sql, (newpfp, User.user_id))
-        connection.commit()
-        User.user_id = cursor.lastrowid
-
-
-def edit_interests(User: user, newinterest):
-    assert User.id is None
-    with connection.cursor() as cursor:
-        sql = f"UPDATE User Set Interest = %s WHERE user_id = %d "
-        cursor.execute(sql, (newinterest, User.user_id))
-        connection.commit()
-        User.user_id = cursor.lastrowid
-
-
-def get_review_for_movie(Movie: movie):
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' where 'movie_id'=%d"""
-        cursor.execture(sql, (Movie.movie_id))
-        r = cursor.fetchall()
-        if r is None:
-            return None
-        else:
-            l = []
-            for a in r:
-                l.append(review.from_dict(a))
-            return l
-
-
-def get_review_for_show(Show: tvshow):
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' where 'show_id'=%d"""
-        cursor.execture(sql, (Show.show_id))
-        r = cursor.fetchall()
-
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(review.from_dict(a))
-        return l
-
-
-def add_comment(Comment: comment) -> None:
+def addComment(Comment: Comment) -> None:
     assert Comment.comment_id is None
     with connection.cursor() as cursor:
-        sql = f"INSERT INTO comment (comment_id,review_id,user_id,content)" \
-              f"(%d,%d,%d,%s)"
-        cursor.execute(sql, (Comment.comment_id, Comment.review_id,
-                       Comment.user_id, Comment.content))
-    connection.commit()
-    Comment.comment_id = cursor.lastrowid
+        sql = "INSERT INTO `comment` (review_id, user_id, content) VALUES (%s, %s, %s)"
+        cursor.execute(
+            sql, (Comment.review_id, Comment.user_id, Comment.content))
+        connection.commit()
+        Comment.comment_id = cursor.lastrowid
 
 
-def add_review(Review: review) -> None:
-    assert Review.id is None
+def addReview(Review: Review) -> None:
+    assert Review.review_id is None
     with connection.cursor() as cursor:
-        sql = f"INSERT INTO review (movie_id,user_id,likes,rating,content) VALUES " \
-              f"( %s ,%s , %s, %s,%s)"
-        cursor.execute(sql, (Review.review_id, Review.movie_id,
-                       Review.user_id, Review.likes, review.rating, Review.content))
+        sql = f"INSERT INTO review (title,movie_id,show_id,user_id,likes,rating,content,creation_time) VALUES " \
+              f"(%s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(sql, (Review.title, Review.movie_id, Review.show_id, Review.user_id,
+                             Review.likes, Review.rating, Review.content, Review.creation_time))
     connection.commit()
     Review.review_id = cursor.lastrowid
 
 
+"""
 def get_reviews_fromMovie(Movie: movie):
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' where 'movie_id'=%d"""
+        sql = SELECT * FROM `review` where `movie_id`=%d
         cursor.execture(sql, (Movie.movie_id))
         r = cursor.fetchall()
         if r is None:
@@ -383,38 +222,43 @@ def get_reviews_fromMovie(Movie: movie):
 
 def get_reviews_fromShow(Shows: tvshow) -> Optional[review]:
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' where 'show_id'=%d"""
+        sql = SELECT * FROM `review` where `show_id`=%d
         cursor.execture(sql, (Shows.show_id))
         r = cursor.fetchall()
         if r is None:
             return None
         return r
+"""
 
 
-def get_reviews_fromUser(User: user) -> Optional[review]:
+def getReviews_fromUser(User: User) -> List[Review]:
+    assert User.user_id is not None
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' where 'user_id'=%d"""
-        cursor.execture(sql, (User.user_id))
+        sql = """SELECT * FROM `review` where `user_id`=%s"""
+        cursor.execute(sql, (User.user_id,))
         r = cursor.fetchall()
-        if r is None:
-            return None
-        return r
+        L = []
+        for i in r:
+            L.append(Review.from_dict(i))
+        return L
 
 
-def get_comments_fromReview(Review: review) -> Optional[comment]:
+def getComments_fromReview(Review: Review) -> List[Comment]:
+    assert Review.review_id is not None
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'comment' where 'review_id'=%d"""
-        cursor.execture(sql, (Review.review_id))
+        sql = """SELECT * FROM `comment` where `review_id`=%s"""
+        cursor.execute(sql, (Review.review_id,))
         r = cursor.fetchall()
-        if r is None:
-            return None
-        return r
+        L = []
+        for i in r:
+            L.append(Comment.from_dict(i))
+        return L
 
 
-def check_login(username, password) -> bool:
+def checkLogin(username: str, password: str) -> bool:
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'User' where 'username'=%s"""
-        cursor.execute(sql, (username))
+        sql = """SELECT * FROM `user` where `username`=%s"""
+        cursor.execute(sql, (username,))
         r = cursor.fetchone()
         if r is None:
             return False
@@ -425,225 +269,156 @@ def check_login(username, password) -> bool:
                 return False
 
 
-def count_likes_review(Review: review) -> int:
+def LikeOrUnlike(Review: Review, User: User) -> None:
+    assert Review.review_id is not None and User.user_id is not None
+    with connection.cursor() as cursor:
+        sql = """SELECT `likes` FROM `review` WHERE `review_id`=%s"""
+        cursor.execute(sql, (Review.review_id,))
+        r = cursor.fetchone()
+        d = json.loads(r[0]) if r else {}
+        if (User.user_id in d.keys() and d[User.user_id]):
+            d[User.user_id] = False
+        else:
+            d[User.user_id] = True
+        sql = """UPDATE `review` SET `likes` = %s WHERE `review_id` = %s"""
+        cursor.execute(sql, (json.dumps(d), Review.review_id))
+        connection.commit()
+
+
+""" won't this be handled later?
+def countLikes_Review(Review: Review) -> int:
     count = 0
     for key in Review.likes:
         if Review.likes[key] == 1:
             count += 1
     return count
+"""
 
 
-def count_likes_user(User: user) -> int:
+def countLikes_User(User: User) -> int:
     count = 0
     with connection.cursor() as cursor:
-        sql = """SELECT 'likes' FROM 'review'"""
+        sql = """SELECT `likes` FROM `review`"""
         cursor.execute(sql)
         r = cursor.fetchall()
-        if r is None:
-            return 0
-        else:
-            for key in r:
-                if key in r:
-                    if r[key] == True:
-                        count += 1
+        for i in r:
+            d = json.loads(i[0]) if i[0] else {}
+            if User.user_id in d.keys():
+                if d[User.user_id] == True:
+                    count += 1
     return count
 
 
-def count_comments(Review: review) -> int:
+def countComments_User(User: User) -> int:
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'comment' where 'review_id'=%d"""
-        cursor.execture(sql, (Review.review_id))
-        r = cursor.fetchone()
-        if r is None:
-            return 0
-        else:
-            return len(r)
-
-
-def count_posts(User: user):
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'review' where 'user_id'=%d"""
-        cursor.execture(sql, (User.user_id))
-        r = cursor.fetchone()
-        if r is None:
-            return 0
-        else:
-            return len(r)
-
-
-# function to match prefix for autocomplete
-
-
-def autocomplete_search(prefix):
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM 'movie' where 'title' LIKE %s"""
-        cursor.execute(sql, (prefix + '%'))
+        sql = """SELECT * FROM `comment` where `user_id`=%s"""
+        cursor.execute(sql, (User.user_id,))
         r = cursor.fetchall()
-        if r is None:
-            return None
-        else:
-            return r
+        return len(r)
 
 
-def add_or_delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
-    if isinstance(title, movie):
+def countReviews_User(User: User) -> int:
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM `review` where `user_id`=%s"""
+        cursor.execute(sql, (User.user_id,))
+        r = cursor.fetchall()
+        return len(r)
+
+
+def Search(prefix: str) -> List[Union(Movie, Tvshow)]:
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM `movie` WHERE `title` LIKE %s
+                 UNION ALL
+                 SELECT * FROM `tvshow` WHERE `title` LIKE %s"""
+        cursor.execute(sql, (prefix + '%', prefix + '%'))
+        r = cursor.fetchall()
+        L = []
+        for i in r:
+            if 'season' in i.keys():
+                L.append(Tvshow.from_dict(i))
+            else:
+                L.append(Movie.from_dict(i))
+        return L
+
+
+def addOrDelete_fromWatchlist(User: User, title: Union[Movie, Tvshow]) -> None:
+    assert User.user_id is not None
+    if isinstance(title, Movie):
+        assert title.movie_id is not None
         with connection.cursor() as cursor:
-            sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
-            cursor.execute(sql, (User.user_id))
+            sql = """SELECT `watchlist_movies` FROM user WHERE `user_id`=%s"""
+            cursor.execute(sql, (User.user_id,))
             r = cursor.fetchone()
-            d = json.dumps(r[0]) if r else {}
+            d = json.loads(r[0]) if r else {}
             if ((title.movie_id in d) and d[title.movie_id]):
                 d[title.movie_id] = not d[title.movie_id]
             else:
                 d[title.movie_id] = True
-            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            sql = """UPDATE user SET `watchlist_movies` = %s WHERE user_id = %s"""
             cursor.execute(sql, (json.dumps(d), User.user_id))
             connection.commit()
-    elif isinstance(title, tvshow):
+    elif isinstance(title, Tvshow):
+        assert title.show_id is not None
         with connection.cursor() as cursor:
-            sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
-            cursor.execute(sql, (User.user_id))
+            sql = """SELECT `watchlist_shows` FROM `user` WHERE `user_id`=%s"""
+            cursor.execute(sql, (User.user_id,))
             r = cursor.fetchone()
-            d = json.dumps(r[0]) if r else {}
+            d = json.loads(r[0]) if r else {}
             if ((title.show_id in d) and d[title.show_id]):
                 d[title.show_id] = not d[title.show_id]
             else:
                 d[title.show_id] = True
-            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
+            sql = """UPDATE user SET `watchlist_shows` = %s WHERE user_id = %s"""
             cursor.execute(sql, (json.dumps(d), User.user_id))
             connection.commit()
 
 
-def delete_fromWatchlist(User: user, title: Union[movie, tvshow]):
-    if isinstance(title, movie):
+def delete_fromWatchlist(User: User, title: Union[Movie, Tvshow]) -> None:
+    assert User.user_id is not None
+    if isinstance(title, Movie):
+        assert title.movie_id is not None
         with connection.cursor() as cursor:
-            sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
-            cursor.execute(sql, (User.user_id))
+            sql = """SELECT `watchlist_movies` FROM `user` WHERE `user_id`=%s"""
+            cursor.execute(sql, (User.user_id,))
             r = cursor.fetchone()
-            d = json.dumps(r[0]) if r else {}
-            d[title.movie_id] = False
-            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
-            cursor.execute(sql, (json.dumps(d), User.user_id))
-            connection.commit()
-    elif isinstance(title, tvshow):
+            d = json.loads(r[0]) if r else {}
+            if (d):
+                d[title.movie_id] = False
+                sql = """UPDATE user SET `watchlist_movies` = %s WHERE `user_id` = %s"""
+                cursor.execute(sql, (json.dumps(d), User.user_id))
+                connection.commit()
+    elif isinstance(title, Tvshow):
+        assert title.show_id is not None
         with connection.cursor() as cursor:
-            sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
-            cursor.execute(sql, (User.user_id))
+            sql = """SELECT `watchlist_shows` FROM `user` WHERE `user_id`=%s"""
+            cursor.execute(sql, (User.user_id,))
             r = cursor.fetchone()
-            d = json.dumps(r[0]) if r else {}
-            d[title.show_id] = False
-            sql = """UPDATE user SET 'watchlist_shows' = %s WHERE user_id = %s"""
-            cursor.execute(sql, (json.dumps(d), User.user_id))
-            connection.commit()
+            d = json.loads(r[0]) if r else {}
+            if (d):
+                d[title.show_id] = False
+                sql = """UPDATE user SET `watchlist_shows` = %s WHERE `user_id` = %s"""
+                cursor.execute(sql, (json.dumps(d), User.user_id))
+                connection.commit()
 
 
-def get_watchlist_fromUser(User: user):
+def getWatchlist_fromUser(User: User) -> List[Union[MovieId, ShowId]]:
+    assert User.user_id is not None
     L = []
     with connection.cursor() as cursor:
-        sql = """SELECT 'watchlist_movies' FROM user WHERE 'user_id'=%d"""
-        cursor.execute(sql, (User.user_id))
+        sql = """SELECT `watchlist_movies` FROM `user` WHERE `user_id`=%s"""
+        cursor.execute(sql, (User.user_id,))
         r = cursor.fetchone()
-        d = json.dumps(r[0]) if r else {}
+        d = json.loads(r[0]) if r else {}
         for i in d:
             if (d[i]):
                 L.append(i)
-        sql = """SELECT 'watchlist_shows' FROM user WHERE 'user_id'=%d"""
-        cursor.execute(sql, (User.user_id))
+        sql = """SELECT `watchlist_shows` FROM `user` WHERE `user_id`=%s"""
+        cursor.execute(sql, (User.user_id,))
         r = cursor.fetchone()
-        d = json.dumps(r[0]) if r else {}
+        d = json.loads(r[0]) if r else {}
         for i in d:
             if (d[i]):
                 L.append(i)
     return L
 
-    # -------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-def get_category_from_id(id: int) -> Optional[Category]:
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM `category` WHERE `id`=%d"""
-        cursor.execute(sql, (id))
-        r = cursor.fetchone()
-        if r is None:
-            return None
-        return Category.from_dict(r)
-
-
-def get_category_from_name(name: str) -> Optional[Category]:
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM `category` WHERE `name`=%s"""
-        cursor.execute(sql, (name))
-        r = cursor.fetchone()
-        if r is None:
-            return None
-        return Category.from_dict(r)
-
-
-def add_category(category: Category) -> None:
-    assert category.id is None
-    c = get_category_from_name(category.name)
-    if c is not None:
-        category.id = c.id
-        return
-
-    with connection.cursor() as cursor:
-        sql = f"INSERT INTO category (name) VALUES (%s)"
-        cursor.execute(sql, (category.name))
-        connection.commit()
-        category.id = cursor.lastrowid
-
-
-def get_tag_from_id(id: int) -> Optional[Tag]:
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM `tag` WHERE `id`=%d"""
-        cursor.execute(sql, (id))
-        r = cursor.fetchone()
-        if r is None:
-            return None
-        return Tag.from_dict(r)
-
-
-def get_tag_from_name(name: str) -> Optional[Tag]:
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM `tag` WHERE `name`=%s"""
-        cursor.execute(sql, (name))
-        r = cursor.fetchone()
-        if r is None:
-            return None
-        return Tag.from_dict(r)
-
-
-def add_tag(tag: Tag) -> None:
-    assert tag.id is None
-    t = get_tag_from_name(tag.name)
-    if t is not None:
-        tag.id = t.id
-        return
-
-    with connection.cursor() as cursor:
-        sql = f"INSERT INTO tag (name) VALUES (%s)"
-        cursor.execute(sql, (tag.name))
-        connection.commit()
-        tag.id = cursor.lastrowid
-
-
-def add_pet(pet: Pet) -> None:
-    assert pet.id is None
-    if pet.category.id is None:
-        add_category(pet.category)
-    for tag in pet.tags:
-        if tag.id is None:
-            add_tag(tag)
-
-    with connection.cursor() as cursor:
-        sql = f"INSERT INTO pet (name, photo_urls, category_id, status) VALUES " \
-              f"(%s, %s, %s, %s)"
-        cursor.execute(sql, (pet.name, pet.photo_urls,
-                       pet.category.id, pet.status))
-        connection.commit()
-        pet.id = cursor.lastrowid
-
-        sql = f"INSERT INTO pet_tag (pet_id, tag_id) VALUES (%s, %s)"
-        for tag in pet.tags:
-            cursor.execute(sql, (pet.id, tag.id))
-        connection.commit()
+# -----------------------------------------------------------------------------------------------------------------------

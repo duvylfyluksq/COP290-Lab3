@@ -16,7 +16,8 @@ class Comment(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, comment_id: int=None, review_id: ReviewId=None, user_id: UserId=None, content: str=None):  # noqa: E501
+
+    def __init__(self, comment_id: int = None, review_id: ReviewId = None, user_id: UserId = None, content: str = None):  # noqa: E501
         """Comment - a model defined in Swagger
 
         :param comment_id: The comment_id of this Comment.  # noqa: E501
