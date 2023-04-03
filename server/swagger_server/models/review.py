@@ -5,12 +5,12 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from swagger_server.models.base_model_ import Model
-from swagger_server.models.review_id import ReviewId  # noqa: F401,E501
-from swagger_server.models.user_id import UserId  # noqa: F401,E501
-from swagger_server.models.all_ofreview_movie_id import AllOfreviewMovieId  # noqa: F401,E501
-from swagger_server.models.all_ofreview_show_id import AllOfreviewShowId  # noqa: F401,E501
-from swagger_server import util
+from base_model_ import Model
+from review_id import ReviewId  # noqa: F401,E501
+from user_id import UserId  # noqa: F401,E501
+from all_ofreview_movie_id import AllOfreviewMovieId  # noqa: F401,E501
+from all_ofreview_show_id import AllOfreviewShowId  # noqa: F401,E501
+from .. import util
 
 
 class Review(Model):
@@ -18,7 +18,8 @@ class Review(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, review_id: ReviewId=None, title: str=None, movie_id: AllOfreviewMovieId=None, show_id: AllOfreviewShowId=None, user_id: UserId=None, likes: Dict[str, bool]=None, rating: int=None, content: str=None, creation_time: datetime=None):  # noqa: E501
+
+    def __init__(self, review_id: ReviewId = None, title: str = None, movie_id: AllOfreviewMovieId = None, show_id: AllOfreviewShowId = None, user_id: UserId = None, likes: Dict[str, bool] = None, rating: int = None, content: str = None, creation_time: datetime = None):  # noqa: E501
         """Review - a model defined in Swagger
 
         :param review_id: The review_id of this Review.  # noqa: E501

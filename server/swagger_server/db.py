@@ -311,28 +311,6 @@ def addReview(Review: Review) -> None:
     Review.review_id = cursor.lastrowid
 
 
-"""
-def get_reviews_fromMovie(Movie: movie):
-    with connection.cursor() as cursor:
-        sql = SELECT * FROM `review` where `movie_id`=%d
-        cursor.execture(sql, (Movie.movie_id))
-        r = cursor.fetchall()
-        if r is None:
-            return None
-        return r
-
-
-def get_reviews_fromShow(Shows: tvshow) -> Optional[review]:
-    with connection.cursor() as cursor:
-        sql = SELECT * FROM `review` where `show_id`=%d
-        cursor.execture(sql, (Shows.show_id))
-        r = cursor.fetchall()
-        if r is None:
-            return None
-        return r
-"""
-
-
 def getReviews_forUser(User: User) -> List[Review]:
     assert User.user_id is not None
     with connection.cursor() as cursor:

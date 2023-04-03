@@ -5,10 +5,10 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from swagger_server.models.base_model_ import Model
-from swagger_server.models.review_id import ReviewId  # noqa: F401,E501
-from swagger_server.models.user_id import UserId  # noqa: F401,E501
-from swagger_server import util
+from base_model_ import Model
+from review_id import ReviewId  # noqa: F401,E501
+from user_id import UserId  # noqa: F401,E501
+from .. import util
 
 
 class Comment(Model):

@@ -5,9 +5,9 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from swagger_server.models.base_model_ import Model
-from swagger_server.models.user_id import UserId  # noqa: F401,E501
-from swagger_server import util
+from base_model_ import Model
+from user_id import UserId  # noqa: F401,E501
+from .. import util
 
 
 class User(Model):
@@ -15,7 +15,8 @@ class User(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, user_id: UserId=None, username: str=None, password: str=None, bio: str=None, pfp: str=None, watchlist_movies: Dict[str, bool]=None, watchlist_shows: Dict[str, bool]=None, interests: List[str]=None):  # noqa: E501
+
+    def __init__(self, user_id: UserId = None, username: str = None, password: str = None, bio: str = None, pfp: str = None, watchlist_movies: Dict[str, bool] = None, watchlist_shows: Dict[str, bool] = None, interests: List[str] = None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param user_id: The user_id of this User.  # noqa: E501

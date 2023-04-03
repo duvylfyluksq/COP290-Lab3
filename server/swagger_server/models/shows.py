@@ -5,8 +5,8 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from swagger_server.models.base_model_ import Model
-from swagger_server import util
+from base_model_ import Model
+from .. import util
 
 
 class Shows(Model):
@@ -14,7 +14,8 @@ class Shows(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, title: str=None, year: int=None, genre: str=None, director: str=None, writer: str=None, cast: List[str]=None, rating: float=None, poster: str=None):  # noqa: E501
+
+    def __init__(self, title: str = None, year: int = None, genre: str = None, director: str = None, writer: str = None, cast: List[str] = None, rating: float = None, poster: str = None):  # noqa: E501
         """Shows - a model defined in Swagger
 
         :param title: The title of this Shows.  # noqa: E501

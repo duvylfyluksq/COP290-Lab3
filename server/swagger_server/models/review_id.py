@@ -5,8 +5,8 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from swagger_server.models.base_model_ import Model
-from swagger_server import util
+from base_model_ import Model
+from .. import util
 
 
 class ReviewId(Model):
@@ -14,6 +14,7 @@ class ReviewId(Model):
 
     Do not edit the class manually.
     """
+
     def __init__(self):  # noqa: E501
         """ReviewId - a model defined in Swagger
 
