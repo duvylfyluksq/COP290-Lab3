@@ -1,0 +1,123 @@
+.vector-icon17 {
+  position: relative;
+  width: 59.5px;
+  height: 53.5px;
+  flex-shrink: 0;
+}
+.logo2 {
+  border-radius: var(--br-2xs);
+  background-color: var(--color-darkorchid-100);
+  width: 75px;
+  height: 75px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-24xl) var(--padding-18xl);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.movies5 {
+  margin: 0;
+}
+.genres5,
+.movies4,
+.tv-shows2 {
+  position: relative;
+  font-weight: 500;
+  display: inline-block;
+  width: 93px;
+  height: 27px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.genres5,
+.tv-shows2 {
+  width: 118px;
+  height: 25px;
+}
+.genres5 {
+  width: 83px;
+  height: 24px;
+}
+.navbar-lhs2 {
+  width: 406px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-37xl);
+}
+.search-movies-tv2,
+.vector-icon18 {
+  position: relative;
+  width: 22px;
+  height: 19px;
+  flex-shrink: 0;
+}
+.search-movies-tv2 {
+  font-weight: 200;
+  display: inline-block;
+  width: 227px;
+  height: 21px;
+}
+.searchbar2 {
+  border-radius: var(--br-31xl);
+  background-color: var(--color-white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  width: 743px;
+  height: 53px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-mid) var(--padding-sm);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+  font-size: var(--font-size-xl);
+}
+.fluentcompose-24-filled-icon2 {
+  overflow: hidden;
+}
+.fluentcompose-24-filled-icon2,
+.profilemenu-icon2 {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.navbar-rhs2,
+.navbar2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.navbar-rhs2 {
+  width: 321px;
+  height: 95px;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+.navbar2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 1920px;
+  height: 133px;
+  overflow: hidden;
+  padding: var(--padding-3xs) var(--padding-56xl);
+  box-sizing: border-box;
+  justify-content: flex-start;
+  gap: var(--gap-56xl);
+  text-align: left;
+  font-size: var(--font-size-6xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+}

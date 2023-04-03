@@ -1,0 +1,28 @@
+.body13,
+.home-signedin {
+  position: absolute;
+  left: 0;
+  width: 1920px;
+}
+.body13 {
+  top: 133px;
+  height: 947px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-21xl) var(--padding-56xl);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-11xl);
+}
+.home-signedin {
+  top: 0;
+  background-color: var(--color-white);
+  height: 1080px;
+}
+.home-signedin-parent {
+  position: relative;
+  width: 100%;
+  height: 1080px;
+}

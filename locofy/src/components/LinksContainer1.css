@@ -1,0 +1,131 @@
+.vector-icon37 {
+  position: relative;
+  width: 59.5px;
+  height: 53.5px;
+  flex-shrink: 0;
+}
+.logo4 {
+  text-decoration: none;
+  border-radius: var(--br-2xs);
+  background-color: var(--color-darkorchid-100);
+  width: 75px;
+  height: 75px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-24xl) var(--padding-18xl);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.movies9 {
+  margin: 0;
+}
+.genres9,
+.movies8,
+.tv-shows4 {
+  position: relative;
+  font-weight: 500;
+  display: inline-block;
+  width: 93px;
+  height: 27px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.genres9,
+.tv-shows4 {
+  width: 118px;
+  height: 25px;
+}
+.genres9 {
+  width: 83px;
+  height: 24px;
+}
+.navbar-lhs4 {
+  width: 406px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-37xl);
+}
+.search-movies-tv4,
+.vector-icon38 {
+  position: relative;
+  width: 22px;
+  height: 19px;
+  flex-shrink: 0;
+}
+.search-movies-tv4 {
+  font-weight: 200;
+  display: inline-block;
+  width: 227px;
+  height: 21px;
+}
+.searchbar4 {
+  border-radius: var(--br-31xl);
+  background-color: var(--color-white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  width: 743px;
+  height: 53px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-mid) var(--padding-sm);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.sign-in1,
+.vector-icon39 {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+.sign-in1 {
+  font-weight: 500;
+  display: inline-block;
+  width: 81px;
+  height: 27px;
+}
+.navbar-rhs4 {
+  width: 148px;
+  height: 95px;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: var(--font-size-6xl);
+}
+.navbar-rhs4,
+.navbar4,
+.right9 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.right9 {
+  width: 1139px;
+  flex-shrink: 0;
+  font-size: var(--font-size-xl);
+}
+.navbar4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 1920px;
+  height: 133px;
+  overflow: hidden;
+  padding: var(--padding-3xs) var(--padding-56xl);
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--font-size-6xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+}

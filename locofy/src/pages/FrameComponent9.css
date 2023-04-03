@@ -1,0 +1,122 @@
+.showing3,
+.title {
+  position: relative;
+  display: inline-block;
+  width: 432px;
+  height: 49px;
+  flex-shrink: 0;
+}
+.title {
+  font-weight: 600;
+  width: 614px;
+}
+.postslist6,
+.reviewsheader3 {
+  display: flex;
+  justify-content: flex-start;
+}
+.reviewsheader3 {
+  height: 59px;
+  flex-shrink: 0;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-3xs);
+}
+.postslist6 {
+  width: 1770px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-24xl);
+}
+.back13,
+.backicon6 {
+  position: relative;
+  flex-shrink: 0;
+}
+.backicon6 {
+  width: 27px;
+  height: 27px;
+  overflow: hidden;
+}
+.back13 {
+  display: inline-block;
+  width: 116px;
+  height: 33px;
+}
+.back12 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-mini);
+}
+.navigate6 {
+  display: inline-block;
+  width: 95px;
+  height: 33px;
+}
+.navigate6,
+.next-icon6,
+.next13 {
+  position: relative;
+  flex-shrink: 0;
+}
+.next13 {
+  display: inline-block;
+  width: 65px;
+  height: 33px;
+}
+.next-icon6 {
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+}
+.paginationfooter6 {
+  width: 1371px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.reviewlist3 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 var(--padding-6xl);
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-31xl);
+  font-size: var(--font-size-11xl);
+}
+.body9,
+.reviews-movie-out {
+  position: absolute;
+  left: 0;
+  width: 1920px;
+}
+.body9 {
+  top: 133px;
+  height: 947px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-56xl);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-56xl);
+}
+.reviews-movie-out {
+  top: 0;
+  background-color: var(--color-white);
+  height: 1080px;
+  overflow: hidden;
+}
+.reviews-movie-out-parent {
+  position: relative;
+  width: 100%;
+  height: 1080px;
+  text-align: left;
+  font-size: var(--font-size-26xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+}
