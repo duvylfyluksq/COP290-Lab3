@@ -21,13 +21,13 @@ python3 -m swagger_server
 and open your browser to here:
 
 ```
-http://localhost:8080/VINAYTAYAL28/FMD_API3.0/3.0.0/ui/
+http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0/ui/
 ```
 
 Your Swagger definition lives here:
 
 ```
-http://localhost:8080/VINAYTAYAL28/FMD_API3.0/3.0.0/swagger.json
+http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0/swagger.json
 ```
 
 To launch the integration tests, use tox:

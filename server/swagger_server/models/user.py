@@ -6,6 +6,7 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.user_id import UserId  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -14,50 +15,55 @@ class User(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, user_id: str=None, name: str=None, userpic: str=None, bio: str=None, interests: str=None, watchlist: str=None, created_at: str=None):  # noqa: E501
+    def __init__(self, user_id: UserId=None, username: str=None, password: str=None, bio: str=None, pfp: str=None, watchlist_movies: Dict[str, bool]=None, watchlist_shows: Dict[str, bool]=None, interests: List[str]=None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param user_id: The user_id of this User.  # noqa: E501
-        :type user_id: str
-        :param name: The name of this User.  # noqa: E501
-        :type name: str
-        :param userpic: The userpic of this User.  # noqa: E501
-        :type userpic: str
+        :type user_id: UserId
+        :param username: The username of this User.  # noqa: E501
+        :type username: str
+        :param password: The password of this User.  # noqa: E501
+        :type password: str
         :param bio: The bio of this User.  # noqa: E501
         :type bio: str
+        :param pfp: The pfp of this User.  # noqa: E501
+        :type pfp: str
+        :param watchlist_movies: The watchlist_movies of this User.  # noqa: E501
+        :type watchlist_movies: Dict[str, bool]
+        :param watchlist_shows: The watchlist_shows of this User.  # noqa: E501
+        :type watchlist_shows: Dict[str, bool]
         :param interests: The interests of this User.  # noqa: E501
-        :type interests: str
-        :param watchlist: The watchlist of this User.  # noqa: E501
-        :type watchlist: str
-        :param created_at: The created_at of this User.  # noqa: E501
-        :type created_at: str
+        :type interests: List[str]
         """
         self.swagger_types = {
-            'user_id': str,
-            'name': str,
-            'userpic': str,
+            'user_id': UserId,
+            'username': str,
+            'password': str,
             'bio': str,
-            'interests': str,
-            'watchlist': str,
-            'created_at': str
+            'pfp': str,
+            'watchlist_movies': Dict[str, bool],
+            'watchlist_shows': Dict[str, bool],
+            'interests': List[str]
         }
 
         self.attribute_map = {
             'user_id': 'user_id',
-            'name': 'name',
-            'userpic': 'userpic',
+            'username': 'username',
+            'password': 'password',
             'bio': 'bio',
-            'interests': 'interests',
-            'watchlist': 'watchlist',
-            'created_at': 'created_at'
+            'pfp': 'pfp',
+            'watchlist_movies': 'watchlist_movies',
+            'watchlist_shows': 'watchlist_shows',
+            'interests': 'interests'
         }
         self._user_id = user_id
-        self._name = name
-        self._userpic = userpic
+        self._username = username
+        self._password = password
         self._bio = bio
+        self._pfp = pfp
+        self._watchlist_movies = watchlist_movies
+        self._watchlist_shows = watchlist_shows
         self._interests = interests
-        self._watchlist = watchlist
-        self._created_at = created_at
 
     @classmethod
     def from_dict(cls, dikt) -> 'User':
@@ -65,73 +71,73 @@ class User(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The User of this User.  # noqa: E501
+        :return: The user of this User.  # noqa: E501
         :rtype: User
         """
         return util.deserialize_model(dikt, cls)
 
     @property
-    def user_id(self) -> str:
+    def user_id(self) -> UserId:
         """Gets the user_id of this User.
 
 
         :return: The user_id of this User.
-        :rtype: str
+        :rtype: UserId
         """
         return self._user_id
 
     @user_id.setter
-    def user_id(self, user_id: str):
+    def user_id(self, user_id: UserId):
         """Sets the user_id of this User.
 
 
         :param user_id: The user_id of this User.
-        :type user_id: str
+        :type user_id: UserId
         """
 
         self._user_id = user_id
 
     @property
-    def name(self) -> str:
-        """Gets the name of this User.
+    def username(self) -> str:
+        """Gets the username of this User.
 
 
-        :return: The name of this User.
+        :return: The username of this User.
         :rtype: str
         """
-        return self._name
+        return self._username
 
-    @name.setter
-    def name(self, name: str):
-        """Sets the name of this User.
+    @username.setter
+    def username(self, username: str):
+        """Sets the username of this User.
 
 
-        :param name: The name of this User.
-        :type name: str
+        :param username: The username of this User.
+        :type username: str
         """
 
-        self._name = name
+        self._username = username
 
     @property
-    def userpic(self) -> str:
-        """Gets the userpic of this User.
+    def password(self) -> str:
+        """Gets the password of this User.
 
 
-        :return: The userpic of this User.
+        :return: The password of this User.
         :rtype: str
         """
-        return self._userpic
+        return self._password
 
-    @userpic.setter
-    def userpic(self, userpic: str):
-        """Sets the userpic of this User.
+    @password.setter
+    def password(self, password: str):
+        """Sets the password of this User.
 
 
-        :param userpic: The userpic of this User.
-        :type userpic: str
+        :param password: The password of this User.
+        :type password: str
         """
 
-        self._userpic = userpic
+        self._password = password
 
     @property
     def bio(self) -> str:
@@ -155,64 +161,85 @@ class User(Model):
         self._bio = bio
 
     @property
-    def interests(self) -> str:
+    def pfp(self) -> str:
+        """Gets the pfp of this User.
+
+
+        :return: The pfp of this User.
+        :rtype: str
+        """
+        return self._pfp
+
+    @pfp.setter
+    def pfp(self, pfp: str):
+        """Sets the pfp of this User.
+
+
+        :param pfp: The pfp of this User.
+        :type pfp: str
+        """
+
+        self._pfp = pfp
+
+    @property
+    def watchlist_movies(self) -> Dict[str, bool]:
+        """Gets the watchlist_movies of this User.
+
+
+        :return: The watchlist_movies of this User.
+        :rtype: Dict[str, bool]
+        """
+        return self._watchlist_movies
+
+    @watchlist_movies.setter
+    def watchlist_movies(self, watchlist_movies: Dict[str, bool]):
+        """Sets the watchlist_movies of this User.
+
+
+        :param watchlist_movies: The watchlist_movies of this User.
+        :type watchlist_movies: Dict[str, bool]
+        """
+
+        self._watchlist_movies = watchlist_movies
+
+    @property
+    def watchlist_shows(self) -> Dict[str, bool]:
+        """Gets the watchlist_shows of this User.
+
+
+        :return: The watchlist_shows of this User.
+        :rtype: Dict[str, bool]
+        """
+        return self._watchlist_shows
+
+    @watchlist_shows.setter
+    def watchlist_shows(self, watchlist_shows: Dict[str, bool]):
+        """Sets the watchlist_shows of this User.
+
+
+        :param watchlist_shows: The watchlist_shows of this User.
+        :type watchlist_shows: Dict[str, bool]
+        """
+
+        self._watchlist_shows = watchlist_shows
+
+    @property
+    def interests(self) -> List[str]:
         """Gets the interests of this User.
 
 
         :return: The interests of this User.
-        :rtype: str
+        :rtype: List[str]
         """
         return self._interests
 
     @interests.setter
-    def interests(self, interests: str):
+    def interests(self, interests: List[str]):
         """Sets the interests of this User.
 
 
         :param interests: The interests of this User.
-        :type interests: str
+        :type interests: List[str]
         """
 
         self._interests = interests
-
-    @property
-    def watchlist(self) -> str:
-        """Gets the watchlist of this User.
-
-
-        :return: The watchlist of this User.
-        :rtype: str
-        """
-        return self._watchlist
-
-    @watchlist.setter
-    def watchlist(self, watchlist: str):
-        """Sets the watchlist of this User.
-
-
-        :param watchlist: The watchlist of this User.
-        :type watchlist: str
-        """
-
-        self._watchlist = watchlist
-
-    @property
-    def created_at(self) -> str:
-        """Gets the created_at of this User.
-
-
-        :return: The created_at of this User.
-        :rtype: str
-        """
-        return self._created_at
-
-    @created_at.setter
-    def created_at(self, created_at: str):
-        """Sets the created_at of this User.
-
-
-        :param created_at: The created_at of this User.
-        :type created_at: str
-        """
-
-        self._created_at = created_at

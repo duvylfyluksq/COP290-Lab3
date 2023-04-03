@@ -14,20 +14,15 @@ class UserId(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, user_id: int=None):  # noqa: E501
+    def __init__(self):  # noqa: E501
         """UserId - a model defined in Swagger
 
-        :param user_id: The user_id of this UserId.  # noqa: E501
-        :type user_id: int
         """
         self.swagger_types = {
-            'user_id': int
         }
 
         self.attribute_map = {
-            'user_id': 'user_id'
         }
-        self._user_id = user_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'UserId':
@@ -39,24 +34,3 @@ class UserId(Model):
         :rtype: UserId
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def user_id(self) -> int:
-        """Gets the user_id of this UserId.
-
-
-        :return: The user_id of this UserId.
-        :rtype: int
-        """
-        return self._user_id
-
-    @user_id.setter
-    def user_id(self, user_id: int):
-        """Sets the user_id of this UserId.
-
-
-        :param user_id: The user_id of this UserId.
-        :type user_id: int
-        """
-
-        self._user_id = user_id
