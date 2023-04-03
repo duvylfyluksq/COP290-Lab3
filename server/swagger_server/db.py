@@ -1,19 +1,16 @@
 # Connect to the database
 # Connect to the database
-from typing import Union, List
+from typing import Union, List, Optional
 import os
 import json
 import pymysql
 from models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
-db_host = os.getenv("DB_HOST")
-db_user = os.getenv("DB_USER")
-db_password = os.getenv("DB_PASSWORD")
-db_name = os.getenv("DB_NAME")
+
 connection = pymysql.connect(
-    host=db_host,
-    user=db_user,
-    password=db_password,
-    database=db_name,
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
     cursorclass=pymysql.cursors.DictCursor,
 )
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -30,7 +27,7 @@ def addUser(User: User) -> None:
         User.user_id = cursor.lastrowid
 
 
-def editUsername(User: User, username) -> None:
+def editUsername(User: User, username: str) -> None:
     assert User.user_id is not None
     with connection.cursor() as cursor:
         sql = f"UPDATE `user` SET `username` = %s WHERE `user_id` = %s"
@@ -38,7 +35,7 @@ def editUsername(User: User, username) -> None:
         connection.commit()
 
 
-def editPassword(User: User, password) -> None:
+def editPassword(User: User, password: str) -> None:
     assert User.user_id is not None
     with connection.cursor() as cursor:
         sql = f"UPDATE `user` SET `password` = %s WHERE `user_id` = %s"
@@ -46,7 +43,7 @@ def editPassword(User: User, password) -> None:
         connection.commit()
 
 
-def editBio(User: User, bio) -> None:
+def editBio(User: User, bio: str) -> None:
     assert User.user_id is not None
     with connection.cursor() as cursor:
         sql = f"UPDATE `user` SET `bio` = %s WHERE `user_id` = %s"
@@ -54,114 +51,141 @@ def editBio(User: User, bio) -> None:
         connection.commit()
 
 
-def editInterests(User: User, interests) -> None:
+def editInterests(User: User, interests: List[str]) -> None:
     assert User.user_id is not None
     with connection.cursor() as cursor:
         sql = f"UPDATE `user` SET `interests` = %s WHERE `user_id` = %s"
-        cursor.execute(sql, (json.dumps(interests), User.user_id))
+        cursor.execute(sql, (json.load(interests), User.user_id))
         connection.commit()
 
 
-def sort_rating_movies(order: bool):
+def sortLikes_Review(order: Optional[bool]) -> List[Review]:
     if order is None:
         order = False
+    with connection.cursor() as cursor:
+        L = []
+        sql = """SELECT * FROM `review`"""
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        L = [(Review.from_dict(i), sum(json.loads(i['likes']).values()))
+             for i in r]
+        L = sorted(L, key=lambda x: x[1], reverse=(not order))
+        return [i for (i, _) in L]
+
+
+def sortRecent_Review(order: Optional[bool]) -> List[Review]:
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM `review` ORDER BY `creation_time` DESC"""
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        L = [Review.from_dict(i) for i in r]
+        if order:
+            L.reverse()
+        return L
+
+
+def sortRating_Movie(order: Optional[bool]) -> List[Movie]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `movie` ORDER BY `rating` DESC"""
-        cursor.execture(sql)
+        cursor.execute(sql)
         r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(movie.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
+        L = [Movie.from_dict(i) for i in r]
+        if order:
+            L.reverse()
+        return L
 
 
-def sort_rating_shows(order: bool):
-    if order is None:
-        order = False
+def sortRating_Tvshow(order: Optional[bool]) -> List[Tvshow]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `tvshow` ORDER BY `rating` DESC"""
-        cursor.execture(sql)
+        cursor.execute(sql)
         r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(tvshow.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
+        L = [Tvshow.from_dict(i) for i in r]
+        if order:
+            L.reverse()
+        return L
 
 
-def sort_rating_reviews(order: bool):
-    if order is None:
-        order = False
+def sortRecent_Movie(order: Optional[bool]) -> List[Movie]:
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM `review` ORDER BY `rating` DESC"""
-        cursor.execture(sql)
+        sql = """SELECT * FROM `movie` ORDER BY `release_date` DESC"""
+        cursor.execute(sql)
         r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(review.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
+        L = [Movie.from_dict(i) for i in r]
+        if order:
+            L.reverse()
+        return L
 
 
-def sort_most_recent_reviews(order: bool):
-    if order is None:
-        order = False
+def sortRecent_Tvshow(order: Optional[bool]) -> List[Tvshow]:
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM `review` ORDER BY `date` DESC"""
-        cursor.execture(sql)
+        sql = """SELECT * FROM `tvshow` ORDER BY `release_date` DESC"""
+        cursor.execute(sql)
         r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(review.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
+        L = [Tvshow.from_dict(i) for i in r]
+        if order:
+            L.reverse()
+        return L
 
 
-def sort_most_recent_shows(order: bool):
-    if order is None:
-        order = False
+def sortLex_Movie(order: Optional[bool]) -> List[Movie]:
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM `tvshow` ORDER BY `date` DESC"""
-        cursor.execture(sql)
+        sql = """SELECT * FROM `movie` ORDER BY `title` DESC"""
+        cursor.execute(sql)
         r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(tvshow.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
+        L = [Movie.from_dict(i) for i in r]
+        if order:
+            L.reverse()
+        return L
 
 
-def sort_most_recent_movies(order: bool):
-    if order is None:
-        order = False
+def sortLex_Tvshow(order: Optional[bool]) -> List[Tvshow]:
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM `movie` ORDER BY `date` DESC"""
-        cursor.execture(sql)
+        sql = """SELECT * FROM `tvshow` ORDER BY `title` DESC"""
+        cursor.execute(sql)
         r = cursor.fetchall()
-        if r is None:
-            return None
-        l = []
-        for a in r:
-            l.append(movie.from_dict(a))
-        if order is True:
-            return l.reverse()
-        return l
+        L = [Tvshow.from_dict(i) for i in r]
+        if order:
+            L.reverse()
+        return L
+
+
+def sortPop_Movie(order: Optional[bool]) -> List[Movie]:
+    with connection.cursor() as cursor:
+        sql = """SELECT `movie_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `movie_id`"""
+        cursor.execute(sql)
+        review_counts = {i['movie_id']: i['review_count']
+                         for i in cursor.fetchall()}
+        sql = """SELECT * FROM `movie`"""
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        movies = [Movie.from_dict(i) for i in r]
+        movies_with_review_counts = [
+            (i, review_counts.get(i.movie_id, 0)) for i in movies]
+        L = sorted(
+            movies_with_review_counts, key=lambda x: x[1], reverse=True)
+        if order:
+            L.reverse()
+        return [i for (i, _) in L]
+
+
+def sortPop_Tvshow(order: Optional[bool]) -> List[Tvshow]:
+    with connection.cursor() as cursor:
+        sql = """SELECT `show_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `show_id`"""
+        cursor.execute(sql)
+        review_counts = {i['show_id']: i['review_count']
+                         for i in cursor.fetchall()}
+        sql = """SELECT * FROM `tvshow`"""
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        shows = [Tvshow.from_dict(i) for i in r]
+        shows_with_review_counts = [
+            (i, review_counts.get(i.movie_id, 0)) for i in shows]
+        L = sorted(
+            shows_with_review_counts, key=lambda x: x[1], reverse=True)
+        if order:
+            L.reverse()
+        return [i for (i, _) in L]
 
 
 def getReviews_forMovie(Movie: Movie) -> List[Review]:
@@ -170,10 +194,7 @@ def getReviews_forMovie(Movie: Movie) -> List[Review]:
         sql = """SELECT * FROM `review` where `movie_id`=%s"""
         cursor.execute(sql, (Movie.movie_id,))
         r = cursor.fetchall()
-        L = []
-        for i in r:
-            L.append(Review.from_dict(i))
-        return L
+        return [Review.from_dict(i) for i in r]
 
 
 def getReviews_forShow(Tvshow: Tvshow) -> List[Review]:
@@ -182,10 +203,7 @@ def getReviews_forShow(Tvshow: Tvshow) -> List[Review]:
         sql = """SELECT * FROM `review` where `show_id`=%s"""
         cursor.execute(sql, (Tvshow.show_id,))
         r = cursor.fetchall()
-        L = []
-        for i in r:
-            L.append(Review.from_dict(i))
-        return L
+        return [Review.from_dict(i) for i in r]
 
 
 def addComment(Comment: Comment) -> None:
@@ -237,10 +255,7 @@ def getReviews_forUser(User: User) -> List[Review]:
         sql = """SELECT * FROM `review` where `user_id`=%s"""
         cursor.execute(sql, (User.user_id,))
         r = cursor.fetchall()
-        L = []
-        for i in r:
-            L.append(Review.from_dict(i))
-        return L
+        return [Review.from_dict(i) for i in r]
 
 
 def getComments_fromReview(Review: Review) -> List[Comment]:
@@ -249,10 +264,7 @@ def getComments_fromReview(Review: Review) -> List[Comment]:
         sql = """SELECT * FROM `comment` where `review_id`=%s"""
         cursor.execute(sql, (Review.review_id,))
         r = cursor.fetchall()
-        L = []
-        for i in r:
-            L.append(Comment.from_dict(i))
-        return L
+        return [Comment.from_dict(i) for i in r]
 
 
 def checkLogin(username: str, password: str) -> bool:
@@ -280,16 +292,6 @@ def LikeOrUnlike(Review: Review, User: User) -> None:
         sql = """UPDATE `review` SET `likes` = %s WHERE `review_id` = %s"""
         cursor.execute(sql, (json.dumps(d), Review.review_id))
         connection.commit()
-
-
-""" won't this be handled later?
-def countLikes_Review(Review: Review) -> int:
-    count = 0
-    for key in Review.likes:
-        if Review.likes[key] == 1:
-            count += 1
-    return count
-"""
 
 
 def countLikes_User(User: User) -> int:
@@ -437,5 +439,3 @@ def filterGenre(genres: List[str]) -> List[Union[Movie, Tvshow]]:
         for i in r:
             L.append(Tvshow.from_dict(i))
     return L
-
-# -----------------------------------------------------------------------------------------------------------------------
