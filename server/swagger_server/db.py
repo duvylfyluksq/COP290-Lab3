@@ -1,5 +1,3 @@
-# Connect to the database
-# Connect to the database
 from typing import Union, List, Optional
 import os
 import json
@@ -84,73 +82,131 @@ def sortRecent_Review(order: Optional[bool]) -> List[Review]:
         return L
 
 
-def sortRating_Movie(order: Optional[bool]) -> List[Movie]:
+def sortReview(sort_type: str, sort_order: Optional[bool]) -> List[Review]:
+    if (sort_type == "Recent"):
+        sortRecent_Review(sort_order)
+    elif (sort_type == "Likes"):
+        sortLikes_Review(sort_order)
+
+
+def sortRating_Movie() -> List[Movie]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `movie` ORDER BY `rating` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
         L = [Movie.from_dict(i) for i in r]
-        if order:
-            L.reverse()
         return L
 
 
-def sortRating_Tvshow(order: Optional[bool]) -> List[Tvshow]:
+def sortRating_Tvshow() -> List[Tvshow]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `tvshow` ORDER BY `rating` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
         L = [Tvshow.from_dict(i) for i in r]
-        if order:
-            L.reverse()
         return L
 
 
-def sortRecent_Movie(order: Optional[bool]) -> List[Movie]:
+def mergeRating(a: List[Movie], b: List[Tvshow]) -> List[Union[Movie, Tvshow]]:
+    i, j = 0, 0
+    L = []
+    while i < len(a) and j < len(b):
+        if (a[i].rating > b[j].rating):
+            L.append(a[i])
+            i += 1
+        else:
+            L.append(b[j])
+            j += 1
+    if (i < len(a)):
+        while (i < len(a)):
+            L.append(a[i])
+            i += 1
+    if (j < len(b)):
+        while (j < len(b)):
+            L.append(b[j])
+            j += 1
+    return L
+
+
+def sortRecent_Movie() -> List[Movie]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `movie` ORDER BY `release_date` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
         L = [Movie.from_dict(i) for i in r]
-        if order:
-            L.reverse()
         return L
 
 
-def sortRecent_Tvshow(order: Optional[bool]) -> List[Tvshow]:
+def sortRecent_Tvshow() -> List[Tvshow]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `tvshow` ORDER BY `release_date` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
         L = [Tvshow.from_dict(i) for i in r]
-        if order:
-            L.reverse()
         return L
 
 
-def sortLex_Movie(order: Optional[bool]) -> List[Movie]:
+def mergeRecent(a: List[Movie], b: List[Tvshow]) -> List[Union[Movie, Tvshow]]:
+    i, j = 0, 0
+    L = []
+    while i < len(a) and j < len(b):
+        if (a[i].release_date > b[j].release_date):
+            L.append(a[i])
+            i += 1
+        else:
+            L.append(b[j])
+            j += 1
+    if (i < len(a)):
+        while (i < len(a)):
+            L.append(a[i])
+            i += 1
+    if (j < len(b)):
+        while (j < len(b)):
+            L.append(b[j])
+            j += 1
+    return L
+
+
+def sortLex_Movie() -> List[Movie]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `movie` ORDER BY `title` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
         L = [Movie.from_dict(i) for i in r]
-        if order:
-            L.reverse()
         return L
 
 
-def sortLex_Tvshow(order: Optional[bool]) -> List[Tvshow]:
+def sortLex_Tvshow() -> List[Tvshow]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `tvshow` ORDER BY `title` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
         L = [Tvshow.from_dict(i) for i in r]
-        if order:
-            L.reverse()
         return L
 
 
-def sortPop_Movie(order: Optional[bool]) -> List[Movie]:
+def mergeLex(a: List[Movie], b: List[Tvshow]) -> List[Union[Movie, Tvshow]]:
+    i, j = 0, 0
+    L = []
+    while i < len(a) and j < len(b):
+        if (a[i].title > b[j].title):
+            L.append(a[i])
+            i += 1
+        else:
+            L.append(b[j])
+            j += 1
+    if (i < len(a)):
+        while (i < len(a)):
+            L.append(a[i])
+            i += 1
+    if (j < len(b)):
+        while (j < len(b)):
+            L.append(b[j])
+            j += 1
+    return L
+
+
+def sortPop_Movie() -> List[(Movie, int)]:
     with connection.cursor() as cursor:
         sql = """SELECT `movie_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `movie_id`"""
         cursor.execute(sql)
@@ -164,12 +220,10 @@ def sortPop_Movie(order: Optional[bool]) -> List[Movie]:
             (i, review_counts.get(i.movie_id, 0)) for i in movies]
         L = sorted(
             movies_with_review_counts, key=lambda x: x[1], reverse=True)
-        if order:
-            L.reverse()
-        return [i for (i, _) in L]
+        return L
 
 
-def sortPop_Tvshow(order: Optional[bool]) -> List[Tvshow]:
+def sortPop_Tvshow() -> List[(Tvshow, int)]:
     with connection.cursor() as cursor:
         sql = """SELECT `show_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `show_id`"""
         cursor.execute(sql)
@@ -183,9 +237,39 @@ def sortPop_Tvshow(order: Optional[bool]) -> List[Tvshow]:
             (i, review_counts.get(i.movie_id, 0)) for i in shows]
         L = sorted(
             shows_with_review_counts, key=lambda x: x[1], reverse=True)
-        if order:
-            L.reverse()
-        return [i for (i, _) in L]
+        return L
+
+
+def mergePop(a: List[(Movie, int)], b: List[(Tvshow, int)]) -> List[Union[Movie, Tvshow]]:
+    i, j = 0, 0
+    L = []
+    while i < len(a) and j < len(b):
+        if (a[i][1] > b[j][1]):
+            L.append(a[i][0])
+            i += 1
+        else:
+            L.append(b[j][0])
+            j += 1
+    if (i < len(a)):
+        while (i < len(a)):
+            L.append(a[i][0])
+            i += 1
+    if (j < len(b)):
+        while (j < len(b)):
+            L.append(b[j][0])
+            j += 1
+    return L
+
+
+def mergeBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
+    if (sort_type == "Rat"):
+        return mergeRating(a, b).reverse() if sort_order else mergeRating(a, b)
+    elif (sort_type == "Rel"):
+        return mergeRecent(a, b).reverse() if sort_order else mergeRecent(a, b)
+    elif (sort_type == "Lex"):
+        return mergeLex(a, b).reverse() if sort_order else mergeLex(a, b)
+    elif (sort_type == "Pop"):
+        return mergePop(a, b).reverse() if sort_order else mergePop(a, b)
 
 
 def getReviews_forMovie(Movie: Movie) -> List[Review]:
