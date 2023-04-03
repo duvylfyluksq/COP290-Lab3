@@ -7,10 +7,12 @@ import userpfp from './profilePicture_user.jpeg'
 import BrowsecardShow from './browsecard_show';
 import BrowsecardMovie from './browsecard_movie';
 import Review from './review';
+import NavBar from './navbar1';
 
 function App() {
   return (
     <div className="App">
+      <NavBar pic={userpfp} username="duvyflfyluksq" />
       <UserProfile pic={userpfp} username="duvylfyluksq" bio="Im a puppet on a string tracy island, time-traveling diamond cutter-shaped heartaches that come to find you four in some velvet morning years too late..." 
       interest1="Adventure" interest2="Romance" interest3="Comedy" posts="424242" likes="424242" comments="424242"/>
 
