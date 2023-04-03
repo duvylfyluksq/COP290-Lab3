@@ -1,0 +1,89 @@
+.joker-icon4 {
+  position: relative;
+  width: 363px;
+  height: 187px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.picture3 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--padding-12xs);
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.season2,
+.title10 {
+  display: inline-block;
+}
+.title10 {
+  position: relative;
+  font-weight: 500;
+  width: 779px;
+  height: 66px;
+  flex-shrink: 0;
+}
+.season2 {
+  font-size: var(--font-size-21xl);
+  width: 168px;
+  height: 43px;
+}
+.season2,
+.vector-icon23,
+.xy105 {
+  position: relative;
+  flex-shrink: 0;
+}
+.xy105 {
+  display: inline-block;
+  width: 86px;
+  height: 30px;
+}
+.vector-icon23 {
+  width: 25px;
+  height: 23.75px;
+}
+.rating9 {
+  width: 158px;
+  height: 41px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-mini);
+  font-size: var(--font-size-11xl);
+}
+.sublayout5 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--gap-8xs);
+}
+.material-symbolsdelete-outlin-icon1 {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.right6,
+.watchlistdisplay-tvshow1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-131xl);
+}
+.watchlistdisplay-tvshow1 {
+  border-radius: var(--br-21xl);
+  background-color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  padding: var(--padding-21xl);
+  gap: var(--gap-21xl);
+  text-align: left;
+  font-size: var(--font-size-31xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+}

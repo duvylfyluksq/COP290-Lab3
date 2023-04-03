@@ -1,0 +1,124 @@
+.vector-icon87 {
+  position: relative;
+  width: 59.5px;
+  height: 53.5px;
+  flex-shrink: 0;
+}
+.logo7 {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-24xl) var(--padding-18xl);
+  background-color: var(--color-darkorchid-100);
+  border-radius: var(--br-2xs);
+  width: 75px;
+  height: 75px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+}
+.movies13 {
+  margin: 0;
+}
+.genres13,
+.movies12,
+.tv-shows6 {
+  position: relative;
+  font-weight: 500;
+  display: inline-block;
+  width: 93px;
+  height: 27px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.genres13,
+.tv-shows6 {
+  width: 118px;
+  height: 25px;
+}
+.genres13 {
+  width: 83px;
+  height: 24px;
+}
+.navbar-lhs6 {
+  width: 406px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-37xl);
+}
+.search-movies-tv6,
+.vector-icon88 {
+  position: relative;
+  width: 22px;
+  height: 19px;
+  flex-shrink: 0;
+}
+.search-movies-tv6 {
+  font-weight: 200;
+  display: inline-block;
+  width: 227px;
+  height: 21px;
+}
+.searchbar6 {
+  border-radius: var(--br-31xl);
+  background-color: var(--color-white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  width: 743px;
+  height: 53px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-mid) var(--padding-sm);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+  font-size: var(--font-size-xl);
+}
+.fluentcompose-24-filled-icon3 {
+  overflow: hidden;
+}
+.fluentcompose-24-filled-icon3,
+.profilemenu-icon3 {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.navbar-rhs6,
+.navbar6 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.navbar-rhs6 {
+  width: 321px;
+  height: 95px;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+.navbar6 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 1920px;
+  height: 133px;
+  overflow: hidden;
+  padding: var(--padding-3xs) var(--padding-56xl);
+  box-sizing: border-box;
+  justify-content: flex-start;
+  gap: var(--gap-56xl);
+  text-align: left;
+  font-size: var(--font-size-6xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+}

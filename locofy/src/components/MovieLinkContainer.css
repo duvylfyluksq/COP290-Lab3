@@ -1,0 +1,108 @@
+.top-movies4 {
+  align-self: stretch;
+  position: relative;
+  font-weight: 600;
+}
+.moviecard-icon22 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-mini);
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+}
+.vector-icon82,
+.xy1052 {
+  position: relative;
+  flex-shrink: 0;
+}
+.xy1052 {
+  display: inline-block;
+  width: 42px;
+  height: 18px;
+}
+.vector-icon82 {
+  width: 17.5px;
+  height: 15px;
+}
+.rating62 {
+  width: 67px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.title57 {
+  position: relative;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  display: inline-block;
+  width: 423px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.details47 {
+  position: absolute;
+  top: 60px;
+  left: 17px;
+  width: 423px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-8xs);
+}
+.linearfill47 {
+  position: absolute;
+  top: 292px;
+  left: 0;
+  border-radius: var(--br-mini);
+  background: linear-gradient(
+    180deg,
+    #742bba,
+    rgba(116, 43, 186, 0.82),
+    rgba(197, 167, 226, 0.32) 37.5%,
+    rgba(255, 255, 255, 0)
+  );
+  width: 475px;
+  height: 292px;
+  overflow: hidden;
+}
+.moviecard22 {
+  text-decoration: none;
+  position: relative;
+  width: 475px;
+  height: 292px;
+  flex-shrink: 0;
+  cursor: pointer;
+  color: inherit;
+}
+.top-movies3,
+.top-movies5 {
+  align-self: stretch;
+  display: flex;
+  justify-content: flex-start;
+}
+.top-movies5 {
+  overflow-x: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-13xl-5);
+  font-size: var(--font-size-mini);
+  color: var(--color-white);
+}
+.top-movies3 {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-11xl);
+  text-align: left;
+  font-size: var(--font-size-26xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+}

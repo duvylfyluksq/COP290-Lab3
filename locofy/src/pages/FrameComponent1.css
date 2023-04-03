@@ -1,0 +1,118 @@
+.vector-icon1,
+.watchlist1 {
+  position: relative;
+  flex-shrink: 0;
+}
+.watchlist1 {
+  font-weight: 600;
+  display: inline-block;
+  width: 190px;
+  height: 49px;
+}
+.vector-icon1 {
+  width: 40px;
+  height: 30px;
+}
+.watchlistheader1 {
+  width: 257px;
+  height: 59px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.watchlistdisplay1 {
+  width: 1770px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-24xl);
+}
+.back3,
+.backicon1 {
+  position: relative;
+  flex-shrink: 0;
+}
+.backicon1 {
+  width: 27px;
+  height: 27px;
+  overflow: hidden;
+}
+.back3 {
+  display: inline-block;
+  width: 116px;
+  height: 33px;
+}
+.back2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-mini);
+}
+.navigate1 {
+  display: inline-block;
+  width: 95px;
+  height: 33px;
+}
+.navigate1,
+.next-icon1,
+.next3 {
+  position: relative;
+  flex-shrink: 0;
+}
+.next3 {
+  display: inline-block;
+  width: 65px;
+  height: 33px;
+}
+.next-icon1 {
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+}
+.paginationfooter1 {
+  width: 1264px;
+  display: flex;
+  flex-direction: row;
+  padding: 0 0 var(--padding-6xl);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-11xl);
+}
+.body1,
+.watchlist-out {
+  position: absolute;
+  left: 0;
+  background-color: var(--color-white);
+  width: 1920px;
+}
+.body1 {
+  top: 133px;
+  height: 947px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-56xl);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-56xl);
+}
+.watchlist-out {
+  top: 0;
+  height: 1080px;
+  overflow: hidden;
+}
+.watchlist-out-parent {
+  position: relative;
+  width: 100%;
+  height: 1080px;
+  text-align: left;
+  font-size: var(--font-size-26xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+}
