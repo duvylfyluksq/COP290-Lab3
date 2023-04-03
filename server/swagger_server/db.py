@@ -164,7 +164,7 @@ def sort_most_recent_movies(order: bool):
         return l
 
 
-def getReview_forMovie(Movie: Movie) -> List[Review]:
+def getReviews_forMovie(Movie: Movie) -> List[Review]:
     assert Movie.movie_id is not None
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `review` where `movie_id`=%s"""
@@ -176,7 +176,7 @@ def getReview_forMovie(Movie: Movie) -> List[Review]:
         return L
 
 
-def getReview_forShow(Tvshow: Tvshow) -> List[Review]:
+def getReviews_forShow(Tvshow: Tvshow) -> List[Review]:
     assert Tvshow.show_id is not None
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `review` where `show_id`=%s"""
@@ -231,7 +231,7 @@ def get_reviews_fromShow(Shows: tvshow) -> Optional[review]:
 """
 
 
-def getReviews_fromUser(User: User) -> List[Review]:
+def getReviews_forUser(User: User) -> List[Review]:
     assert User.user_id is not None
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `review` where `user_id`=%s"""
@@ -260,13 +260,10 @@ def checkLogin(username: str, password: str) -> bool:
         sql = """SELECT * FROM `user` where `username`=%s"""
         cursor.execute(sql, (username,))
         r = cursor.fetchone()
-        if r is None:
-            return False
+        if r is not None and r['password'] == password:
+            return True
         else:
-            if r['password'] == password:
-                return True
-            else:
-                return False
+            return False
 
 
 def LikeOrUnlike(Review: Review, User: User) -> None:
@@ -419,6 +416,26 @@ def getWatchlist_fromUser(User: User) -> List[Union[MovieId, ShowId]]:
         for i in d:
             if (d[i]):
                 L.append(i)
+    return L
+
+
+def filterGenre(genres: List[str]) -> List[Union[Movie, Tvshow]]:
+    L = []
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM `movie` WHERE JSON_CONTAINS_ANY(%s, `genres`)"""
+        for i in range(1, len(genres)):
+            sql += """ OR JSON_CONTAINS_ANY(%s, `genres`)"""
+        cursor.execute(sql, genres)
+        r = cursor.fetchall()
+        for i in r:
+            L.append(Movie.from_dict(i))
+        sql = """SELECT * FROM `tvshow` WHERE JSON_CONTAINS_ANY(%s, `genres`)"""
+        for i in range(1, len(genres)):
+            sql += """ OR JSON_CONTAINS_ANY(%s, `genres`)"""
+        cursor.execute(sql, genres)
+        r = cursor.fetchall()
+        for i in r:
+            L.append(Tvshow.from_dict(i))
     return L
 
 # -----------------------------------------------------------------------------------------------------------------------
