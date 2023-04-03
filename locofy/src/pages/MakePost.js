@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCallback } from "react";
 import MovieNavbar from "../components/MovieNavbar";
 import "./MakePost.css";
