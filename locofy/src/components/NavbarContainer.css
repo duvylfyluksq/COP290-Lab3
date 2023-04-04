@@ -4,6 +4,22 @@
   height: 53.5px;
   flex-shrink: 0;
 }
+
+a{
+  text-decoration: none;
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+}
+
+.navbar2{
+  color: #742BBA;
+  font-family: 'Roboto';
+  overflow: visible;
+}
+::placeholder{
+  color: #742BBA;
+  font-family: 'Roboto';
+}
 .logo2 {
   border-radius: var(--br-2xs);
   background-color: var(--color-darkorchid-100);
@@ -13,11 +29,15 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: var(--padding-24xl) var(--padding-18xl);
+  padding: 15px;
+  padding-left:25px;
   box-sizing: border-box;
+  margin-top:0px;
   align-items: center;
   justify-content: space-between;
+  vertical-align: middle;
   cursor: pointer;
+  
 }
 .movies5 {
   margin: 0;
@@ -80,6 +100,15 @@
   gap: var(--gap-3xs);
   font-size: var(--font-size-xl);
 }
+
+.type{
+  border:none;
+  width:100%;
+}
+
+input:focus{
+  outline:none;
+}
 .fluentcompose-24-filled-icon2 {
   overflow: hidden;
 }
@@ -96,6 +125,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  overflow: visible;
 }
 .navbar-rhs2 {
   width: 321px;
@@ -111,7 +141,6 @@
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   width: 1920px;
   height: 133px;
-  overflow: hidden;
   padding: var(--padding-3xs) var(--padding-56xl);
   box-sizing: border-box;
   justify-content: flex-start;
@@ -121,3 +150,62 @@
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
 }
+
+
+.dropdown{
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+  position: relative;
+  font-size:13px;
+  display: none;
+flex-direction: row;
+justify-content: center;
+background-color: #FFFFFF;
+/* border-radius: 10px; */
+align-items: center;
+padding: 0px 25px;
+/* width: 500%; */
+height: 150px;
+left: -90%;
+top: 450%;
+opacity:100%;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+white-space: nowrap;
+overflow: visible;
+}
+
+.rhs:hover .dropdown {
+  display: inline-block;
+  
+}
+
+
+.dropdown .name{
+  font-weight:700px;
+  
+}
+
+.signedin {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.navbar2 .rhs {
+  width: 100px;
+  height: 27px;
+  display:flex;
+  text-align: right;
+  align-items: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 29px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  overflow: visible;
+}
+

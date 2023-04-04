@@ -23,7 +23,7 @@ align-items: center;
 /* padding: 10px 75px; */
 /* gap: 56px; */
 justify-content: space-between;
-position: absolute;
+position: fixed;
 width: 100%;
 height: 15%;
 left: 0px;

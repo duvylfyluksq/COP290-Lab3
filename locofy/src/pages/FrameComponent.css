@@ -3,6 +3,9 @@
   position: relative;
   flex-shrink: 0;
 }
+.watchlist-inother-parent{
+  width:100%;
+}
 .watchlist {
   font-weight: 600;
   display: inline-block;

@@ -38,7 +38,7 @@ const NavbarContainer = ({
       </div>
       <div className="searchbar2">
         <img className="vector-icon18" alt="" src="/vector4.svg" />
-        <div className="search-movies-tv2">Search Movies, TV Shows</div>
+        <input type="text" placeholder="Search Movies or TV Shows" class="type" />
       </div>
       <div className="navbar-rhs2">
         <img
@@ -47,12 +47,24 @@ const NavbarContainer = ({
           src={dimensionsText}
           onClick={onFluentcompose24FilledClick}
         />
-        <img
-          className="profilemenu-icon2"
-          alt=""
-          src={dimensionsId}
-          onClick={onProfileMenuClick}
-        />
+        <div class="rhs">
+          <button class="signedin">
+            <img
+              className="profilemenu-icon2"
+              alt=""
+              src={dimensionsId}
+              onClick={onProfileMenuClick}
+            />
+          </button>
+          <div class="dropdown">
+              <span class="name">bobdylan</span>
+              <hr />
+              <a href="#Watchlist">Watchlist</a><br />
+              <a href="#userpage">View Profile</a><br />
+              <hr />
+              <a href="#signout">Logout</a>
+          </div>
+        </div>
       </div>
     </div>
   );

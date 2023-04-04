@@ -2,7 +2,9 @@ import React from "react";
 import './Website/style_navbar.css';
 import makepost from './Website/images/navbar/add_a_post.jpg';
 import logo from './Website/images/navbar/Logo.jpg';
-
+// import { library, dom } from '@fortawesome/fontawesome-free';
+// import { faSearch } from '@fortawesome/free-solid-svg-icons';
+// library.add(faSearch);
 
 function NavBar(props){
     return (
