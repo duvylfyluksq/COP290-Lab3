@@ -32,6 +32,7 @@ def getMovie(Id: MovieId) -> Movie:
         sql = f"SELECT * FROM `movie` WHERE `movie_id` = %s"
         cursor.execute(sql, (Id,))
         r = cursor.fetchone()
+        print(r)
         return Movie.from_dict(r)
 
 
@@ -41,6 +42,7 @@ def getTvshow(Id: ShowId) -> Tvshow:
         sql = f"SELECT * FROM `tvshow` WHERE `show_id` = %s"
         cursor.execute(sql, (Id,))
         r = cursor.fetchone()
+        print(r)
         return Tvshow.from_dict(r)
 
 

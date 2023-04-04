@@ -6,10 +6,10 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.movie_id import MovieId  # noqa: F401,E501
 from swagger_server.models.review_id import ReviewId  # noqa: F401,E501
+from swagger_server.models.show_id import ShowId  # noqa: F401,E501
 from swagger_server.models.user_id import UserId  # noqa: F401,E501
-from swagger_server.models.all_ofreview_movie_id import AllOfreviewMovieId  # noqa: F401,E501
-from swagger_server.models.all_ofreview_show_id import AllOfreviewShowId  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -18,7 +18,7 @@ class Review(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, review_id: ReviewId=None, title: str=None, movie_id: AllOfreviewMovieId=None, show_id: AllOfreviewShowId=None, user_id: UserId=None, likes: Dict[str, bool]=None, rating: int=None, content: str=None, creation_time: datetime=None):  # noqa: E501
+    def __init__(self, review_id: ReviewId=None, title: str=None, movie_id: MovieId=None, show_id: ShowId=None, user_id: UserId=None, likes: Dict[str, bool]=None, rating: int=None, content: str=None, creation_time: datetime=None):  # noqa: E501
         """Review - a model defined in Swagger
 
         :param review_id: The review_id of this Review.  # noqa: E501
@@ -26,9 +26,9 @@ class Review(Model):
         :param title: The title of this Review.  # noqa: E501
         :type title: str
         :param movie_id: The movie_id of this Review.  # noqa: E501
-        :type movie_id: AllOfreviewMovieId
+        :type movie_id: MovieId
         :param show_id: The show_id of this Review.  # noqa: E501
-        :type show_id: AllOfreviewShowId
+        :type show_id: ShowId
         :param user_id: The user_id of this Review.  # noqa: E501
         :type user_id: UserId
         :param likes: The likes of this Review.  # noqa: E501
@@ -43,8 +43,8 @@ class Review(Model):
         self.swagger_types = {
             'review_id': ReviewId,
             'title': str,
-            'movie_id': AllOfreviewMovieId,
-            'show_id': AllOfreviewShowId,
+            'movie_id': MovieId,
+            'show_id': ShowId,
             'user_id': UserId,
             'likes': Dict[str, bool],
             'rating': int,
@@ -127,43 +127,43 @@ class Review(Model):
         self._title = title
 
     @property
-    def movie_id(self) -> AllOfreviewMovieId:
+    def movie_id(self) -> MovieId:
         """Gets the movie_id of this Review.
 
 
         :return: The movie_id of this Review.
-        :rtype: AllOfreviewMovieId
+        :rtype: MovieId
         """
         return self._movie_id
 
     @movie_id.setter
-    def movie_id(self, movie_id: AllOfreviewMovieId):
+    def movie_id(self, movie_id: MovieId):
         """Sets the movie_id of this Review.
 
 
         :param movie_id: The movie_id of this Review.
-        :type movie_id: AllOfreviewMovieId
+        :type movie_id: MovieId
         """
 
         self._movie_id = movie_id
 
     @property
-    def show_id(self) -> AllOfreviewShowId:
+    def show_id(self) -> ShowId:
         """Gets the show_id of this Review.
 
 
         :return: The show_id of this Review.
-        :rtype: AllOfreviewShowId
+        :rtype: ShowId
         """
         return self._show_id
 
     @show_id.setter
-    def show_id(self, show_id: AllOfreviewShowId):
+    def show_id(self, show_id: ShowId):
         """Sets the show_id of this Review.
 
 
         :param show_id: The show_id of this Review.
-        :type show_id: AllOfreviewShowId
+        :type show_id: ShowId
         """
 
         self._show_id = show_id

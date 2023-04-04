@@ -64,9 +64,7 @@ paths:
         style: form
         explode: false
         schema:
-          allOf:
-            - $ref: '#/components/schemas/movie_id'
-            - nullable: true
+          $ref: '#/components/schemas/movie_id'
       - name: show_id
         in: query
         description: ID of the TVShow for which the review is being posted(null if Movie)
@@ -74,9 +72,7 @@ paths:
         style: form
         explode: false
         schema:
-          allOf:
-            - $ref: '#/components/schemas/show_id'
-            - nullable: true
+          $ref: '#/components/schemas/show_id'
       - name: user_id
         in: query
         description: ID of the user who is posting the review
@@ -770,20 +766,29 @@ components:
 
 
   schemas:
+    movie_id:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+
+    show_id:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
 
     user_id:
       type: integer
       example: 42
 
-    movie_id:
-      type: integer
-      example: 42
-
-    show_id:
-      type: integer
-      example: 42
-
     review_id:
+      type: integer
+      example: 42
+
+    comment_id:
       type: integer
       example: 42
 
@@ -943,13 +948,9 @@ components:
           maxLength: 50
           example: Amazing Watch!
         movie_id:
-          allOf:
-            - $ref: '#/components/schemas/movie_id'
-            - nullable: true
+          $ref: '#/components/schemas/movie_id'
         show_id:
-          allOf:
-            - $ref: '#/components/schemas/show_id'
-            - nullable: true
+          $ref: '#/components/schemas/show_id'
         user_id:
           $ref: '#/components/schemas/user_id'
         likes:
@@ -979,8 +980,7 @@ components:
       type: object
       properties:
         comment_id:
-          type: integer
-          example: 42
+          $ref: '#/components/schemas/comment_id'
         review_id:
           $ref: '#/components/schemas/review_id'
         user_id:

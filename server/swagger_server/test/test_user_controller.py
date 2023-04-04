@@ -5,7 +5,10 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
+from swagger_server.models.id1 import Id1  # noqa: E501
+from swagger_server.models.id2 import Id2  # noqa: E501
+from swagger_server.models.user import User  # noqa: E501
+from swagger_server.models.user_id import UserId  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
@@ -17,56 +20,82 @@ class TestUserController(BaseTestCase):
 
         Update user bio
         """
-        query_string = [('address', 'address_example')]
+        query_string = [('bio', 'bio_example')]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/profile/{user_id}/bio'.format(user_id=56),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/profile/{user_id}/bio'.format(user_id=UserId()),
             method='PUT',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_profile_user_id_name_put(self):
-        """Test case for profile_user_id_name_put
+    def test_profile_user_id_interests_put(self):
+        """Test case for profile_user_id_interests_put
 
-        Update user name
+        Update interests
         """
-        query_string = [('name', 'name_example')]
+        query_string = [('pfp', 'pfp_example')]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/profile/{user_id}/name'.format(user_id=56),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/profile/{user_id}/interests'.format(user_id=UserId()),
             method='PUT',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_profile_user_id_pic_put(self):
-        """Test case for profile_user_id_pic_put
+    def test_profile_user_id_password_put(self):
+        """Test case for profile_user_id_password_put
 
-        Update user pic
+        Update Password
         """
-        query_string = [('pic', 'pic_example')]
+        query_string = [('password', 'password_example')]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/profile/{user_id}/pic'.format(user_id=56),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/profile/{user_id}/password'.format(user_id=UserId()),
             method='PUT',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_users_signin_post(self):
-        """Test case for users_signin_post
+    def test_profile_user_id_pfp_put(self):
+        """Test case for profile_user_id_pfp_put
+
+        Update profile picture
+        """
+        query_string = [('pfp', 'pfp_example')]
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/profile/{user_id}/pfp'.format(user_id=UserId()),
+            method='PUT',
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_profile_user_id_username_put(self):
+        """Test case for profile_user_id_username_put
+
+        Update username
+        """
+        query_string = [('username', 'username_example')]
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/profile/{user_id}/username'.format(user_id=UserId()),
+            method='PUT',
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_user_signin_post(self):
+        """Test case for user_signin_post
 
         Sign in user with credentials
         """
         query_string = [('username', 'username_example'),
                         ('password', 'password_example')]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/users/signin',
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/signin',
             method='POST',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_users_signup_post(self):
-        """Test case for users_signup_post
+    def test_user_signup_post(self):
+        """Test case for user_signup_post
 
         Create a new user account
         """
@@ -74,9 +103,10 @@ class TestUserController(BaseTestCase):
                         ('password', 'password_example'),
                         ('confirm_password', 'confirm_password_example'),
                         ('interests', 'interests_example'),
+                        ('pfp', 'pfp_example'),
                         ('bio', 'bio_example')]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/users/signup',
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/signup',
             method='POST',
             query_string=query_string)
         self.assert200(response,
@@ -88,20 +118,20 @@ class TestUserController(BaseTestCase):
         Get all titles in user watchlist
         """
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/watchlist/{user_id}'.format(user_id=56),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/watchlist/{user_id}'.format(user_id=UserId()),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_watchlist_user_id_post(self):
-        """Test case for watchlist_user_id_post
+    def test_watchlist_user_id_put(self):
+        """Test case for watchlist_user_id_put
 
-        Add a title to user watchlist
+        Add/Remove title from watchlist
         """
-        query_string = [('title', 'title_example')]
+        query_string = [('id', Id1())]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/watchlist/{user_id}'.format(user_id=56),
-            method='POST',
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/watchlist/{user_id}'.format(user_id=UserId()),
+            method='PUT',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -111,9 +141,9 @@ class TestUserController(BaseTestCase):
 
         Remove title from user's watchlist
         """
-        query_string = [('title', 'title_example')]
+        query_string = [('id', Id2())]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/watchlist/{user_id}/remove'.format(user_id=56),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/watchlist/{user_id}/remove'.format(user_id=UserId()),
             method='PUT',
             query_string=query_string)
         self.assert200(response,

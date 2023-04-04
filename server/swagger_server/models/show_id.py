@@ -14,40 +14,20 @@ class ShowId(Model):
 
     Do not edit the class manually.
     """
-
-    def __init__(self, show_id: int = None):  # noqa: E501
+    def __init__(self, id: int=None):  # noqa: E501
         """ShowId - a model defined in Swagger
 
-        :param show_id: The show_id of this ShowId.
-        :type show_id: int
+        :param id: The id of this ShowId.  # noqa: E501
+        :type id: int
         """
         self.swagger_types = {
-            'show_id': int
+            'id': int
         }
 
         self.attribute_map = {
-            'show_id': 'show_id'
+            'id': 'id'
         }
-
-        self._show_id = show_id
-
-    @property
-    def show_id(self) -> int:
-        """Gets the show_id of this ShowId.
-
-        :return: The show_id of this ShowId.
-        :rtype: int
-        """
-        return self._show_id
-
-    @show_id.setter
-    def show_id(self, show_id: int):
-        """Sets the show_id of this ShowId.
-
-        :param show_id: The show_id of this ShowId.
-        :type show_id: int
-        """
-        self._show_id = show_id
+        self._id = id
 
     @classmethod
     def from_dict(cls, dikt) -> 'ShowId':
@@ -55,7 +35,28 @@ class ShowId(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The show_id of this ShowId.
+        :return: The show_id of this ShowId.  # noqa: E501
         :rtype: ShowId
         """
         return util.deserialize_model(dikt, cls)
+
+    @property
+    def id(self) -> int:
+        """Gets the id of this ShowId.
+
+
+        :return: The id of this ShowId.
+        :rtype: int
+        """
+        return self._id
+
+    @id.setter
+    def id(self, id: int):
+        """Sets the id of this ShowId.
+
+
+        :param id: The id of this ShowId.
+        :type id: int
+        """
+
+        self._id = id

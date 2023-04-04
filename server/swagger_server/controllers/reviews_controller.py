@@ -2,10 +2,10 @@ import connexion
 import six
 
 from swagger_server.models.comment import Comment  # noqa: E501
-from swagger_server.models.movie_id1 import MovieId1  # noqa: E501
+from swagger_server.models.movie_id import MovieId  # noqa: E501
 from swagger_server.models.review import Review  # noqa: E501
 from swagger_server.models.review_id import ReviewId  # noqa: E501
-from swagger_server.models.show_id1 import ShowId1  # noqa: E501
+from swagger_server.models.show_id import ShowId  # noqa: E501
 from swagger_server.models.title import Title  # noqa: E501
 from swagger_server.models.user_id import UserId  # noqa: E501
 from swagger_server import util
@@ -32,9 +32,9 @@ def review_post(movie_id, show_id, user_id, rating, title, content):  # noqa: E5
     :rtype: None
     """
     if connexion.request.is_json:
-        movie_id = MovieId1.from_dict(connexion.request.get_json())  # noqa: E501
+        movie_id = MovieId.from_dict(connexion.request.get_json())  # noqa: E501
     if connexion.request.is_json:
-        show_id = ShowId1.from_dict(connexion.request.get_json())  # noqa: E501
+        show_id = ShowId.from_dict(connexion.request.get_json())  # noqa: E501
     if connexion.request.is_json:
         user_id = UserId.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'

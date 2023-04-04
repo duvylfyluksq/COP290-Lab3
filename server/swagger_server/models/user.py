@@ -7,8 +7,6 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.user_id import UserId  # noqa: F401,E501
-from swagger_server.models.movie_id import MovieId
-from swagger_server.models.show_id import ShowId
 from swagger_server import util
 
 
@@ -17,10 +15,7 @@ class User(Model):
 
     Do not edit the class manually.
     """
-
-    # Ensure modifying constructor doesn't cause problems later
-
-    def __init__(self, user_id: UserId = None, username: str = None, password: str = None, bio: str = None, pfp: str = None, watchlist_movies: Dict[MovieId, bool] = None, watchlist_shows: Dict[ShowId, bool] = None, interests: List[str] = None):  # noqa: E501
+    def __init__(self, user_id: UserId=None, username: str=None, password: str=None, bio: str=None, pfp: str=None, watchlist_movies: Dict[str, bool]=None, watchlist_shows: Dict[str, bool]=None, interests: List[str]=None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param user_id: The user_id of this User.  # noqa: E501
@@ -46,8 +41,8 @@ class User(Model):
             'password': str,
             'bio': str,
             'pfp': str,
-            'watchlist_movies': Dict[MovieId, bool],
-            'watchlist_shows': Dict[ShowId, bool],
+            'watchlist_movies': Dict[str, bool],
+            'watchlist_shows': Dict[str, bool],
             'interests': List[str]
         }
 
@@ -187,7 +182,7 @@ class User(Model):
         self._pfp = pfp
 
     @property
-    def watchlist_movies(self) -> Dict[MovieId, bool]:
+    def watchlist_movies(self) -> Dict[str, bool]:
         """Gets the watchlist_movies of this User.
 
 
@@ -197,7 +192,7 @@ class User(Model):
         return self._watchlist_movies
 
     @watchlist_movies.setter
-    def watchlist_movies(self, watchlist_movies: Dict[MovieId, bool]):
+    def watchlist_movies(self, watchlist_movies: Dict[str, bool]):
         """Sets the watchlist_movies of this User.
 
 
@@ -208,7 +203,7 @@ class User(Model):
         self._watchlist_movies = watchlist_movies
 
     @property
-    def watchlist_shows(self) -> Dict[ShowId, bool]:
+    def watchlist_shows(self) -> Dict[str, bool]:
         """Gets the watchlist_shows of this User.
 
 
@@ -218,7 +213,7 @@ class User(Model):
         return self._watchlist_shows
 
     @watchlist_shows.setter
-    def watchlist_shows(self, watchlist_shows: Dict[ShowId, bool]):
+    def watchlist_shows(self, watchlist_shows: Dict[str, bool]):
         """Sets the watchlist_shows of this User.
 
 

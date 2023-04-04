@@ -66,7 +66,7 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/movie_id_1'
+          $ref: '#/components/schemas/movie_id'
       - name: show_id
         in: query
         description: ID of the TVShow for which the review is being posted(null if
@@ -75,7 +75,7 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/show_id_1'
+          $ref: '#/components/schemas/show_id'
       - name: user_id
         in: query
         description: ID of the user who is posting the review
@@ -834,16 +834,29 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.user_controller
 components:
   schemas:
+    movie_id:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+      example:
+        id: 42
+    show_id:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+      example:
+        id: 42
     user_id:
       type: integer
       example: 42
-    movie_id:
-      type: integer
-      example: 42
-    show_id:
-      type: integer
-      example: 42
     review_id:
+      type: integer
+      example: 42
+    comment_id:
       type: integer
       example: 42
     user:
@@ -971,7 +984,8 @@ components:
         - Thriller
         rating: 9.36
         writer: Todd Phillips
-        movie_id: 42
+        movie_id:
+          id: 42
         title: Inception
         poster: https://fmd.com/poster.jpeg
     tvshow:
@@ -1030,7 +1044,8 @@ components:
         - Leonardo Di Caprio
         - Kate Winslet
         - Bradd Pitt
-        show_id: 42
+        show_id:
+          id: 42
         release_date: 2001-08-19T00:00:00.000+00:00
         director: Christopher Nolan
         genres:
@@ -1052,13 +1067,9 @@ components:
           type: string
           example: Amazing Watch!
         movie_id:
-          allOf:
-          - $ref: '#/components/schemas/movie_id'
-          - nullable: true
+          $ref: '#/components/schemas/movie_id'
         show_id:
-          allOf:
-          - $ref: '#/components/schemas/show_id'
-          - nullable: true
+          $ref: '#/components/schemas/show_id'
         user_id:
           $ref: '#/components/schemas/user_id'
         likes:
@@ -1086,11 +1097,13 @@ components:
       example:
         creation_time: 2023-04-02T12:30:45Z
         review_id: 42
-        show_id: ""
+        show_id:
+          id: 42
         user_id: 42
         rating: 10
         title: Amazing Watch!
-        movie_id: ""
+        movie_id:
+          id: 42
         content: have you got colour in your cheeks? do you ever get that feel' that
           you can't shift the tide that sticks around like sumats in your teeth.
         likes:
@@ -1101,8 +1114,7 @@ components:
       type: object
       properties:
         comment_id:
-          type: integer
-          example: 42
+          $ref: '#/components/schemas/comment_id'
         review_id:
           $ref: '#/components/schemas/review_id'
         user_id:
@@ -1118,14 +1130,6 @@ components:
         comment_id: 42
         content: "im a puppet on a string, tracy island time travelling diamond, coulda\
           \ shaped heartaches"
-    movie_id_1:
-      allOf:
-      - $ref: '#/components/schemas/movie_id'
-      - nullable: true
-    show_id_1:
-      allOf:
-      - $ref: '#/components/schemas/show_id'
-      - nullable: true
     title:
       oneOf:
       - $ref: '#/components/schemas/movie_id'

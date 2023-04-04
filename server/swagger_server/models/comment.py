@@ -6,6 +6,7 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.comment_id import CommentId  # noqa: F401,E501
 from swagger_server.models.review_id import ReviewId  # noqa: F401,E501
 from swagger_server.models.user_id import UserId  # noqa: F401,E501
 from swagger_server import util
@@ -16,11 +17,11 @@ class Comment(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, comment_id: int=None, review_id: ReviewId=None, user_id: UserId=None, content: str=None):  # noqa: E501
+    def __init__(self, comment_id: CommentId=None, review_id: ReviewId=None, user_id: UserId=None, content: str=None):  # noqa: E501
         """Comment - a model defined in Swagger
 
         :param comment_id: The comment_id of this Comment.  # noqa: E501
-        :type comment_id: int
+        :type comment_id: CommentId
         :param review_id: The review_id of this Comment.  # noqa: E501
         :type review_id: ReviewId
         :param user_id: The user_id of this Comment.  # noqa: E501
@@ -29,7 +30,7 @@ class Comment(Model):
         :type content: str
         """
         self.swagger_types = {
-            'comment_id': int,
+            'comment_id': CommentId,
             'review_id': ReviewId,
             'user_id': UserId,
             'content': str
@@ -58,22 +59,22 @@ class Comment(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def comment_id(self) -> int:
+    def comment_id(self) -> CommentId:
         """Gets the comment_id of this Comment.
 
 
         :return: The comment_id of this Comment.
-        :rtype: int
+        :rtype: CommentId
         """
         return self._comment_id
 
     @comment_id.setter
-    def comment_id(self, comment_id: int):
+    def comment_id(self, comment_id: CommentId):
         """Sets the comment_id of this Comment.
 
 
         :param comment_id: The comment_id of this Comment.
-        :type comment_id: int
+        :type comment_id: CommentId
         """
 
         self._comment_id = comment_id

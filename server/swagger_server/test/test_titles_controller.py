@@ -5,51 +5,67 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
+from swagger_server.models.id import Id  # noqa: E501
+from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
 from swagger_server.models.movie import Movie  # noqa: E501
-from swagger_server.models.shows import Shows  # noqa: E501
-from swagger_server.models.title import Title  # noqa: E501
+from swagger_server.models.tvshow import Tvshow  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
 class TestTitlesController(BaseTestCase):
     """TitlesController integration test stubs"""
 
-    def test_movies_get(self):
-        """Test case for movies_get
+    def test_movie_get(self):
+        """Test case for movie_get
 
-        Get movies by genre and sorting type
+        Sort/Filter movies
         """
         query_string = [('genre', 'genre_example'),
-                        ('sort', 'sort_example')]
+                        ('sort_type_browse', 'sort_type_browse_example'),
+                        ('sort_order', true)]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/Movies',
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/movie',
             method='GET',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_t_vs_get(self):
-        """Test case for t_vs_get
+    def test_search_get(self):
+        """Test case for search_get
 
-        Get TV shows by genre and sorting type
+        
         """
-        query_string = [('genre', 'genre_example'),
-                        ('sort', 'sort_example')]
+        query_string = [('expression', 'expression_example')]
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/TVs',
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/search',
             method='GET',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_title_title_get(self):
-        """Test case for title_title_get
+    def test_title_id_get(self):
+        """Test case for title_id_get
 
-        Get information about a title
+        Get information about a Movie/TV Show
         """
         response = self.client.open(
-            '/VINAYTAYAL28/FMD_API3.0/3.0.0/Title/{Title}'.format(title='title_example'),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title/{id}'.format(id=Id()),
             method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_tvshow_get(self):
+        """Test case for tvshow_get
+
+        Sort/Filter TV Shows
+        """
+        query_string = [('genre', 'genre_example'),
+                        ('sort_type_browse', 'sort_type_browse_example'),
+                        ('sort_order', true)]
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/tvshow',
+            method='GET',
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
