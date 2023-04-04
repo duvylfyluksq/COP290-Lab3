@@ -2,7 +2,7 @@
 .home-signedin {
   position: absolute;
   left: 0;
-  width: 1920px;
+  width: 100%;
 }
 .body13 {
   top: 133px;
@@ -19,6 +19,7 @@
 .home-signedin {
   top: 0;
   background-color: var(--color-white);
+  width: 100%;
   height: 1080px;
 }
 .home-signedin-parent {

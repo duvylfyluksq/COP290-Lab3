@@ -1,7 +1,7 @@
 .vector-icon17 {
   position: relative;
-  width: 59.5px;
-  height: 53.5px;
+  width: 100%;
+  height: 100%;
   flex-shrink: 0;
 }
 
@@ -23,16 +23,18 @@ a{
 .logo2 {
   border-radius: var(--br-2xs);
   background-color: var(--color-darkorchid-100);
-  width: 75px;
-  height: 75px;
+  width: max(30px,3.5%);
+  aspect-ratio: 1;
   flex-shrink: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 15px;
-  padding-left:25px;
+  padding: 0;
+  padding: 0.6%;
+  padding-left: 0.6%;
+  padding-right: 0.3%;
   box-sizing: border-box;
-  margin-top:0px;
+  margin: 0;
   align-items: center;
   justify-content: space-between;
   vertical-align: middle;
@@ -45,31 +47,31 @@ a{
 .genres5,
 .movies4,
 .tv-shows2 {
-  position: relative;
+  /* position: relative; */
   font-weight: 500;
   display: inline-block;
-  width: 93px;
-  height: 27px;
+  width: 40%;
+  height: 50%;
   flex-shrink: 0;
   cursor: pointer;
 }
-.genres5,
+/* .genres5,
 .tv-shows2 {
   width: 118px;
   height: 25px;
-}
-.genres5 {
-  width: 83px;
-  height: 24px;
+}*/
+.tv-shows2 {
+  width: 50%;
+  height: 50%;
 }
 .navbar-lhs2 {
-  width: 406px;
+  width: fit-content;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: var(--gap-37xl);
+  gap: 5%;
 }
 .search-movies-tv2,
 .vector-icon18 {
@@ -85,17 +87,18 @@ a{
   height: 21px;
 }
 .searchbar2 {
+  margin-left: 10%;
   border-radius: var(--br-31xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 743px;
-  height: 53px;
+  width: 30%;
+  height: fit-content;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
   padding: var(--padding-mid) var(--padding-sm);
   box-sizing: border-box;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   gap: var(--gap-3xs);
   font-size: var(--font-size-xl);
@@ -112,14 +115,25 @@ input:focus{
 .fluentcompose-24-filled-icon2 {
   overflow: hidden;
 }
-.fluentcompose-24-filled-icon2,
-.profilemenu-icon2 {
+.fluentcompose-24-filled-icon2
+{
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: max(30px,25%);
+  aspect-ratio: 1;
   flex-shrink: 0;
   cursor: pointer;
 }
+
+.profilemenu-icon2 {
+  position: relative;
+  width: 90%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+
+
 .navbar-rhs2,
 .navbar2 {
   display: flex;
@@ -128,10 +142,13 @@ input:focus{
   overflow: visible;
 }
 .navbar-rhs2 {
-  width: 321px;
-  height: 95px;
+  margin-left: auto;
+  margin-right: 3%;
+  width: 15%;
+  height: 150%;
   flex-shrink: 0;
   justify-content: space-between;
+  gap: 42%;
 }
 .navbar2 {
   position: absolute;
@@ -139,14 +156,16 @@ input:focus{
   left: 0;
   background-color: var(--color-white);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  width: 1920px;
-  height: 133px;
-  padding: var(--padding-3xs) var(--padding-56xl);
+  width: 100%;
+  height: 8%;
+  padding: 2% 4%;
+  padding-right: 0;
+  margin-right: 0;
   box-sizing: border-box;
   justify-content: flex-start;
-  gap: var(--gap-56xl);
+  gap: 2%;
   text-align: left;
-  font-size: var(--font-size-6xl);
+  font-size: 20px;
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
 }
@@ -193,8 +212,8 @@ overflow: visible;
 }
 
 .navbar2 .rhs {
-  width: 100px;
-  height: 27px;
+  /* width: 100px;
+  height: 27px; */
   display:flex;
   text-align: right;
   align-items: center;
