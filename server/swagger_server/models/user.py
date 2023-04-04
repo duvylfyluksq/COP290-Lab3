@@ -15,7 +15,8 @@ class User(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, user_id: UserId=None, username: str=None, password: str=None, bio: str=None, pfp: str=None, watchlist_movies: Dict[str, bool]=None, watchlist_shows: Dict[str, bool]=None, interests: List[str]=None):  # noqa: E501
+
+    def __init__(self, user_id: UserId = None, username: str = None, password: str = None, bio: str = None, pfp: str = None, watchlist_movies: Dict[int, bool] = None, watchlist_shows: Dict[int, bool] = None, interests: List[str] = None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param user_id: The user_id of this User.  # noqa: E501
@@ -41,8 +42,8 @@ class User(Model):
             'password': str,
             'bio': str,
             'pfp': str,
-            'watchlist_movies': Dict[str, bool],
-            'watchlist_shows': Dict[str, bool],
+            'watchlist_movies': Dict[int, bool],
+            'watchlist_shows': Dict[int, bool],
             'interests': List[str]
         }
 
@@ -182,7 +183,7 @@ class User(Model):
         self._pfp = pfp
 
     @property
-    def watchlist_movies(self) -> Dict[str, bool]:
+    def watchlist_movies(self) -> Dict[int, bool]:
         """Gets the watchlist_movies of this User.
 
 
@@ -192,7 +193,7 @@ class User(Model):
         return self._watchlist_movies
 
     @watchlist_movies.setter
-    def watchlist_movies(self, watchlist_movies: Dict[str, bool]):
+    def watchlist_movies(self, watchlist_movies: Dict[int, bool]):
         """Sets the watchlist_movies of this User.
 
 
@@ -203,7 +204,7 @@ class User(Model):
         self._watchlist_movies = watchlist_movies
 
     @property
-    def watchlist_shows(self) -> Dict[str, bool]:
+    def watchlist_shows(self) -> Dict[int, bool]:
         """Gets the watchlist_shows of this User.
 
 
@@ -213,7 +214,7 @@ class User(Model):
         return self._watchlist_shows
 
     @watchlist_shows.setter
-    def watchlist_shows(self, watchlist_shows: Dict[str, bool]):
+    def watchlist_shows(self, watchlist_shows: Dict[int, bool]):
         """Sets the watchlist_shows of this User.
 
 

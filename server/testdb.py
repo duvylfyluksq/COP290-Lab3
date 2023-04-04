@@ -174,10 +174,62 @@ class TestDB(unittest.TestCase):
         L = db.Search("T")
         self.assertEqual(len(L), 7)
         L = [i.title for i in L]
-        print(L)
         self.assertEqual(
             sorted(L), ["The Godfather", "The Lion King", "The Matrix",
                         "The Shawshank Redemption", "The Shining", "Titanic", "True Detective"])
+
+    def test_addOrDelete_fromWatchlist(self):
+        db.addUser(self.user)
+        movie_id = 8
+        db.addOrDelete_fromWatchlist(self.user, db.getMovie(movie_id))
+        self.assertEqual((self.user.watchlist_movies)
+                         [movie_id], True)
+        movie_id = 1
+        db.addOrDelete_fromWatchlist(self.user, db.getMovie(movie_id))
+        self.assertEqual((self.user.watchlist_movies)
+                         [movie_id], False)
+        movie_id = 2
+        db.addOrDelete_fromWatchlist(self.user, db.getMovie(movie_id))
+        self.assertEqual((self.user.watchlist_movies)
+                         [movie_id], True)
+        show_id = 1
+        db.addOrDelete_fromWatchlist(self.user, db.getTvshow(show_id))
+        self.assertEqual((self.user.watchlist_shows)
+                         [show_id], True)
+        show_id = 7
+        db.addOrDelete_fromWatchlist(self.user, db.getTvshow(show_id))
+        self.assertEqual((self.user.watchlist_shows)
+                         [show_id], False)
+        show_id = 8
+        db.addOrDelete_fromWatchlist(self.user, db.getTvshow(show_id))
+        self.assertEqual((self.user.watchlist_shows)
+                         [show_id], True)
+
+    def test_delete_fromWatchlist(self):
+        db.addUser(self.user)
+        movie_id = 8
+        db.delete_fromWatchlist(self.user, db.getMovie(movie_id))
+        self.assertEqual(
+            movie_id not in self.user.watchlist_movies.keys(), True)
+        movie_id = 1
+        db.delete_fromWatchlist(self.user, db.getMovie(movie_id))
+        self.assertEqual((self.user.watchlist_movies)
+                         [movie_id], False)
+        movie_id = 2
+        db.delete_fromWatchlist(self.user, db.getMovie(movie_id))
+        self.assertEqual((self.user.watchlist_movies)
+                         [movie_id], False)
+        show_id = 1
+        db.delete_fromWatchlist(self.user, db.getTvshow(show_id))
+        self.assertEqual(show_id not in self.user.watchlist_shows.keys(), True)
+        show_id = 7
+        db.delete_fromWatchlist(self.user, db.getTvshow(show_id))
+        self.assertEqual((self.user.watchlist_shows)
+                         [show_id], False)
+        show_id = 8
+        db.delete_fromWatchlist(self.user, db.getTvshow(show_id))
+        self.assertEqual((self.user.watchlist_shows)
+                         [show_id], False)
     """
     
     def test_sortLikes_Review(self):

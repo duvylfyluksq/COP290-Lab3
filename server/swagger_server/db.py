@@ -488,27 +488,31 @@ def addOrDelete_fromWatchlist(User: User, title: Union[Movie, Tvshow]) -> None:
             sql = """SELECT `watchlist_movies` FROM user WHERE `user_id`=%s"""
             cursor.execute(sql, (User.user_id,))
             r = cursor.fetchone()
-            d = json.loads(r[0]) if r else {}
-            if ((title.movie_id in d) and d[title.movie_id]):
-                d[title.movie_id] = not d[title.movie_id]
+            d = {int(k): v for k, v in json.loads(
+                r['watchlist_movies']).items()}
+            if ((title.movie_id.id in d.keys()) and d[title.movie_id.id]):
+                d[title.movie_id.id] = not d[title.movie_id.id]
             else:
-                d[title.movie_id] = True
+                d[title.movie_id.id] = True
             sql = """UPDATE user SET `watchlist_movies` = %s WHERE user_id = %s"""
             cursor.execute(sql, (json.dumps(d), User.user_id))
+            User.watchlist_movies = d
             connection.commit()
     elif isinstance(title, Tvshow):
         assert title.show_id is not None
         with connection.cursor() as cursor:
-            sql = """SELECT `watchlist_shows` FROM `user` WHERE `user_id`=%s"""
+            sql = """SELECT `watchlist_shows` FROM user WHERE `user_id`=%s"""
             cursor.execute(sql, (User.user_id,))
             r = cursor.fetchone()
-            d = json.loads(r[0]) if r else {}
-            if ((title.show_id in d) and d[title.show_id]):
-                d[title.show_id] = not d[title.show_id]
+            d = {int(k): v for k, v in json.loads(
+                r['watchlist_shows']).items()}
+            if ((title.show_id.id in d.keys()) and d[title.show_id.id]):
+                d[title.show_id.id] = not d[title.show_id.id]
             else:
-                d[title.show_id] = True
+                d[title.show_id.id] = True
             sql = """UPDATE user SET `watchlist_shows` = %s WHERE user_id = %s"""
             cursor.execute(sql, (json.dumps(d), User.user_id))
+            User.watchlist_shows = d
             connection.commit()
 
 
@@ -517,27 +521,31 @@ def delete_fromWatchlist(User: User, title: Union[Movie, Tvshow]) -> None:
     if isinstance(title, Movie):
         assert title.movie_id is not None
         with connection.cursor() as cursor:
-            sql = """SELECT `watchlist_movies` FROM `user` WHERE `user_id`=%s"""
+            sql = """SELECT `watchlist_movies` FROM user WHERE `user_id`=%s"""
             cursor.execute(sql, (User.user_id,))
             r = cursor.fetchone()
-            d = json.loads(r[0]) if r else {}
-            if (d):
-                d[title.movie_id] = False
-                sql = """UPDATE user SET `watchlist_movies` = %s WHERE `user_id` = %s"""
-                cursor.execute(sql, (json.dumps(d), User.user_id))
-                connection.commit()
+            d = {int(k): v for k, v in json.loads(
+                r['watchlist_movies']).items()}
+            if (title.movie_id.id in d.keys() and d[title.movie_id.id]):
+                d[title.movie_id.id] = False
+            sql = """UPDATE user SET `watchlist_movies` = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            User.watchlist_movies = d
+            connection.commit()
     elif isinstance(title, Tvshow):
         assert title.show_id is not None
         with connection.cursor() as cursor:
-            sql = """SELECT `watchlist_shows` FROM `user` WHERE `user_id`=%s"""
+            sql = """SELECT `watchlist_shows` FROM user WHERE `user_id`=%s"""
             cursor.execute(sql, (User.user_id,))
             r = cursor.fetchone()
-            d = json.loads(r[0]) if r else {}
-            if (d):
-                d[title.show_id] = False
-                sql = """UPDATE user SET `watchlist_shows` = %s WHERE `user_id` = %s"""
-                cursor.execute(sql, (json.dumps(d), User.user_id))
-                connection.commit()
+            d = {int(k): v for k, v in json.loads(
+                r['watchlist_shows']).items()}
+            if ((title.show_id.id in d.keys()) and d[title.show_id.id]):
+                d[title.show_id.id] = False
+            sql = """UPDATE user SET `watchlist_shows` = %s WHERE user_id = %s"""
+            cursor.execute(sql, (json.dumps(d), User.user_id))
+            User.watchlist_shows = d
+            connection.commit()
 
 
 def getWatchlist_fromUser(User: User) -> List[Union[MovieId, ShowId]]:
