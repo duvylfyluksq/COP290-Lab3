@@ -2,7 +2,7 @@ from typing import Union, List, Optional, Tuple
 import os
 import json
 import pymysql
-from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
+from swagger_server.models import User, UserId, Movie, Tvshow, Review, Comment, MovieId, ShowId
 
 connection = pymysql.connect(
     host="localhost",
@@ -12,6 +12,36 @@ connection = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor,
 )
 # -------------------------------------------------------------------------------------------------------------------------------
+
+
+def getUser(Id: UserId) -> User:
+    assert Id is not None
+    with connection.cursor() as cursor:
+        sql = f"SELECT * FROM `user` WHERE `user_id` = %s"
+        cursor.execute(sql, (Id,))
+        r = cursor.fetchone()
+        r['watchlist_movies'] = json.loads(r['watchlist_movies'])
+        r['watchlist_shows'] = json.loads(r['watchlist_shows'])
+        r['interests'] = json.loads(r['interests'])
+        return (User.from_dict(r))
+
+
+def getMovie(Id: MovieId) -> Movie:
+    assert Id is not None
+    with connection.cursor() as cursor:
+        sql = f"SELECT * FROM `movie` WHERE `movie_id` = %s"
+        cursor.execute(sql, (Id,))
+        r = cursor.fetchone()
+        return Movie.from_dict(r)
+
+
+def getTvshow(Id: ShowId) -> Tvshow:
+    assert Id is not None
+    with connection.cursor() as cursor:
+        sql = f"SELECT * FROM `tvshow` WHERE `show_id` = %s"
+        cursor.execute(sql, (Id,))
+        r = cursor.fetchone()
+        return Tvshow.from_dict(r)
 
 
 def addUser(User: User) -> None:

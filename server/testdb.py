@@ -17,6 +17,11 @@ class TestDB(unittest.TestCase):
             cursor.execute(sql, (self.user.user_id,))
             db.connection.commit()
 
+    def test_getUser(self):
+        user_id = 1
+        cur = db.getUser(user_id)
+        self.assertTrue(cur.user_id, user_id)
+
     def test_addUser(self):
         db.addUser(self.user)
         self.assertIsNotNone(self.user.user_id)
@@ -76,6 +81,8 @@ class TestDB(unittest.TestCase):
     def test_getWatchlist_fromUser(self):
         db.addUser(self.user)
         L = db.getWatchlist_fromUser(self.user)
+        print(isinstance(L[0], MovieId) or isinstance(L[0], ShowId))
+        print(L[0])
         self.assertEqual(sorted(L), ['1', '3', '7', '9'])
 
 
