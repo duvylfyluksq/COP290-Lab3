@@ -53,6 +53,19 @@ def getTvshow(Id: ShowId) -> Tvshow:
         return Tvshow.from_dict(r)
 
 
+def getReview(Id: ReviewId) -> ReviewId:
+    assert Id is not None
+    with connection.cursor() as cursor:
+        sql = f"SELECT * FROM `review` WHERE `review_id` = %s"
+        cursor.execute(sql, (Id,))
+        r = cursor.fetchone()
+        r['likes'] = json.loads(r['likes'])
+        r['show_id'] = {'id': r['show_id']}
+        r['movie_id'] = {'id': r['movie_id']}
+        r['creation_time'] = r['creation_time'].strftime("%Y-%m-%d %H:%M:%S")
+        return (Review.from_dict(r))
+
+
 def addUser(User: User) -> None:
     assert User.user_id is None
     with connection.cursor() as cursor:
