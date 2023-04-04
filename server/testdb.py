@@ -8,8 +8,8 @@ class TestDB(unittest.TestCase):
 
     def setUp(self):
         self.user = User(user_id=None, username="testuser", password="testpass", bio="testbio",
-                         pfp="testpfp.com", watchlist_movies={MovieId(1): True, MovieId(2): False, MovieId(3): True},
-                         watchlist_shows={ShowId(7): True, ShowId(8): False, ShowId(9): True}, interests=["Action", "Comedy", "Drama"])
+                         pfp="testpfp.com", watchlist_movies={1: True, 2: False, 3: True},
+                         watchlist_shows={7: True, 8: False, 9: True}, interests=["Action", "Comedy", "Drama"])
 
     def tearDown(self):
         with db.connection.cursor() as cursor:
@@ -81,9 +81,13 @@ class TestDB(unittest.TestCase):
     def test_getWatchlist_fromUser(self):
         db.addUser(self.user)
         L = db.getWatchlist_fromUser(self.user)
-        print(isinstance(L[0], MovieId) or isinstance(L[0], ShowId))
-        print(L[0])
-        self.assertEqual(sorted(L), ['1', '3', '7', '9'])
+        titles = []
+        for i in L:
+            if (isinstance(i, MovieId)):
+                titles.append(i.movie_id)
+            elif (isinstance(i, ShowId)):
+                titles.append(i.show_id)
+        self.assertEqual(sorted(titles), [1, 3, 7, 9])
 
 
 if __name__ == '__main__':

@@ -502,14 +502,14 @@ def getWatchlist_fromUser(User: User) -> List[Union[MovieId, ShowId]]:
         d = json.loads(r['watchlist_movies']) if r else {}
         for i in d:
             if (d[i]):
-                L.append(i)
+                L.append(MovieId(json.loads(i)))
         sql = """SELECT `watchlist_shows` FROM `user` WHERE `user_id`=%s"""
         cursor.execute(sql, (User.user_id,))
         r = cursor.fetchone()
         d = json.loads(r['watchlist_shows']) if r else {}
         for i in d:
             if (d[i]):
-                L.append(i)
+                L.append(ShowId(json.loads(i)))
     return L
 
 

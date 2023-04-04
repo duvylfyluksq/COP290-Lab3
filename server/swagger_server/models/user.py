@@ -18,7 +18,9 @@ class User(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, user_id: UserId = None, username: str = None, password: str = None, bio: str = None, pfp: str = None, watchlist_movies: Dict[str, bool] = None, watchlist_shows: Dict[str, bool] = None, interests: List[str] = None):  # noqa: E501
+    # Ensure modifying constructor doesn't cause problems later
+
+    def __init__(self, user_id: UserId = None, username: str = None, password: str = None, bio: str = None, pfp: str = None, watchlist_movies: Dict[MovieId, bool] = None, watchlist_shows: Dict[ShowId, bool] = None, interests: List[str] = None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param user_id: The user_id of this User.  # noqa: E501
