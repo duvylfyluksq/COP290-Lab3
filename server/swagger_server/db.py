@@ -1,8 +1,9 @@
 from typing import Union, List, Optional, Tuple
+import datetime
 import os
 import json
 import pymysql
-from swagger_server.models import User, UserId, Movie, Tvshow, Review, Comment, MovieId, ShowId
+from swagger_server.models import User, UserId, Movie, Tvshow, Review, Comment, MovieId, ShowId, CommentId, ReviewId
 
 connection = pymysql.connect(
     host="localhost",
@@ -32,7 +33,10 @@ def getMovie(Id: MovieId) -> Movie:
         sql = f"SELECT * FROM `movie` WHERE `movie_id` = %s"
         cursor.execute(sql, (Id,))
         r = cursor.fetchone()
-        print(r)
+        r['genres'] = json.loads(r['genres'])
+        r['cast'] = json.loads(r['cast'])
+        r['movie_id'] = {'id': r['movie_id']}
+        r['release_date'] = r['release_date'].strftime("%Y-%m-%d")
         return Movie.from_dict(r)
 
 
@@ -42,7 +46,10 @@ def getTvshow(Id: ShowId) -> Tvshow:
         sql = f"SELECT * FROM `tvshow` WHERE `show_id` = %s"
         cursor.execute(sql, (Id,))
         r = cursor.fetchone()
-        print(r)
+        r['genres'] = json.loads(r['genres'])
+        r['cast'] = json.loads(r['cast'])
+        r['show_id'] = {'id': r['show_id']}
+        r['release_date'] = r['release_date'].strftime("%Y-%m-%d")
         return Tvshow.from_dict(r)
 
 
@@ -328,8 +335,8 @@ def addComment(Comment: Comment) -> None:
         sql = "INSERT INTO `comment` (review_id, user_id, content) VALUES (%s, %s, %s)"
         cursor.execute(
             sql, (Comment.review_id, Comment.user_id, Comment.content))
-        connection.commit()
         Comment.comment_id = cursor.lastrowid
+        connection.commit()
 
 
 def addReview(Review: Review) -> None:
@@ -339,8 +346,8 @@ def addReview(Review: Review) -> None:
               f"(%s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, (Review.title, Review.movie_id, Review.show_id, Review.user_id,
                              Review.likes, Review.rating, Review.content, Review.creation_time))
-    connection.commit()
-    Review.review_id = cursor.lastrowid
+        Review.review_id = cursor.lastrowid
+        connection.commit()
 
 
 def getReviews_forUser(User: User) -> List[Review]:
