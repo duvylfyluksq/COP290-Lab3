@@ -18,7 +18,8 @@ class Review(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, review_id: ReviewId=None, title: str=None, movie_id: MovieId=None, show_id: ShowId=None, user_id: UserId=None, likes: Dict[str, bool]=None, rating: int=None, content: str=None, creation_time: datetime=None):  # noqa: E501
+
+    def __init__(self, review_id: ReviewId = None, title: str = None, movie_id: MovieId = None, show_id: ShowId = None, user_id: UserId = None, likes: Dict[int, bool] = None, rating: int = None, content: str = None, creation_time: datetime = None):  # noqa: E501
         """Review - a model defined in Swagger
 
         :param review_id: The review_id of this Review.  # noqa: E501
@@ -46,7 +47,7 @@ class Review(Model):
             'movie_id': MovieId,
             'show_id': ShowId,
             'user_id': UserId,
-            'likes': Dict[str, bool],
+            'likes': Dict[int, bool],
             'rating': int,
             'content': str,
             'creation_time': datetime
@@ -190,7 +191,7 @@ class Review(Model):
         self._user_id = user_id
 
     @property
-    def likes(self) -> Dict[str, bool]:
+    def likes(self) -> Dict[int, bool]:
         """Gets the likes of this Review.
 
 
@@ -200,7 +201,7 @@ class Review(Model):
         return self._likes
 
     @likes.setter
-    def likes(self, likes: Dict[str, bool]):
+    def likes(self, likes: Dict[int, bool]):
         """Sets the likes of this Review.
 
 

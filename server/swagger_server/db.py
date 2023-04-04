@@ -416,13 +416,15 @@ def LikeOrUnlike(Review: Review, User: User) -> None:
         sql = """SELECT `likes` FROM `review` WHERE `review_id`=%s"""
         cursor.execute(sql, (Review.review_id,))
         r = cursor.fetchone()
-        d = json.loads(r[0]) if r else {}
+        d = {int(k): v for k, v in json.loads(
+            r['likes']).items()}
         if (User.user_id in d.keys() and d[User.user_id]):
             d[User.user_id] = False
         else:
             d[User.user_id] = True
         sql = """UPDATE `review` SET `likes` = %s WHERE `review_id` = %s"""
         cursor.execute(sql, (json.dumps(d), Review.review_id))
+        Review.likes = d
         connection.commit()
 
 

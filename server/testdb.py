@@ -230,6 +230,22 @@ class TestDB(unittest.TestCase):
         db.delete_fromWatchlist(self.user, db.getTvshow(show_id))
         self.assertEqual((self.user.watchlist_shows)
                          [show_id], False)
+
+    def test_LikeOrUnlike(self):
+        db.addReview(self.review)
+        user_id = 8
+        db.LikeOrUnlike(self.review, db.getUser(user_id))
+        self.assertEqual((self.review.likes)
+                         [user_id], True)
+        user_id = 1
+        db.LikeOrUnlike(self.review, db.getUser(user_id))
+        self.assertEqual((self.review.likes)
+                         [user_id], False)
+        user_id = 2
+        db.LikeOrUnlike(self.review, db.getUser(user_id))
+        self.assertEqual((self.review.likes)
+                         [user_id], True)
+
     """
     
     def test_sortLikes_Review(self):
