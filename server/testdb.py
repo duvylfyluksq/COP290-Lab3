@@ -1,7 +1,7 @@
 import unittest
 import json
 import swagger_server.db as db
-from swagger_server.models import User, UserId, MovieId, ShowId
+from swagger_server.models import User, UserId, MovieId, ShowId, Review, Movie, Tvshow
 
 
 class TestDB(unittest.TestCase):
@@ -89,6 +89,167 @@ class TestDB(unittest.TestCase):
                 titles.append(i.show_id)
         self.assertEqual(sorted(titles), [1, 3, 7, 9])
 
+    def test_addcomment(self):
+        db.addUser(self.user)
+        db.addComment(self.user, "testcomment")
+        with db.connection.cursor() as cursor:
+            sql = f"SELECT * FROM `comment` WHERE `user_id` = {self.user.user_id}"
+            cursor.execute(sql)
+            result = cursor.fetchone()
+            self.assertEqual(result['comment'], "testcomment")
+
+    def test_getMovie(self):
+        movie_id = MovieId(1)
+        cur = db.getMovie(movie_id)
+        self.assertEqual(cur.movie_id, movie_id)
+    def test_getTvshow(self):
+        show_id = ShowId(1)
+        cur = db.getTvshow(show_id)
+        self.assertEqual(cur.show_id, show_id)
+    def test_sortLikes_Review(self):
+        cur = db.sortLikes_Review(True)
+        self.assertEqual(type(cur[0]),Review)
+        
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i].likes
+            b = cur[i+1].likes
+            count_true_in_a = len([value for value in a.values() if value==True])
+            count_true_in_b = len([value for value in b.values() if value==True])
+            if count_true_in_a > count_true_in_b:
+                self.assertTrue(False)
+            i += 1
+        self.assertTrue(True)
+    def test_sortrecent_Review(self):
+        cur = db.sortrecent_Review(True)
+        self.assertEqual(type(cur[0]),Review)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i].creation_time
+            b = cur[i+1].creation_time
+            if a > b:
+                self.assertTrue(False)
+            i += 1
+        self.assertTrue(True)
+    def test_sortreview(self):
+        cur = db.sortreview("Recent")
+        self.test_sortrecent_Review()
+        cur = db.sortreview("Likes")
+
+        self.test_sortLikes_Review()
+    def test_sortRating_Movie(self):
+        cur = db.sortRating_Movie(True)
+        self.assertEqual(type(cur[0]),Movie)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i].rating
+            b = cur[i+1].rating
+            if a > b:
+                self.assertTrue(False)
+            i += 1
+        self.assertTrue(True)
+    def test_sortRating_Tvshow(self):
+        cur = db.sortRating_Tvshow(True)
+        self.assertEqual(type(cur[0]),Tvshow)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i].rating
+            b = cur[i+1].rating
+            if a > b:
+                self.assertTrue(False)
+            i += 1
+        self.assertTrue(True)
+    def test_sortrecent_Movie(self):
+        cur = db.sortrecent_Movie(True)
+        self.assertEqual(type(cur[0]),Movie)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i].creation_time
+            b = cur[i+1].creation_time
+            if a > b:
+                self.assertTrue(False)
+            i += 1
+        self.assertTrue(True)
+    def test_sortrecent_Tvshow(self):
+        cur = db.sortrecent_Tvshow(True)
+        self.assertEqual(type(cur[0]),Tvshow)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i].creation_time
+            b = cur[i+1].creation_time
+            if a > b:
+                self.assertTrue(False)
+            i += 1
+        self.assertTrue(True)
+    def test_sortLex_Movie(self):
+        cur = db.sortLex_Movie(True)
+        self.assertEqual(type(cur[0]),Movie)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i].title
+            b = cur[i+1].title
+            if a > b:
+                self.assertTrue(False)
+            i += 1
+        self.assertTrue(True)
+    def test_sortLex_Tvshow(self):
+        cur = db.sortLex_Tvshow(True)
+        self.assertEqual(type(cur[0]),Tvshow)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i].title
+            b = cur[i+1].title
+            if a > b:
+                self.assertTrue(False)
+            i += 1
+        self.assertTrue(True)
+    def test_sortPop_Movie(self):
+        cur = db.sortPop_Movie(True)
+        self.assertEqual(type(cur[0]),Movie)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i]
+            b = cur[i+1]
+
+            a_reviews = Review.query.filter_by(movie_id=a.id).count()
+
+            # Get review count for movie b
+            b_reviews = Review.query.filter_by(movie_id=b.id).count()
+
+            if a_reviews > b_reviews:
+                self.assertTrue(False)
+
+            i += 1
+
+        self.assertTrue(True)
+    def test_sortPop_Tvshow(self):
+        cur = db.sortPop_Tvshow(True)
+        self.assertEqual(type(cur[0]),Tvshow)
+        i = 0 
+        while i < len(cur) - 1:
+            a = cur[i]
+            b = cur[i+1]
+
+            a_reviews = Review.query.filter_by(show_id=a.id).count()
+
+            # Get review count for movie b
+            b_reviews = Review.query.filter_by(show_id=b.id).count()
+
+            if a_reviews > b_reviews:
+                self.assertTrue(False)
+
+            i += 1
+
+        self.assertTrue(True)
+    
+
+
+
+
+
+        
+
+    # check sort functions sortLikes_Review, sortrecent_Review, sortreview, sortRating_Review, sortRating_Movie, sortrecent_Movie, sortrecent_Show, sortRating_Show,sortLex_Movie,sortLex_TvShow
 
 if __name__ == '__main__':
     unittest.main()
