@@ -3,7 +3,7 @@ import pprint
 import six
 import typing
 
-from .. import util
+from ... import util
 
 T = typing.TypeVar('T')
 

@@ -8,7 +8,7 @@ from typing import List, Dict  # noqa: F401
 from base_model_ import Model
 from movie_id import MovieId  # noqa: F401,E501
 import re  # noqa: F401,E501
-from .. import util
+from swagger_server import util
 
 
 class Movie(Model):
