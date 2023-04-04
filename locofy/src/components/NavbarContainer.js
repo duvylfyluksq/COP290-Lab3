@@ -38,7 +38,7 @@ const NavbarContainer = ({
       </div>
       <div className="searchbar2">
         <img className="vector-icon18" alt="" src="/vector4.svg" />
-        <input type="text" placeholder="Search Movies or TV Shows" class="type" />
+        <input type="text" placeholder="What's on your mind?" class="type" />
       </div>
       <div className="navbar-rhs2">
         <img

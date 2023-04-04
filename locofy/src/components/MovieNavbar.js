@@ -48,7 +48,7 @@ const MovieNavbar = () => {
       </div>
       <div className="searchbar6">
         <img className="vector-icon88" alt="" src="/vector23.svg" />
-        <div className="search-movies-tv6">Search Movies, TV Shows</div>
+        <input type="text" placeholder="What's on your mind?" class="type" />
       </div>
       <div className="navbar-rhs6">
         <img
@@ -57,12 +57,24 @@ const MovieNavbar = () => {
           src="/fluentcompose24filled1.svg"
           onClick={onFluentcompose24FilledClick}
         />
-        <img
-          className="profilemenu-icon3"
-          alt=""
-          src="/profilemenu9.svg"
-          onClick={onProfileMenuClick}
-        />
+        <div class="rhs">
+          <button class="signedin">
+            <img
+            className="profilemenu-icon3"
+            alt=""
+            src="/profilemenu9.svg"
+            onClick={onProfileMenuClick}
+            />
+          </button>
+          <div class="dropdown">
+              <span class="name">bobdylan</span>
+              <hr />
+              <a href="#Watchlist">Watchlist</a><br />
+              <a href="#userpage">View Profile</a><br />
+              <hr />
+              <a href="#signout">Logout</a>
+          </div>
+        </div>
       </div>
     </div>
   );
