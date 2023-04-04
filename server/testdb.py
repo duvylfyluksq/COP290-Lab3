@@ -153,6 +153,11 @@ class TestDB(unittest.TestCase):
         L = [i.review_id for i in r]
         self.assertEqual(sorted(L), [3, 4, 8])
 
+    def test_getReviews_forUser(self):
+        user_id = 5
+        r = db.getReviews_forUser(db.getUser(user_id))
+        L = [i.review_id for i in r]
+        self.assertEqual(sorted(L), [1, 3, 4, 6])
     """
     
     def test_sortLikes_Review(self):

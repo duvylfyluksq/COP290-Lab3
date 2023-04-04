@@ -368,6 +368,12 @@ def getReviews_forUser(User: User) -> List[Review]:
         sql = """SELECT * FROM `review` where `user_id`=%s"""
         cursor.execute(sql, (User.user_id,))
         r = cursor.fetchall()
+        for i in r:
+            i['likes'] = json.loads(i['likes'])
+            i['show_id'] = {'id': i['show_id']}
+            i['movie_id'] = {'id': i['movie_id']}
+            i['creation_time'] = i['creation_time'].strftime(
+                "%Y-%m-%d %H:%M:%S")
         return [Review.from_dict(i) for i in r]
 
 
