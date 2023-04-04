@@ -8,8 +8,8 @@ class TestDB(unittest.TestCase):
 
     def setUp(self):
         self.user = User(user_id=None, username="testuser", password="testpass", bio="testbio",
-                         pfp="testpfp.com", watchlist_movies={1: True, 2: False, 3: True},
-                         watchlist_shows={7: True, 8: False, 9: True}, interests=["Action", "Comedy", "Drama"])
+                         pfp="testpfp.com", watchlist_movies={MovieId(1): True, MovieId(2): False, MovieId(3): True},
+                         watchlist_shows={ShowId(7): True, ShowId(8): False, ShowId(9): True}, interests=["Action", "Comedy", "Drama"])
 
     def tearDown(self):
         with db.connection.cursor() as cursor:

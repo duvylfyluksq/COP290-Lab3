@@ -14,15 +14,40 @@ class MovieId(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self):  # noqa: E501
+
+    def __init__(self, movie_id: int = None):  # noqa: E501
         """MovieId - a model defined in Swagger
 
+        :param movie_id: The movie_id of this MovieId.
+        :type movie_id: int
         """
         self.swagger_types = {
+            'movie_id': int
         }
 
         self.attribute_map = {
+            'movie_id': 'movie_id'
         }
+
+        self._movie_id = movie_id
+
+    @property
+    def movie_id(self) -> int:
+        """Gets the movie_id of this MovieId.
+
+        :return: The movie_id of this MovieId.
+        :rtype: int
+        """
+        return self._movie_id
+
+    @movie_id.setter
+    def movie_id(self, movie_id: int):
+        """Sets the movie_id of this MovieId.
+
+        :param movie_id: The movie_id of this MovieId.
+        :type movie_id: int
+        """
+        self._movie_id = movie_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'MovieId':
@@ -30,7 +55,7 @@ class MovieId(Model):
 
         :param dikt: A dict.
         :type: dict
-        :return: The movie_id of this MovieId.  # noqa: E501
+        :return: The movie_id of this MovieId.
         :rtype: MovieId
         """
         return util.deserialize_model(dikt, cls)
