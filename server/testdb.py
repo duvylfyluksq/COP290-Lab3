@@ -1,4 +1,5 @@
 import unittest
+import datetime
 import json
 import swagger_server.db as db
 from swagger_server.models import User, UserId, MovieId, ShowId, Review, Movie, Tvshow, ReviewId, CommentId, Comment
@@ -12,6 +13,10 @@ class TestDB(unittest.TestCase):
                          watchlist_shows={7: True, 8: False, 9: True}, interests=["Action", "Comedy", "Drama"])
         self.comment = Comment(comment_id=None, review_id=1,
                                user_id=1, content="test comment")
+        self.review = Review(review_id=None, title="test review", movie_id=1, show_id=None, user_id=1,
+                             likes={1: True, 2: False, 3: True}, rating=8, content="test review content",
+                             creation_time=datetime.datetime.strptime(
+                                 datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S"))
 
     def tearDown(self):
         with db.connection.cursor() as cursor:
@@ -19,6 +24,8 @@ class TestDB(unittest.TestCase):
             cursor.execute(sql, (self.user.user_id,))
             sql = f"DELETE FROM `comment` WHERE `comment_id` = %s"
             cursor.execute(sql, (self.comment.comment_id,))
+            sql = f"DELETE FROM `review` WHERE `review_id` = %s"
+            cursor.execute(sql, (self.review.review_id,))
             db.connection.commit()
 
     def test_getUser(self):
@@ -117,6 +124,24 @@ class TestDB(unittest.TestCase):
             self.assertEqual(result['user_id'], self.comment.user_id)
             self.assertEqual(result['review_id'], self.comment.review_id)
             self.assertEqual(result['content'], self.comment.content)
+
+    def test_Review(self):
+
+        db.addReview(self.review)
+        self.assertIsNotNone(self.review.review_id)
+        with db.connection.cursor() as cursor:
+            sql = "SELECT * FROM `review` WHERE review_id = %s"
+            cursor.execute(sql, (self.review.review_id,))
+            result = cursor.fetchone()
+            self.assertEqual(result['review_id'], self.review.review_id)
+            self.assertEqual(result['title'], self.review.title)
+            self.assertEqual(result['movie_id'], self.review.movie_id)
+            self.assertEqual(result['show_id'], self.review.show_id)
+            self.assertEqual(result['user_id'], self.review.user_id)
+            self.assertEqual(result['rating'], self.review.rating)
+            self.assertEqual(result['content'], self.review.content)
+            self.assertEqual(result['creation_time'].strftime(
+                '%Y-%m-%d %H:%M:%S'), self.review.creation_time.strftime('%Y-%m-%d %H:%M:%S'))
 
     """
     def test_sortLikes_Review(self):

@@ -345,7 +345,7 @@ def addReview(Review: Review) -> None:
         sql = f"INSERT INTO review (title,movie_id,show_id,user_id,likes,rating,content,creation_time) VALUES " \
               f"(%s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, (Review.title, Review.movie_id, Review.show_id, Review.user_id,
-                             Review.likes, Review.rating, Review.content, Review.creation_time))
+                             json.dumps(Review.likes), Review.rating, Review.content, Review.creation_time))
         Review.review_id = cursor.lastrowid
         connection.commit()
 
