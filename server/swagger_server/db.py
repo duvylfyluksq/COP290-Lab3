@@ -315,8 +315,14 @@ def getReviews_forMovie(Movie: Movie) -> List[Review]:
     assert Movie.movie_id is not None
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `review` where `movie_id`=%s"""
-        cursor.execute(sql, (Movie.movie_id,))
+        cursor.execute(sql, (Movie.movie_id.id,))
         r = cursor.fetchall()
+        for i in r:
+            i['likes'] = json.loads(i['likes'])
+            i['show_id'] = {'id': i['show_id']}
+            i['movie_id'] = {'id': i['movie_id']}
+            i['creation_time'] = i['creation_time'].strftime(
+                "%Y-%m-%d %H:%M:%S")
         return [Review.from_dict(i) for i in r]
 
 
@@ -324,8 +330,14 @@ def getReviews_forShow(Tvshow: Tvshow) -> List[Review]:
     assert Tvshow.show_id is not None
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `review` where `show_id`=%s"""
-        cursor.execute(sql, (Tvshow.show_id,))
+        cursor.execute(sql, (Tvshow.show_id.id,))
         r = cursor.fetchall()
+        for i in r:
+            i['likes'] = json.loads(i['likes'])
+            i['show_id'] = {'id': i['show_id']}
+            i['movie_id'] = {'id': i['movie_id']}
+            i['creation_time'] = i['creation_time'].strftime(
+                "%Y-%m-%d %H:%M:%S")
         return [Review.from_dict(i) for i in r]
 
 

@@ -15,8 +15,7 @@ class TestDB(unittest.TestCase):
                                user_id=1, content="test comment")
         self.review = Review(review_id=None, title="test review", movie_id=1, show_id=None, user_id=1,
                              likes={1: True, 2: False, 3: True}, rating=8, content="test review content",
-                             creation_time=datetime.datetime.strptime(
-                                 datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S"))
+                             creation_time=datetime.datetime(2022, 4, 4, 14, 0, 0))
 
     def tearDown(self):
         with db.connection.cursor() as cursor:
@@ -126,7 +125,6 @@ class TestDB(unittest.TestCase):
             self.assertEqual(result['content'], self.comment.content)
 
     def test_Review(self):
-
         db.addReview(self.review)
         self.assertIsNotNone(self.review.review_id)
         with db.connection.cursor() as cursor:
@@ -143,7 +141,20 @@ class TestDB(unittest.TestCase):
             self.assertEqual(result['creation_time'].strftime(
                 '%Y-%m-%d %H:%M:%S'), self.review.creation_time.strftime('%Y-%m-%d %H:%M:%S'))
 
+    def test_getReviews_forMovie(self):
+        movie_id = 1
+        r = db.getReviews_forMovie(db.getMovie(movie_id))
+        L = [i.review_id for i in r]
+        self.assertEqual(sorted(L), [1, 2])
+
+    def test_getReviews_forShow(self):
+        show_id = 2
+        r = db.getReviews_forShow(db.getTvshow(show_id))
+        L = [i.review_id for i in r]
+        self.assertEqual(sorted(L), [3, 4, 8])
+
     """
+    
     def test_sortLikes_Review(self):
         cur = db.sortLikes_Review(True)
         self.assertEqual(type(cur[0]), Review)
