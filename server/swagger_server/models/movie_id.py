@@ -49,6 +49,14 @@ class MovieId(Model):
         """
         self._movie_id = movie_id
 
+    def __hash__(self):
+        return hash(self.movie_id)
+
+    def __eq__(self, other):
+        if isinstance(other, MovieId):
+            return self.movie_id == other.movie_id
+        return False
+
     @classmethod
     def from_dict(cls, dikt) -> 'MovieId':
         """Returns the dict as a model
