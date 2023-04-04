@@ -5,10 +5,10 @@ from datetime import date, datetime  # noqa: F401
 
 from typing import List, Dict  # noqa: F401
 
-from base_model_ import Model
-from show_id import ShowId  # noqa: F401,E501
+from swagger_server.models.base_model_ import Model
+from swagger_server.models.show_id import ShowId  # noqa: F401,E501
 import re  # noqa: F401,E501
-from .. import util
+from swagger_server import util
 
 
 class Tvshow(Model):
@@ -16,8 +16,7 @@ class Tvshow(Model):
 
     Do not edit the class manually.
     """
-
-    def __init__(self, show_id: ShowId = None, title: str = None, season: int = None, cast: List[str] = None, director: str = None, writer: str = None, rating: float = None, genres: List[str] = None, release_date: date = None, duration: str = None, poster: str = None):  # noqa: E501
+    def __init__(self, show_id: ShowId=None, title: str=None, season: int=None, cast: List[str]=None, director: str=None, writer: str=None, rating: float=None, genres: List[str]=None, release_date: date=None, duration: str=None, poster: str=None):  # noqa: E501
         """Tvshow - a model defined in Swagger
 
         :param show_id: The show_id of this Tvshow.  # noqa: E501

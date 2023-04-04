@@ -156,24 +156,24 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<FrameComponent />} />
-      <Route path="/frame-17" element={<FrameComponent1 />} />
-      <Route path="/frame-16" element={<FrameComponent2 />} />
-      <Route path="/frame-15" element={<FrameComponent3 />} />
-      <Route path="/frame-14" element={<FrameComponent4 />} />
-      <Route path="/frame-13" element={<FrameComponent5 />} />
-      <Route path="/frame-12" element={<FrameComponent6 />} />
-      <Route path="/frame-11" element={<FrameComponent7 />} />
-      <Route path="/frame-10" element={<FrameComponent8 />} />
-      <Route path="/frame-9" element={<FrameComponent9 />} />
-      <Route path="/frame-8" element={<FrameComponent10 />} />
-      <Route path="/frame-7" element={<FrameComponent11 />} />
-      <Route path="/frame-6" element={<FrameComponent12 />} />
-      <Route path="/frame-5" element={<FrameComponent13 />} />
-      <Route path="/frame-4" element={<FrameComponent14 />} />
-      <Route path="/frame-3" element={<FrameComponent15 />} />
-      <Route path="/frame-2" element={<FrameComponent16 />} />
-      <Route path="/frame-1" element={<FrameComponent17 />} />
+      <Route path="/watchlistinother" element={<FrameComponent />} />
+      <Route path="/watchlistout" element={<FrameComponent1 />} />
+      <Route path="/watchlistinself" element={<FrameComponent2 />} />
+      <Route path="/reviewsduvylfyluksqin" element={<FrameComponent3 />} />
+      <Route path="/reviewsbobdylanin" element={<FrameComponent4 />} />
+      <Route path="/reviewsduvylfyluksqout" element={<FrameComponent5 />} />
+      <Route path="/duvylfyluksqinother" element={<FrameComponent6 />} />
+      <Route path="/bobdylaninself" element={<FrameComponent7 />} />
+      <Route path="/duvylfyluksqout" element={<FrameComponent8 />} />
+      <Route path="/reviewsmovieout" element={<FrameComponent9 />} />
+      <Route path="/movieout" element={<FrameComponent10 />} />
+      <Route path="/tvshowout" element={<FrameComponent11 />} />
+      <Route path="/genresout" element={<FrameComponent12 />} />
+      <Route path="/mixedbrowsein" element={<FrameComponent13 />} />
+      <Route path="/tvshowbrowsein" element={<FrameComponent14 />} />
+      <Route path="/moviebrowseout" element={<FrameComponent15 />} />
+      <Route path="/homesignedin" element={<FrameComponent16 />} />
+      <Route path="/" element={<FrameComponent17 />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/continue" element={<Continue />} />
       <Route path="/makepost" element={<MakePost />} />
