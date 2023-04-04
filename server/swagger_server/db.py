@@ -1,14 +1,14 @@
-from typing import Union, List, Optional
+from typing import Union, List, Optional, Tuple
 import os
 import json
 import pymysql
-from models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
 
 connection = pymysql.connect(
-    host=os.getenv("DB_HOST"),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASSWORD"),
-    database=os.getenv("DB_NAME"),
+    host="localhost",
+    user="root",
+    password="",
+    database="fmd",
     cursorclass=pymysql.cursors.DictCursor,
 )
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -21,8 +21,8 @@ def addUser(User: User) -> None:
               f"(%s, %s, %s, %s,%s,%s,%s)"
         cursor.execute(sql, (User.username, User.password,
                        json.dumps(User.watchlist_movies), json.dumps(User.watchlist_shows), User.bio, User.pfp, json.dumps(User.interests)))
-        connection.commit()
         User.user_id = cursor.lastrowid
+        connection.commit()
 
 
 def editUsername(User: User, username: str) -> None:
@@ -53,7 +53,7 @@ def editInterests(User: User, interests: List[str]) -> None:
     assert User.user_id is not None
     with connection.cursor() as cursor:
         sql = f"UPDATE `user` SET `interests` = %s WHERE `user_id` = %s"
-        cursor.execute(sql, (json.load(interests), User.user_id))
+        cursor.execute(sql, (json.dumps(interests), User.user_id))
         connection.commit()
 
 
@@ -206,7 +206,7 @@ def mergeLex(a: List[Movie], b: List[Tvshow]) -> List[Union[Movie, Tvshow]]:
     return L
 
 
-def sortPop_Movie() -> List[(Movie, int)]:
+def sortPop_Movie() -> List[Tuple[Movie, int]]:
     with connection.cursor() as cursor:
         sql = """SELECT `movie_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `movie_id`"""
         cursor.execute(sql)
@@ -223,7 +223,7 @@ def sortPop_Movie() -> List[(Movie, int)]:
         return L
 
 
-def sortPop_Tvshow() -> List[(Tvshow, int)]:
+def sortPop_Tvshow() -> List[Tuple[Tvshow, int]]:
     with connection.cursor() as cursor:
         sql = """SELECT `show_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `show_id`"""
         cursor.execute(sql)
@@ -240,7 +240,7 @@ def sortPop_Tvshow() -> List[(Tvshow, int)]:
         return L
 
 
-def mergePop(a: List[(Movie, int)], b: List[(Tvshow, int)]) -> List[Union[Movie, Tvshow]]:
+def mergePop(a: List[Tuple[Movie, int]], b: List[Tuple[Tvshow, int]]) -> List[Union[Movie, Tvshow]]:
     i, j = 0, 0
     L = []
     while i < len(a) and j < len(b):
@@ -386,7 +386,7 @@ def countReviews_User(User: User) -> int:
         return len(r)
 
 
-def Search(prefix: str) -> List[Union(Movie, Tvshow)]:
+def Search(prefix: str) -> List[Union[Movie, Tvshow]]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `movie` WHERE `title` LIKE %s
                  UNION ALL
@@ -469,14 +469,14 @@ def getWatchlist_fromUser(User: User) -> List[Union[MovieId, ShowId]]:
         sql = """SELECT `watchlist_movies` FROM `user` WHERE `user_id`=%s"""
         cursor.execute(sql, (User.user_id,))
         r = cursor.fetchone()
-        d = json.loads(r[0]) if r else {}
+        d = json.loads(r['watchlist_movies']) if r else {}
         for i in d:
             if (d[i]):
                 L.append(i)
         sql = """SELECT `watchlist_shows` FROM `user` WHERE `user_id`=%s"""
         cursor.execute(sql, (User.user_id,))
         r = cursor.fetchone()
-        d = json.loads(r[0]) if r else {}
+        d = json.loads(r['watchlist_shows']) if r else {}
         for i in d:
             if (d[i]):
                 L.append(i)
