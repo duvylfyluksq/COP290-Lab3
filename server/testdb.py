@@ -169,6 +169,15 @@ class TestDB(unittest.TestCase):
         r = db.getComments_fromReview(db.getReview(review_id))
         L = [i.comment_id for i in r]
         self.assertEqual(sorted(L), [2, 9])
+
+    def test_Search(self):
+        L = db.Search("T")
+        self.assertEqual(len(L), 7)
+        L = [i.title for i in L]
+        print(L)
+        self.assertEqual(
+            sorted(L), ["The Godfather", "The Lion King", "The Matrix",
+                        "The Shawshank Redemption", "The Shining", "Titanic", "True Detective"])
     """
     
     def test_sortLikes_Review(self):

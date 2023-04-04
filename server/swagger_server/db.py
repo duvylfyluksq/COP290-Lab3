@@ -457,19 +457,27 @@ def countReviews_User(User: User) -> int:
 
 
 def Search(prefix: str) -> List[Union[Movie, Tvshow]]:
+    L = []
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM `movie` WHERE `title` LIKE %s
-                 UNION ALL
-                 SELECT * FROM `tvshow` WHERE `title` LIKE %s"""
-        cursor.execute(sql, (prefix + '%', prefix + '%'))
+        sql = """SELECT * FROM `movie` WHERE `title` LIKE %s"""
+        cursor.execute(sql, (prefix + '%',))
         r = cursor.fetchall()
-        L = []
         for i in r:
-            if 'season' in i.keys():
-                L.append(Tvshow.from_dict(i))
-            else:
-                L.append(Movie.from_dict(i))
-        return L
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['movie_id'] = {'id': i['movie_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
+            L.append(Movie.from_dict(i))
+        sql = """SELECT * FROM `tvshow` WHERE `title` LIKE %s"""
+        cursor.execute(sql, (prefix + '%',))
+        r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['show_id'] = {'id': i['show_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
+            L.append(Tvshow.from_dict(i))
+    return L
 
 
 def addOrDelete_fromWatchlist(User: User, title: Union[Movie, Tvshow]) -> None:
