@@ -65,6 +65,16 @@ class TestDB(unittest.TestCase):
             result = cursor.fetchone()
             self.assertEqual(result['password'], new_password)
 
+    def test_editPfp(self):
+        db.addUser(self.user)
+        new_pfp = "new"
+        db.editPfp(self.user, new_pfp)
+        with db.connection.cursor() as cursor:
+            sql = f"SELECT * FROM `user` WHERE `user_id` = {self.user.user_id}"
+            cursor.execute(sql)
+            result = cursor.fetchone()
+            self.assertEqual(result['pfp'], new_pfp)
+
     def test_editBio(self):
         db.addUser(self.user)
         new_bio = "new"
