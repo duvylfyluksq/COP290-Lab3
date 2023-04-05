@@ -3,8 +3,8 @@ import six
 
 from swagger_server.models.id import Id  # noqa: E501
 from swagger_server.models.title import Title  # noqa: E501
-from swagger_server.models.user import User  # noqa: E501
-from swagger_server import util
+from swagger_server.models.user import User, Movie, Tvshow  # noqa: E501
+from swagger_server import db, util
 
 
 def profile_user_id_bio_put(user_id, bio):  # noqa: E501
@@ -19,10 +19,15 @@ def profile_user_id_bio_put(user_id, bio):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    user = db.getUser(user_id)
+    try:
+        db.editBio(user, bio)
+        return ('Bio updated successfully', 200)
+    except Exception as err:
+        return (f'Error updating bio: {err}', 400)
 
 
-def profile_user_id_interests_put(user_id, pfp):  # noqa: E501
+def profile_user_id_interests_put(user_id, interests):  # noqa: E501
     """Update interests
 
      # noqa: E501
@@ -34,7 +39,12 @@ def profile_user_id_interests_put(user_id, pfp):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    user = db.getUser(user_id)
+    try:
+        db.editInterests(user, interests)
+        return ('Interests updated successfully', 200)
+    except Exception as err:
+        return (f'Error updating Interests: {err}', 400)
 
 
 def profile_user_id_password_put(user_id, password):  # noqa: E501
@@ -49,7 +59,12 @@ def profile_user_id_password_put(user_id, password):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    user = db.getUser(user_id)
+    try:
+        db.editPassword(user, password)
+        return ('Password updated successfully', 200)
+    except Exception as err:
+        return (f'Error updating password: {err}', 400)
 
 
 def profile_user_id_pfp_put(user_id, pfp):  # noqa: E501
@@ -64,7 +79,12 @@ def profile_user_id_pfp_put(user_id, pfp):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    user = db.getUser(user_id)
+    try:
+        db.editPfp(user, pfp)
+        return ('Profile picture updated successfully', 200)
+    except Exception as err:
+        return (f'Error updating profile picture: {err}', 400)
 
 
 def profile_user_id_username_put(user_id, username):  # noqa: E501
@@ -79,7 +99,12 @@ def profile_user_id_username_put(user_id, username):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    user = db.getUser(user_id)
+    try:
+        db.editUsername(user, username)
+        return ('Username updated successfully', 200)
+    except Exception as err:
+        return (f'Error updating username: {err}', 400)
 
 
 def user_signin_post(username, password):  # noqa: E501
@@ -94,7 +119,10 @@ def user_signin_post(username, password):  # noqa: E501
 
     :rtype: User
     """
-    return 'do some magic!'
+    try:
+        return db.checkLogin(username, password)
+    except Exception as err:
+        return (f'Error logging in: {err}', 400)
 
 
 def user_signup_post(username, password, confirm_password, interests, pfp, bio):  # noqa: E501
@@ -117,7 +145,16 @@ def user_signup_post(username, password, confirm_password, interests, pfp, bio):
 
     :rtype: User
     """
-    return 'do some magic!'
+    if (password == confirm_password):
+        user = User(user_id=None, username=username, password=password,
+                    interests=interests, pfp=pfp, bio=bio, watchlist_movies={}, watchlist_shows={})
+        try:
+            db.addUser(user)
+            return ('Username updated successfully', 200)
+        except Exception as err:
+            return (f'Error adding user: {err}', 400)
+    else:
+        return (f'Passwords not matching', 400)
 
 
 def watchlist_user_id_get(user_id):  # noqa: E501
@@ -130,7 +167,17 @@ def watchlist_user_id_get(user_id):  # noqa: E501
 
     :rtype: List[Title]
     """
-    return 'do some magic!'
+    try:
+        user = db.getUser(user_id)
+        L = db.getWatchlist_fromUser(user)
+        for i in range(len(L)):
+            if (isinstance(L[i], Movie)):
+                L[i] = Title(movie=L[i], tvshow=None)
+            else:
+                L[i] = Title(movie=None, tvshow=L[i])
+        return L
+    except Exception as err:
+        return (f'Error getting watchlist from user: {err}', 400)
 
 
 def watchlist_user_id_put(user_id, id):  # noqa: E501
@@ -147,6 +194,17 @@ def watchlist_user_id_put(user_id, id):  # noqa: E501
     """
     if connexion.request.is_json:
         id = Id.from_dict(connexion.request.get_json())  # noqa: E501
+        title = None
+        if (id.tvshow is None):
+            title = id.movie
+        else:
+            title = id.tvshow
+        try:
+            user = db.getUser(user_id)
+            db.addOrDelete_fromWatchlist(user, title)
+            return ('Watchlist updated successfully', 200)
+        except Exception as err:
+            return (f'Error modifying watchlist: {err}', 400)
     return 'do some magic!'
 
 
@@ -164,4 +222,15 @@ def watchlist_user_id_remove_put(user_id, id):  # noqa: E501
     """
     if connexion.request.is_json:
         id = Id.from_dict(connexion.request.get_json())  # noqa: E501
+        title = None
+        if (id.tvshow is None):
+            title = id.movie
+        else:
+            title = id.tvshow
+        try:
+            user = db.getUser(user_id)
+            db.delete_fromWatchlist(user, title)
+            return ('Watchlist updated successfully', 200)
+        except Exception as err:
+            return (f'Error modifying watchlist: {err}', 400)
     return 'do some magic!'
