@@ -3,7 +3,7 @@ import datetime
 import os
 import json
 import pymysql
-from swagger_server.models import User, UserId, Movie, Tvshow, Review, Comment, MovieId, ShowId, CommentId, ReviewId
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
 
 connection = pymysql.connect(
     host="localhost",
@@ -15,7 +15,7 @@ connection = pymysql.connect(
 # -------------------------------------------------------------------------------------------------------------------------------
 
 
-def getUser(Id: UserId) -> User:
+def getUser(Id: int) -> User:
     assert Id is not None
     with connection.cursor() as cursor:
         sql = f"SELECT * FROM `user` WHERE `user_id` = %s"
@@ -83,7 +83,7 @@ def getTvshow(Id: ShowId) -> Tvshow:
         return Tvshow.from_dict(r)
 
 
-def getReview(Id: ReviewId) -> ReviewId:
+def getReview(Id: int) -> Review:
     assert Id is not None
     with connection.cursor() as cursor:
         sql = f"SELECT * FROM `review` WHERE `review_id` = %s"

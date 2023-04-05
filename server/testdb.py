@@ -2,7 +2,7 @@ import unittest
 import datetime
 import json
 import swagger_server.db as db
-from swagger_server.models import User, UserId, MovieId, ShowId, Review, Movie, Tvshow, ReviewId, CommentId, Comment
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
 
 
 class TestDB(unittest.TestCase):

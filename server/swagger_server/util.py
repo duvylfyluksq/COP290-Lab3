@@ -100,8 +100,10 @@ def deserialize_model(data, klass):
     :return: model object.
     """
     instance = klass()
+
     if not instance.swagger_types:
         return data
+
     for attr, attr_type in six.iteritems(instance.swagger_types):
         if data is not None \
                 and instance.attribute_map[attr] in data \

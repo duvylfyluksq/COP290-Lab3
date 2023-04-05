@@ -44,9 +44,7 @@ paths:
               schema:
                 type: array
                 items:
-                  oneOf:
-                  - $ref: '#/components/schemas/movie'
-                  - $ref: '#/components/schemas/tvshow'
+                  $ref: '#/components/schemas/title'
                 x-content-type: application/json
         "404":
           description: Movie/TV Show Not found
@@ -83,7 +81,8 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: rating
         in: query
         description: rating by the user
@@ -361,22 +360,22 @@ paths:
         "500":
           description: Internal server error
       x-openapi-router-controller: swagger_server.controllers.user_controller
-  /review/{title}:
+  /review/{id}:
     get:
       tags:
       - Reviews
       summary: Get all reviews of a title
       description: Returns a list of reviews for a particular title
-      operationId: review_title_get
+      operationId: review_id_get
       parameters:
-      - name: title
+      - name: id
         in: path
-        description: ID of the review
+        description: ID of the Movie or TVShow
         required: true
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/title'
+          $ref: '#/components/schemas/id'
       - name: sort_type_reviews
         in: query
         description: Parameter based on which reviews will be sorted
@@ -428,7 +427,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/review_id'
+          type: integer
+          example: 42
       - name: user_id
         in: query
         description: ID of the commentor
@@ -436,7 +436,8 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: content
         in: query
         description: Comment to be added to review
@@ -474,7 +475,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/review_id'
+          type: integer
+          example: 42
       - name: user_id
         in: query
         description: ID of the user who likes the review
@@ -482,7 +484,8 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       responses:
         "201":
           description: Like added or removed
@@ -514,7 +517,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/title'
         "400":
           description: Invalid request
         "404":
@@ -535,7 +538,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: sort_type_reviews
         in: query
         description: Parameter based on which reviews will be sorted
@@ -587,7 +591,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       responses:
         "200":
           description: List of titles in user watchlist
@@ -596,9 +601,7 @@ paths:
               schema:
                 type: array
                 items:
-                  oneOf:
-                  - $ref: '#/components/schemas/movie'
-                  - $ref: '#/components/schemas/tvshow'
+                  $ref: '#/components/schemas/title'
                 x-content-type: application/json
         "400":
           description: Bad request. Invalid user ID
@@ -616,7 +619,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: id
         in: query
         description: id of TVShow/Movie to be added to the watchlist
@@ -624,7 +628,7 @@ paths:
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/id_1'
+          $ref: '#/components/schemas/id'
       responses:
         "201":
           description: Title added/removed successfully
@@ -645,7 +649,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: id
         in: query
         description: id of the Title to be removed from user's watchlist
@@ -653,7 +658,7 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/id_2'
+          $ref: '#/components/schemas/id'
       responses:
         "200":
           description: Title removed successfully from user's wishlist
@@ -676,7 +681,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: username
         in: query
         description: New username
@@ -709,7 +715,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: pfp
         in: query
         description: New Profile Picture
@@ -742,7 +749,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: password
         in: query
         description: New password
@@ -775,7 +783,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: pfp
         in: query
         description: New Profile Picture
@@ -813,7 +822,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: bio
         in: query
         description: New bio
@@ -834,6 +844,58 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.user_controller
 components:
   schemas:
+    id:
+      type: object
+      properties:
+        movie_id:
+          $ref: '#/components/schemas/movie_id'
+        show_id:
+          $ref: '#/components/schemas/show_id'
+    title:
+      type: object
+      properties:
+        movie:
+          $ref: '#/components/schemas/movie'
+        tvshow:
+          $ref: '#/components/schemas/tvshow'
+      example:
+        movie:
+          duration: 2hrs 2mins
+          cast:
+          - Leonardo Di Caprio
+          - Kate Winslet
+          - Bradd Pitt
+          release_date: 2001-08-19T00:00:00.000+00:00
+          director: Christopher Nolan
+          genres:
+          - Adventure
+          - Comedy
+          - Thriller
+          rating: 9.36
+          writer: Todd Phillips
+          movie_id:
+            id: 42
+          title: Inception
+          poster: https://fmd.com/poster.jpeg
+        tvshow:
+          duration: 55mins
+          cast:
+          - Leonardo Di Caprio
+          - Kate Winslet
+          - Bradd Pitt
+          show_id:
+            id: 42
+          release_date: 2001-08-19T00:00:00.000+00:00
+          director: Christopher Nolan
+          genres:
+          - Adventure
+          - Comedy
+          - Thriller
+          rating: 9.36
+          season: 2
+          writer: Todd Phillips
+          title: Peaky Blinders
+          poster: https://fmd.com/poster.jpeg
     movie_id:
       type: object
       properties:
@@ -850,20 +912,12 @@ components:
           example: 42
       example:
         id: 42
-    user_id:
-      type: integer
-      example: 42
-    review_id:
-      type: integer
-      example: 42
-    comment_id:
-      type: integer
-      example: 42
     user:
       type: object
       properties:
         user_id:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
         username:
           maxLength: 25
           type: string
@@ -1061,7 +1115,8 @@ components:
       type: object
       properties:
         review_id:
-          $ref: '#/components/schemas/review_id'
+          type: integer
+          example: 42
         title:
           maxLength: 50
           type: string
@@ -1071,7 +1126,8 @@ components:
         show_id:
           $ref: '#/components/schemas/show_id'
         user_id:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
         likes:
           type: object
           additionalProperties:
@@ -1114,11 +1170,14 @@ components:
       type: object
       properties:
         comment_id:
-          $ref: '#/components/schemas/comment_id'
+          type: integer
+          example: 42
         review_id:
-          $ref: '#/components/schemas/review_id'
+          type: integer
+          example: 42
         user_id:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
         content:
           maxLength: 200
           type: string
@@ -1130,26 +1189,6 @@ components:
         comment_id: 42
         content: "im a puppet on a string, tracy island time travelling diamond, coulda\
           \ shaped heartaches"
-    title:
-      oneOf:
-      - $ref: '#/components/schemas/movie_id'
-      - $ref: '#/components/schemas/show_id'
-    id:
-      oneOf:
-      - $ref: '#/components/schemas/movie_id'
-      - $ref: '#/components/schemas/show_id'
-    inline_response_200:
-      oneOf:
-      - $ref: '#/components/schemas/movie'
-      - $ref: '#/components/schemas/tvshow'
-    id_1:
-      oneOf:
-      - $ref: '#/components/schemas/movie_id'
-      - $ref: '#/components/schemas/show_id'
-    id_2:
-      oneOf:
-      - $ref: '#/components/schemas/movie_id'
-      - $ref: '#/components/schemas/show_id'
   parameters:
     genre:
       name: genre
