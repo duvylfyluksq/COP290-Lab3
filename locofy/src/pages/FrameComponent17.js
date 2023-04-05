@@ -8,6 +8,7 @@ import TrendingMoviesContainer from "../components/TrendingMoviesContainer";
 import TrendingContainer from "../components/TrendingContainer";
 import Navbar2 from "../components/Navbar2";
 import "./FrameComponent17.css";
+import MoviesContainer from '../components/MoviesContainer';
 
 const FrameComponent17 = () => {
   const navigate = useNavigate();
@@ -124,7 +125,7 @@ const FrameComponent17 = () => {
     navigate("/tvshowout");
   }, [navigate]);
 
-  const onLogoClick = useCallback(() => {
+  const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
 
@@ -201,9 +202,9 @@ const FrameComponent17 = () => {
             onTVShowCardContainer17Click={onTVShowCardContainer13Click}
           />
         </div>
-        <Navbar2
-          productIds="/vector36.svg"
-          onLogoClick={onLogoClick}
+        <MoviesContainer
+          coordinates="/vector21.svg"
+          onLogoContainerClick={onLogoContainerClick}
           onMoviesTextClick={onMoviesTextClick}
           onTVShowsTextClick={onTVShowsTextClick}
           onGenresTextClick={onGenresTextClick}

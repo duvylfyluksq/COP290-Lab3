@@ -174,6 +174,7 @@ function App() {
       <Route path="/moviebrowseout" element={<FrameComponent15 />} />
       <Route path="/homesignedin" element={<FrameComponent16 />} />
       <Route path="/" element={<FrameComponent17 />} />
+      <Route path="/homesignedout" element={<FrameComponent17 />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/continue" element={<Continue />} />
       <Route path="/makepost" element={<MakePost />} />

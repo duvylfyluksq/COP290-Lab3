@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import HorizontalRowContainer from "../components/HorizontalRowContainer";
 import LinksContainer1 from "../components/LinksContainer1";
+import MoviesContainer from '../components/MoviesContainer';
 import "./FrameComponent12.css";
 
 const FrameComponent12 = () => {
@@ -92,7 +93,7 @@ const FrameComponent12 = () => {
     // Please sync "MixedBrowse-Out" to the project
   }, []);
 
-  const onLogoClick = useCallback(() => {
+  const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
 
@@ -104,7 +105,7 @@ const FrameComponent12 = () => {
     // Please sync "TVShowBrowse-Out" to the project
   }, []);
 
-  const onGenresText1Click = useCallback(() => {
+  const onGenresTextClick = useCallback(() => {
     navigate("/genresout");
   }, [navigate]);
 
@@ -155,12 +156,12 @@ const FrameComponent12 = () => {
             />
           </div>
         </div>
-        <LinksContainer1
-          dimensionsId="/vector22.svg"
-          onLogoClick={onLogoClick}
+        <MoviesContainer
+          coordinates="/vector21.svg"
+          onLogoContainerClick={onLogoContainerClick}
           onMoviesTextClick={onMoviesTextClick}
           onTVShowsTextClick={onTVShowsTextClick}
-          onGenresText1Click={onGenresText1Click}
+          onGenresTextClick={onGenresTextClick}
           onNavbarRHSContainerClick={onNavbarRHSContainerClick}
         />
       </div>
