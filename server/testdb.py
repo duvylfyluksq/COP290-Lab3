@@ -246,6 +246,46 @@ class TestDB(unittest.TestCase):
         self.assertEqual((self.review.likes)
                          [user_id], True)
 
+    def test_countReviews_User(self):
+        user_id = 5
+        count = db.countReviews_User(db.getUser(user_id))
+        self.assertEqual(count, 4)
+        user_id = 2
+        count = db.countReviews_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 3
+        count = db.countReviews_User(db.getUser(user_id))
+        self.assertEqual(count, 3)
+        user_id = 7
+        count = db.countReviews_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+
+    def test_countComments_User(self):
+        user_id = 1
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 2
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 3
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 4
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 5
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 7
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 8
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 9
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+
     """
     
     def test_sortLikes_Review(self):
