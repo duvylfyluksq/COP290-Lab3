@@ -117,10 +117,15 @@ def sortLikes_Review(order: Optional[bool]) -> List[Review]:
         sql = """SELECT * FROM `review`"""
         cursor.execute(sql)
         r = cursor.fetchall()
-        L = [(Review.from_dict(i), sum(json.loads(i['likes']).values()))
+        for i in r:
+            i['likes'] = json.loads(i['likes'])
+            i['show_id'] = {'id': i['show_id']}
+            i['movie_id'] = {'id': i['movie_id']}
+            i['creation_time'] = i['creation_time'].strftime(
+                "%Y-%m-%d %H:%M:%S")
+        L = [(Review.from_dict(i), sum(i['likes'].values()))
              for i in r]
-        L = sorted(L, key=lambda x: x[1], reverse=(not order))
-        return [i for (i, _) in L]
+        return sorted(L, key=lambda x: x[1], reverse=(not order))
 
 
 def sortRecent_Review(order: Optional[bool]) -> List[Review]:
@@ -128,6 +133,12 @@ def sortRecent_Review(order: Optional[bool]) -> List[Review]:
         sql = """SELECT * FROM `review` ORDER BY `creation_time` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['likes'] = json.loads(i['likes'])
+            i['show_id'] = {'id': i['show_id']}
+            i['movie_id'] = {'id': i['movie_id']}
+            i['creation_time'] = i['creation_time'].strftime(
+                "%Y-%m-%d %H:%M:%S")
         L = [Review.from_dict(i) for i in r]
         if order:
             L.reverse()
@@ -138,7 +149,8 @@ def sortReview(sort_type: str, sort_order: Optional[bool]) -> List[Review]:
     if (sort_type == "Recent"):
         sortRecent_Review(sort_order)
     elif (sort_type == "Likes"):
-        sortLikes_Review(sort_order)
+        L = sortLikes_Review(sort_order)
+        return [i for i, _ in L]
 
 
 def sortRating_Movie() -> List[Movie]:
@@ -146,6 +158,11 @@ def sortRating_Movie() -> List[Movie]:
         sql = """SELECT * FROM `movie` ORDER BY `rating` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['movie_id'] = {'id': i['movie_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
         L = [Movie.from_dict(i) for i in r]
         return L
 
@@ -155,6 +172,11 @@ def sortRating_Tvshow() -> List[Tvshow]:
         sql = """SELECT * FROM `tvshow` ORDER BY `rating` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['show_id'] = {'id': i['show_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
         L = [Tvshow.from_dict(i) for i in r]
         return L
 
@@ -185,6 +207,11 @@ def sortRecent_Movie() -> List[Movie]:
         sql = """SELECT * FROM `movie` ORDER BY `release_date` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['movie_id'] = {'id': i['movie_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
         L = [Movie.from_dict(i) for i in r]
         return L
 
@@ -194,6 +221,11 @@ def sortRecent_Tvshow() -> List[Tvshow]:
         sql = """SELECT * FROM `tvshow` ORDER BY `release_date` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['show_id'] = {'id': i['show_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
         L = [Tvshow.from_dict(i) for i in r]
         return L
 
@@ -224,6 +256,11 @@ def sortLex_Movie() -> List[Movie]:
         sql = """SELECT * FROM `movie` ORDER BY `title` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['movie_id'] = {'id': i['movie_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
         L = [Movie.from_dict(i) for i in r]
         return L
 
@@ -233,6 +270,11 @@ def sortLex_Tvshow() -> List[Tvshow]:
         sql = """SELECT * FROM `tvshow` ORDER BY `title` DESC"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['show_id'] = {'id': i['show_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
         L = [Tvshow.from_dict(i) for i in r]
         return L
 
@@ -313,7 +355,7 @@ def mergePop(a: List[Tuple[Movie, int]], b: List[Tuple[Tvshow, int]]) -> List[Un
     return L
 
 
-def mergeBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
+def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
     if (sort_type == "Rat"):
         return mergeRating(a, b).reverse() if sort_order else mergeRating(a, b)
     elif (sort_type == "Rel"):

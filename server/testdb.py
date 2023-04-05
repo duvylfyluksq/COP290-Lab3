@@ -328,6 +328,48 @@ class TestDB(unittest.TestCase):
         genres = ["Thriller"]
         L = db.filterGenre(genres)
         self.assertEqual(len(L), 8)
+
+    def test_sortRecent_Review(self):
+        L = db.sortRecent_Review(None)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.creation_time, reverse=True))
+
+    def test_sortLikes_Review(self):
+        L = db.sortLikes_Review(None)
+        for i in L:
+            self.assertEqual(i[1], sum(i[0].likes.values()))
+        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
+
+    def test_sortRating_Movie(self):
+        L = db.sortRating_Movie()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.rating, reverse=True))
+
+    def test_sortRating_Tvshow(self):
+        L = db.sortRating_Tvshow()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.rating, reverse=True))
+
+    def test_sortRecent_Movie(self):
+        L = db.sortRecent_Movie()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.release_date, reverse=True))
+
+    def test_sortRecent_Tvshow(self):
+        L = db.sortRecent_Tvshow()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.release_date, reverse=True))
+
+    def test_sortLex_Movie(self):
+        L = db.sortLex_Movie()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.title, reverse=True))
+
+    def test_sortLex_Tvshow(self):
+        L = db.sortLex_Tvshow()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.title, reverse=True))
+
     """
     
     def test_sortLikes_Review(self):
