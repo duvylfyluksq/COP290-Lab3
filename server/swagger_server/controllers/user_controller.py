@@ -92,6 +92,8 @@ def profile_user_id_username_put(user_id, username):  # noqa: E501
 
     :rtype: None
     """
+
+    
     if connexion.request.is_json:
         user_id = UserId.from_dict(connexion.request.get_json())  # noqa: E501
         db.editUsername(user_id,username)
