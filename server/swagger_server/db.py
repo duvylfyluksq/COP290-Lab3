@@ -183,24 +183,7 @@ def sortRating_Tvshow() -> List[Tvshow]:
 
 
 def mergeRating(a: List[Movie], b: List[Tvshow]) -> List[Union[Movie, Tvshow]]:
-    i, j = 0, 0
-    L = []
-    while i < len(a) and j < len(b):
-        if (a[i].rating > b[j].rating):
-            L.append(a[i])
-            i += 1
-        else:
-            L.append(b[j])
-            j += 1
-    if (i < len(a)):
-        while (i < len(a)):
-            L.append(a[i])
-            i += 1
-    if (j < len(b)):
-        while (j < len(b)):
-            L.append(b[j])
-            j += 1
-    return L
+    return (sorted(a+b, key=lambda x: x.rating, reverse=True))
 
 
 def sortRecent_Movie() -> List[Movie]:
@@ -232,24 +215,7 @@ def sortRecent_Tvshow() -> List[Tvshow]:
 
 
 def mergeRecent(a: List[Movie], b: List[Tvshow]) -> List[Union[Movie, Tvshow]]:
-    i, j = 0, 0
-    L = []
-    while i < len(a) and j < len(b):
-        if (a[i].release_date > b[j].release_date):
-            L.append(a[i])
-            i += 1
-        else:
-            L.append(b[j])
-            j += 1
-    if (i < len(a)):
-        while (i < len(a)):
-            L.append(a[i])
-            i += 1
-    if (j < len(b)):
-        while (j < len(b)):
-            L.append(b[j])
-            j += 1
-    return L
+    return (sorted(a+b, key=lambda x: x.release_date, reverse=True))
 
 
 def sortLex_Movie() -> List[Movie]:
@@ -281,38 +247,26 @@ def sortLex_Tvshow() -> List[Tvshow]:
 
 
 def mergeLex(a: List[Movie], b: List[Tvshow]) -> List[Union[Movie, Tvshow]]:
-    i, j = 0, 0
-    L = []
-    while i < len(a) and j < len(b):
-        if (a[i].title > b[j].title):
-            L.append(a[i])
-            i += 1
-        else:
-            L.append(b[j])
-            j += 1
-    if (i < len(a)):
-        while (i < len(a)):
-            L.append(a[i])
-            i += 1
-    if (j < len(b)):
-        while (j < len(b)):
-            L.append(b[j])
-            j += 1
-    return L
+    return (sorted(a+b, key=lambda x: x.title, reverse=True))
 
 
 def sortPop_Movie() -> List[Tuple[Movie, int]]:
     with connection.cursor() as cursor:
         sql = """SELECT `movie_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `movie_id`"""
         cursor.execute(sql)
-        review_counts = {i['movie_id']: i['review_count']
-                         for i in cursor.fetchall()}
+        review_counts = {int(i['movie_id']): i['review_count']
+                         for i in cursor.fetchall() if i['movie_id'] is not None}
         sql = """SELECT * FROM `movie`"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['movie_id'] = {'id': i['movie_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
         movies = [Movie.from_dict(i) for i in r]
         movies_with_review_counts = [
-            (i, review_counts.get(i.movie_id, 0)) for i in movies]
+            (i, review_counts.get(i.movie_id.id, 0)) for i in movies]
         L = sorted(
             movies_with_review_counts, key=lambda x: x[1], reverse=True)
         return L
@@ -322,41 +276,30 @@ def sortPop_Tvshow() -> List[Tuple[Tvshow, int]]:
     with connection.cursor() as cursor:
         sql = """SELECT `show_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `show_id`"""
         cursor.execute(sql)
-        review_counts = {i['show_id']: i['review_count']
-                         for i in cursor.fetchall()}
+        review_counts = {int(i['show_id']): i['review_count']
+                         for i in cursor.fetchall() if i['show_id'] is not None}
         sql = """SELECT * FROM `tvshow`"""
         cursor.execute(sql)
         r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['show_id'] = {'id': i['show_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
         shows = [Tvshow.from_dict(i) for i in r]
         shows_with_review_counts = [
-            (i, review_counts.get(i.movie_id, 0)) for i in shows]
+            (i, review_counts.get(i.show_id.id, 0)) for i in shows]
         L = sorted(
             shows_with_review_counts, key=lambda x: x[1], reverse=True)
         return L
 
 
-def mergePop(a: List[Tuple[Movie, int]], b: List[Tuple[Tvshow, int]]) -> List[Union[Movie, Tvshow]]:
-    i, j = 0, 0
-    L = []
-    while i < len(a) and j < len(b):
-        if (a[i][1] > b[j][1]):
-            L.append(a[i][0])
-            i += 1
-        else:
-            L.append(b[j][0])
-            j += 1
-    if (i < len(a)):
-        while (i < len(a)):
-            L.append(a[i][0])
-            i += 1
-    if (j < len(b)):
-        while (j < len(b)):
-            L.append(b[j][0])
-            j += 1
-    return L
+def mergePop(a: List[Tuple[Movie, int]], b: List[Tuple[Tvshow, int]]) -> List[Tuple[Union[Movie, Tvshow], int]]:
+    return (sorted(a+b, key=lambda x: x[1], reverse=True))
 
 
 def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
+    # Doesn't need to be tested separately, individual functions working
     if (sort_type == "Rat"):
         return mergeRating(a, b).reverse() if sort_order else mergeRating(a, b)
     elif (sort_type == "Rel"):
@@ -364,7 +307,8 @@ def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[M
     elif (sort_type == "Lex"):
         return mergeLex(a, b).reverse() if sort_order else mergeLex(a, b)
     elif (sort_type == "Pop"):
-        return mergePop(a, b).reverse() if sort_order else mergePop(a, b)
+        L = mergePop(a, b).reverse() if sort_order else mergePop(a, b)
+        return [i for i, _ in L]
 
 
 def getReviews_forMovie(Movie: Movie) -> List[Review]:

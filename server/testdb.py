@@ -384,6 +384,17 @@ class TestDB(unittest.TestCase):
         self.assertEqual(
             L, sorted(L, key=lambda x: x.title, reverse=True))
 
+    def test_sortPop_Movie(self):
+        L = db.sortPop_Movie()
+        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
+
+    def test_sortPop_Tvshow(self):
+        L = db.sortPop_Tvshow()
+        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
+
+    def test_mergePop(self):
+        L = db.mergePop(db.sortPop_Movie(), db.sortPop_Tvshow())
+        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
     """
     def test_sortPop_Movie(self):
         cur = db.sortPop_Movie(True)
