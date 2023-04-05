@@ -26,7 +26,20 @@ def movie_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
         genre = [str(datum) for datum in connexion.request.get_json().get('genre')]
         sort_type_browse = str(connexion.request.get_json().get('sort_type_browse'))
         sort_order = bool(connexion.request.get_json().get('sort_order'))
-    db.filterGenre(genre)
+    
+    if sort_type_browse == "rat":
+        a =  db.sortMovieRating(sort_order)
+    elif sort_type_browse == "rel":
+        a =  db.sortMovieRelease(sort_order)
+    elif sort_type_browse == "pop":
+        a =  db.sortMoviePopularity(sort_order)
+    else:
+        a=  db.sortMovieName(sort_order)
+    if genre == []:
+        return a
+    else:
+
+        return [i for i in a if i.genre in genre]
     
 
     return 'do some magic!'
@@ -42,7 +55,10 @@ def search_get(expression):  # noqa: E501
 
     :rtype: List[Title]
     """
-    return 'do some magic!'
+    if connexion.request.is_json:
+        expression = str(connexion.request.get_json().get('expression'))
+    return db.search(expression)
+
 
 
 def title_id_get(id):  # noqa: E501
@@ -56,7 +72,17 @@ def title_id_get(id):  # noqa: E501
     :rtype: Title
     """
     if connexion.request.is_json:
-        id = Id.from_dict(connexion.request.get_json())  # noqa: E501
+        id = Id.from_dict(connexion.request.get_json()) 
+        if id.movie_id is not None:
+            return db.getMovie(id.movie_id.id)
+        elif id.show_id is not None:
+            return db.getTvshow(id.show_id.id)
+        else:
+            return "Invalid ID"
+    else :
+        return "error"
+    
+     # noqa: E501
     return 'do some magic!'
 
 
@@ -74,4 +100,23 @@ def tvshow_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E50
 
     :rtype: List[Tvshow]
     """
+    if connexion.request.is_json:
+        genre = [str(datum) for datum in connexion.request.get_json().get('genre')]
+        sort_type_browse = str(connexion.request.get_json().get('sort_type_browse'))
+        sort_order = bool(connexion.request.get_json().get('sort_order'))
+    
+    if sort_type_browse == "rat":
+        a =  db.sortRating_Tvshow(sort_order)
+    elif sort_type_browse == "rel":
+        a =  db.sortRecent_Tvshow(sort_order)
+    elif sort_type_browse == "pop":
+        a =  db.sortPop_Tvshow(sort_order)
+    else:
+        a=  db.sortLex_Tvshow(sort_order)
+    if genre == []:
+        return a
+    else:
+            
+            return [i for i in a if i.genre in genre]
+    
     return 'do some magic!'

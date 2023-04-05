@@ -344,6 +344,8 @@ def mergePop(a: List[Tuple[Movie, int]], b: List[Tuple[Tvshow, int]]) -> List[Tu
 
 
 def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
+    if sort_type is None:
+        return getAllMovies()
     if (sort_type == "Rat"):
         L = mergeRating(a, b)
     elif (sort_type == "Rel"):
@@ -353,6 +355,7 @@ def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[M
     elif (sort_type == "Pop"):
         L = mergePop(a, b)
         L = [i for i, _ in L]
+    
     if (sort_order):
         L.reverse()
     return L
