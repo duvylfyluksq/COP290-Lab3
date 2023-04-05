@@ -246,6 +246,130 @@ class TestDB(unittest.TestCase):
         self.assertEqual((self.review.likes)
                          [user_id], True)
 
+    def test_countReviews_User(self):
+        user_id = 5
+        count = db.countReviews_User(db.getUser(user_id))
+        self.assertEqual(count, 4)
+        user_id = 2
+        count = db.countReviews_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 3
+        count = db.countReviews_User(db.getUser(user_id))
+        self.assertEqual(count, 3)
+        user_id = 7
+        count = db.countReviews_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+
+    def test_countComments_User(self):
+        user_id = 1
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 2
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 3
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 4
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 5
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 7
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 8
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 9
+        count = db.countComments_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+
+    def test_countLikes_User(self):
+        user_id = 1
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 5)
+        user_id = 2
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 3)
+        user_id = 3
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 4
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 5
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 6
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 7
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 1)
+        user_id = 8
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 2)
+        user_id = 9
+        count = db.countLikes_User(db.getUser(user_id))
+        self.assertEqual(count, 0)
+
+    def test_filterGenre(self):
+        genres = ["Drama"]
+        L = db.filterGenre(genres)
+        self.assertEqual(len(L), 17)
+        genres = ["Horror"]
+        L = db.filterGenre(genres)
+        self.assertEqual(len(L), 2)
+        genres = ["Horror", "Drama"]
+        L = db.filterGenre(genres)
+        self.assertEqual(len(L), 17)
+        genres = ["Thriller"]
+        L = db.filterGenre(genres)
+        self.assertEqual(len(L), 8)
+
+    def test_sortRecent_Review(self):
+        L = db.sortRecent_Review(None)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.creation_time, reverse=True))
+
+    def test_sortLikes_Review(self):
+        L = db.sortLikes_Review(None)
+        for i in L:
+            self.assertEqual(i[1], sum(i[0].likes.values()))
+        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
+
+    def test_sortRating_Movie(self):
+        L = db.sortRating_Movie()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.rating, reverse=True))
+
+    def test_sortRating_Tvshow(self):
+        L = db.sortRating_Tvshow()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.rating, reverse=True))
+
+    def test_sortRecent_Movie(self):
+        L = db.sortRecent_Movie()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.release_date, reverse=True))
+
+    def test_sortRecent_Tvshow(self):
+        L = db.sortRecent_Tvshow()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.release_date, reverse=True))
+
+    def test_sortLex_Movie(self):
+        L = db.sortLex_Movie()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.title, reverse=True))
+
+    def test_sortLex_Tvshow(self):
+        L = db.sortLex_Tvshow()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.title, reverse=True))
+
     """
     
     def test_sortLikes_Review(self):
