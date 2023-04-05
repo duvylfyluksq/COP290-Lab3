@@ -5,6 +5,7 @@ import WelcomeBackContainer from "../components/WelcomeBackContainer";
 import FooterContainer from "../components/FooterContainer";
 import LinksContainer1 from "../components/LinksContainer1";
 import "./SignIn.css";
+import MoviesContainer from '../components/MoviesContainer';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -44,17 +45,16 @@ const SignIn = () => {
           welcomeBackText="/vector37.svg"
           createAccountText="Welcome Back!"
         />
-        <input className="fields" type="text" />
+        <input type="text" className="password" placeholder="Username" />
+        <input type="password" className="password" placeholder="Password" />
         <FooterContainer
           onLoginContainerClick={onLoginContainerClick}
           onSignUpTextClick={onSignUpTextClick}
         />
       </div>
       <div className="body15" />
-      <LinksContainer1
-        dimensionsId="/vector38.svg"
-        propTextShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        propWebkitTextStroke="unset"
+      <MoviesContainer
+        coordinates="/vector38.svg"
         onLogoClick={onLogoClick}
         onMoviesTextClick={onMoviesTextClick}
         onTVShowsTextClick={onTVShowsTextClick}

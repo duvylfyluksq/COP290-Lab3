@@ -15,7 +15,6 @@ const SignInTile = () => {
   const onSignUpTextClick = useCallback(() => {
     navigate("/signup");
   }, [navigate]);
-
   return (
     <div className="signintile1">
       <WelcomeBackContainer

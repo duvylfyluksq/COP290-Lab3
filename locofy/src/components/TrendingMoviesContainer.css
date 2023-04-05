@@ -1,3 +1,8 @@
+.trending-movies3::-webkit-scrollbar{
+  width: 0px;
+  background-color: transparent; 
+}
+
 .trending-movies2 {
   margin: 0;
 }

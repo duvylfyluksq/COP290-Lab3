@@ -32,7 +32,7 @@ const MovieLinkContainer = () => {
   }, [navigate]);
 
   return (
-    <div className="top-movies3">
+    <div id="topmovies" className="top-movies3">
       <div className="top-movies4">Top Movies</div>
       <div className="top-movies5">
         <a className="moviecard22" onClick={onMovieCardClick}>

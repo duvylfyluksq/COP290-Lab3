@@ -10,7 +10,29 @@ const CreateAccountContainer = () => {
   const onSignUpClick = useCallback(() => {
     navigate("/continue");
   }, [navigate]);
-
+  const image = document.getElementById("your-img");
+  function toggleVisibility1() {  
+    var getPassword = document.getElementById("Password1");
+    var image = document.getElementById("your-img");
+    if (getPassword.type === "password") {  
+      getPassword.type = "text";
+      image.setAttribute("src", "/hidepasswordicon.svg");
+    } else {  
+      getPassword.type = "password";
+      image.setAttribute("src", "/showpasswordicon.svg");
+    }  
+  };
+  function toggleVisibility2() {  
+    var confPassword = document.getElementById("Password2");
+    var image = document.getElementById("my-img");
+    if (confPassword.type === "password") {  
+      confPassword.type = "text";
+      image.setAttribute("src", "/hidepasswordicon.svg");
+    } else {  
+      confPassword.type = "password";
+      image.setAttribute("src", "/showpasswordicon.svg");
+    }  
+  };
   return (
     <div className="signintile2">
       <WelcomeBackContainer
@@ -22,26 +44,30 @@ const CreateAccountContainer = () => {
       <form className="fields2">
         <div className="username4">
           <div className="username5">
-            <p className="username6">Username</p>
+            <input type="text" className="usrname" placeholder="Username" />
           </div>
         </div>
         <div className="password">
-          <div className="password1">Password</div>
+        <input type="password" id="Password1" className="usrname" placeholder="Password" />
           <div className="hideorshowpassword">
             <img
+              id="your-img"
               className="showpasswordicon"
               alt=""
               src="/showpasswordicon.svg"
+              onClick={() => toggleVisibility1()}
             />
           </div>
         </div>
         <div className="password">
-          <div className="password2">Confirm Password</div>
+        <input type="password" id="Password2" className="usrname" placeholder="Confirm Password" />
           <div className="hideorshowpassword">
             <img
+              id="my-img"
               className="showpasswordicon"
               alt=""
               src="/showpasswordicon.svg"
+              onClick={() => toggleVisibility2()}
             />
           </div>
         </div>
@@ -52,7 +78,7 @@ const CreateAccountContainer = () => {
         </button>
         <div className="subfooter1">
           <div className="check1">Already have an account?</div>
-          <div className="signin1">Sign In</div>
+          <a href="./SignIn" className="signin1">Sign In</a>
         </div>
       </div>
     </div>

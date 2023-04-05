@@ -13,10 +13,13 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: var(--padding-24xl) var(--padding-18xl);
   box-sizing: border-box;
   align-items: center;
   justify-content: space-between;
+  padding-left: 3%;
+  padding-top: 8%;
+  justify-content: space-between;
+  vertical-align: middle;
 }
 .welcome {
   position: relative;

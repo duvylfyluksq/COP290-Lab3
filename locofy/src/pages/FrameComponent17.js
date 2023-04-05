@@ -9,6 +9,7 @@ import TrendingContainer from "../components/TrendingContainer";
 import Navbar2 from "../components/Navbar2";
 import "./FrameComponent17.css";
 import MoviesContainer from '../components/MoviesContainer';
+import Left from './images/left_arrow.jpg'
 
 const FrameComponent17 = () => {
   const navigate = useNavigate();
@@ -149,7 +150,13 @@ const FrameComponent17 = () => {
     <div className="home-signedout-parent">
       <div className="home-signedout">
         <div className="body14">
-          <MovieLinkContainer />
+          {/* <div class="scroll-container">
+              <div class="scroll-content"> */}
+                <MovieLinkContainer />
+              {/* </div>
+              <button class="scroll-left"><img src={Left} className="arrow" /></button>
+              <button class="scroll-right">Right</button>
+          </div> */}
           <TVShowsContainer
             propHeight="unset"
             propFlexShrink="unset"
