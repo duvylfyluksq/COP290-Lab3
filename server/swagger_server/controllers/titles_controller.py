@@ -6,6 +6,8 @@ from swagger_server.models.inline_response200 import InlineResponse200  # noqa: 
 from swagger_server.models.movie import Movie  # noqa: E501
 from swagger_server.models.tvshow import Tvshow  # noqa: E501
 from swagger_server import util
+from swagger_server import db
+
 
 
 def movie_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
@@ -21,7 +23,9 @@ def movie_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
     :type sort_order: bool
 
     :rtype: List[Movie]
+
     """
+
     return 'do some magic!'
 
 
@@ -68,3 +72,4 @@ def tvshow_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E50
     :rtype: List[Tvshow]
     """
     return 'do some magic!'
+

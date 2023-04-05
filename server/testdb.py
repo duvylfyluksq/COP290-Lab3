@@ -330,15 +330,21 @@ class TestDB(unittest.TestCase):
         self.assertEqual(len(L), 8)
 
     def test_sortRecent_Review(self):
-        L = db.sortRecent_Review(None)
+        L = db.sortRecent_Review()
         self.assertEqual(
             L, sorted(L, key=lambda x: x.creation_time, reverse=True))
 
     def test_sortLikes_Review(self):
-        L = db.sortLikes_Review(None)
+        L = db.sortLikes_Review()
         for i in L:
             self.assertEqual(i[1], sum(i[0].likes.values()))
         self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
+
+    def test_sortReview(self):
+        L = db.sortReview("Recent", True)
+        self.assertEqual(L, sorted(L, key=lambda x: x.creation_time))
+        L = db.sortReview("Likes", True)
+        self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
 
     def test_sortRating_Movie(self):
         L = db.sortRating_Movie()
@@ -350,6 +356,10 @@ class TestDB(unittest.TestCase):
         self.assertEqual(
             L, sorted(L, key=lambda x: x.rating, reverse=True))
 
+    def test_mergeRating(self):
+        L = db.mergeRating(db.sortRating_Movie(), db.sortRating_Tvshow())
+        self.assertEqual(L, sorted(L, key=lambda x: x.rating, reverse=True))
+
     def test_sortRecent_Movie(self):
         L = db.sortRecent_Movie()
         self.assertEqual(
@@ -357,6 +367,11 @@ class TestDB(unittest.TestCase):
 
     def test_sortRecent_Tvshow(self):
         L = db.sortRecent_Tvshow()
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.release_date, reverse=True))
+
+    def test_mergeRecent(self):
+        L = db.mergeRecent(db.sortRecent_Movie(), db.sortRecent_Tvshow())
         self.assertEqual(
             L, sorted(L, key=lambda x: x.release_date, reverse=True))
 
@@ -370,156 +385,39 @@ class TestDB(unittest.TestCase):
         self.assertEqual(
             L, sorted(L, key=lambda x: x.title, reverse=True))
 
-    """
-    
-    def test_sortLikes_Review(self):
-        cur = db.sortLikes_Review(True)
-        self.assertEqual(type(cur[0]), Review)
-
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i].likes
-            b = cur[i+1].likes
-            count_true_in_a = len(
-                [value for value in a.values() if value == True])
-            count_true_in_b = len(
-                [value for value in b.values() if value == True])
-            if count_true_in_a > count_true_in_b:
-                self.assertTrue(False)
-            i += 1
-        self.assertTrue(True)
-
-    def test_sortrecent_Review(self):
-        cur = db.sortrecent_Review(True)
-        self.assertEqual(type(cur[0]), Review)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i].creation_time
-            b = cur[i+1].creation_time
-            if a > b:
-                self.assertTrue(False)
-            i += 1
-        self.assertTrue(True)
-
-    def test_sortreview(self):
-        cur = db.sortreview("Recent")
-        self.test_sortrecent_Review()
-        cur = db.sortreview("Likes")
-
-        self.test_sortLikes_Review()
-
-    def test_sortRating_Movie(self):
-        cur = db.sortRating_Movie(True)
-        self.assertEqual(type(cur[0]), Movie)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i].rating
-            b = cur[i+1].rating
-            if a > b:
-                self.assertTrue(False)
-            i += 1
-        self.assertTrue(True)
-
-    def test_sortRating_Tvshow(self):
-        cur = db.sortRating_Tvshow(True)
-        self.assertEqual(type(cur[0]), Tvshow)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i].rating
-            b = cur[i+1].rating
-            if a > b:
-                self.assertTrue(False)
-            i += 1
-        self.assertTrue(True)
-
-    def test_sortrecent_Movie(self):
-        cur = db.sortrecent_Movie(True)
-        self.assertEqual(type(cur[0]), Movie)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i].creation_time
-            b = cur[i+1].creation_time
-            if a > b:
-                self.assertTrue(False)
-            i += 1
-        self.assertTrue(True)
-
-    def test_sortrecent_Tvshow(self):
-        cur = db.sortrecent_Tvshow(True)
-        self.assertEqual(type(cur[0]), Tvshow)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i].creation_time
-            b = cur[i+1].creation_time
-            if a > b:
-                self.assertTrue(False)
-            i += 1
-        self.assertTrue(True)
-
-    def test_sortLex_Movie(self):
-        cur = db.sortLex_Movie(True)
-        self.assertEqual(type(cur[0]), Movie)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i].title
-            b = cur[i+1].title
-            if a > b:
-                self.assertTrue(False)
-            i += 1
-        self.assertTrue(True)
-
-    def test_sortLex_Tvshow(self):
-        cur = db.sortLex_Tvshow(True)
-        self.assertEqual(type(cur[0]), Tvshow)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i].title
-            b = cur[i+1].title
-            if a > b:
-                self.assertTrue(False)
-            i += 1
-        self.assertTrue(True)
+    def test_mergeLex(self):
+        L = db.mergeLex(db.sortLex_Movie(), db.sortLex_Tvshow())
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.title, reverse=True))
 
     def test_sortPop_Movie(self):
-        cur = db.sortPop_Movie(True)
-        self.assertEqual(type(cur[0]), Movie)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i]
-            b = cur[i+1]
-
-            a_reviews = Review.query.filter_by(movie_id=a.id).count()
-
-            # Get review count for movie b
-            b_reviews = Review.query.filter_by(movie_id=b.id).count()
-
-            if a_reviews > b_reviews:
-                self.assertTrue(False)
-
-            i += 1
-
-        self.assertTrue(True)
+        L = db.sortPop_Movie()
+        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
 
     def test_sortPop_Tvshow(self):
-        cur = db.sortPop_Tvshow(True)
-        self.assertEqual(type(cur[0]), Tvshow)
-        i = 0
-        while i < len(cur) - 1:
-            a = cur[i]
-            b = cur[i+1]
+        L = db.sortPop_Tvshow()
+        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
 
-            a_reviews = Review.query.filter_by(show_id=a.id).count()
+    def test_mergePop(self):
+        L = db.mergePop(db.sortPop_Movie(), db.sortPop_Tvshow())
+        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
 
-            # Get review count for movie b
-            b_reviews = Review.query.filter_by(show_id=b.id).count()
-
-            if a_reviews > b_reviews:
-                self.assertTrue(False)
-
-            i += 1
-
-        self.assertTrue(True)
-    """
+    def test_sortBrowse(self):
+        L = db.sortBrowse(db.sortRecent_Movie(),
+                          db.sortLex_Tvshow(), "Rat", True)
+        self.assertEqual(L, sorted(L, key=lambda x: x.rating))
+        L = db.sortBrowse(db.sortRating_Movie(),
+                          db.sortLex_Tvshow(), "Rel", True)
+        self.assertEqual(L, sorted(L, key=lambda x: x.release_date))
+        L = db.sortBrowse(db.sortRecent_Movie(),
+                          db.sortRating_Tvshow(), "Lex", True)
+        self.assertEqual(L, sorted(L, key=lambda x: x.title))
+        L = db.sortBrowse(db.sortPop_Movie(),
+                          db.sortPop_Tvshow(), "Pop", True)
+        r = db.mergePop(db.sortPop_Movie(), db.sortPop_Tvshow())
+        r.reverse()
+        r = [i for i, _ in r]
+        self.assertEqual(L, r)
 
 
 if __name__ == '__main__':
