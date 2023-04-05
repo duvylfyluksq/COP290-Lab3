@@ -313,6 +313,10 @@ def sortPop_Movie() -> List[Tuple[Movie, int]]:
         return L
 
 
+
+
+
+
 def sortPop_Tvshow() -> List[Tuple[Tvshow, int]]:
     with connection.cursor() as cursor:
         sql = """SELECT `show_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `show_id`"""

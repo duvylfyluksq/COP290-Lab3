@@ -26,7 +26,9 @@ def movie_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
         genre = [str(datum) for datum in connexion.request.get_json().get('genre')]
         sort_type_browse = str(connexion.request.get_json().get('sort_type_browse'))
         sort_order = bool(connexion.request.get_json().get('sort_order'))
-    db.
+    db.filterGenre(genre)
+    
+
     return 'do some magic!'
 
 
