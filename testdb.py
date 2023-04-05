@@ -2,7 +2,7 @@ import unittest
 import datetime
 import json
 import swagger_server.db as db
-from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId, Id
 
 
 class TestDB(unittest.TestCase):
@@ -134,7 +134,7 @@ class TestDB(unittest.TestCase):
             self.assertEqual(result['review_id'], self.comment.review_id)
             self.assertEqual(result['content'], self.comment.content)
 
-    def test_Review(self):
+    def test_addReview(self):
         db.addReview(self.review)
         self.assertIsNotNone(self.review.review_id)
         with db.connection.cursor() as cursor:
@@ -339,6 +339,54 @@ class TestDB(unittest.TestCase):
         L = db.filterGenre(genres)
         self.assertEqual(len(L), 8)
 
+    def test_sortRecent_Review_User(self):
+        user_id = 5
+        L = db.sortRecent_Review_User(user_id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.creation_time, reverse=True))
+
+    def test_sortLikes_Review_User(self):
+        user_id = 5
+        L = db.sortLikes_Review_User(user_id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: sum(x.likes.values()), reverse=True))
+
+    def test_sortReviewUser(self):
+        user_id = 3
+        L = db.sortReviewUser(user_id, "Recent", True)
+        self.assertEqual(L, sorted(L, key=lambda x: x.creation_time))
+        L = db.sortReviewUser(user_id, "Likes", True)
+        self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
+
+    def test_sortReviewTitle(self):
+        id = Id(movie_id=MovieId(id=1), show_id=None)
+        L = db.sortReviewTitle(id, "Recent", True)
+        self.assertEqual(L, sorted(L, key=lambda x: x.creation_time))
+        id = Id(movie_id=None, show_id=ShowId(id=2))
+        L = db.sortReviewTitle(id, "Likes", True)
+        self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
+
+    def test_sortLikes_Review_Title(self):
+        id = Id(movie_id=MovieId(id=1), show_id=None)
+        L = db.sortLikes_Review_Title(id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: sum(x.likes.values()), reverse=True))
+        id = Id(movie_id=None, show_id=ShowId(id=2))
+        L = db.sortLikes_Review_Title(id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: sum(x.likes.values()), reverse=True))
+
+    def test_sortRecent_Review_Title(self):
+        id = Id(movie_id=MovieId(id=1), show_id=None)
+        L = db.sortRecent_Review_Title(id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.creation_time, reverse=True))
+        id = Id(movie_id=None, show_id=ShowId(id=2))
+        L = db.sortRecent_Review_Title(id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.creation_time, reverse=True))
+
+    """
     def test_sortRecent_Review(self):
         L = db.sortRecent_Review()
         self.assertEqual(
@@ -355,6 +403,7 @@ class TestDB(unittest.TestCase):
         self.assertEqual(L, sorted(L, key=lambda x: x.creation_time))
         L = db.sortReview("Likes", True)
         self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
+    """
 
     def test_sortRating_Movie(self):
         L = db.sortRating_Movie()

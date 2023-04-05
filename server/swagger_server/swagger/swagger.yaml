@@ -319,6 +319,7 @@ paths:
         explode: true
         schema:
           maxItems: 3
+          minItems: 3
           type: array
           example:
           - Adventure
@@ -785,7 +786,7 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: pfp
+      - name: interests
         in: query
         description: New Profile Picture
         required: true
@@ -793,6 +794,7 @@ paths:
         explode: true
         schema:
           maxItems: 3
+          minItems: 3
           type: array
           example:
           - Adventure
@@ -952,6 +954,7 @@ components:
             "42": true
         interests:
           maxItems: 3
+          minItems: 3
           type: array
           example:
           - Adventure
@@ -1006,6 +1009,7 @@ components:
           example: 9.36
         genres:
           maxItems: 3
+          minItems: 3
           type: array
           example:
           - Adventure
@@ -1074,6 +1078,7 @@ components:
           example: 9.36
         genres:
           maxItems: 3
+          minItems: 3
           type: array
           example:
           - Adventure

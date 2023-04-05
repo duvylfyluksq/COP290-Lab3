@@ -1,7 +1,7 @@
 import datetime
 
 import six
-from typing import Callable
+import typing
 from swagger_server import type_util
 
 
