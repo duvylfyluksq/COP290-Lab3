@@ -109,9 +109,7 @@ def editInterests(User: User, interests: List[str]) -> None:
         connection.commit()
 
 
-def sortLikes_Review(order: Optional[bool]) -> List[Review]:
-    if order is None:
-        order = False
+def sortLikes_Review() -> List[Tuple[Review, int]]:
     with connection.cursor() as cursor:
         L = []
         sql = """SELECT * FROM `review`"""
@@ -125,10 +123,10 @@ def sortLikes_Review(order: Optional[bool]) -> List[Review]:
                 "%Y-%m-%d %H:%M:%S")
         L = [(Review.from_dict(i), sum(i['likes'].values()))
              for i in r]
-        return sorted(L, key=lambda x: x[1], reverse=(not order))
+        return sorted(L, key=lambda x: x[1], reverse=True)
 
 
-def sortRecent_Review(order: Optional[bool]) -> List[Review]:
+def sortRecent_Review() -> List[Review]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `review` ORDER BY `creation_time` DESC"""
         cursor.execute(sql)
@@ -140,18 +138,18 @@ def sortRecent_Review(order: Optional[bool]) -> List[Review]:
             i['creation_time'] = i['creation_time'].strftime(
                 "%Y-%m-%d %H:%M:%S")
         L = [Review.from_dict(i) for i in r]
-        if order:
-            L.reverse()
         return L
 
 
 def sortReview(sort_type: str, sort_order: Optional[bool]) -> List[Review]:
-    # testing individual suffices, this doesn't need a separate test
     if (sort_type == "Recent"):
-        sortRecent_Review(sort_order)
+        L = sortRecent_Review()
     elif (sort_type == "Likes"):
-        L = sortLikes_Review(sort_order)
-        return [i for i, _ in L]
+        L = sortLikes_Review()
+        L = [i for i, _ in L]
+    if (sort_order):
+        L.reverse()
+    return L
 
 
 def sortRating_Movie() -> List[Movie]:
@@ -299,16 +297,18 @@ def mergePop(a: List[Tuple[Movie, int]], b: List[Tuple[Tvshow, int]]) -> List[Tu
 
 
 def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
-    # Doesn't need to be tested separately, individual functions working
     if (sort_type == "Rat"):
-        return mergeRating(a, b).reverse() if sort_order else mergeRating(a, b)
+        L = mergeRating(a, b)
     elif (sort_type == "Rel"):
-        return mergeRecent(a, b).reverse() if sort_order else mergeRecent(a, b)
+        L = mergeRecent(a, b)
     elif (sort_type == "Lex"):
-        return mergeLex(a, b).reverse() if sort_order else mergeLex(a, b)
+        L = mergeLex(a, b)
     elif (sort_type == "Pop"):
-        L = mergePop(a, b).reverse() if sort_order else mergePop(a, b)
-        return [i for i, _ in L]
+        L = mergePop(a, b)
+        L = [i for i, _ in L]
+    if (sort_order):
+        L.reverse()
+    return L
 
 
 def getReviews_forMovie(Movie: Movie) -> List[Review]:
