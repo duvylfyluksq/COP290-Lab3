@@ -32,13 +32,12 @@ const NewReleasesContainer = ({
   }, [propWidth, propAlignSelf1]);
 
   return (
-    <div className="new-releases" style={newReleasesStyle}>
-      <div className="new-releases1">
-        <p className="new-releases2">New Releases</p>
-      </div>
-      <div className="new-releases3" style={newReleases1Style}>
-        <div className="moviecard12" onClick={onMovieCardContainer9Click}>
+    <div className="new-releases">
+      <div className="new-releases2">New Releases</div>
+      <div className="new-releases3">
+        <a className="moviecard12" onClick={onMovieCardContainer9Click}>
           <img className="moviecard-icon12" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill28">
             <div className="details28">
               <div className="rating43">
@@ -48,9 +47,10 @@ const NewReleasesContainer = ({
               <div className="title38">Title</div>
             </div>
           </div>
-        </div>
-        <div className="moviecard12" onClick={onTVShowCardContainer9Click}>
+        </a>
+        <a className="moviecard12" onClick={onTVShowCardContainer9Click}>
           <img className="moviecard-icon12" alt="" src="/tvshowcard1@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill29">
             <div className="details29">
               <div className="rating43">
@@ -61,9 +61,10 @@ const NewReleasesContainer = ({
               <div className="season17">Season z</div>
             </div>
           </div>
-        </div>
-        <div className="moviecard12" onClick={onMovieCardContainer10Click}>
+        </a>
+        <a className="moviecard12" onClick={onMovieCardContainer10Click}>
           <img className="moviecard-icon12" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill28">
             <div className="details28">
               <div className="rating43">
@@ -73,9 +74,10 @@ const NewReleasesContainer = ({
               <div className="title38">Title</div>
             </div>
           </div>
-        </div>
-        <div className="moviecard12" onClick={onTVShowCardContainer10Click}>
+        </a>
+        <a className="moviecard12" onClick={onTVShowCardContainer10Click}>
           <img className="moviecard-icon12" alt="" src="/tvshowcard1@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill29">
             <div className="details29">
               <div className="rating43">
@@ -86,9 +88,10 @@ const NewReleasesContainer = ({
               <div className="season17">Season z</div>
             </div>
           </div>
-        </div>
-        <div className="moviecard12" onClick={onMovieCardContainer11Click}>
+        </a>
+        <a className="moviecard12" onClick={onMovieCardContainer11Click}>
           <img className="moviecard-icon12" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill28">
             <div className="details28">
               <div className="rating43">
@@ -98,9 +101,10 @@ const NewReleasesContainer = ({
               <div className="title38">Title</div>
             </div>
           </div>
-        </div>
-        <div className="moviecard12" onClick={onTVShowCardContainer11Click}>
+        </a>
+        <a className="moviecard12" onClick={onTVShowCardContainer11Click}>
           <img className="moviecard-icon12" alt="" src="/tvshowcard1@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill29">
             <div className="details29">
               <div className="rating43">
@@ -111,9 +115,10 @@ const NewReleasesContainer = ({
               <div className="season17">Season z</div>
             </div>
           </div>
-        </div>
-        <div className="moviecard12" onClick={onTVShowCardContainer12Click}>
+        </a>
+        <a className="moviecard12" onClick={onTVShowCardContainer12Click}>
           <img className="moviecard-icon12" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill29">
             <div className="details29">
               <div className="rating43">
@@ -124,7 +129,7 @@ const NewReleasesContainer = ({
               <div className="season17">Season z</div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   );

@@ -15,7 +15,8 @@
 .vector-icon81,
 .xy1051 {
   position: relative;
-  flex-shrink: 0;
+  top:185px;
+  z-index:2;
 }
 .xy1051 {
   display: inline-block;
@@ -34,13 +35,12 @@
   justify-content: space-between;
 }
 .title56 {
+  top:185px;
   position: relative;
-  font-size: var(--font-size-xl);
-  font-weight: 500;
   display: inline-block;
-  width: 423px;
   height: 18px;
   flex-shrink: 0;
+  z-index:2;
 }
 .details46 {
   position: absolute;
@@ -53,7 +53,7 @@
   justify-content: flex-start;
   gap: var(--gap-8xs);
 }
-.linearfill46 {
+/* .linearfill46 {
   position: absolute;
   top: 292px;
   left: 0;
@@ -68,15 +68,32 @@
   width: 475px;
   height: 292px;
   overflow: hidden;
+} */
+
+.gradient-overlay {
+  z-index:1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: -100%;
+  left: 0;
+  border-radius: var(--br-mini);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0),
+    rgba(82,30,152,1)
+  );
+  overflow: hidden;
 }
+
 .moviecard21 {
+  text-decoration: none;
   position: relative;
   width: 475px;
   height: 292px;
   flex-shrink: 0;
   cursor: pointer;
-  text-align: left;
-  font-size: var(--font-size-mini);
-  color: var(--color-white);
-  font-family: var(--font-roboto);
+  color: inherit;
 }

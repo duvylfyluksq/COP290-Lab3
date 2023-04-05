@@ -1,14 +1,35 @@
 .new-releases2 {
-  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-weight: 600;
 }
-.new-releases1 {
+/* .new-releases1 {
   position: relative;
   font-weight: 600;
   display: inline-block;
   width: 290px;
   height: 45px;
   flex-shrink: 0;
+} */
+
+.gradient-overlay {
+  z-index:1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: -100%;
+  left: 0;
+  border-radius: var(--br-mini);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0),
+    rgba(82,30,152,1)
+  );
+  overflow: hidden;
 }
+
 .moviecard-icon12 {
   position: absolute;
   height: 100%;
@@ -26,7 +47,8 @@
 .vector-icon63,
 .xy1033 {
   position: relative;
-  flex-shrink: 0;
+  top:145px;
+  z-index:2;
 }
 .xy1033 {
   display: inline-block;
@@ -45,6 +67,8 @@
   justify-content: space-between;
 }
 .title38 {
+  top:145px;
+  z-index:2;
   position: relative;
   font-size: var(--font-size-xl);
   font-weight: 500;
@@ -64,7 +88,7 @@
   justify-content: flex-start;
   gap: var(--gap-8xs);
 }
-.linearfill28 {
+/* .linearfill28 {
   position: absolute;
   top: 292px;
   left: 0;
@@ -79,16 +103,23 @@
   width: 475px;
   height: 292px;
   overflow: hidden;
-}
-.moviecard12,
+} */
 .season17 {
+  top:145px;
   position: relative;
+  display: inline-block;
+  height: 18px;
   flex-shrink: 0;
+  z-index:2;
 }
 .moviecard12 {
+  text-decoration: none;
+  position: relative;
   width: 475px;
   height: 292px;
+  flex-shrink: 0;
   cursor: pointer;
+  color: inherit;
 }
 .season17 {
   display: inline-block;
@@ -106,7 +137,7 @@
   justify-content: flex-start;
   gap: var(--gap-8xs);
 }
-.linearfill29 {
+/* .linearfill29 {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -123,14 +154,14 @@
     rgba(255, 255, 255, 0)
   );
   overflow: hidden;
-}
+} */
 .new-releases,
 .new-releases3 {
+  align-self: stretch;
   display: flex;
   justify-content: flex-start;
 }
 .new-releases3 {
-  width: 1770px;
   overflow-x: auto;
   flex-direction: row;
   align-items: center;
@@ -139,8 +170,6 @@
   color: var(--color-white);
 }
 .new-releases {
-  height: 394px;
-  flex-shrink: 0;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--gap-11xl);
