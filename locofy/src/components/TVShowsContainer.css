@@ -1,3 +1,7 @@
+.top-tv-shows2::-webkit-scrollbar{
+  width: 0px;
+  background-color: transparent; 
+}
 .top-tv-shows1 {
   position: relative;
   font-weight: 600;

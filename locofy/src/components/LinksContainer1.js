@@ -3,27 +3,18 @@ import { useMemo } from "react";
 import "./LinksContainer1.css";
 
 const LinksContainer1 = ({
-  dimensions,
-  dimensionsId,
-  propTextShadow,
-  propWebkitTextStroke,
+  coordinates,
   onLogoClick,
   onMoviesTextClick,
   onTVShowsTextClick,
   onGenresText1Click,
   onNavbarRHSContainerClick,
 }) => {
-  const signInStyle = useMemo(() => {
-    return {
-      textShadow: propTextShadow,
-      webkitTextStroke: propWebkitTextStroke,
-    };
-  }, [propTextShadow, propWebkitTextStroke]);
 
   return (
     <div className="navbar4">
       <a className="logo4" onClick={onLogoClick}>
-        <img className="vector-icon37" alt="" src={dimensionsId} />
+        <img className="vector-icon37" alt="" src={coordinates} />
       </a>
       <div className="navbar-lhs4">
         <div className="movies8" onClick={onMoviesTextClick}>
@@ -43,7 +34,7 @@ const LinksContainer1 = ({
         </div>
         <div className="navbar-rhs4" onClick={onNavbarRHSContainerClick}>
           <img className="vector-icon39" alt="" src="/vector24.svg" />
-          <div className="sign-in1" style={signInStyle}>
+          <div className="sign-in1">
             Sign In
           </div>
         </div>

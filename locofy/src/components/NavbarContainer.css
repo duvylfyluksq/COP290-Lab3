@@ -151,7 +151,7 @@ input:focus{
   gap: 42%;
 }
 .navbar2 {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: var(--color-white);

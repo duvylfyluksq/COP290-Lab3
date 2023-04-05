@@ -1,3 +1,8 @@
+.top-movies5::-webkit-scrollbar {
+  width: 0px;
+  background-color: transparent; /* Safari and Chrome */
+}
+
 .top-movies4 {
   align-self: stretch;
   position: relative;

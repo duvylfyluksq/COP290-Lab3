@@ -1,3 +1,7 @@
+.trending-tv-shows2::-webkit-scrollbar{
+  width: 0px;
+  background-color: transparent; 
+}
 .trending-tv-shows1 {
   margin: 0;
 }

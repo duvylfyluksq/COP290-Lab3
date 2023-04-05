@@ -1,3 +1,7 @@
+.new-releases3::-webkit-scrollbar{
+  width: 0px;
+  background-color: transparent; 
+}
 .new-releases2 {
   align-self: stretch;
   position: relative;

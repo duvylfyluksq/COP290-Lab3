@@ -159,3 +159,11 @@
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
 }
+
+.usrname{
+  border:none;
+  width:450%;
+}
+.usrname:focus{
+  outline:none;
+}

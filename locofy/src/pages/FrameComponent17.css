@@ -16,12 +16,51 @@
   gap: var(--gap-11xl);
 }
 .home-signedout {
+  width:100%;
   top: 0;
   background-color: var(--color-white);
   height: 1080px;
 }
 .home-signedout-parent {
-  position: relative;
   width: 100%;
   height: 1080px;
 }
+
+/* .scroll-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-content {
+  white-space: nowrap;
+  position: relative;
+  margin-left: 120px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* add padding or margin if needed */
+/* }
+
+.scroll-left, .scroll-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  z-index: 1;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.scroll-left {
+  left: 0;
+}
+
+.scroll-right {
+  right: 0;
+}
+
+.arrow{
+  width:100px;
+  height:100px;
+} */
