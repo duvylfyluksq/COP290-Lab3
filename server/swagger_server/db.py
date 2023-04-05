@@ -93,6 +93,14 @@ def editPassword(User: User, password: str) -> None:
         connection.commit()
 
 
+def editPfp(User: User, pfp: str) -> None:
+    assert User.user_id is not None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE `user` SET `pfp` = %s WHERE `user_id` = %s"
+        cursor.execute(sql, (pfp, User.user_id))
+        connection.commit()
+
+
 def editBio(User: User, bio: str) -> None:
     assert User.user_id is not None
     with connection.cursor() as cursor:
