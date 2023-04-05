@@ -2,7 +2,7 @@ import unittest
 import datetime
 import json
 import swagger_server.db as db
-from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId, Id
 
 
 class TestDB(unittest.TestCase):
@@ -350,6 +350,41 @@ class TestDB(unittest.TestCase):
         L = db.sortLikes_Review_User(user_id)
         self.assertEqual(
             L, sorted(L, key=lambda x: sum(x.likes.values()), reverse=True))
+
+    def test_sortReviewUser(self):
+        user_id = 3
+        L = db.sortReviewUser(user_id, "Recent", True)
+        self.assertEqual(L, sorted(L, key=lambda x: x.creation_time))
+        L = db.sortReviewUser(user_id, "Likes", True)
+        self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
+
+    def test_sortReviewTitle(self):
+        id = Id(movie_id=MovieId(id=1), show_id=None)
+        L = db.sortReviewTitle(id, "Recent", True)
+        self.assertEqual(L, sorted(L, key=lambda x: x.creation_time))
+        id = Id(movie_id=None, show_id=ShowId(id=2))
+        L = db.sortReviewTitle(id, "Likes", True)
+        self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
+
+    def test_sortLikes_Review_Title(self):
+        id = Id(movie_id=MovieId(id=1), show_id=None)
+        L = db.sortLikes_Review_Title(id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: sum(x.likes.values()), reverse=True))
+        id = Id(movie_id=None, show_id=ShowId(id=2))
+        L = db.sortLikes_Review_Title(id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: sum(x.likes.values()), reverse=True))
+
+    def test_sortRecent_Review_Title(self):
+        id = Id(movie_id=MovieId(id=1), show_id=None)
+        L = db.sortRecent_Review_Title(id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.creation_time, reverse=True))
+        id = Id(movie_id=None, show_id=ShowId(id=2))
+        L = db.sortRecent_Review_Title(id)
+        self.assertEqual(
+            L, sorted(L, key=lambda x: x.creation_time, reverse=True))
 
     """
     def test_sortRecent_Review(self):

@@ -25,11 +25,8 @@ def review_id_get(id, sort_type_reviews=None, sort_order=None):  # noqa: E501
     :rtype: List[Review]
     """
     if connexion.request.is_json:
-        id = int(connexion.request.get_json().get('id')) # noqa: E501
-    return db.getReview(id)
-    
-    
-    return 'do some magic!'
+        id = int(connexion.request.get_json().get('id'))  # noqa: E501
+        return db.sortReviewTitle(id, sort_type_reviews, sort_order)
 
 
 def review_post(movie_id, show_id, user_id, rating, title, content):  # noqa: E501
@@ -56,8 +53,9 @@ def review_post(movie_id, show_id, user_id, rating, title, content):  # noqa: E5
         movie_id = MovieId.from_dict(connexion.request.get_json())  # noqa: E501
     if connexion.request.is_json:
         show_id = ShowId.from_dict(connexion.request.get_json())
-          # noqa: E501
-    db.addReview(Review=Review(review_id=None,title=title,movie_id=movie_id,show_id= show_id,user_id=user_id,rating=rating,content=content))
+        # noqa: E501
+    db.addReview(Review=Review(review_id=None, title=title, movie_id=movie_id,
+                 show_id=show_id, user_id=user_id, rating=rating, content=content))
     return 'do some magic!'
 
 
@@ -75,7 +73,8 @@ def review_review_id_comment_post(review_id, user_id, content):  # noqa: E501
 
     :rtype: Comment
     """
-    db.addComment(Comment = Comment(comment_id = None,review_id=review_id, user_id= user_id, content=content))
+    db.addComment(Comment=Comment(comment_id=None,
+                  review_id=review_id, user_id=user_id, content=content))
     return 'do some magic!'
 
 
@@ -91,7 +90,7 @@ def review_review_id_likes_put(review_id, user_id):  # noqa: E501
 
     :rtype: None
     """
-    db.LikeOrUnlike(review_id,user_id)
+    db.LikeOrUnlike(review_id, user_id)
     return 'do some magic!'
 
 
@@ -110,4 +109,3 @@ def review_user_id_get(user_id, sort_type_reviews=None, sort_order=None):  # noq
     :rtype: List[Review]
     """
     return db.getReviewByUser(user_id)
-   
