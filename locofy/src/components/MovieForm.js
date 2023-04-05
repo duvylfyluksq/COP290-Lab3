@@ -9,6 +9,7 @@ const MovieForm = ({
   return (
     <div className="moviecard21" onClick={onMovieCardContainerClick}>
       <img className="moviecard-icon21" alt="" src={imageDimensions} />
+      <div className="gradient_overlay"></div>
       <div className="linearfill46">
         <div className="details46">
           <div className="rating61">

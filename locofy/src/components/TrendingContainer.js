@@ -31,12 +31,12 @@ const TrendingContainer = ({
 
   return (
     <div className="trending-tv-shows" style={trendingTVShowsStyle}>
-      <div className="trending-tv-shows-container">
-        <p className="trending-tv-shows1">Trending TV Shows</p>
+      <div className="trending-tv-shows-container">Trending TV Shows
       </div>
       <div className="trending-tv-shows2" style={trendingTVShows1Style}>
         <div className="tvshowcard17" onClick={onTVShowCardContainer13Click}>
           <img className="tvshowcard-icon20" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill41">
             <div className="details41">
               <div className="rating56">
@@ -50,6 +50,7 @@ const TrendingContainer = ({
         </div>
         <div className="tvshowcard17" onClick={onTVShowCardContainer14Click}>
           <img className="tvshowcard-icon20" alt="" src="/tvshowcard1@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill41">
             <div className="details41">
               <div className="rating56">
@@ -63,6 +64,7 @@ const TrendingContainer = ({
         </div>
         <div className="tvshowcard17" onClick={onTVShowCardContainer15Click}>
           <img className="tvshowcard-icon20" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill41">
             <div className="details41">
               <div className="rating56">
@@ -76,6 +78,7 @@ const TrendingContainer = ({
         </div>
         <div className="tvshowcard17" onClick={onTVShowCardContainer16Click}>
           <img className="tvshowcard-icon20" alt="" src="/tvshowcard1@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill41">
             <div className="details41">
               <div className="rating56">
@@ -89,6 +92,7 @@ const TrendingContainer = ({
         </div>
         <div className="tvshowcard17" onClick={onTVShowCardContainer17Click}>
           <img className="tvshowcard-icon20" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill41">
             <div className="details41">
               <div className="rating56">

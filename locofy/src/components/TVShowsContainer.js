@@ -35,6 +35,7 @@ const TVShowsContainer = ({
       <div className="top-tv-shows2" style={topTVShows1Style}>
         <div className="tvshowcard8" onClick={onTVShowCardContainer4Click}>
           <img className="tvshowcard-icon11" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill23">
             <div className="details23">
               <div className="rating38">
@@ -48,6 +49,7 @@ const TVShowsContainer = ({
         </div>
         <div className="tvshowcard8" onClick={onTVShowCardContainer5Click}>
           <img className="tvshowcard-icon11" alt="" src="/tvshowcard1@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill23">
             <div className="details23">
               <div className="rating38">
@@ -61,6 +63,7 @@ const TVShowsContainer = ({
         </div>
         <div className="tvshowcard8" onClick={onTVShowCardContainer6Click}>
           <img className="tvshowcard-icon11" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill23">
             <div className="details23">
               <div className="rating38">
@@ -74,6 +77,7 @@ const TVShowsContainer = ({
         </div>
         <div className="tvshowcard8" onClick={onTVShowCardContainer7Click}>
           <img className="tvshowcard-icon11" alt="" src="/tvshowcard1@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill23">
             <div className="details23">
               <div className="rating38">
@@ -87,6 +91,7 @@ const TVShowsContainer = ({
         </div>
         <div className="tvshowcard8" onClick={onTVShowCardContainer8Click}>
           <img className="tvshowcard-icon11" alt="" src="/moviecard@2x.png" />
+          <div class="gradient-overlay"></div>
           <div className="linearfill23">
             <div className="details23">
               <div className="rating38">

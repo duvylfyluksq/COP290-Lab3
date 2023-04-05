@@ -106,6 +106,8 @@ a{
 .fluentcompose-24-filled-icon3 {
   overflow: hidden;
 }
+
+
 .fluentcompose-24-filled-icon3,
 .profilemenu-icon3 {
   position: relative;
@@ -128,10 +130,10 @@ input:focus{
 .navbar6 {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: left;
 }
 .navbar-rhs6 {
-  width: 321px;
+  width: 121px;
   height: 95px;
   flex-shrink: 0;
   justify-content: space-between;
@@ -168,34 +170,43 @@ align-items: center;
 padding: 0px 25px;
 /* width: 500%; */
 height: 150px;
-left: -90%;
-top: 450%;
+left: -50%;
+top: 375%;
 opacity:100%;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 white-space: nowrap;
 overflow: visible;
 }
 
-.rhs:hover .dropdown {
-  display: inline-block;
-  
+.signedin:hover .dropdown {
+  display: inline-block;  
 }
 
+.signedin:hover .rhs{
+  display:inline-block;
+}
 
 .dropdown .name{
   font-weight:700px;
   
 }
-
+.signedin:hover .signedin{
+  display:inline-block;
+}
+.dropdown:focus .rhs{
+  display:flex;
+}
 .signedin {
+  opacity:100%;
+  z-index:1;
+  display:flex;
   background-color: white;
   border: none;
   cursor: pointer;
-  overflow: visible;
 }
 
 .rhs {
-  width: 100px;
+  width: 200px;
   height: 27px;
   display:flex;
   text-align: right;

@@ -148,16 +148,23 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding:17px 14px;
+  resize: none;
 }
 .login {
   position: relative;
   font-size: var(--font-size-11xl);
   font-weight: 500;
   color: var(--color-goldenrod);
-  text-align: left;
+  /* text-align: left; */
   display: inline-block;
   width: 62px;
   height: 28px;
+}
+
+.charlimit{
+  text-align:center;
+  font-size: 10px;
+  margin-left:85%;
 }
 .post {
   cursor: pointer;

@@ -20,12 +20,31 @@
 .vector-icon82,
 .xy1052 {
   position: relative;
-  flex-shrink: 0;
+  top:185px;
+  z-index:2;
 }
 .xy1052 {
   display: inline-block;
   width: 42px;
   height: 18px;
+}
+
+.gradient-overlay {
+  z-index:1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: -100%;
+  left: 0;
+  border-radius: var(--br-mini);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0),
+    rgba(82,30,152,1)
+  );
+  overflow: hidden;
 }
 .vector-icon82 {
   width: 17.5px;
@@ -39,13 +58,12 @@
   justify-content: space-between;
 }
 .title57 {
+  top:185px;
   position: relative;
-  font-size: var(--font-size-xl);
-  font-weight: 500;
   display: inline-block;
-  width: 423px;
   height: 18px;
   flex-shrink: 0;
+  z-index:2;
 }
 .details47 {
   position: absolute;
@@ -58,7 +76,7 @@
   justify-content: flex-start;
   gap: var(--gap-8xs);
 }
-.linearfill47 {
+/* .linearfill47 {
   position: absolute;
   top: 292px;
   left: 0;
@@ -73,7 +91,7 @@
   width: 475px;
   height: 292px;
   overflow: hidden;
-}
+} */
 .moviecard22 {
   text-decoration: none;
   position: relative;

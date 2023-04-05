@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { useCallback } from "react";
 import MovieNavbar from "../components/MovieNavbar";
 import "./MakePost.css";
@@ -21,6 +22,16 @@ const MakePost = () => {
   const onPostClick = useCallback(() => {
     // Please sync "State=SignedIn" to the project
   }, []);
+  const [charCount1, setCharCount1] = useState(0);
+  function handleInputChange1(event) {
+    const inputValue = event.target.value;
+    setCharCount1(inputValue.length);
+  }
+  const [charCount2, setCharCount2] = useState(0);
+  function handleInputChange2(event) {
+    const inputValue = event.target.value;
+    setCharCount2(inputValue.length);
+  }
   function changeColor(buttonNumber){
     var buttons = document.querySelectorAll("#rating");
     for (var i = 0; i < buttons.length; i++) {
@@ -69,12 +80,17 @@ const MakePost = () => {
               className="select2"
               type="text"
               placeholder="Write your review title"
+              maxlength="120"
+              onChange={handleInputChange1}
           />
+          <center class="charlimit">Characters left: {120-charCount1}</center>
         </div>
         <div className="end">
           <div className="movieorshow">
             <div className="reviewbody1">Review Content</div>
-            <textarea className="body19" placeholder="Write your review" cols="80" />
+            <textarea className="body19" placeholder="Write your review" cols="80" maxlength="600"
+              onChange={handleInputChange2} />
+            <center class="charlimit">Characters left: {600-charCount2}</center>
           </div>
           <button className="post" onClick={onPostClick}>
             <div className="login">Post</div>
