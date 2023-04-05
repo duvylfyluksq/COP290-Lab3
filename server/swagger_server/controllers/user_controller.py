@@ -3,7 +3,11 @@ import six
 
 from swagger_server.models.id import Id  # noqa: E501
 from swagger_server.models.title import Title  # noqa: E501
-from swagger_server.models.user import User, Movie, Tvshow  # noqa: E501
+from swagger_server.models.user import User  # noqa: E501
+from swagger_server.models.movie import Movie
+from swagger_server.models.tvshow import Tvshow
+from swagger_server.models.movie_id import MovieId
+from swagger_server.models.show_id import ShowId
 from swagger_server import db, util
 
 
@@ -99,12 +103,15 @@ def profile_user_id_username_put(user_id, username):  # noqa: E501
 
     :rtype: None
     """
-    user = db.getUser(user_id)
     try:
-        db.editUsername(user, username)
-        return ('Username updated successfully', 200)
+        user = db.getUser(user_id)
+        try:
+            db.editUsername(user, username)
+            return ('Username updated successfully', 200)
+        except Exception as err:
+            return (f'Error updating username: {err}', 400)
     except Exception as err:
-        return (f'Error updating username: {err}', 400)
+        return (f'User not found :{err}', 404)
 
 
 def user_signin_post(username, password):  # noqa: E501
@@ -171,7 +178,7 @@ def watchlist_user_id_get(user_id):  # noqa: E501
         user = db.getUser(user_id)
         L = db.getWatchlist_fromUser(user)
         for i in range(len(L)):
-            if (isinstance(L[i], Movie)):
+            if (isinstance(L[i], MovieId)):
                 L[i] = Title(movie=L[i], tvshow=None)
             else:
                 L[i] = Title(movie=None, tvshow=L[i])

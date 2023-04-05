@@ -229,7 +229,7 @@ paths:
           type: string
           maxLength: 25
           example: godofnoobs_42
-      - name: Confirm Password
+      - name: Confirm_Password
         in: query
         description: Confirm Password
         required: true
@@ -249,6 +249,7 @@ paths:
           type: array
           items:
             type: string
+          minItems: 3
           maxItems: 3
           example:
             - Adventure
@@ -656,7 +657,7 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: pfp
+      - name: interests
         in: query
         description: New Profile Picture
         required: true
@@ -666,6 +667,7 @@ paths:
           type: array
           items:
             type: string
+          minItems: 3
           maxItems: 3
           example:
             - Adventure
@@ -840,6 +842,7 @@ components:
           items:
             type: string
           maxItems: 3
+          minItems: 3
           example:
             - Adventure
             - Comedy
@@ -877,6 +880,7 @@ components:
           items:
             type: string
           maxItems: 3
+          minItems: 3
           example:
             - Adventure
             - Comedy
@@ -927,6 +931,7 @@ components:
           type: array
           items:
             type: string
+          minItems: 3
           maxItems: 3
           example:
             - Adventure
