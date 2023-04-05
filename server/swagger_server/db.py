@@ -574,18 +574,34 @@ def getWatchlist_fromUser(User: User) -> List[Union[MovieId, ShowId]]:
 def filterGenre(genres: List[str]) -> List[Union[Movie, Tvshow]]:
     L = []
     with connection.cursor() as cursor:
-        sql = """SELECT * FROM `movie` WHERE JSON_CONTAINS_ANY(%s, `genres`)"""
-        for i in range(1, len(genres)):
-            sql += """ OR JSON_CONTAINS_ANY(%s, `genres`)"""
-        cursor.execute(sql, genres)
+        sql = """SELECT * FROM `movie`"""
+        cursor.execute(sql)
         r = cursor.fetchall()
         for i in r:
-            L.append(Movie.from_dict(i))
-        sql = """SELECT * FROM `tvshow` WHERE JSON_CONTAINS_ANY(%s, `genres`)"""
-        for i in range(1, len(genres)):
-            sql += """ OR JSON_CONTAINS_ANY(%s, `genres`)"""
-        cursor.execute(sql, genres)
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['movie_id'] = {'id': i['movie_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
+            check = False
+            for j in genres:
+                if (j in i['genres']):
+                    check = True
+                    break
+            if (check):
+                L.append(Movie.from_dict(i))
+        sql = """SELECT * FROM `tvshow`"""
+        cursor.execute(sql)
         r = cursor.fetchall()
         for i in r:
-            L.append(Tvshow.from_dict(i))
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['show_id'] = {'id': i['show_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
+            check = False
+            for j in genres:
+                if (j in i['genres']):
+                    check = True
+                    break
+            if (check):
+                L.append(Tvshow.from_dict(i))
     return L

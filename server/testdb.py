@@ -315,6 +315,19 @@ class TestDB(unittest.TestCase):
         count = db.countLikes_User(db.getUser(user_id))
         self.assertEqual(count, 0)
 
+    def test_filterGenre(self):
+        genres = ["Drama"]
+        L = db.filterGenre(genres)
+        self.assertEqual(len(L), 17)
+        genres = ["Horror"]
+        L = db.filterGenre(genres)
+        self.assertEqual(len(L), 2)
+        genres = ["Horror", "Drama"]
+        L = db.filterGenre(genres)
+        self.assertEqual(len(L), 17)
+        genres = ["Thriller"]
+        L = db.filterGenre(genres)
+        self.assertEqual(len(L), 8)
     """
     
     def test_sortLikes_Review(self):
