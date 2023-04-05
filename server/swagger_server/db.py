@@ -40,6 +40,36 @@ def getMovie(Id: MovieId) -> Movie:
         return Movie.from_dict(r)
 
 
+def getAllMovies() -> List[Movie]:
+    L = []
+    with connection.cursor() as cursor:
+        sql = f"SELECT * FROM `movie`"
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['movie_id'] = {'id': i['movie_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
+            L.append(Movie.from_dict(i))
+    return L
+
+
+def getAllTvshows() -> List[Tvshow]:
+    L = []
+    with connection.cursor() as cursor:
+        sql = f"SELECT * FROM `tvshow`"
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['show_id'] = {'id': i['show_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
+            L.append(Tvshow.from_dict(i))
+    return L
+
+
 def getTvshow(Id: ShowId) -> Tvshow:
     assert Id is not None
     with connection.cursor() as cursor:
