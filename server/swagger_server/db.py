@@ -146,6 +146,7 @@ def sortRecent_Review(order: Optional[bool]) -> List[Review]:
 
 
 def sortReview(sort_type: str, sort_order: Optional[bool]) -> List[Review]:
+    # testing individual suffices, this doesn't need a separate test
     if (sort_type == "Recent"):
         sortRecent_Review(sort_order)
     elif (sort_type == "Likes"):
