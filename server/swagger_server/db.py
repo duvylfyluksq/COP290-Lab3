@@ -395,6 +395,15 @@ def checkLogin(username: str, password: str) -> bool:
             return True
         else:
             return False
+def checKUsername(username: str) -> bool:
+    with connection.cursor() as cursor:
+        sql = """SELECT * FROM `user` where `username`=%s"""
+        cursor.execute(sql, (username,))
+        r = cursor.fetchone()
+        if r is not None:
+            return True
+        else:
+            return False
 
 
 def LikeOrUnlike(Review: Review, User: User) -> None:
