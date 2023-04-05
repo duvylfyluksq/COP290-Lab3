@@ -435,10 +435,10 @@ def countLikes_User(User: User) -> int:
         cursor.execute(sql)
         r = cursor.fetchall()
         for i in r:
-            d = json.loads(i[0]) if i[0] else {}
-            if User.user_id in d.keys():
-                if d[User.user_id] == True:
-                    count += 1
+            d = d = {int(k): v for k, v in json.loads(
+                i['likes']).items()}
+            if (User.user_id in d.keys() and d[User.user_id]):
+                count += 1
     return count
 
 
