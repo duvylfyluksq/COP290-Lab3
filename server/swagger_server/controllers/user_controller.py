@@ -6,7 +6,7 @@ from swagger_server.models.id2 import Id2  # noqa: E501
 from swagger_server.models.user import User  # noqa: E501
 from swagger_server.models.user_id import UserId  # noqa: E501
 from swagger_server import util
-
+from swagger_server import db
 
 def profile_user_id_bio_put(user_id, bio):  # noqa: E501
     """Update user bio
@@ -21,7 +21,8 @@ def profile_user_id_bio_put(user_id, bio):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        user_id = UserId.from_dict(connexion.request.get_json())  # noqa: E501
+        user_id = UserId.from_dict(connexion.request.get_json())
+        db.editBio(user_id,bio) # noqa: E501
     return 'do some magic!'
 
 
@@ -39,6 +40,7 @@ def profile_user_id_interests_put(user_id, pfp):  # noqa: E501
     """
     if connexion.request.is_json:
         user_id = UserId.from_dict(connexion.request.get_json())  # noqa: E501
+        db.editInterests(user_id,pfp)
     return 'do some magic!'
 
 
@@ -56,6 +58,7 @@ def profile_user_id_password_put(user_id, password):  # noqa: E501
     """
     if connexion.request.is_json:
         user_id = UserId.from_dict(connexion.request.get_json())  # noqa: E501
+        db.editPassword(user_id,password)
     return 'do some magic!'
 
 
@@ -73,6 +76,7 @@ def profile_user_id_pfp_put(user_id, pfp):  # noqa: E501
     """
     if connexion.request.is_json:
         user_id = UserId.from_dict(connexion.request.get_json())  # noqa: E501
+        db.editPfp(user_id,pfp)
     return 'do some magic!'
 
 
@@ -90,6 +94,7 @@ def profile_user_id_username_put(user_id, username):  # noqa: E501
     """
     if connexion.request.is_json:
         user_id = UserId.from_dict(connexion.request.get_json())  # noqa: E501
+        db.editUsername(user_id,username)
     return 'do some magic!'
 
 
@@ -105,6 +110,12 @@ def user_signin_post(username, password):  # noqa: E501
 
     :rtype: User
     """
+    if db.checkLogin(username,password):
+        return "Login Successful"
+    else:
+        "invalid username or password"
+
+    
     return 'do some magic!'
 
 
@@ -128,12 +139,27 @@ def user_signup_post(username, password, confirm_password, interests, pfp, bio):
 
     :rtype: User
     """
-    return 'do some magic!'
+
+
+    
+    
+    if password != confirm_password:
+        return "Passwords do not match"
+    else:
+        newuser = User(user_id=None, username=username, password=password, bio=bio,
+                        pfp=pfp, watchlist_movies={},
+                        watchlist_shows={}, interests=interests)
+
+    
+        db.addUser(User=newuser)
+    return "User Added"
+ 
 
 
 def watchlist_user_id_get(user_id):  # noqa: E501
     """Get all titles in user watchlist
 
+    
      # noqa: E501
 
     :param user_id: ID of the user
@@ -141,6 +167,7 @@ def watchlist_user_id_get(user_id):  # noqa: E501
 
     :rtype: List[Object]
     """
+    
     if connexion.request.is_json:
         user_id = UserId.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
