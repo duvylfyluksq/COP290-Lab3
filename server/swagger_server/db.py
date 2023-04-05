@@ -395,6 +395,8 @@ def checkLogin(username: str, password: str) -> bool:
             return True
         else:
             return False
+
+
 def checKUsername(username: str) -> bool:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `user` where `username`=%s"""
