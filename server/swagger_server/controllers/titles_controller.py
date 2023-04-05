@@ -7,7 +7,7 @@ from swagger_server.models.title import Title  # noqa: E501
 from swagger_server.models.tvshow import Tvshow  # noqa: E501
 from swagger_server import util
 
-
+from swagger_server import db
 def movie_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
     """Sort/Filter movies
 
@@ -22,6 +22,11 @@ def movie_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
 
     :rtype: List[Movie]
     """
+    if connexion.request.is_json:
+        genre = [str(datum) for datum in connexion.request.get_json().get('genre')]
+        sort_type_browse = str(connexion.request.get_json().get('sort_type_browse'))
+        sort_order = bool(connexion.request.get_json().get('sort_order'))
+    db.
     return 'do some magic!'
 
 
