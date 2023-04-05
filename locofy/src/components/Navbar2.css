@@ -1,7 +1,7 @@
 .vector-icon83 {
   position: relative;
-  width: 59.5px;
-  height: 53.5px;
+  width: 100%;
+  height: 100%;
   flex-shrink: 0;
 }
 
@@ -13,22 +13,22 @@
 .logo5 {
     border-radius: var(--br-2xs);
     background-color: var(--color-darkorchid-100);
-    width: 75px;
-    height: 75px;
+    width: max(30px,3.5%);
+    aspect-ratio: 1;
     flex-shrink: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    padding-left:25px;
+    padding: 0;
+    padding: 0.6%;
+    padding-left: 0.6%;
+    padding-right: 0.3%;
     box-sizing: border-box;
-    margin-top:0px;
+    margin: 0;
     align-items: center;
     justify-content: space-between;
     vertical-align: middle;
     cursor: pointer;
-    border:none;
-    
   }
 
 
@@ -47,30 +47,30 @@
 .genres12,
 .movies10,
 .tv-shows5 {
-  position: relative;
   font-weight: 500;
   display: inline-block;
-  width: 93px;
-  height: 27px;
+  width: 40%;
+  height: 50%;
   flex-shrink: 0;
   cursor: pointer;
 }
-.genres12,
+/* .genres12,
 .tv-shows5 {
   width: 118px;
   height: 25px;
-}
-.genres12 {
-  width: 83px;
-  height: 24px;
+} */
+.tv-shows5 {
+  width: 50%;
+  height: 50%;
 }
 .navbar-lhs5 {
-  width: 406px;
+  width: fit-content;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 5%;
 }
 .search-movies-tv5,
 .vector-icon84 {
@@ -86,19 +86,21 @@
   height: 21px;
 }
 .searchbar5 {
+  margin-left: 10%;
   border-radius: var(--br-31xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 743px;
-  height: 53px;
+  width: 30%;
+  height: fit-content;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
   padding: var(--padding-mid) var(--padding-sm);
   box-sizing: border-box;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   gap: var(--gap-3xs);
+  font-size: var(--font-size-xl);
 }
 .sign-in2,
 .vector-icon85 {
@@ -114,11 +116,13 @@
   height: 27px;
 }
 .navbar-rhs5 {
-  width: 148px;
-  height: 95px;
+  margin-left: auto;
+  margin-right: 3%;
+  width: 15%;
+  height: 150%;
   flex-shrink: 0;
-  cursor: pointer;
-  font-size: var(--font-size-6xl);
+  justify-content: space-between;
+  gap: 42%;
 }
 .navbar-rhs5,
 .navbar5,
@@ -139,13 +143,16 @@
   left: 0;
   background-color: var(--color-white);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  width: 1920px;
-  height: 133px;
-  overflow: hidden;
-  padding: var(--padding-3xs) var(--padding-56xl);
+  width: 100%;
+  height: 8%;
+  padding: 2% 4%;
+  padding-right: 0;
+  margin-right: 0;
   box-sizing: border-box;
+  justify-content: flex-start;
+  gap: 2%;
   text-align: left;
-  font-size: var(--font-size-6xl);
+  font-size: 20px;
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
 }

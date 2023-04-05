@@ -212,7 +212,7 @@
 .tvshow-out {
   position: absolute;
   left: 0;
-  width: 1920px;
+  width: 100%;
   overflow-y: auto;
 }
 .body11 {
