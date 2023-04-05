@@ -1,8 +1,8 @@
 .scrolllist {
   position: absolute;
-  top: 133px;
-  left: 595px;
-  width: 60%;
+  top: 70px;
+  left: 30%;
+  width: 65%;
   height: 947px;
   overflow-y: auto;
   display: flex;

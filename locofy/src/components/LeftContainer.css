@@ -90,7 +90,7 @@
   border-radius: var(--br-11xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 515px;
+  width: 90%;
   height: 160px;
   flex-shrink: 0;
   padding: var(--padding-xl) var(--padding-mini);
@@ -123,7 +123,7 @@
 .adventure48 {
   position: absolute;
   top: 6px;
-  left: 22.5px;
+  left: 20%;
   display: inline-block;
   width: 68px;
   height: 20px;
@@ -133,7 +133,7 @@
   position: relative;
   border-radius: var(--br-mini);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 113px;
+  width: 30%;
   height: 31px;
   flex-shrink: 0;
 }
@@ -145,11 +145,12 @@
   background-color: var(--color-white);
 }
 .horizontalrow15 {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-33xl);
+  gap: 5%;
 }
 .filter2,
 .genretags2,
@@ -158,7 +159,7 @@
   flex-direction: column;
 }
 .genretags2 {
-  width: 443px;
+  width: 100%;
   align-items: flex-start;
   justify-content: flex-start;
   gap: var(--gap-29xl);
@@ -171,7 +172,7 @@
   border-radius: var(--br-11xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 515px;
+  width: 90%;
   height: 597px;
   flex-shrink: 0;
   padding: var(--padding-xl);
@@ -181,9 +182,9 @@
 }
 .left5 {
   position: absolute;
-  top: 133px;
+  top: 40px;
   left: 0;
-  width: 591px;
+  width: 30%;
   height: 947px;
   overflow: hidden;
   justify-content: center;
