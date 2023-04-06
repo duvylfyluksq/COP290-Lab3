@@ -22,7 +22,7 @@ class TestReviewsController(BaseTestCase):
         Get all reviews of a title
         """
         query_string = [('sort_type_reviews', 'sort_type_reviews_example'),
-                        ('sort_order', true)]
+                        ('sort_order', True)]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{id}'.format(id=Id()),
             method='GET',
@@ -81,7 +81,7 @@ class TestReviewsController(BaseTestCase):
         Get all reviews of a user
         """
         query_string = [('sort_type_reviews', 'sort_type_reviews_example'),
-                        ('sort_order', true)]
+                        ('sort_order', True)]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{user_id}'.format(user_id=56),
             method='GET',

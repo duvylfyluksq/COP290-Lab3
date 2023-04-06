@@ -86,13 +86,15 @@ def review_review_id_comment_post(review_id, user_id, content):  # noqa: E501
 
     :rtype: Comment
     """
-    if connexion.request.is_json:
-        user_id = int(connexion.request.get_json().get('user_id'))
-        content = str(connexion.request.get_json().get('content'))
-    
-        db.addComment(Comment = Comment(comment_id = None,review_id=review_id, user_id= user_id, content=content))
-        return ("comment added successfully",200)
-
+    try:
+        if connexion.request.is_json:
+            user_id = int(connexion.request.get_json().get('user_id'))
+            content = str(connexion.request.get_json().get('content'))
+        
+            db.addComment(Comment = Comment(comment_id = None,review_id=review_id, user_id= user_id, content=content))
+            return ("comment added successfully",200)
+    except Exception as err:
+        return (f'Error: {err}', 400)
     return 'do some magic!'
 
 
@@ -108,10 +110,13 @@ def review_review_id_likes_put(review_id, user_id):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.isjson():
-        user_id = int(connexion.request.get_json().get('user_id'))
-        db.LikeorUnlike(review_id,user_id)
-        return ("done",200)
+    try:
+        if connexion.request.isjson():
+            user_id = int(connexion.request.get_json().get('user_id'))
+            db.LikeorUnlike(review_id,user_id)
+            return ("done",200)
+    except Exception as err:
+        return (f'Error: {err}', 400)
     return 'do some magic!'
 
 
