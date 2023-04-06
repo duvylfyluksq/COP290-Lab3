@@ -1,4 +1,3 @@
----
 openapi: 3.0.3
 info:
   title: FMD
@@ -20,13 +19,13 @@ tags:
   description: Everything about shows or movies
 - name: User
   description: Operations about user
-  
 paths:
   /search:
     get:
       tags:
       - Titles
       description: Obtain all movies/shows whose prefix matches the input expression
+      operationId: search_get
       parameters:
       - name: expression
         in: query
@@ -46,18 +45,21 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/title'
+                x-content-type: application/json
         "404":
           description: Movie/TV Show Not found
-          
+      x-openapi-router-controller: swagger_server.controllers.titles_controller
   /review:
     post:
       tags:
       - Reviews
       summary: Add a new review
+      operationId: review_post
       parameters:
       - name: movie_id
         in: query
-        description: ID of the movie for which the review is being posted(null if TVShow)
+        description: ID of the movie for which the review is being posted(null if
+          TVShow)
         required: true
         style: form
         explode: false
@@ -65,7 +67,8 @@ paths:
           $ref: '#/components/schemas/movie_id'
       - name: show_id
         in: query
-        description: ID of the TVShow for which the review is being posted(null if Movie)
+        description: ID of the TVShow for which the review is being posted(null if
+          Movie)
         required: true
         style: form
         explode: false
@@ -87,9 +90,9 @@ paths:
         style: form
         explode: false
         schema:
-          type: integer
           maximum: 10
           minimum: 1
+          type: integer
           example: 10
       - name: title
         in: query
@@ -98,8 +101,8 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 50
+          type: string
           example: Amazing Watch!
       - name: content
         in: query
@@ -108,9 +111,10 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 500
-          example: have you got colour in your cheeks? do you ever get that feel' that you can't shift the tide that sticks around like sumats in your teeth.
+          type: string
+          example: have you got colour in your cheeks? do you ever get that feel'
+            that you can't shift the tide that sticks around like sumats in your teeth.
       - name: creation_time
         in: query
         description: creation time
@@ -120,22 +124,54 @@ paths:
         schema:
           type: string
           format: date-time
-          example: '2023-04-02T12:30:45Z'
+          example: 2023-04-02T12:30:45Z
       responses:
         "200":
           description: Review added successfully
         "400":
           description: Invalid request body
-
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
   /movie:
     get:
       tags:
       - Titles
       summary: Sort/Filter movies
+      operationId: movie_get
       parameters:
-      - $ref: '#/components/parameters/genre'
-      - $ref: '#/components/parameters/sort_type_browse'
-      - $ref: '#/components/parameters/sort_order'
+      - name: genre
+        in: query
+        description: Genres to be filtered by
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sort_type_browse
+        in: query
+        description: Parameter based on which titles will be sorted
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+          - Lex
+          - Pop
+          - Rel
+          - Rat
+      - name: sort_order
+        in: query
+        description: sorting order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
       responses:
         "200":
           description: Successful response
@@ -145,20 +181,53 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/movie'
+                x-content-type: application/json
         "400":
           description: Invalid request
         "404":
           description: No movies found
-
+      x-openapi-router-controller: swagger_server.controllers.titles_controller
   /tvshow:
     get:
       tags:
       - Titles
       summary: Sort/Filter TV Shows
+      operationId: tvshow_get
       parameters:
-      - $ref: '#/components/parameters/genre'
-      - $ref: '#/components/parameters/sort_type_browse'
-      - $ref: '#/components/parameters/sort_order'
+      - name: genre
+        in: query
+        description: Genres to be filtered by
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sort_type_browse
+        in: query
+        description: Parameter based on which titles will be sorted
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+          - Lex
+          - Pop
+          - Rel
+          - Rat
+      - name: sort_order
+        in: query
+        description: sorting order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
       responses:
         "200":
           description: Successful response
@@ -168,16 +237,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/tvshow'
+                x-content-type: application/json
         "400":
           description: Invalid request
         "404":
           description: No TV Shows found
-
+      x-openapi-router-controller: swagger_server.controllers.titles_controller
   /user/signin:
     post:
       tags:
       - User
       summary: Sign in user with credentials
+      operationId: user_signin_post
       parameters:
       - name: Username
         in: query
@@ -186,8 +257,8 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 25
+          type: string
           example: bobdylan
       - name: Password
         in: query
@@ -196,8 +267,8 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 25
+          type: string
           example: godofnoobs_42
       responses:
         "200":
@@ -212,12 +283,13 @@ paths:
           description: Invalid credentials
         "500":
           description: Internal server error
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /user/signup:
     post:
       tags:
       - User
       summary: Create a new user account
+      operationId: user_signup_post
       parameters:
       - name: Username
         in: query
@@ -226,8 +298,8 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 25
+          type: string
           example: bobdylan
       - name: Password
         in: query
@@ -236,8 +308,8 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 25
+          type: string
           example: godofnoobs_42
       - name: Confirm_Password
         in: query
@@ -246,8 +318,8 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 25
+          type: string
           example: godofnoobs_42
       - name: interests
         in: query
@@ -256,15 +328,15 @@ paths:
         style: form
         explode: true
         schema:
+          maxItems: 3
+          minItems: 3
           type: array
+          example:
+          - Adventure
+          - Comedy
+          - Thriller
           items:
             type: string
-          minItems: 3
-          maxItems: 3
-          example:
-            - Adventure
-            - Comedy
-            - Thriller
       - name: pfp
         in: query
         description: profile picture
@@ -282,9 +354,9 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
-          example: i am bobdylan, i work with duvylfyluksq
           maxLength: 100
+          type: string
+          example: "i am bobdylan, i work with duvylfyluksq"
       responses:
         "200":
           description: User account created successfully
@@ -298,13 +370,14 @@ paths:
           description: User already exists
         "500":
           description: Internal server error
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /review/{id}:
     get:
       tags:
       - Reviews
       summary: Get all reviews of a title
       description: Returns a list of reviews for a particular title
+      operationId: review_id_get
       parameters:
       - name: id
         in: path
@@ -314,8 +387,28 @@ paths:
         explode: false
         schema:
           type: string
-      - $ref: '#/components/parameters/sort_type_reviews'
-      - $ref: '#/components/parameters/sort_order'
+      - name: sort_type_reviews
+        in: query
+        description: Parameter based on which reviews will be sorted
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+          - Likes
+          - Recent
+      - name: sort_order
+        in: query
+        description: sorting order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
       responses:
         "200":
           description: List of reviews for Movie/TVShow
@@ -325,16 +418,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/review'
+                x-content-type: application/json
         "400":
           description: Invalid request
         "404":
           description: Title not found
-
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
   /review/{review_id}/comment:
     post:
       tags:
       - Reviews
       summary: Add comment to review
+      operationId: review_review_id_comment_post
       parameters:
       - name: review_id
         in: path
@@ -361,9 +456,10 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 200
-          example: im a puppet on a string, tracy island time travelling diamond, coulda shaped heartaches
+          type: string
+          example: "im a puppet on a string, tracy island time travelling diamond,\
+            \ coulda shaped heartaches"
       responses:
         "201":
           description: Comment added successfully to review
@@ -375,12 +471,13 @@ paths:
           description: Bad request. Invalid review ID or missing required fields
         "404":
           description: Review not found
-
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
   /review/{review_id}/likes:
     put:
       tags:
       - Reviews
       summary: Like/Unlike Review
+      operationId: review_review_id_likes_put
       parameters:
       - name: review_id
         in: path
@@ -407,13 +504,15 @@ paths:
           description: Bad request. Invalid review ID or missing required fields
         "404":
           description: Review not found
-
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
   /title/{id}:
     get:
       tags:
       - Titles
       summary: Get information about a Movie/TV Show
-      description: Returns information about a particular Movie/TV Show, including its title, genre, director, actors, release date, and description.
+      description: "Returns information about a particular Movie/TV Show, including\
+        \ its title, genre, director, actors, release date, and description."
+      operationId: title_id_get
       parameters:
       - name: id
         in: path
@@ -434,25 +533,46 @@ paths:
           description: Invalid request
         "404":
           description: Movie/TV Show not found
-
+      x-openapi-router-controller: swagger_server.controllers.titles_controller
   /review/{user_id}:
     get:
       tags:
       - Reviews
       summary: Get all reviews of a user
       description: Returns a list of reviews for a particular user
+      operationId: review_user_id_get
       parameters:
       - name: user_id
         in: path
-        description: ID of the user 
+        description: ID of the user
         required: true
         style: simple
         explode: false
         schema:
           type: integer
           example: 42
-      - $ref: '#/components/parameters/sort_type_reviews'
-      - $ref: '#/components/parameters/sort_order'
+      - name: sort_type_reviews
+        in: query
+        description: Parameter based on which reviews will be sorted
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+          - Likes
+          - Recent
+      - name: sort_order
+        in: query
+        description: sorting order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
       responses:
         "200":
           description: List of reviews by the User
@@ -462,16 +582,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/review'
+                x-content-type: application/json
         "400":
           description: Invalid request
         "404":
           description: Title not found
-
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
   /watchlist/{user_id}:
     get:
       tags:
       - User
       summary: Get all titles in user watchlist
+      operationId: watchlist_user_id_get
       parameters:
       - name: user_id
         in: path
@@ -491,13 +613,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/title'
+                x-content-type: application/json
         "400":
           description: Bad request. Invalid user ID
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
     put:
       tags:
       - User
       summary: Add/Remove title from watchlist
+      operationId: watchlist_user_id_put
       parameters:
       - name: user_id
         in: path
@@ -521,12 +645,13 @@ paths:
           description: Title added/removed successfully
         "400":
           description: Bad request. Invalid user ID or title not provided
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /watchlist/{user_id}/remove:
     put:
       tags:
       - User
       summary: Remove title from user's watchlist
+      operationId: watchlist_user_id_remove_put
       parameters:
       - name: user_id
         in: path
@@ -552,12 +677,13 @@ paths:
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found or title not found in user's wishlist
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /profile/{user_id}/username:
     put:
       tags:
       - User
       summary: Update username
+      operationId: profile_user_id_username_put
       parameters:
       - name: user_id
         in: path
@@ -575,8 +701,8 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 25
+          type: string
           example: bobdylan
       responses:
         "200":
@@ -585,12 +711,13 @@ paths:
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /profile/{user_id}/pfp:
     put:
       tags:
       - User
       summary: Update profile picture
+      operationId: profile_user_id_pfp_put
       parameters:
       - name: user_id
         in: path
@@ -618,12 +745,13 @@ paths:
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /profile/{user_id}/password:
     put:
       tags:
       - User
       summary: Update Password
+      operationId: profile_user_id_password_put
       parameters:
       - name: user_id
         in: path
@@ -641,8 +769,8 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
           maxLength: 25
+          type: string
           example: godofnoobs_42
       responses:
         "200":
@@ -651,12 +779,13 @@ paths:
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /profile/{user_id}/interests:
     put:
       tags:
       - User
       summary: Update interests
+      operationId: profile_user_id_interests_put
       parameters:
       - name: user_id
         in: path
@@ -674,15 +803,15 @@ paths:
         style: form
         explode: true
         schema:
+          maxItems: 3
+          minItems: 3
           type: array
+          example:
+          - Adventure
+          - Comedy
+          - Thriller
           items:
             type: string
-          minItems: 3
-          maxItems: 3
-          example:
-            - Adventure
-            - Comedy
-            - Thriller
       responses:
         "200":
           description: Interests updated successfully
@@ -690,12 +819,13 @@ paths:
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /profile/{user_id}/bio:
     put:
       tags:
       - User
       summary: Update user bio
+      operationId: profile_user_id_bio_put
       parameters:
       - name: user_id
         in: path
@@ -713,9 +843,9 @@ paths:
         style: form
         explode: false
         schema:
-          type: string
-          example: i am bobdylan, i work with duvylfyluksq
           maxLength: 100
+          type: string
+          example: "i am bobdylan, i work with duvylfyluksq"
       responses:
         "200":
           description: Bio updated successfully
@@ -723,13 +853,355 @@ paths:
           description: Bad request. Invalid user ID or missing required fields
         "404":
           description: User not found
-
+      x-openapi-router-controller: swagger_server.controllers.user_controller
 components:
+  schemas:
+    title:
+      type: object
+      properties:
+        movie:
+          $ref: '#/components/schemas/movie'
+        tvshow:
+          $ref: '#/components/schemas/tvshow'
+      example:
+        movie:
+          duration: 2hrs 2mins
+          cast:
+          - Leonardo Di Caprio
+          - Kate Winslet
+          - Bradd Pitt
+          release_date: 2001-08-19T00:00:00.000+00:00
+          director: Christopher Nolan
+          genres:
+          - Adventure
+          - Comedy
+          - Thriller
+          rating: 9.36
+          writer: Todd Phillips
+          movie_id:
+            id: 42
+          title: Inception
+          poster: https://fmd.com/poster.jpeg
+        tvshow:
+          duration: 55mins
+          cast:
+          - Leonardo Di Caprio
+          - Kate Winslet
+          - Bradd Pitt
+          show_id:
+            id: 42
+          release_date: 2001-08-19T00:00:00.000+00:00
+          director: Christopher Nolan
+          genres:
+          - Adventure
+          - Comedy
+          - Thriller
+          rating: 9.36
+          season: 2
+          writer: Todd Phillips
+          title: Peaky Blinders
+          poster: https://fmd.com/poster.jpeg
+    movie_id:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+      example:
+        id: 42
+    show_id:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 42
+      example:
+        id: 42
+    user:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 42
+        username:
+          maxLength: 25
+          type: string
+          example: bobdylan
+        password:
+          maxLength: 25
+          type: string
+          example: godofnoobs_42
+        bio:
+          maxLength: 100
+          type: string
+          example: "i am bobdylan, i work with duvylfyluksq"
+        pfp:
+          type: string
+          format: uri
+          example: https://fmd.com/pfp.jpeg
+        watchlist_movies:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            "1": true
+            "2": false
+            "42": true
+        watchlist_shows:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            "1": true
+            "2": false
+            "42": true
+        interests:
+          maxItems: 3
+          minItems: 3
+          type: array
+          example:
+          - Adventure
+          - Comedy
+          - Thriller
+          items:
+            type: string
+      example:
+        password: godofnoobs_42
+        user_id: 42
+        bio: "i am bobdylan, i work with duvylfyluksq"
+        watchlist_movies:
+          "1": true
+          "2": false
+          "42": true
+        pfp: https://fmd.com/pfp.jpeg
+        interests:
+        - Adventure
+        - Comedy
+        - Thriller
+        username: bobdylan
+        watchlist_shows:
+          "1": true
+          "2": false
+          "42": true
+    movie:
+      type: object
+      properties:
+        movie_id:
+          $ref: '#/components/schemas/movie_id'
+        title:
+          type: string
+          example: Inception
+        cast:
+          maxItems: 3
+          type: array
+          example:
+          - Leonardo Di Caprio
+          - Kate Winslet
+          - Bradd Pitt
+          items:
+            type: string
+        director:
+          type: string
+          example: Christopher Nolan
+        writer:
+          type: string
+          example: Todd Phillips
+        rating:
+          type: number
+          format: float
+          example: 9.36
+        genres:
+          maxItems: 3
+          minItems: 3
+          type: array
+          example:
+          - Adventure
+          - Comedy
+          - Thriller
+          items:
+            type: string
+        release_date:
+          type: string
+          format: date
+          example: 2001-08-19
+        duration:
+          pattern: ^\d+hrs \d+mins$
+          type: string
+          example: 2hrs 2mins
+        poster:
+          type: string
+          example: https://fmd.com/poster.jpeg
+      example:
+        duration: 2hrs 2mins
+        cast:
+        - Leonardo Di Caprio
+        - Kate Winslet
+        - Bradd Pitt
+        release_date: 2001-08-19T00:00:00.000+00:00
+        director: Christopher Nolan
+        genres:
+        - Adventure
+        - Comedy
+        - Thriller
+        rating: 9.36
+        writer: Todd Phillips
+        movie_id:
+          id: 42
+        title: Inception
+        poster: https://fmd.com/poster.jpeg
+    tvshow:
+      type: object
+      properties:
+        show_id:
+          $ref: '#/components/schemas/show_id'
+        title:
+          type: string
+          example: Peaky Blinders
+        season:
+          type: integer
+          example: 2
+        cast:
+          maxItems: 3
+          type: array
+          example:
+          - Leonardo Di Caprio
+          - Kate Winslet
+          - Bradd Pitt
+          items:
+            type: string
+        director:
+          type: string
+          example: Christopher Nolan
+        writer:
+          type: string
+          example: Todd Phillips
+        rating:
+          type: number
+          format: float
+          example: 9.36
+        genres:
+          maxItems: 3
+          minItems: 3
+          type: array
+          example:
+          - Adventure
+          - Comedy
+          - Thriller
+          items:
+            type: string
+        release_date:
+          type: string
+          format: date
+          example: 2001-08-19
+        duration:
+          pattern: ^\d+mins$
+          type: string
+          example: 55mins
+        poster:
+          type: string
+          example: https://fmd.com/poster.jpeg
+      example:
+        duration: 55mins
+        cast:
+        - Leonardo Di Caprio
+        - Kate Winslet
+        - Bradd Pitt
+        show_id:
+          id: 42
+        release_date: 2001-08-19T00:00:00.000+00:00
+        director: Christopher Nolan
+        genres:
+        - Adventure
+        - Comedy
+        - Thriller
+        rating: 9.36
+        season: 2
+        writer: Todd Phillips
+        title: Peaky Blinders
+        poster: https://fmd.com/poster.jpeg
+    review:
+      type: object
+      properties:
+        review_id:
+          type: integer
+          example: 42
+        title:
+          maxLength: 50
+          type: string
+          example: Amazing Watch!
+        movie_id:
+          $ref: '#/components/schemas/movie_id'
+        show_id:
+          $ref: '#/components/schemas/show_id'
+        user_id:
+          type: integer
+          example: 42
+        likes:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            "1": true
+            "2": false
+            "42": true
+        rating:
+          maximum: 10
+          minimum: 1
+          type: integer
+          example: 10
+        content:
+          maxLength: 500
+          type: string
+          example: have you got colour in your cheeks? do you ever get that feel'
+            that you can't shift the tide that sticks around like sumats in your teeth.
+        creation_time:
+          type: string
+          format: date-time
+          example: 2023-04-02T12:30:45Z
+      example:
+        creation_time: 2023-04-02T12:30:45Z
+        review_id: 42
+        show_id:
+          id: 42
+        user_id: 42
+        rating: 10
+        title: Amazing Watch!
+        movie_id:
+          id: 42
+        content: have you got colour in your cheeks? do you ever get that feel' that
+          you can't shift the tide that sticks around like sumats in your teeth.
+        likes:
+          "1": true
+          "2": false
+          "42": true
+    comment:
+      type: object
+      properties:
+        comment_id:
+          type: integer
+          example: 42
+        review_id:
+          type: integer
+          example: 42
+        user_id:
+          type: integer
+          example: 42
+        content:
+          maxLength: 200
+          type: string
+          example: "im a puppet on a string, tracy island time travelling diamond,\
+            \ coulda shaped heartaches"
+      example:
+        review_id: 42
+        user_id: 42
+        comment_id: 42
+        content: "im a puppet on a string, tracy island time travelling diamond, coulda\
+          \ shaped heartaches"
   parameters:
     genre:
       name: genre
       in: query
-      description: Genres to be filtered by 
+      description: Genres to be filtered by
       required: false
       style: form
       explode: true
@@ -747,10 +1219,10 @@ components:
       schema:
         type: string
         enum:
-          - Lex
-          - Pop
-          - Rel
-          - Rat
+        - Lex
+        - Pop
+        - Rel
+        - Rat
     sort_type_reviews:
       name: sort_type_reviews
       in: query
@@ -761,8 +1233,8 @@ components:
       schema:
         type: string
         enum:
-          - Likes
-          - Recent
+        - Likes
+        - Recent
     sort_order:
       name: sort_order
       in: query
@@ -773,238 +1245,6 @@ components:
       schema:
         type: boolean
         enum:
-          - true
-          - false
-
-
-  schemas:
-    
-    title:
-      type: object
-      properties:
-        movie:
-          $ref: '#/components/schemas/movie'
-        tvshow:
-          $ref: '#/components/schemas/tvshow'
-          
-    movie_id:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 42
-
-    show_id:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 42
-
-    user:
-      type: object
-      properties:
-        user_id:
-          type: integer
-          example: 42
-        username:
-          type: string
-          maxLength: 25
-          example: bobdylan
-        password:
-          type: string
-          maxLength: 25
-          example: godofnoobs_42
-        bio:
-          type: string
-          example: i am bobdylan, i work with duvylfyluksq
-          maxLength: 100
-        pfp:
-          type: string
-          format: uri
-          example: https://fmd.com/pfp.jpeg
-        watchlist_movies:
-          type: object
-          additionalProperties:
-            type: boolean
-          example:
-            1 : True
-            2 : False
-            42 : True
-        watchlist_shows:
-          type: object
-          additionalProperties:
-            type: boolean
-          example:
-            1 : True
-            2 : False
-            42 : True
-        interests:
-          type: array
-          items:
-            type: string
-          maxItems: 3
-          minItems: 3
-          example:
-            - Adventure
-            - Comedy
-            - Thriller
-
-    movie:
-      type: object
-      properties:
-        movie_id:
-          $ref: '#/components/schemas/movie_id'
-        title:
-          type: string
-          example: Inception
-        cast:
-          type: array
-          items:
-            type: string
-          maxItems: 3
-          example:
-            - Leonardo Di Caprio
-            - Kate Winslet
-            - Bradd Pitt
-        director:
-          type: string
-          example: Christopher Nolan
-        writer:
-          type: string
-          example: Todd Phillips
-        rating:
-          type: number
-          format: float
-          example: 9.36
-        genres:
-          type: array
-          items:
-            type: string
-          maxItems: 3
-          minItems: 3
-          example:
-            - Adventure
-            - Comedy
-            - Thriller
-        release_date:
-          type: string
-          format: date
-          example: '2001-08-19'
-        duration:
-          type: string
-          pattern: '^\d+hrs \d+mins$'
-          example: 2hrs 2mins
-        poster:
-          type: string
-          example: https://fmd.com/poster.jpeg
-
-    tvshow:
-      type: object
-      properties:
-        show_id:
-          $ref: '#/components/schemas/show_id'
-        title:
-          type: string
-          example: Peaky Blinders
-        season:
-          type: integer
-          example: 2
-        cast:
-          type: array
-          items:
-            type: string
-          maxItems: 3
-          example:
-            - Leonardo Di Caprio
-            - Kate Winslet
-            - Bradd Pitt
-        director:
-          type: string
-          example: Christopher Nolan
-        writer:
-          type: string
-          example: Todd Phillips
-        rating:
-          type: number
-          format: float
-          example: 9.36
-        genres:
-          type: array
-          items:
-            type: string
-          minItems: 3
-          maxItems: 3
-          example:
-            - Adventure
-            - Comedy
-            - Thriller
-        release_date:
-          type: string
-          format: date
-          example: '2001-08-19'
-        duration:
-          type: string
-          pattern: '^\d+mins$'
-          example: 55mins
-        poster:
-          type: string
-          example: https://fmd.com/poster.jpeg
-
-    review:
-      type: object
-      properties:
-        review_id:
-          type: integer
-          example: 42
-        title:
-          type: string
-          maxLength: 50
-          example: Amazing Watch!
-        movie_id:
-          $ref: '#/components/schemas/movie_id'
-        show_id:
-          $ref: '#/components/schemas/show_id'
-        user_id:
-          type: integer
-          example: 42
-        likes:
-          type: object
-          additionalProperties:
-            type: boolean
-          example:
-            1 : True
-            2 : False
-            42 : True
-        rating:
-          type: integer
-          maximum: 10
-          minimum: 1
-          example: 10
-        content:
-          type: string
-          maxLength: 500
-          example:
-            have you got colour in your cheeks? do you ever get that feel' that you can't shift the tide that sticks around like sumats in your teeth.
-        creation_time:
-          type: string
-          format: date-time
-          example: '2023-04-02T12:30:45Z'
-
-    comment:
-      type: object
-      properties:
-        comment_id:
-          type: integer
-          example: 42
-        review_id:
-          type: integer
-          example: 42
-        user_id:
-          type: integer
-          example: 42
-        content:
-          type: string
-          maxLength: 200
-          example: im a puppet on a string, tracy island time travelling diamond, coulda shaped heartaches
+        - true
+        - false
 
