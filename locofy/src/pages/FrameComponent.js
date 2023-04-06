@@ -1,10 +1,12 @@
 import React from 'react';
 import { useCallback } from "react";
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import MovieWatchListContainer from "../components/MovieWatchListContainer";
 import BottomFooter from "../components/BottomFooter";
 import NavbarContainer from "../components/NavbarContainer";
 import "./FrameComponent.css";
+import Box from "./Watchlist_list"
 
 const FrameComponent = () => {
   const navigate = useNavigate();
@@ -32,6 +34,26 @@ const FrameComponent = () => {
   const onProfileMenuClick = useCallback(() => {
     // Please sync "UserPage/InSelf" to the project
   }, []);
+  // const [numBoxes, setNumBoxes] = useState(5); // State variable for the number of boxes to display
+  // const [currentIndex, setCurrentIndex] = useState(0); // State variable for the index of the first box to display
+
+  // const boxes = []; // Array to hold the boxes
+  // for (let i = currentIndex; i < currentIndex + numBoxes; i++) {
+  //   boxes.push(<Box />);
+  // }
+
+  // // Event handlers for the next and previous buttons
+  // const handleNext = () => {
+  //   if (currentIndex + numBoxes < 20) {
+  //     setCurrentIndex(currentIndex + numBoxes);
+  //   }
+  // };
+
+  // const handlePrev = () => {
+  //   if (currentIndex - numBoxes >= 0) {
+  //     setCurrentIndex(currentIndex - numBoxes);
+  //   }
+  // };
 
   return (
     <div className="watchlist-inother-parent">
@@ -42,16 +64,61 @@ const FrameComponent = () => {
             <img className="vector-icon" alt="" src="/vector.svg" />
           </div>
           <div className="watchlistdisplay">
-            <MovieWatchListContainer />
-            <BottomFooter />
-            <MovieWatchListContainer />
-            <BottomFooter />
-            <MovieWatchListContainer />
-            <BottomFooter />
-            <MovieWatchListContainer />
-            <BottomFooter />
-            <MovieWatchListContainer />
-            <BottomFooter />
+            <MovieWatchListContainer 
+            image="/joker@2x.png"
+            rating="x.y"
+            title="Eternal Sunshine Of The Spotless.. "
+            />
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
+            <MovieWatchListContainer 
+            image="/joker@2x.png"
+            rating="x.y"
+            title="Eternal Sunshine Of The Spotless.. "
+            />
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
+            <MovieWatchListContainer 
+            image="/joker@2x.png"
+            rating="x.y"
+            title="Eternal Sunshine Of The Spotless.. "
+            />
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
+            <MovieWatchListContainer 
+            image="/joker@2x.png"
+            rating="x.y"
+            title="Eternal Sunshine Of The Spotless.. "
+            />
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
+            <MovieWatchListContainer 
+            image="/joker@2x.png"
+            rating="x.y"
+            title="Eternal Sunshine Of The Spotless.. "
+            />
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
           </div>
           <div className="paginationfooter">
             <div className="back">

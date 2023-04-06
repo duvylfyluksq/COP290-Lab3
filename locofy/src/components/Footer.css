@@ -1,6 +1,6 @@
 .joker-icon4 {
   position: relative;
-  width: 363px;
+  width: 187px;
   height: 187px;
   flex-shrink: 0;
   object-fit: cover;
@@ -22,6 +22,8 @@
   width: 779px;
   height: 66px;
   flex-shrink: 0;
+  overflow-x: hidden;
+  white-space: nowrap;
 }
 .season2 {
   font-size: var(--font-size-21xl);
@@ -67,6 +69,7 @@
   height: 40px;
   flex-shrink: 0;
   overflow: hidden;
+  cursor:pointer;
 }
 .right6,
 .watchlistdisplay-tvshow1 {
@@ -74,9 +77,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: var(--gap-131xl);
 }
 .watchlistdisplay-tvshow1 {
+  width:100%;
   border-radius: var(--br-21xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);

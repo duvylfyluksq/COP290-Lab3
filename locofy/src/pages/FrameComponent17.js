@@ -9,7 +9,7 @@ import TrendingContainer from "../components/TrendingContainer";
 import Navbar2 from "../components/Navbar2";
 import "./FrameComponent17.css";
 import MoviesContainer from '../components/MoviesContainer';
-import Left from './images/left_arrow.jpg'
+// import Left from './images/left_arrow.jpg'
 
 const FrameComponent17 = () => {
   const navigate = useNavigate();

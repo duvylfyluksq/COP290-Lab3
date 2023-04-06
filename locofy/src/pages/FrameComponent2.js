@@ -42,16 +42,66 @@ const FrameComponent2 = () => {
             <img className="vector-icon2" alt="" src="/vector.svg" />
           </div>
           <div className="watchlistdisplay2">
-            <WatchListMovieContainer productId="/materialsymbolsdeleteoutline.svg" />
-            <Footer productId="/materialsymbolsdeleteoutline.svg" />
-            <WatchListMovieContainer productId="/materialsymbolsdeleteoutline.svg" />
-            <Footer productId="/materialsymbolsdeleteoutline.svg" />
-            <Footer productId="/materialsymbolsdeleteoutline.svg" />
-            <WatchListMovieContainer productId="/materialsymbolsdeleteoutline.svg" />
-            <Footer productId="/materialsymbolsdeleteoutline.svg" />
-            <WatchListMovieContainer productId="/materialsymbolsdeleteoutline.svg" />
-            <Footer productId="/materialsymbolsdeleteoutline.svg" />
-            <Footer productId="/materialsymbolsdeleteoutline.svg" />
+            <WatchListMovieContainer
+              image="/joker@2x.png"
+              rating="x.y"
+              title="Eternal Sunshine Of The Sjloawidhwoadqoih"
+              productId="/materialsymbolsdeleteoutline.svg"
+            />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
+            <WatchListMovieContainer
+              image="/joker@2x.png"
+              rating="x.y"
+              title="Eternal Sunshine Of The Spotless.. "
+              productId="/materialsymbolsdeleteoutline.svg"
+            />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
+            <WatchListMovieContainer
+              image="/joker@2x.png"
+              rating="x.y"
+              title="Eternal Sunshine Of The Spotless.. "
+              productId="/materialsymbolsdeleteoutline.svg"
+            />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
+            <WatchListMovieContainer
+              image="/joker@2x.png"
+              rating="x.y"
+              title="Eternal Sunshine Of The Spotless.. "
+              productId="/materialsymbolsdeleteoutline.svg"
+            />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
           </div>
           <div className="paginationfooter2">
             <div className="back4">

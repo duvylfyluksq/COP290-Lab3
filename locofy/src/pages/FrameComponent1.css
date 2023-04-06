@@ -23,7 +23,7 @@
   justify-content: space-between;
 }
 .watchlistdisplay1 {
-  width: 1770px;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -74,7 +74,7 @@
   overflow: hidden;
 }
 .paginationfooter1 {
-  width: 1264px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   padding: 0 0 var(--padding-6xl);
@@ -88,7 +88,7 @@
   position: absolute;
   left: 0;
   background-color: var(--color-white);
-  width: 1920px;
+  width: 100%;
 }
 .body1 {
   top: 133px;
