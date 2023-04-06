@@ -148,7 +148,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding:17px 14px;
-  resize: none;
+  resize: horizontal;
 }
 .login {
   position: relative;

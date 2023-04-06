@@ -42,8 +42,8 @@ flex-grow: 0; */
 
 .signintile {
   position: absolute;
-  top: 209px;
-  left: 679px;
+  top: 179px;
+  /* left: 679px; */
   border-radius: var(--br-31xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
@@ -56,9 +56,13 @@ flex-grow: 0; */
 }
 .body15 {
   position: absolute;
-  top: 133px;
+  display: flex;
+  top: 73px;
   left: 0;
-  width: 1920px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
   height: 947px;
 }
 .signin {

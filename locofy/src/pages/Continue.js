@@ -1,13 +1,13 @@
 import React from 'react';
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar2 from "../components/Navbar2";
+import MoviesContainer from '../components/MoviesContainer';
 import "./Continue.css";
 
 const Continue = () => {
   const navigate = useNavigate();
 
-  const onLogoClick = useCallback(() => {
+  const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
 
@@ -132,11 +132,9 @@ const Continue = () => {
           <div className="continue2">Continue</div>
         </button>
       </div>
-      <Navbar2
-        productIds="/vector39.svg"
-        propJustifyContent="flex-start"
-        propGap="56px"
-        onLogoClick={onLogoClick}
+      <MoviesContainer
+        coordinates="/vector21.svg"
+        onLogoContainerClick={onLogoContainerClick}
         onMoviesTextClick={onMoviesTextClick}
         onTVShowsTextClick={onTVShowsTextClick}
         onGenresTextClick={onGenresTextClick}

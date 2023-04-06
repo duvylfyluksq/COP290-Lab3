@@ -111,12 +111,22 @@ paths:
           type: string
           maxLength: 500
           example: have you got colour in your cheeks? do you ever get that feel' that you can't shift the tide that sticks around like sumats in your teeth.
+      - name: creation_time
+        in: query
+        description: creation time
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: string
+          format: date-time
+          example: '2023-04-02T12:30:45Z'
       responses:
         "200":
           description: Review added successfully
         "400":
           description: Invalid request body
-          
+
   /movie:
     get:
       tags:
@@ -303,7 +313,7 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/id'
+          type: string
       - $ref: '#/components/parameters/sort_type_reviews'
       - $ref: '#/components/parameters/sort_order'
       responses:
@@ -412,7 +422,7 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/id'
+          type: string
       responses:
         "200":
           description: Information about the Movie/TV Show
@@ -505,7 +515,7 @@ paths:
         style: form
         explode: true
         schema:
-          $ref: '#/components/schemas/id'
+          type: string
       responses:
         "201":
           description: Title added/removed successfully
@@ -534,7 +544,7 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/id'
+          type: string
       responses:
         "200":
           description: Title removed successfully from user's wishlist
@@ -768,14 +778,6 @@ components:
 
 
   schemas:
-
-    id:
-      type: object
-      properties:
-        movie_id:
-          $ref: '#/components/schemas/movie_id'
-        show_id:
-          $ref: '#/components/schemas/show_id'
     
     title:
       type: object

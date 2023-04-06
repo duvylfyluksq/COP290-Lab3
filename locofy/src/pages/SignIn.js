@@ -40,6 +40,7 @@ const SignIn = () => {
 
   return (
     <div className="signin">
+       <div className="body15">
       <div className="signintile">
         <WelcomeBackContainer
           welcomeBackText="/vector37.svg"
@@ -52,7 +53,7 @@ const SignIn = () => {
           onSignUpTextClick={onSignUpTextClick}
         />
       </div>
-      <div className="body15" />
+      </div>
       <MoviesContainer
         coordinates="/vector38.svg"
         onLogoClick={onLogoClick}

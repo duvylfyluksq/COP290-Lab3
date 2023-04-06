@@ -5,7 +5,6 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.id import Id  # noqa: E501
 from swagger_server.models.movie import Movie  # noqa: E501
 from swagger_server.models.title import Title  # noqa: E501
 from swagger_server.models.tvshow import Tvshow  # noqa: E501
@@ -49,7 +48,7 @@ class TestTitlesController(BaseTestCase):
         Get information about a Movie/TV Show
         """
         response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title/{id}'.format(id=Id()),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title/{id}'.format(id='id_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

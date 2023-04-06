@@ -6,7 +6,6 @@ from flask import json
 from six import BytesIO
 
 from swagger_server.models.comment import Comment  # noqa: E501
-from swagger_server.models.id import Id  # noqa: E501
 from swagger_server.models.movie_id import MovieId  # noqa: E501
 from swagger_server.models.review import Review  # noqa: E501
 from swagger_server.models.show_id import ShowId  # noqa: E501
@@ -24,7 +23,7 @@ class TestReviewsController(BaseTestCase):
         query_string = [('sort_type_reviews', 'sort_type_reviews_example'),
                         ('sort_order', true)]
         response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{id}'.format(id=Id()),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{id}'.format(id='id_example'),
             method='GET',
             query_string=query_string)
         self.assert200(response,
@@ -40,7 +39,8 @@ class TestReviewsController(BaseTestCase):
                         ('user_id', 56),
                         ('rating', 10),
                         ('title', 'title_example'),
-                        ('content', 'content_example')]
+                        ('content', 'content_example'),
+                        ('creation_time', '2013-10-20T19:20:30+01:00')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review',
             method='POST',

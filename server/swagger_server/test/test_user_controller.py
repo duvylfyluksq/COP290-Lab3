@@ -5,7 +5,6 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.id import Id  # noqa: E501
 from swagger_server.models.title import Title  # noqa: E501
 from swagger_server.models.user import User  # noqa: E501
 from swagger_server.test import BaseTestCase
@@ -32,7 +31,7 @@ class TestUserController(BaseTestCase):
 
         Update interests
         """
-        query_string = [('pfp', 'pfp_example')]
+        query_string = [('interests', 'interests_example')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/profile/{user_id}/interests'.format(user_id=56),
             method='PUT',
@@ -127,7 +126,7 @@ class TestUserController(BaseTestCase):
 
         Add/Remove title from watchlist
         """
-        query_string = [('id', Id())]
+        query_string = [('id', 'id_example')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/watchlist/{user_id}'.format(user_id=56),
             method='PUT',
@@ -140,7 +139,7 @@ class TestUserController(BaseTestCase):
 
         Remove title from user's watchlist
         """
-        query_string = [('id', Id())]
+        query_string = [('id', 'id_example')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/watchlist/{user_id}/remove'.format(user_id=56),
             method='PUT',

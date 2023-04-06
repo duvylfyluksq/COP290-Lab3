@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useCallback } from "react";
 import MovieNavbar from "../components/MovieNavbar";
 import "./MakePost.css";
+import NavbarContainer from '../components/NavbarContainer';
+import { useNavigate } from 'react-router-dom';
 
 // const button=document.getElementById("rating");
 // button.addEventListener("click",function changeColor(){
@@ -17,6 +19,7 @@ import "./MakePost.css";
 //   }
 //   buttons[buttonNumber - 1].className="colored";
 // }
+
 
 const MakePost = () => {
   const onPostClick = useCallback(() => {
@@ -39,6 +42,31 @@ const MakePost = () => {
     }
     buttons[buttonNumber - 1].classList.add('colored');
   }
+  const navigate = useNavigate();
+
+const onLogoContainerClick = useCallback(() => {
+  navigate("/homesignedin");
+}, [navigate]);
+
+const onMoviesTextClick = useCallback(() => {
+  navigate("/moviebrowsein");
+}, [navigate]);
+
+const onTVShowsTextClick = useCallback(() => {
+  navigate("/tvshowbrowsein");
+}, [navigate]);
+
+const onGenresTextClick = useCallback(() => {
+  navigate("/genresin");
+}, [navigate]);
+
+const onFluentcompose24FilledClick = useCallback(() => {
+  navigate("/makepost");
+}, [navigate]);
+
+const onProfileMenuClick = useCallback(() => {
+  // Please sync "UserPage/InSelf" to the project
+}, []);
   
   return (
     <div className="makepost">
@@ -97,7 +125,18 @@ const MakePost = () => {
           </button>
         </div>
       </div>
-      <MovieNavbar />
+      <NavbarContainer
+          dimensions="/vector35.svg"
+          dimensionsText="/fluentcompose24filled1.svg"
+          dimensionsId="/profilemenu8.svg"
+          propBoxShadow="unset"
+          onLogoContainerClick={onLogoContainerClick}
+          onMoviesTextClick={onMoviesTextClick}
+          onTVShowsTextClick={onTVShowsTextClick}
+          onGenresTextClick={onGenresTextClick}
+          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
+          onProfileMenuClick={onProfileMenuClick}
+        />
     </div>
   );
 };

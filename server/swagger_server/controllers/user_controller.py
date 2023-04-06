@@ -1,7 +1,6 @@
 import connexion
 import six
 
-from swagger_server.models.id import Id  # noqa: E501
 from swagger_server.models.title import Title  # noqa: E501
 from swagger_server.models.user import User  # noqa: E501
 from swagger_server import util
@@ -141,12 +140,10 @@ def watchlist_user_id_put(user_id, id):  # noqa: E501
     :param user_id: ID of the user
     :type user_id: int
     :param id: id of TVShow/Movie to be added to the watchlist
-    :type id: dict | bytes
+    :type id: str
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        id = Id.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 
@@ -158,10 +155,8 @@ def watchlist_user_id_remove_put(user_id, id):  # noqa: E501
     :param user_id: ID of the user
     :type user_id: int
     :param id: id of the Title to be removed from user&#x27;s watchlist
-    :type id: dict | bytes
+    :type id: str
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        id = Id.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'

@@ -4,7 +4,6 @@
 from __future__ import absolute_import
 # import models into model package
 from swagger_server.models.comment import Comment
-from swagger_server.models.id import Id
 from swagger_server.models.movie import Movie
 from swagger_server.models.movie_id import MovieId
 from swagger_server.models.review import Review
