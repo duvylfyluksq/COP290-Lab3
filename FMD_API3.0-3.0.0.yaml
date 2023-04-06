@@ -62,7 +62,8 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/movie_id'
+          type: string
+          format: JSON
       - name: show_id
         in: query
         description: ID of the TVShow for which the review is being posted(null if Movie)
@@ -70,7 +71,8 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/show_id'
+          type: string
+          format: JSON
       - name: user_id
         in: query
         description: ID of the user who is posting the review

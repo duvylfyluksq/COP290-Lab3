@@ -19,9 +19,7 @@ class TestTitlesController(BaseTestCase):
 
         Sort/Filter movies
         """
-        query_string = [('genre', 'genre_example'),
-                        ('sort_type_browse', 'sort_type_browse_example'),
-                        ('sort_order', true)]
+        query_string = [('genre', 'Action, Adventure'), ('sort_order', True)]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/movie',
             method='GET',
@@ -32,23 +30,29 @@ class TestTitlesController(BaseTestCase):
     def test_search_get(self):
         """Test case for search_get
 
-        
         """
-        query_string = [('expression', 'expression_example')]
+        query_string = [('expression', 'vin')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/search',
             method='GET',
             query_string=query_string)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        self.assert200(response, 'Response body is : ' +
+                       response.data.decode('utf-8'))
 
     def test_title_id_get(self):
         """Test case for title_id_get
 
         Get information about a Movie/TV Show
         """
+        payload = json.dumps({"movie_id": {"id": 1}, "show_id": None})
         response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title/{id}'.format(id='id_example'),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title/{id}'.format(id=payload),
+            method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+        payload = json.dumps({"movie_id": None, "show_id": {"id": 1}})
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title/{id}'.format(id=payload),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -58,9 +62,7 @@ class TestTitlesController(BaseTestCase):
 
         Sort/Filter TV Shows
         """
-        query_string = [('genre', 'genre_example'),
-                        ('sort_type_browse', 'sort_type_browse_example'),
-                        ('sort_order', true)]
+        query_string = [('genre', 'Crime'), ('sort_type_browse', 'Rat')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/tvshow',
             method='GET',

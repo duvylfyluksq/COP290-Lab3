@@ -20,12 +20,11 @@ class TestReviewsController(BaseTestCase):
 
         Get all reviews of a title
         """
-        query_string = [('sort_type_reviews', 'sort_type_reviews_example'),
-                        ('sort_order', true)]
+        payload = json.dumps({"movie_id": {"id": 4}, "show_id": None})
+        query_string = []
         response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{id}'.format(id='id_example'),
-            method='GET',
-            query_string=query_string)
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{id}'.format(id=payload),
+            method='GET', query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -34,29 +33,47 @@ class TestReviewsController(BaseTestCase):
 
         Add a new review
         """
-        query_string = [('movie_id', MovieId()),
-                        ('show_id', ShowId()),
-                        ('user_id', 56),
-                        ('rating', 10),
-                        ('title', 'title_example'),
-                        ('content', 'content_example'),
+        movie_id = json.dumps({"id": 4})
+        show_id = json.dumps(None)
+        query_string = [('movie_id', movie_id),
+                        ('show_id', show_id),
+                        ('user_id', 1),
+                        ('rating', 9),
+                        ('title', 'Great Movie'),
+                        ('content', 'blah blah blah'),
                         ('creation_time', '2013-10-20T19:20:30+01:00')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review',
             method='POST',
             query_string=query_string)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        self.assert200(response, 'Response body is : ' +
+                       response.data.decode('utf-8'))
+        show_id = json.dumps({"id": 4})
+        movie_id = json.dumps(None)
+        query_string = [('movie_id', movie_id),
+                        ('show_id', show_id),
+                        ('user_id', 1),
+                        ('rating', 9),
+                        ('title', 'Great Movie'),
+                        ('content', 'blah blah blah'),
+                        ('creation_time', '2013-10-20T19:20:30+01:00')]
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review',
+            method='POST',
+            query_string=query_string)
+        self.assert200(response, 'Response body is : ' +
+                       response.data.decode('utf-8'))
 
     def test_review_review_id_comment_post(self):
         """Test case for review_review_id_comment_post
 
         Add comment to review
         """
-        query_string = [('user_id', 56),
-                        ('content', 'content_example')]
+        query_string = [('user_id', 1),
+                        ('content', 'hahahahahahahahahahahahahahah')]
         response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{review_id}/comment'.format(review_id=56),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{review_id}/comment'.format(
+                review_id=416),
             method='POST',
             query_string=query_string)
         self.assert200(response,
@@ -67,9 +84,10 @@ class TestReviewsController(BaseTestCase):
 
         Like/Unlike Review
         """
-        query_string = [('user_id', 56)]
+        query_string = [('user_id', 8)]
         response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{review_id}/likes'.format(review_id=56),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{review_id}/likes'.format(
+                review_id=1),
             method='PUT',
             query_string=query_string)
         self.assert200(response,
@@ -80,10 +98,11 @@ class TestReviewsController(BaseTestCase):
 
         Get all reviews of a user
         """
-        query_string = [('sort_type_reviews', 'sort_type_reviews_example'),
-                        ('sort_order', true)]
+        query_string = [('sort_type_reviews', 'Recent'),
+                        ('sort_order', True)]
         response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{user_id}'.format(user_id=56),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/user/{user_id}'.format(
+                user_id=1),
             method='GET',
             query_string=query_string)
         self.assert200(response,

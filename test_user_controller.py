@@ -32,8 +32,8 @@ class TestUserController(BaseTestCase):
 
         Update interests
         """
-        query_string = [('interests', ['interests_example',
-                         'interests_example', 'interests_example'])]
+        query_string = [
+            ('interests', 'interests_example,interests_example,interests_example')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/profile/{user_id}/interests'.format(
                 user_id=1),
@@ -103,8 +103,8 @@ class TestUserController(BaseTestCase):
 
         Create a new user account
         """
-        query_string = {'Username': 'username_example_3', 'Password': 'password_example', 'Confirm_Password': 'password_example', 'interests': [
-            'interests_example', 'interests_example', 'interests_example'], 'pfp': 'pfp_example', 'bio': 'bio_example'}
+        query_string = [('Username', 'paya'), ('Password', 'password_example'), ('Confirm_Password', 'password_example'), (
+            'interests', 'interests_example,interests_example,interests_example'), ('pfp', 'pfp_example'), ('bio', 'bio_example')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/signup',
             method='POST',

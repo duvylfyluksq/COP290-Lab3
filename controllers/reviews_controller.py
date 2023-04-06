@@ -1,8 +1,8 @@
 import connexion
 import six
+import json
 
 from swagger_server.models.comment import Comment  # noqa: E501
-from swagger_server.models.id import Id  # noqa: E501
 from swagger_server.models.movie_id import MovieId  # noqa: E501
 from swagger_server.models.review import Review  # noqa: E501
 from swagger_server.models.show_id import ShowId  # noqa: E501
@@ -11,121 +11,66 @@ from swagger_server import util
 
 
 def review_id_get(id, sort_type_reviews=None, sort_order=None):  # noqa: E501
-    """Get all reviews of a title
-
-    Returns a list of reviews for a particular title # noqa: E501
-
-    :param id: ID of the Movie or TVShow
-    :type id: dict | bytes
-    :param sort_type_reviews: Parameter based on which reviews will be sorted
-    :type sort_type_reviews: str
-    :param sort_order: sorting order
-    :type sort_order: bool
-
-    :rtype: List[Review]
-    """
-    if connexion.request.is_json:
-        try:
-            id = Id.from_dict(connexion.request.get_json())  # noqa: E501
-            return (db.sortReviewTitle(id, sort_type_reviews, sort_order), 200)
-        except Exception as err:
-            return (f'Error: {err}', 400)
-
-    return "do some magic!"
+    try:
+        id = json.loads(id)
+        if (id['show_id'] is None):
+            id = MovieId.from_dict(id['movie_id'])
+        elif (id['movie_id'] is None):
+            id = ShowId.from_dict(id['show_id'])
+        else:
+            raise TypeError
+        L = []
+        if (sort_type_reviews is None):
+            if (isinstance(id, MovieId)):
+                L = db.getReviews_forMovie(db.getMovie(id.id))
+            else:
+                L = db.getReviews_forTvshow(db.getTvshow(id.id))
+        else:
+            L = db.sortReviewTitle(id, sort_type_reviews, sort_order)
+        return (L, 200)
+    except Exception as err:
+        return (f'Error: {err}', 400)
 
 
-def review_post(movie_id, show_id, user_id, rating, title, content):  # noqa: E501
-    """Add a new review
-
-     # noqa: E501
-
-    :param movie_id: ID of the movie for which the review is being posted(null if TVShow)
-    :type movie_id: dict | bytes
-    :param show_id: ID of the TVShow for which the review is being posted(null if Movie)
-    :type show_id: dict | bytes
-    :param user_id: ID of the user who is posting the review
-    :type user_id: int
-    :param rating: rating by the user
-    :type rating: int
-    :param title: the review title of the review to be added
-    :type title: str
-    :param content: content of the review
-    :type content: str
-
-    :rtype: None
-    """
-    if connexion.request.is_json:
-        try:
-            movie_id = MovieId.from_dict(connexion.request.get_json())  # noqa: E501
-
-            show_id = ShowId.from_dict(connexion.request.get_json())  # noqa: E501
-            db.addReview(Review=Review(review_id=None, title=title, movie_id=movie_id,
-                         show_id=show_id, user_id=user_id, rating=rating, content=content))
-        except Exception as err:
-            (f'Error: {err}', 400)
-
-    return 'do some magic!'
+def review_post(movie_id, show_id, user_id, rating, title, content, creation_time):  # noqa: E501
+    movie_id = json.loads(movie_id)
+    show_id = json.loads(show_id)
+    creation_time = util.deserialize_datetime(creation_time)
+    try:
+        if (show_id is None):
+            db.addReview(Review(review_id=None, movie_id=(MovieId.from_dict(movie_id)).id, show_id=None, user_id=user_id,
+                                rating=rating, title=title, content=content, creation_time=creation_time))
+        elif (movie_id is None):
+            db.addReview(Review(review_id=None, movie_id=None, show_id=(ShowId.from_dict(show_id)).id, user_id=user_id,
+                                rating=rating, title=title, content=content, creation_time=creation_time))
+        else:
+            raise TypeError
+        return ("Review added successfully", 200)
+    except Exception as err:
+        return (f'Error: {err}', 400)
 
 
 def review_review_id_comment_post(review_id, user_id, content):  # noqa: E501
-    """Add comment to review
-
-     # noqa: E501
-
-    :param review_id: ID of the review
-    :type review_id: int
-    :param user_id: ID of the commentor
-    :type user_id: int
-    :param content: Comment to be added to review
-    :type content: str
-
-    :rtype: Comment
-    """
     try:
-        db.addComment(Comment=Comment(
-            comment_id=None, review_id=review_id, user_id=user_id, content=content))
+        comment = Comment(comment_id=None, review_id=review_id,
+                          user_id=user_id, content=content)
+        db.addComment(Comment=comment)
         return ("Comment added successfully", 200)
     except Exception as err:
         return (f'Error: {err}', 400)
 
 
 def review_review_id_likes_put(review_id, user_id):  # noqa: E501
-    """Like/Unlike Review
-
-     # noqa: E501
-
-    :param review_id: ID of the review
-    :type review_id: int
-    :param user_id: ID of the user who likes the review
-    :type user_id: int
-
-    :rtype: None
-    """
     try:
-        if connexion.request.isjson():
-            db.LikeorUnlike(review_id, user_id)
-            return ("Liked/Unliked", 200)
+        db.LikeOrUnlike(db.getReview(review_id), db.getUser(user_id))
+        return ("Liked/Unliked", 200)
     except Exception as err:
         return (f'Error: {err}', 400)
 
 
-def review_user_id_get(user_id: int, sort_type_reviews=None, sort_order=None):  # noqa: E501
-    """Get all reviews of a user
-
-    Returns a list of reviews for a particular user # noqa: E501
-
-    :param user_id: ID of the user
-    :type user_id: int
-    :param sort_type_reviews: Parameter based on which reviews will be sorted
-    :type sort_type_reviews: str
-    :param sort_order: sorting order
-    :type sort_order: bool
-
-    :rtype: List[Review]
-    """
-    return (db.sortReviewUser(user_id, sort_type_reviews, sort_order), 200)
-    if connexion.request.is_json:
-        try:
-            return (db.sortReviewUser(user_id, sort_type_reviews, sort_order), 200)
-        except Exception as err:
-            return (f'Error: {err}', 400)
+def review_user_id_get(user_id, sort_type_reviews=None, sort_order=None):  # noqa: E501
+    try:
+        print(db.sortReviewUser(user_id, sort_type_reviews, sort_order))
+        return (db.sortReviewUser(user_id, sort_type_reviews, sort_order), 200)
+    except Exception as err:
+        return (f'Error: {err}', 400)
