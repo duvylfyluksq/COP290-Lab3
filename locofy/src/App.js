@@ -23,6 +23,9 @@ import FrameComponent14 from "./pages/FrameComponent14";
 import FrameComponent15 from "./pages/FrameComponent15";
 import FrameComponent16 from "./pages/FrameComponent16";
 import FrameComponent17 from "./pages/FrameComponent17";
+import Genresin from "./pages/Genresin";
+import Tvshowin from "./pages/Tvshowin";
+import Moviein from "./pages/Moviein";
 import SignIn from "./pages/SignIn";
 import Continue from "./pages/Continue";
 import MakePost from "./pages/MakePost";
@@ -167,8 +170,11 @@ function App() {
       <Route path="/duvylfyluksqout" element={<FrameComponent8 />} />
       <Route path="/reviewsmovieout" element={<FrameComponent9 />} />
       <Route path="/movieout" element={<FrameComponent10 />} />
+      <Route path="/moviein" element={<Moviein />} />
       <Route path="/tvshowout" element={<FrameComponent11 />} />
+      <Route path="/tvshowin" element={<Tvshowin />} />
       <Route path="/genresout" element={<FrameComponent12 />} />
+      <Route path="/genresin" element={<Genresin />} />
       <Route path="/mixedbrowsein" element={<FrameComponent13 />} />
       <Route path="/tvshowbrowsein" element={<FrameComponent14 />} />
       <Route path="/moviebrowseout" element={<FrameComponent15 />} />
