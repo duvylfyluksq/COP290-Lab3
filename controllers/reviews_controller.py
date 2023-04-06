@@ -58,11 +58,9 @@ def review_post(movie_id, show_id, user_id, rating, title, content):  # noqa: E5
         try:
             movie_id = MovieId.from_dict(connexion.request.get_json())  # noqa: E501
 
-            show_id = ShowId.from_dict(connexion.request.get_json())  # noqa: E501
-            user_id = int(connexion.request.get_json().get('user_id'))
-            rating = int(connexion.request.get_json().get('rating'))
-            title = str(connexion.request.get_json().get('title'))
-            content = str(connexion.request.get_json().get('content'))
+            show_id = ShowId.from_dict(connexion.request.get_json())
+      # noqa: E501
+            
             db.addReview(Review=Review(review_id=None,title=title,movie_id=movie_id,show_id= show_id,user_id=user_id,rating=rating,content=content))
         except Exception as err:
             (f'Error: {err}', 400)
@@ -112,7 +110,7 @@ def review_review_id_likes_put(review_id, user_id):  # noqa: E501
     """
     try:
         if connexion.request.isjson():
-            user_id = int(connexion.request.get_json().get('user_id'))
+        
             db.LikeorUnlike(review_id,user_id)
             return ("done",200)
     except Exception as err:
@@ -141,5 +139,5 @@ def review_user_id_get(user_id, sort_type_reviews=None, sort_order=None):  # noq
             sort_order = bool(connexion.request.get_json().get('sort_order'))
             return (db.sortReviewUser(user_id, sort_type_reviews, sort_order),200)
         except Exception as err:
-            return (f'Error: {err}', 400)
+            return (f'reviews not found: {err}', 404)
     return 'do some magic!'
