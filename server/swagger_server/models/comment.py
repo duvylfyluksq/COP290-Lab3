@@ -6,9 +6,6 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
-from swagger_server.models.comment_id import CommentId  # noqa: F401,E501
-from swagger_server.models.review_id import ReviewId  # noqa: F401,E501
-from swagger_server.models.user_id import UserId  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -17,22 +14,22 @@ class Comment(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, comment_id: CommentId=None, review_id: ReviewId=None, user_id: UserId=None, content: str=None):  # noqa: E501
+    def __init__(self, comment_id: int=None, review_id: int=None, user_id: int=None, content: str=None):  # noqa: E501
         """Comment - a model defined in Swagger
 
         :param comment_id: The comment_id of this Comment.  # noqa: E501
-        :type comment_id: CommentId
+        :type comment_id: int
         :param review_id: The review_id of this Comment.  # noqa: E501
-        :type review_id: ReviewId
+        :type review_id: int
         :param user_id: The user_id of this Comment.  # noqa: E501
-        :type user_id: UserId
+        :type user_id: int
         :param content: The content of this Comment.  # noqa: E501
         :type content: str
         """
         self.swagger_types = {
-            'comment_id': CommentId,
-            'review_id': ReviewId,
-            'user_id': UserId,
+            'comment_id': int,
+            'review_id': int,
+            'user_id': int,
             'content': str
         }
 
@@ -59,64 +56,64 @@ class Comment(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def comment_id(self) -> CommentId:
+    def comment_id(self) -> int:
         """Gets the comment_id of this Comment.
 
 
         :return: The comment_id of this Comment.
-        :rtype: CommentId
+        :rtype: int
         """
         return self._comment_id
 
     @comment_id.setter
-    def comment_id(self, comment_id: CommentId):
+    def comment_id(self, comment_id: int):
         """Sets the comment_id of this Comment.
 
 
         :param comment_id: The comment_id of this Comment.
-        :type comment_id: CommentId
+        :type comment_id: int
         """
 
         self._comment_id = comment_id
 
     @property
-    def review_id(self) -> ReviewId:
+    def review_id(self) -> int:
         """Gets the review_id of this Comment.
 
 
         :return: The review_id of this Comment.
-        :rtype: ReviewId
+        :rtype: int
         """
         return self._review_id
 
     @review_id.setter
-    def review_id(self, review_id: ReviewId):
+    def review_id(self, review_id: int):
         """Sets the review_id of this Comment.
 
 
         :param review_id: The review_id of this Comment.
-        :type review_id: ReviewId
+        :type review_id: int
         """
 
         self._review_id = review_id
 
     @property
-    def user_id(self) -> UserId:
+    def user_id(self) -> int:
         """Gets the user_id of this Comment.
 
 
         :return: The user_id of this Comment.
-        :rtype: UserId
+        :rtype: int
         """
         return self._user_id
 
     @user_id.setter
-    def user_id(self, user_id: UserId):
+    def user_id(self, user_id: int):
         """Sets the user_id of this Comment.
 
 
         :param user_id: The user_id of this Comment.
-        :type user_id: UserId
+        :type user_id: int
         """
 
         self._user_id = user_id

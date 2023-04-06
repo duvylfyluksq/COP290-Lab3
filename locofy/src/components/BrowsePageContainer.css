@@ -1,22 +1,20 @@
 .peakyblinders-icon1 {
   position: absolute;
-  top: calc(50% - 191.5px);
-  left: calc(50% - 249.5px);
-  width: 499px;
-  height: 382px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
-.picture5,
-.title18 {
+.picture5{
   position: relative;
-  width: 499px;
-  height: 382px;
+  width: 35%;
+  height: 110%;
   flex-shrink: 0;
 }
 .title18 {
   display: inline-block;
-  width: 639px;
-  height: 66px;
+  position: relative;
+  height: 40%;
+  flex-shrink: 0;
 }
 .season-z {
   margin: 0;
@@ -26,8 +24,8 @@
   position: relative;
   font-size: var(--font-size-16xl);
   display: inline-block;
-  width: 166px;
-  height: 32px;
+  width: 100%;
+  height: 30%;
   flex-shrink: 0;
 }
 .year3 {
@@ -36,12 +34,13 @@
   height: 36px;
 }
 .header1 {
-  width: 639px;
+  width: 100%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-3xs);
+  gap: 8%;
 }
 .vector-icon40,
 .xy1013 {
@@ -128,8 +127,8 @@
   justify-content: flex-start;
 }
 .right10 {
-  width: 649px;
-  height: 382px;
+  width: 70%;
+  height: 262px;
   overflow: hidden;
   flex-direction: column;
   padding: var(--padding-mini) var(--padding-3xs);
@@ -140,8 +139,8 @@
   border-radius: var(--br-21xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 1244px;
-  height: 462px;
+  width: 100%;
+  height: 262px;
   flex-direction: row;
   padding: var(--padding-21xl);
   align-items: center;

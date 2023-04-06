@@ -7,9 +7,7 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.movie_id import MovieId  # noqa: F401,E501
-from swagger_server.models.review_id import ReviewId  # noqa: F401,E501
 from swagger_server.models.show_id import ShowId  # noqa: F401,E501
-from swagger_server.models.user_id import UserId  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -18,12 +16,11 @@ class Review(Model):
 
     Do not edit the class manually.
     """
-
-    def __init__(self, review_id: ReviewId = None, title: str = None, movie_id: MovieId = None, show_id: ShowId = None, user_id: UserId = None, likes: Dict[int, bool] = None, rating: int = None, content: str = None, creation_time: datetime = None):  # noqa: E501
+    def __init__(self, review_id: int=None, title: str=None, movie_id: MovieId=None, show_id: ShowId=None, user_id: int=None, likes: Dict[str, bool]=None, rating: int=None, content: str=None, creation_time: datetime=None):  # noqa: E501
         """Review - a model defined in Swagger
 
         :param review_id: The review_id of this Review.  # noqa: E501
-        :type review_id: ReviewId
+        :type review_id: int
         :param title: The title of this Review.  # noqa: E501
         :type title: str
         :param movie_id: The movie_id of this Review.  # noqa: E501
@@ -31,7 +28,7 @@ class Review(Model):
         :param show_id: The show_id of this Review.  # noqa: E501
         :type show_id: ShowId
         :param user_id: The user_id of this Review.  # noqa: E501
-        :type user_id: UserId
+        :type user_id: int
         :param likes: The likes of this Review.  # noqa: E501
         :type likes: Dict[str, bool]
         :param rating: The rating of this Review.  # noqa: E501
@@ -42,12 +39,12 @@ class Review(Model):
         :type creation_time: datetime
         """
         self.swagger_types = {
-            'review_id': ReviewId,
+            'review_id': int,
             'title': str,
             'movie_id': MovieId,
             'show_id': ShowId,
-            'user_id': UserId,
-            'likes': Dict[int, bool],
+            'user_id': int,
+            'likes': Dict[str, bool],
             'rating': int,
             'content': str,
             'creation_time': datetime
@@ -86,22 +83,22 @@ class Review(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def review_id(self) -> ReviewId:
+    def review_id(self) -> int:
         """Gets the review_id of this Review.
 
 
         :return: The review_id of this Review.
-        :rtype: ReviewId
+        :rtype: int
         """
         return self._review_id
 
     @review_id.setter
-    def review_id(self, review_id: ReviewId):
+    def review_id(self, review_id: int):
         """Sets the review_id of this Review.
 
 
         :param review_id: The review_id of this Review.
-        :type review_id: ReviewId
+        :type review_id: int
         """
 
         self._review_id = review_id
@@ -170,28 +167,28 @@ class Review(Model):
         self._show_id = show_id
 
     @property
-    def user_id(self) -> UserId:
+    def user_id(self) -> int:
         """Gets the user_id of this Review.
 
 
         :return: The user_id of this Review.
-        :rtype: UserId
+        :rtype: int
         """
         return self._user_id
 
     @user_id.setter
-    def user_id(self, user_id: UserId):
+    def user_id(self, user_id: int):
         """Sets the user_id of this Review.
 
 
         :param user_id: The user_id of this Review.
-        :type user_id: UserId
+        :type user_id: int
         """
 
         self._user_id = user_id
 
     @property
-    def likes(self) -> Dict[int, bool]:
+    def likes(self) -> Dict[str, bool]:
         """Gets the likes of this Review.
 
 
@@ -201,7 +198,7 @@ class Review(Model):
         return self._likes
 
     @likes.setter
-    def likes(self, likes: Dict[int, bool]):
+    def likes(self, likes: Dict[str, bool]):
         """Sets the likes of this Review.
 
 

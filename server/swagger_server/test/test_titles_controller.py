@@ -6,8 +6,8 @@ from flask import json
 from six import BytesIO
 
 from swagger_server.models.id import Id  # noqa: E501
-from swagger_server.models.inline_response200 import InlineResponse200  # noqa: E501
 from swagger_server.models.movie import Movie  # noqa: E501
+from swagger_server.models.title import Title  # noqa: E501
 from swagger_server.models.tvshow import Tvshow  # noqa: E501
 from swagger_server.test import BaseTestCase
 

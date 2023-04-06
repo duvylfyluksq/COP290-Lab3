@@ -6,6 +6,8 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.movie_id import MovieId  # noqa: F401,E501
+from swagger_server.models.show_id import ShowId  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -14,15 +16,25 @@ class Id(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self):  # noqa: E501
+    def __init__(self, movie_id: MovieId=None, show_id: ShowId=None):  # noqa: E501
         """Id - a model defined in Swagger
 
+        :param movie_id: The movie_id of this Id.  # noqa: E501
+        :type movie_id: MovieId
+        :param show_id: The show_id of this Id.  # noqa: E501
+        :type show_id: ShowId
         """
         self.swagger_types = {
+            'movie_id': MovieId,
+            'show_id': ShowId
         }
 
         self.attribute_map = {
+            'movie_id': 'movie_id',
+            'show_id': 'show_id'
         }
+        self._movie_id = movie_id
+        self._show_id = show_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'Id':
@@ -34,3 +46,45 @@ class Id(Model):
         :rtype: Id
         """
         return util.deserialize_model(dikt, cls)
+
+    @property
+    def movie_id(self) -> MovieId:
+        """Gets the movie_id of this Id.
+
+
+        :return: The movie_id of this Id.
+        :rtype: MovieId
+        """
+        return self._movie_id
+
+    @movie_id.setter
+    def movie_id(self, movie_id: MovieId):
+        """Sets the movie_id of this Id.
+
+
+        :param movie_id: The movie_id of this Id.
+        :type movie_id: MovieId
+        """
+
+        self._movie_id = movie_id
+
+    @property
+    def show_id(self) -> ShowId:
+        """Gets the show_id of this Id.
+
+
+        :return: The show_id of this Id.
+        :rtype: ShowId
+        """
+        return self._show_id
+
+    @show_id.setter
+    def show_id(self, show_id: ShowId):
+        """Sets the show_id of this Id.
+
+
+        :param show_id: The show_id of this Id.
+        :type show_id: ShowId
+        """
+
+        self._show_id = show_id

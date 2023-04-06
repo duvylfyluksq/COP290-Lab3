@@ -45,9 +45,7 @@ paths:
               schema:
                 type: array
                 items:
-                  oneOf:
-                    - $ref: '#/components/schemas/movie'
-                    - $ref: '#/components/schemas/tvshow'
+                  $ref: '#/components/schemas/title'
         "404":
           description: Movie/TV Show Not found
           
@@ -80,7 +78,8 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: rating
         in: query
         description: rating by the user
@@ -230,7 +229,7 @@ paths:
           type: string
           maxLength: 25
           example: godofnoobs_42
-      - name: Confirm Password
+      - name: Confirm_Password
         in: query
         description: Confirm Password
         required: true
@@ -250,6 +249,7 @@ paths:
           type: array
           items:
             type: string
+          minItems: 3
           maxItems: 3
           example:
             - Adventure
@@ -289,23 +289,21 @@ paths:
         "500":
           description: Internal server error
 
-  /review/{title}:
+  /review/{id}:
     get:
       tags:
       - Reviews
       summary: Get all reviews of a title
       description: Returns a list of reviews for a particular title
       parameters:
-      - name: title
+      - name: id
         in: path
-        description: ID of the review
+        description: ID of the Movie or TVShow
         required: true
         style: simple
         explode: false
         schema:
-          oneOf:
-            - $ref: '#/components/schemas/movie_id'
-            - $ref: '#/components/schemas/show_id'
+          $ref: '#/components/schemas/id'
       - $ref: '#/components/parameters/sort_type_reviews'
       - $ref: '#/components/parameters/sort_order'
       responses:
@@ -335,7 +333,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/review_id'
+          type: integer
+          example: 42
       - name: user_id
         in: query
         description: ID of the commentor
@@ -343,7 +342,8 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: content
         in: query
         description: Comment to be added to review
@@ -379,7 +379,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/review_id'
+          type: integer
+          example: 42
       - name: user_id
         in: query
         description: ID of the user who likes the review
@@ -387,7 +388,8 @@ paths:
         style: form
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       responses:
         "201":
           description: Like added or removed
@@ -410,18 +412,14 @@ paths:
         style: simple
         explode: false
         schema:
-          oneOf:
-            - $ref: '#/components/schemas/movie_id'
-            - $ref: '#/components/schemas/show_id'
+          $ref: '#/components/schemas/id'
       responses:
         "200":
           description: Information about the Movie/TV Show
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/movie'
-                  - $ref: '#/components/schemas/tvshow'
+                $ref: '#/components/schemas/title'
         "400":
           description: Invalid request
         "404":
@@ -441,7 +439,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - $ref: '#/components/parameters/sort_type_reviews'
       - $ref: '#/components/parameters/sort_order'
       responses:
@@ -471,7 +470,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       responses:
         "200":
           description: List of titles in user watchlist
@@ -480,9 +480,7 @@ paths:
               schema:
                 type: array
                 items:
-                  oneOf:
-                    - $ref: '#/components/schemas/movie'
-                    - $ref: '#/components/schemas/tvshow'
+                  $ref: '#/components/schemas/title'
         "400":
           description: Bad request. Invalid user ID
 
@@ -498,7 +496,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: id
         in: query
         description: id of TVShow/Movie to be added to the watchlist
@@ -506,9 +505,7 @@ paths:
         style: form
         explode: true
         schema:
-          oneOf:
-            - $ref: '#/components/schemas/movie_id'
-            - $ref: '#/components/schemas/show_id'
+          $ref: '#/components/schemas/id'
       responses:
         "201":
           description: Title added/removed successfully
@@ -528,7 +525,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: id
         in: query
         description: id of the Title to be removed from user's watchlist
@@ -536,9 +534,7 @@ paths:
         style: form
         explode: false
         schema:
-          oneOf:
-            - $ref: '#/components/schemas/movie_id'
-            - $ref: '#/components/schemas/show_id'
+          $ref: '#/components/schemas/id'
       responses:
         "200":
           description: Title removed successfully from user's wishlist
@@ -560,7 +556,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: username
         in: query
         description: New username
@@ -592,7 +589,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: pfp
         in: query
         description: New Profile Picture
@@ -624,7 +622,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: password
         in: query
         description: New password
@@ -656,8 +655,9 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
-      - name: pfp
+          type: integer
+          example: 42
+      - name: interests
         in: query
         description: New Profile Picture
         required: true
@@ -667,6 +667,7 @@ paths:
           type: array
           items:
             type: string
+          minItems: 3
           maxItems: 3
           example:
             - Adventure
@@ -693,7 +694,8 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
       - name: bio
         in: query
         description: New bio
@@ -766,6 +768,23 @@ components:
 
 
   schemas:
+
+    id:
+      type: object
+      properties:
+        movie_id:
+          $ref: '#/components/schemas/movie_id'
+        show_id:
+          $ref: '#/components/schemas/show_id'
+    
+    title:
+      type: object
+      properties:
+        movie:
+          $ref: '#/components/schemas/movie'
+        tvshow:
+          $ref: '#/components/schemas/tvshow'
+          
     movie_id:
       type: object
       properties:
@@ -780,23 +799,12 @@ components:
           type: integer
           example: 42
 
-    user_id:
-      type: integer
-      example: 42
-
-    review_id:
-      type: integer
-      example: 42
-
-    comment_id:
-      type: integer
-      example: 42
-
     user:
       type: object
       properties:
         user_id:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
         username:
           type: string
           maxLength: 25
@@ -834,6 +842,7 @@ components:
           items:
             type: string
           maxItems: 3
+          minItems: 3
           example:
             - Adventure
             - Comedy
@@ -871,6 +880,7 @@ components:
           items:
             type: string
           maxItems: 3
+          minItems: 3
           example:
             - Adventure
             - Comedy
@@ -921,6 +931,7 @@ components:
           type: array
           items:
             type: string
+          minItems: 3
           maxItems: 3
           example:
             - Adventure
@@ -942,7 +953,8 @@ components:
       type: object
       properties:
         review_id:
-          $ref: '#/components/schemas/review_id'
+          type: integer
+          example: 42
         title:
           type: string
           maxLength: 50
@@ -952,7 +964,8 @@ components:
         show_id:
           $ref: '#/components/schemas/show_id'
         user_id:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
         likes:
           type: object
           additionalProperties:
@@ -980,11 +993,14 @@ components:
       type: object
       properties:
         comment_id:
-          $ref: '#/components/schemas/comment_id'
+          type: integer
+          example: 42
         review_id:
-          $ref: '#/components/schemas/review_id'
+          type: integer
+          example: 42
         user_id:
-          $ref: '#/components/schemas/user_id'
+          type: integer
+          example: 42
         content:
           type: string
           maxLength: 200

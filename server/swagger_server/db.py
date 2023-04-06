@@ -3,7 +3,7 @@ import datetime
 import os
 import json
 import pymysql
-from swagger_server.models import User, UserId, Movie, Tvshow, Review, Comment, MovieId, ShowId, CommentId, ReviewId
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId, Id
 
 connection = pymysql.connect(
     host="localhost",
@@ -15,7 +15,7 @@ connection = pymysql.connect(
 # -------------------------------------------------------------------------------------------------------------------------------
 
 
-def getUser(Id: UserId) -> User:
+def getUser(Id: int) -> User:
     assert Id is not None
     with connection.cursor() as cursor:
         sql = f"SELECT * FROM `user` WHERE `user_id` = %s"
@@ -27,7 +27,7 @@ def getUser(Id: UserId) -> User:
         return (User.from_dict(r))
 
 
-def getMovie(Id: MovieId) -> Movie:
+def getMovie(Id: int) -> Movie:
     assert Id is not None
     with connection.cursor() as cursor:
         sql = f"SELECT * FROM `movie` WHERE `movie_id` = %s"
@@ -40,7 +40,37 @@ def getMovie(Id: MovieId) -> Movie:
         return Movie.from_dict(r)
 
 
-def getTvshow(Id: ShowId) -> Tvshow:
+def getAllMovies() -> List[Movie]:
+    L = []
+    with connection.cursor() as cursor:
+        sql = f"SELECT * FROM `movie`"
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['movie_id'] = {'id': i['movie_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
+            L.append(Movie.from_dict(i))
+    return L
+
+
+def getAllTvshows() -> List[Tvshow]:
+    L = []
+    with connection.cursor() as cursor:
+        sql = f"SELECT * FROM `tvshow`"
+        cursor.execute(sql)
+        r = cursor.fetchall()
+        for i in r:
+            i['genres'] = json.loads(i['genres'])
+            i['cast'] = json.loads(i['cast'])
+            i['show_id'] = {'id': i['show_id']}
+            i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
+            L.append(Tvshow.from_dict(i))
+    return L
+
+
+def getTvshow(Id: int) -> Tvshow:
     assert Id is not None
     with connection.cursor() as cursor:
         sql = f"SELECT * FROM `tvshow` WHERE `show_id` = %s"
@@ -53,7 +83,7 @@ def getTvshow(Id: ShowId) -> Tvshow:
         return Tvshow.from_dict(r)
 
 
-def getReview(Id: ReviewId) -> ReviewId:
+def getReview(Id: int) -> Review:
     assert Id is not None
     with connection.cursor() as cursor:
         sql = f"SELECT * FROM `review` WHERE `review_id` = %s"
@@ -93,6 +123,14 @@ def editPassword(User: User, password: str) -> None:
         connection.commit()
 
 
+def editPfp(User: User, pfp: str) -> None:
+    assert User.user_id is not None
+    with connection.cursor() as cursor:
+        sql = f"UPDATE `user` SET `pfp` = %s WHERE `user_id` = %s"
+        cursor.execute(sql, (pfp, User.user_id))
+        connection.commit()
+
+
 def editBio(User: User, bio: str) -> None:
     assert User.user_id is not None
     with connection.cursor() as cursor:
@@ -109,44 +147,49 @@ def editInterests(User: User, interests: List[str]) -> None:
         connection.commit()
 
 
-def sortLikes_Review() -> List[Tuple[Review, int]]:
-    with connection.cursor() as cursor:
-        L = []
-        sql = """SELECT * FROM `review`"""
-        cursor.execute(sql)
-        r = cursor.fetchall()
-        for i in r:
-            i['likes'] = json.loads(i['likes'])
-            i['show_id'] = {'id': i['show_id']}
-            i['movie_id'] = {'id': i['movie_id']}
-            i['creation_time'] = i['creation_time'].strftime(
-                "%Y-%m-%d %H:%M:%S")
-        L = [(Review.from_dict(i), sum(i['likes'].values()))
-             for i in r]
-        return sorted(L, key=lambda x: x[1], reverse=True)
+def sortLikes_Review_User(user_id: int) -> List[Review]:
+    L = getReviews_forUser(getUser(user_id))
+    return sorted(L, key=lambda x: sum(x.likes.values()), reverse=True)
 
 
-def sortRecent_Review() -> List[Review]:
-    with connection.cursor() as cursor:
-        sql = """SELECT * FROM `review` ORDER BY `creation_time` DESC"""
-        cursor.execute(sql)
-        r = cursor.fetchall()
-        for i in r:
-            i['likes'] = json.loads(i['likes'])
-            i['show_id'] = {'id': i['show_id']}
-            i['movie_id'] = {'id': i['movie_id']}
-            i['creation_time'] = i['creation_time'].strftime(
-                "%Y-%m-%d %H:%M:%S")
-        L = [Review.from_dict(i) for i in r]
-        return L
+def sortRecent_Review_User(user_id: int) -> List[Review]:
+    L = getReviews_forUser(getUser(user_id))
+    return sorted(L, key=lambda x: x.creation_time, reverse=True)
 
 
-def sortReview(sort_type: str, sort_order: Optional[bool]) -> List[Review]:
+def sortLikes_Review_Title(id: Id) -> List[Review]:
+    L = []
+    if (id.show_id is None):
+        L = getReviews_forMovie(getMovie(id.movie_id.id))
+    elif (id.movie_id is None):
+        L = getReviews_forShow(getTvshow(id.show_id.id))
+    return sorted(L, key=lambda x: sum(x.likes.values()), reverse=True)
+
+
+def sortRecent_Review_Title(id: Id) -> List[Review]:
+    L = []
+    if (id.show_id is None):
+        L = getReviews_forMovie(getMovie(id.movie_id.id))
+    elif (id.movie_id is None):
+        L = getReviews_forShow(getTvshow(id.show_id.id))
+    return sorted(L, key=lambda x: x.creation_time, reverse=True)
+
+
+def sortReviewUser(user_id: int, sort_type: str, sort_order: Optional[bool]) -> List[Review]:
     if (sort_type == "Recent"):
-        L = sortRecent_Review()
+        L = sortRecent_Review_User(user_id)
     elif (sort_type == "Likes"):
-        L = sortLikes_Review()
-        L = [i for i, _ in L]
+        L = sortLikes_Review_User(user_id)
+    if (sort_order):
+        L.reverse()
+    return L
+
+
+def sortReviewTitle(id: Id, sort_type: str, sort_order: Optional[bool]) -> List[Review]:
+    if (sort_type == "Recent"):
+        L = sortRecent_Review_Title(id)
+    elif (sort_type == "Likes"):
+        L = sortLikes_Review_Title(id)
     if (sort_order):
         L.reverse()
     return L
@@ -270,6 +313,10 @@ def sortPop_Movie() -> List[Tuple[Movie, int]]:
         return L
 
 
+
+
+
+
 def sortPop_Tvshow() -> List[Tuple[Tvshow, int]]:
     with connection.cursor() as cursor:
         sql = """SELECT `show_id`, COUNT(*) as `review_count` FROM `review` GROUP BY `show_id`"""
@@ -297,6 +344,8 @@ def mergePop(a: List[Tuple[Movie, int]], b: List[Tuple[Tvshow, int]]) -> List[Tu
 
 
 def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
+    if sort_type is None:
+        return getAllMovies()
     if (sort_type == "Rat"):
         L = mergeRating(a, b)
     elif (sort_type == "Rel"):
@@ -306,6 +355,7 @@ def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[M
     elif (sort_type == "Pop"):
         L = mergePop(a, b)
         L = [i for i, _ in L]
+    
     if (sort_order):
         L.reverse()
     return L
@@ -558,14 +608,14 @@ def getWatchlist_fromUser(User: User) -> List[Union[MovieId, ShowId]]:
         d = json.loads(r['watchlist_movies']) if r else {}
         for i in d:
             if (d[i]):
-                L.append(MovieId(json.loads(i)))
+                L.append(MovieId(id=json.loads(i)))
         sql = """SELECT `watchlist_shows` FROM `user` WHERE `user_id`=%s"""
         cursor.execute(sql, (User.user_id,))
         r = cursor.fetchone()
         d = json.loads(r['watchlist_shows']) if r else {}
         for i in d:
             if (d[i]):
-                L.append(ShowId(json.loads(i)))
+                L.append(ShowId(id=json.loads(i)))
     return L
 
 

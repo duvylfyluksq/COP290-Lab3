@@ -4,6 +4,7 @@ import BrowsePageContainer from "../components/BrowsePageContainer";
 import LeftContainer from "../components/LeftContainer";
 import { useNavigate } from "react-router-dom";
 import "./FrameComponent14.css";
+import NavbarContainer from '../components/NavbarContainer';
 
 const FrameComponent14 = () => {
   const navigate = useNavigate();
@@ -108,40 +109,20 @@ const FrameComponent14 = () => {
           />
         </div>
         <LeftContainer propBackgroundColor="#fff" propColor="#742bba" />
-        <div className="navbar1">
-          <div className="logo1" onClick={onLogoContainerClick}>
-            <img className="vector-icon10" alt="" src="/vector30.svg" />
-          </div>
-          <div className="navbar-lhs1">
-            <div className="movies2" onClick={onMoviesTextClick}>
-              <p className="movies3">Movies</p>
-            </div>
-            <div className="tv-shows1" onClick={onTVShowsTextClick}>
-              TV Shows
-            </div>
-            <div className="genres4" onClick={onGenresTextClick}>
-              Genres
-            </div>
-          </div>
-          <div className="searchbar1">
-            <img className="vector-icon11" alt="" src="/vector23.svg" />
-            <div className="search-movies-tv1">Search Movies, TV Shows</div>
-          </div>
-          <div className="navbar-rhs1">
-            <img
-              className="fluentcompose-24-filled-icon1"
-              alt=""
-              src="/fluentcompose24filled1.svg"
-              onClick={onFluentcompose24FilledClick}
-            />
-            <img
-              className="profilemenu-icon1"
-              alt=""
-              src="/profilemenu7.svg"
-              onClick={onProfileMenuClick}
-            />
-          </div>
-        </div>
+   
+          <NavbarContainer
+          dimensions="/vector16.svg"
+          dimensionsText="/fluentcompose24filled1.svg"
+          dimensionsId="/profilemenu5.svg"
+          propBoxShadow="unset"
+          onLogoContainerClick={onLogoContainerClick}
+          onMoviesTextClick={onMoviesTextClick}
+          onTVShowsTextClick={onTVShowsTextClick}
+          onGenresTextClick={onGenresTextClick}
+          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
+          onProfileMenuClick={onProfileMenuClick}
+        />
+          
       </div>
     </div>
   );
