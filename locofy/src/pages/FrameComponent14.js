@@ -42,16 +42,16 @@ const FrameComponent14 = () => {
   }, [navigate]);
 
   const onMoviesTextClick = useCallback(() => {
-    // Please sync "MovieBrowse-In" to the project
-  }, []);
+    navigate("/moviebrowsein");
+  }, [navigate]);
 
   const onTVShowsTextClick = useCallback(() => {
     navigate("/tvshowbrowsein");
   }, [navigate]);
 
   const onGenresTextClick = useCallback(() => {
-    // Please sync "Genres-In" to the project
-  }, []);
+    navigate("/genresin");
+  }, [navigate]);
 
   const onFluentcompose24FilledClick = useCallback(() => {
     navigate("/makepost");
@@ -64,9 +64,9 @@ const FrameComponent14 = () => {
     var buttons = document.querySelectorAll("#button");
     for (var i = 0; i < buttons.length; i++) {
       if (i == buttonNumber - 1) {
-        buttons[i].classList.add('colored');
+        buttons[i].classList.add('colored67');
     } else {
-        buttons[i].classList.remove('colored');
+        buttons[i].classList.remove('colored67');
     }
     }
   }
@@ -83,9 +83,9 @@ const FrameComponent14 = () => {
     var logos = document.querySelectorAll("#sorting");
     for (var i = 0; i < logos.length; i++) {
       if (i == buttonNumber - 1) {
-        logos[i].classList.add('coloured');
+        logos[i].classList.add('coloured78');
     } else {
-        logos[i].classList.remove('coloured');
+        logos[i].classList.remove('coloured78');
     }
     }
   }
