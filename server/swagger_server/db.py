@@ -340,19 +340,23 @@ def mergePop(a: List[Tuple[Movie, int]], b: List[Tuple[Tvshow, int]]) -> List[Tu
     return (sorted(a+b, key=lambda x: x[1], reverse=True))
 
 
-def sortBrowse(a, b, sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
+def sortBrowse(sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, Tvshow]]:
     if (sort_type == "Rat"):
-        L = mergeRating(a, b)
+        L = mergeRating(sortRating_Movie(), sortRating_Tvshow())
     elif (sort_type == "Rel"):
-        L = mergeRecent(a, b)
+        L = mergeRecent(sortRecent_Movie(), sortRating_Tvshow())
     elif (sort_type == "Lex"):
-        L = mergeLex(a, b)
+        L = mergeLex(sortLex_Movie(), sortLex_Tvshow())
     elif (sort_type == "Pop"):
-        L = mergePop(a, b)
+        L = mergePop(sortPop_Movie(), sortPop_Tvshow())
         L = [i for i, _ in L]
-
+    elif (sort_type is None):
+        L = getAllMovies()+getAllTvshows()
+    else:
+        raise TypeError
     if (sort_order):
         L.reverse()
+
     return L
 
 
@@ -478,8 +482,9 @@ def countLikes_User(User: User) -> int:
         cursor.execute(sql)
         r = cursor.fetchall()
         for i in r:
-            d = d = {int(k): v for k, v in json.loads(
-                i['likes']).items()}
+            d = {}
+            if (i['likes'] is not None):
+                d = {int(k): v for k, v in json.loads(i['likes']).items()}
             if (User.user_id in d.keys() and d[User.user_id]):
                 count += 1
     return count

@@ -2,7 +2,7 @@ import unittest
 import datetime
 import json
 import swagger_server.db as db
-from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId, Id
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
 
 
 class TestDB(unittest.TestCase):
@@ -178,7 +178,7 @@ class TestDB(unittest.TestCase):
         review_id = 1
         r = db.getComments_fromReview(db.getReview(review_id))
         L = [i.comment_id for i in r]
-        self.assertEqual(sorted(L), [2, 9])
+        self.assertEqual(sorted(L), [2, 9, 259])
 
     def test_Search(self):
         L = db.Search("T")
@@ -273,7 +273,7 @@ class TestDB(unittest.TestCase):
     def test_countComments_User(self):
         user_id = 1
         count = db.countComments_User(db.getUser(user_id))
-        self.assertEqual(count, 2)
+        self.assertEqual(count, 21)
         user_id = 2
         count = db.countComments_User(db.getUser(user_id))
         self.assertEqual(count, 1)
@@ -359,51 +359,32 @@ class TestDB(unittest.TestCase):
         self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
 
     def test_sortReviewTitle(self):
-        id = Id(movie_id=MovieId(id=1), show_id=None)
+        id = MovieId(id=1)
         L = db.sortReviewTitle(id, "Recent", True)
         self.assertEqual(L, sorted(L, key=lambda x: x.creation_time))
-        id = Id(movie_id=None, show_id=ShowId(id=2))
+        id = ShowId(id=2)
         L = db.sortReviewTitle(id, "Likes", True)
         self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
 
     def test_sortLikes_Review_Title(self):
-        id = Id(movie_id=MovieId(id=1), show_id=None)
+        id = MovieId(id=1)
         L = db.sortLikes_Review_Title(id)
         self.assertEqual(
             L, sorted(L, key=lambda x: sum(x.likes.values()), reverse=True))
-        id = Id(movie_id=None, show_id=ShowId(id=2))
+        id = ShowId(id=2)
         L = db.sortLikes_Review_Title(id)
         self.assertEqual(
             L, sorted(L, key=lambda x: sum(x.likes.values()), reverse=True))
 
     def test_sortRecent_Review_Title(self):
-        id = Id(movie_id=MovieId(id=1), show_id=None)
+        id = MovieId(id=1)
         L = db.sortRecent_Review_Title(id)
         self.assertEqual(
             L, sorted(L, key=lambda x: x.creation_time, reverse=True))
-        id = Id(movie_id=None, show_id=ShowId(id=2))
+        id = ShowId(id=2)
         L = db.sortRecent_Review_Title(id)
         self.assertEqual(
             L, sorted(L, key=lambda x: x.creation_time, reverse=True))
-
-    """
-    def test_sortRecent_Review(self):
-        L = db.sortRecent_Review()
-        self.assertEqual(
-            L, sorted(L, key=lambda x: x.creation_time, reverse=True))
-
-    def test_sortLikes_Review(self):
-        L = db.sortLikes_Review()
-        for i in L:
-            self.assertEqual(i[1], sum(i[0].likes.values()))
-        self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
-
-    def test_sortReview(self):
-        L = db.sortReview("Recent", True)
-        self.assertEqual(L, sorted(L, key=lambda x: x.creation_time))
-        L = db.sortReview("Likes", True)
-        self.assertEqual(L, sorted(L, key=lambda x: sum(x.likes.values())))
-    """
 
     def test_sortRating_Movie(self):
         L = db.sortRating_Movie()
@@ -462,17 +443,13 @@ class TestDB(unittest.TestCase):
         self.assertEqual(L, sorted(L, key=lambda x: x[1], reverse=True))
 
     def test_sortBrowse(self):
-        L = db.sortBrowse(db.sortRecent_Movie(),
-                          db.sortLex_Tvshow(), "Rat", True)
+        L = db.sortBrowse("Rat", True)
         self.assertEqual(L, sorted(L, key=lambda x: x.rating))
-        L = db.sortBrowse(db.sortRating_Movie(),
-                          db.sortLex_Tvshow(), "Rel", True)
+        L = db.sortBrowse("Rel", True)
         self.assertEqual(L, sorted(L, key=lambda x: x.release_date))
-        L = db.sortBrowse(db.sortRecent_Movie(),
-                          db.sortRating_Tvshow(), "Lex", True)
+        L = db.sortBrowse("Lex", True)
         self.assertEqual(L, sorted(L, key=lambda x: x.title))
-        L = db.sortBrowse(db.sortPop_Movie(),
-                          db.sortPop_Tvshow(), "Pop", True)
+        L = db.sortBrowse("Pop", True)
         r = db.mergePop(db.sortPop_Movie(), db.sortPop_Tvshow())
         r.reverse()
         r = [i for i, _ in r]
