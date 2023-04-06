@@ -1,6 +1,9 @@
 import React from 'react';
 import { useMemo } from "react";
 import "./NavbarContainer.css";
+import { useNavigate } from 'react-router-dom';
+import { useCallback } from "react";
+
 
 const NavbarContainer = ({
   dimensions,
@@ -19,6 +22,18 @@ const NavbarContainer = ({
       boxShadow: propBoxShadow,
     };
   }, [propBoxShadow]);
+  
+  const navigate = useNavigate();
+
+  const onWatchlistClick = useCallback(() => {
+    navigate("/watchlistinself");
+  }, [navigate]);
+  const onViewProfileClick = useCallback(() => {
+    navigate("/userinself");
+  }, [navigate]);
+  const onLogoutClick = useCallback(() => {
+    navigate("/homesignedout");
+  }, [navigate]);
 
   return (
     <div className="navbar2">
@@ -59,10 +74,10 @@ const NavbarContainer = ({
           <div class="dropdown">
               <span class="name">bobdylan</span>
               <hr />
-              <a href="#Watchlist">Watchlist</a><br />
-              <a href="#userpage">View Profile</a><br />
+              <a href="" onClick={onWatchlistClick}>Watchlist</a><br />
+              <a href="" onClick={onViewProfileClick}>View Profile</a><br />
               <hr />
-              <a href="#signout">Logout</a>
+              <a href="" onClick={onLogoutClick}>Logout</a>
           </div>
         </div>
       </div>

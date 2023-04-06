@@ -128,11 +128,11 @@
   position: absolute;
   top: 133px;
   left: 0;
-  width: 1920px;
+  width: 100%;
   height: 947px;
   overflow-y: auto;
   flex-direction: column;
-  padding: 87.5px var(--padding-538xl);
+  /* padding: 87.5px var(--padding-538xl); */
   justify-content: flex-start;
   gap: var(--gap-21xl);
 }
