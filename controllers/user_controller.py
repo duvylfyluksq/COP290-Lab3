@@ -1,5 +1,6 @@
 import connexion
 import six
+import json
 
 from swagger_server.models.id import Id  # noqa: E501
 from swagger_server.models.title import Title  # noqa: E501
@@ -200,12 +201,12 @@ def watchlist_user_id_put(user_id, id):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        id = Id.from_dict(connexion.request.get_json())  # noqa: E501
+        id = json.loads(id)  # noqa: E501
         title = None
-        if (id.tvshow is None):
-            title = id.movie
+        if (id['show_id'] is None):
+            title = db.getMovie((MovieId.from_dict(id['movie_id'])).id)
         else:
-            title = id.tvshow
+            title = db.getTvshow((ShowId.from_dict(id['show_id'])).id)
         try:
             user = db.getUser(user_id)
             db.addOrDelete_fromWatchlist(user, title)
@@ -228,12 +229,12 @@ def watchlist_user_id_remove_put(user_id, id):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        id = Id.from_dict(connexion.request.get_json())  # noqa: E501
+        id = json.loads(id)  # noqa: E501
         title = None
-        if (id.tvshow is None):
-            title = id.movie
+        if (id['show_id'] is None):
+            title = db.getMovie((MovieId.from_dict(id['movie_id'])).id)
         else:
-            title = id.tvshow
+            title = db.getTvshow((ShowId.from_dict(id['show_id'])).id)
         try:
             user = db.getUser(user_id)
             db.delete_fromWatchlist(user, title)

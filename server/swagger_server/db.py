@@ -3,7 +3,7 @@ import datetime
 import os
 import json
 import pymysql
-from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId, Id
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
 
 connection = pymysql.connect(
     host="localhost",
@@ -157,21 +157,21 @@ def sortRecent_Review_User(user_id: int) -> List[Review]:
     return sorted(L, key=lambda x: x.creation_time, reverse=True)
 
 
-def sortLikes_Review_Title(id: Id) -> List[Review]:
+def sortLikes_Review_Title(id: Union[MovieId, ShowId]) -> List[Review]:
     L = []
-    if (id.show_id is None):
-        L = getReviews_forMovie(getMovie(id.movie_id.id))
-    elif (id.movie_id is None):
-        L = getReviews_forShow(getTvshow(id.show_id.id))
+    if (isinstance(id, MovieId)):
+        L = getReviews_forMovie(getMovie(id.id))
+    elif (isinstance(id, ShowId)):
+        L = getReviews_forShow(getTvshow(id.id))
     return sorted(L, key=lambda x: sum(x.likes.values()), reverse=True)
 
 
-def sortRecent_Review_Title(id: Id) -> List[Review]:
+def sortRecent_Review_Title(id: Union[MovieId, ShowId]) -> List[Review]:
     L = []
-    if (id.show_id is None):
-        L = getReviews_forMovie(getMovie(id.movie_id.id))
-    elif (id.movie_id is None):
-        L = getReviews_forShow(getTvshow(id.show_id.id))
+    if (isinstance(id, MovieId)):
+        L = getReviews_forMovie(getMovie(id.id))
+    elif (isinstance(id, ShowId)):
+        L = getReviews_forShow(getTvshow(id.id))
     return sorted(L, key=lambda x: x.creation_time, reverse=True)
 
 
@@ -185,7 +185,7 @@ def sortReviewUser(user_id: int, sort_type: str, sort_order: Optional[bool]) -> 
     return L
 
 
-def sortReviewTitle(id: Id, sort_type: str, sort_order: Optional[bool]) -> List[Review]:
+def sortReviewTitle(id: Union[ShowId, MovieId], sort_type: str, sort_order: Optional[bool]) -> List[Review]:
     if (sort_type == "Recent"):
         L = sortRecent_Review_Title(id)
     elif (sort_type == "Likes"):
