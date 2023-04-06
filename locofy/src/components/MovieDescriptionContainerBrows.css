@@ -1,31 +1,33 @@
 .joker-icon5 {
   position: absolute;
-  top: calc(50% - 191px);
-  left: calc(50% - 248.5px);
-  width: 498.49px;
-  height: 382px;
+  left:50%;
+  top:-10%;
+  /* top: calc(50% - 191px);
+  left: calc(50% - 248.5px); */
+  width: 50%;
+  height: 120%;
   object-fit: cover;
 }
 .picture6,
 .title19,
 .year4 {
   position: relative;
-  width: 499px;
-  height: 382px;
+  width: 100%;
+  height: 100%;
   flex-shrink: 0;
 }
 .title19,
 .year4 {
+  top:20%;
   font-weight: 500;
   display: inline-block;
-  width: 639px;
-  height: 66px;
+  width: 40%;
+  height: 35%;
 }
 .year4 {
   font-size: var(--font-size-11xl);
   font-weight: 300;
   width: 94px;
-  height: 36px;
 }
 .header2 {
   width: 639px;
@@ -51,19 +53,17 @@
 }
 .rating24 {
   width: 101px;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
-.duration3 {
-  margin: 0;
-}
 .duration2 {
   position: relative;
   display: inline-block;
   width: 104px;
-  height: 24px;
+  height: 5%;
   flex-shrink: 0;
 }
 .subheader1 {
@@ -71,14 +71,17 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-3xs);
+  /* gap: var(--gap-3xs); */
   font-size: var(--font-size-xl);
 }
 .credits3,
 .genre13 {
   position: relative;
   display: inline-block;
-  width: 639px;
+  width: 40%;
+}
+.credits3{
+  font-size: var(--font-size-xl);
 }
 .genre13 {
   position: absolute;
@@ -122,21 +125,21 @@
   box-sizing: border-box;
 }
 .right11 {
-  width: 649px;
+  width: 100%;
   height: 382px;
   overflow: hidden;
   flex-direction: column;
   padding: var(--padding-mini) var(--padding-3xs);
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-26xl);
+  /* gap: var(--gap-26xl); */
 }
 .moviedescription-browsepage {
   border-radius: var(--br-21xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 1250px;
-  height: 499px;
+  width: 90%;
+  height: 300px;
   flex-direction: row;
   padding: var(--padding-21xl);
   align-items: center;

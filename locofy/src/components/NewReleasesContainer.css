@@ -7,14 +7,6 @@
   position: relative;
   font-weight: 600;
 }
-/* .new-releases1 {
-  position: relative;
-  font-weight: 600;
-  display: inline-block;
-  width: 290px;
-  height: 45px;
-  flex-shrink: 0;
-} */
 
 .gradient-overlay {
   z-index:1;

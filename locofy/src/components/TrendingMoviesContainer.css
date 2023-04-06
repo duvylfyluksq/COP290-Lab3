@@ -50,7 +50,7 @@
 .vector-icon70,
 .xy1040 {
   position: relative;
-  top:185px;
+  top:182px;
   z-index:2;
 }
 .xy1040 {
@@ -70,12 +70,13 @@
   justify-content: space-between;
 }
 .title45 {
-  top:185px;
+  top:180px;
   position: relative;
   display: inline-block;
-  height: 18px;
   flex-shrink: 0;
   z-index:2;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
 }
 .details35 {
   position: absolute;
@@ -98,11 +99,11 @@
 }
 .trending-movies,
 .trending-movies3 {
+  align-self: stretch;
   display: flex;
   justify-content: flex-start;
 }
 .trending-movies3 {
-  width: 1770px;
   overflow-x: auto;
   flex-direction: row;
   align-items: center;

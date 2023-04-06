@@ -150,13 +150,7 @@ const FrameComponent17 = () => {
     <div className="home-signedout-parent">
       <div className="home-signedout">
         <div className="body14">
-          {/* <div class="scroll-container">
-              <div class="scroll-content"> */}
-                <MovieLinkContainer />
-              {/* </div>
-              <button class="scroll-left"><img src={Left} className="arrow" /></button>
-              <button class="scroll-right">Right</button>
-          </div> */}
+          <MovieLinkContainer />
           <TVShowsContainer
             propHeight="unset"
             propFlexShrink="unset"

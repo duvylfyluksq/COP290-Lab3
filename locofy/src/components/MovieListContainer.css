@@ -1,3 +1,8 @@
+.top-movies2::-webkit-scrollbar{
+  width: 0px;
+  background-color: transparent; 
+}
+
 .top-movies1 {
   position: relative;
   font-weight: 600;
@@ -22,6 +27,8 @@
 }
 .vector-icon52,
 .xy1022 {
+  z-index:2;
+  top:165px;
   position: relative;
   flex-shrink: 0;
 }
@@ -42,13 +49,16 @@
   justify-content: space-between;
 }
 .title27 {
+  z-index:2;
+  top:165px;
   position: relative;
   font-size: var(--font-size-xl);
   font-weight: 500;
   display: inline-block;
   width: 423px;
-  height: 18px;
   flex-shrink: 0;
+  overflow-x:hidden;
+  white-space: nowrap;
 }
 .details17 {
   position: absolute;
@@ -61,22 +71,24 @@
   justify-content: flex-start;
   gap: var(--gap-8xs);
 }
-.linearfill17 {
+.gradient-overlay {
+  z-index:1;
   position: absolute;
-  top: 292px;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: -100%;
   left: 0;
   border-radius: var(--br-mini);
   background: linear-gradient(
     180deg,
-    #742bba,
-    rgba(116, 43, 186, 0.82),
-    rgba(197, 167, 226, 0.32) 37.5%,
-    rgba(255, 255, 255, 0)
+    rgba(255,255,255,0),
+    rgba(82,30,152,1)
   );
-  width: 475px;
-  height: 292px;
   overflow: hidden;
 }
+
 .moviecard6 {
   position: relative;
   width: 475px;
@@ -86,11 +98,11 @@
 }
 .top-movies,
 .top-movies2 {
+  align-self: stretch;
   display: flex;
   justify-content: flex-start;
 }
 .top-movies2 {
-  width: 1770px;
   overflow-x: auto;
   flex-direction: row;
   align-items: center;

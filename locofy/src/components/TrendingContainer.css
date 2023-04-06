@@ -2,17 +2,13 @@
   width: 0px;
   background-color: transparent; 
 }
-.trending-tv-shows1 {
-  margin: 0;
-}
+
 .trending-tv-shows-container {
+  align-self: stretch;
   position: relative;
   font-weight: 600;
-  display: inline-block;
-  width: 401px;
-  height: 53px;
-  flex-shrink: 0;
 }
+
 .tvshowcard-icon20 {
   position: absolute;
   height: 100%;
@@ -32,6 +28,7 @@
   position: relative;
   top:150px;
   z-index:2;
+  flex-shrink: 0;
 }
 .xy1046 {
   display: inline-block;
@@ -51,20 +48,23 @@
 }
 .season21,
 .title51 {
-  top:145px;
+  
   position: relative;
   display: inline-block;
-  height: 18px;
   flex-shrink: 0;
   z-index:2;
 }
 .title51 {
+  top:145px;
   font-size: var(--font-size-xl);
   font-weight: 500;
   width: 423px;
+  overflow-x:hidden;
+  white-space: nowrap;
 }
 .season21 {
   width: 63px;
+  top:138px;
 }
 .details41 {
   position: absolute;
@@ -97,14 +97,18 @@
 .tvshowcard17 {
   position: relative;
   width: 475px;
-  height: 292px;
+  height: 295px;
   flex-shrink: 0;
   cursor: pointer;
 }
+.trending-tv-shows,
 .trending-tv-shows2 {
-  width: 1770px;
-  overflow-x: auto;
+  align-self: stretch;
   display: flex;
+  justify-content: flex-start;
+}
+.trending-tv-shows2 {
+  overflow-x: auto;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -113,12 +117,10 @@
   color: var(--color-white);
 }
 .trending-tv-shows {
-  height: 394px;
+  height: 395px;
   flex-shrink: 0;
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
   gap: var(--gap-11xl);
   text-align: left;
   font-size: var(--font-size-26xl);

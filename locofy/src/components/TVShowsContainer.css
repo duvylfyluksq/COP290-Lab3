@@ -105,11 +105,11 @@
 }
 .top-tv-shows,
 .top-tv-shows2 {
+  align-self: stretch;
   display: flex;
   justify-content: flex-start;
 }
 .top-tv-shows2 {
-  width: 1770px;
   overflow-x: auto;
   flex-direction: row;
   align-items: center;

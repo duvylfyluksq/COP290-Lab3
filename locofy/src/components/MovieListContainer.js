@@ -33,6 +33,7 @@ const MovieListContainer = () => {
       <div className="top-movies2">
         <div className="moviecard6" onClick={onMovieCardContainer3Click}>
           <img className="moviecard-icon6" alt="" src="/moviecard@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill17">
             <div className="details17">
               <div className="rating32">
@@ -45,6 +46,7 @@ const MovieListContainer = () => {
         </div>
         <div className="moviecard6" onClick={onMovieCardContainer4Click}>
           <img className="moviecard-icon6" alt="" src="/tvshowcard1@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill17">
             <div className="details17">
               <div className="rating32">
@@ -57,6 +59,7 @@ const MovieListContainer = () => {
         </div>
         <div className="moviecard6" onClick={onMovieCardContainer5Click}>
           <img className="moviecard-icon6" alt="" src="/moviecard@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill17">
             <div className="details17">
               <div className="rating32">
@@ -69,6 +72,7 @@ const MovieListContainer = () => {
         </div>
         <div className="moviecard6" onClick={onMovieCardContainer6Click}>
           <img className="moviecard-icon6" alt="" src="/tvshowcard1@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill17">
             <div className="details17">
               <div className="rating32">
@@ -81,6 +85,7 @@ const MovieListContainer = () => {
         </div>
         <div className="moviecard6" onClick={onMovieCardContainer7Click}>
           <img className="moviecard-icon6" alt="" src="/moviecard@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill17">
             <div className="details17">
               <div className="rating32">
@@ -93,6 +98,7 @@ const MovieListContainer = () => {
         </div>
         <div className="moviecard6" onClick={onMovieCardContainer8Click}>
           <img className="moviecard-icon6" alt="" src="/tvshowcard1@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill17">
             <div className="details17">
               <div className="rating32">

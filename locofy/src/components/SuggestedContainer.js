@@ -37,6 +37,7 @@ const SuggestedContainer = () => {
       <div className="recommendations2">
         <div className="moviecard3" onClick={onMovieCardContainerClick}>
           <img className="moviecard-icon3" alt="" src="/moviecard@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill10">
             <div className="details10">
               <div className="rating25">
@@ -49,6 +50,7 @@ const SuggestedContainer = () => {
         </div>
         <div className="moviecard3" onClick={onTVShowCardContainerClick}>
           <img className="moviecard-icon3" alt="" src="/tvshowcard1@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill11">
             <div className="details11">
               <div className="rating25">
@@ -62,6 +64,7 @@ const SuggestedContainer = () => {
         </div>
         <div className="moviecard3" onClick={onMovieCardContainer1Click}>
           <img className="moviecard-icon3" alt="" src="/moviecard@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill10">
             <div className="details10">
               <div className="rating25">
@@ -74,6 +77,7 @@ const SuggestedContainer = () => {
         </div>
         <div className="moviecard3" onClick={onTVShowCardContainer1Click}>
           <img className="moviecard-icon3" alt="" src="/tvshowcard1@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill11">
             <div className="details11">
               <div className="rating25">
@@ -87,6 +91,7 @@ const SuggestedContainer = () => {
         </div>
         <div className="moviecard3" onClick={onMovieCardContainer2Click}>
           <img className="moviecard-icon3" alt="" src="/moviecard@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill10">
             <div className="details10">
               <div className="rating25">
@@ -99,6 +104,7 @@ const SuggestedContainer = () => {
         </div>
         <div className="moviecard3" onClick={onTVShowCardContainer2Click}>
           <img className="moviecard-icon3" alt="" src="/tvshowcard1@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill11">
             <div className="details11">
               <div className="rating25">
@@ -112,6 +118,7 @@ const SuggestedContainer = () => {
         </div>
         <div className="moviecard3" onClick={onTVShowCardContainer3Click}>
           <img className="moviecard-icon3" alt="" src="/moviecard@2x.png" />
+          <div className='gradient-overlay'></div>
           <div className="linearfill11">
             <div className="details11">
               <div className="rating25">

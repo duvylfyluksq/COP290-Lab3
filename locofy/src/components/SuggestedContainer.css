@@ -1,10 +1,11 @@
+.recommendations2::-webkit-scrollbar{
+  width: 0px;
+  background-color: transparent; 
+}
 .recommendations1 {
+  align-self: stretch;
   position: relative;
   font-weight: 600;
-  display: inline-block;
-  width: 507px;
-  height: 51px;
-  flex-shrink: 0;
 }
 .moviecard-icon3 {
   position: absolute;
@@ -20,8 +21,27 @@
   max-height: 100%;
   object-fit: cover;
 }
+.gradient-overlay {
+  z-index:1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: -100%;
+  left: 0;
+  border-radius: var(--br-mini);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0),
+    rgba(82,30,152,1)
+  );
+  overflow: hidden;
+}
 .vector-icon45,
 .xy1015 {
+  top:140px;
+  z-index:2;
   position: relative;
   flex-shrink: 0;
 }
@@ -42,6 +62,8 @@
   justify-content: space-between;
 }
 .title20 {
+  top:145px;
+  z-index:2;
   position: relative;
   font-size: var(--font-size-xl);
   font-weight: 500;
@@ -61,22 +83,7 @@
   justify-content: flex-start;
   gap: var(--gap-8xs);
 }
-.linearfill10 {
-  position: absolute;
-  top: 292px;
-  left: 0;
-  border-radius: var(--br-mini);
-  background: linear-gradient(
-    180deg,
-    #742bba,
-    rgba(116, 43, 186, 0.82),
-    rgba(197, 167, 226, 0.32) 37.5%,
-    rgba(255, 255, 255, 0)
-  );
-  width: 475px;
-  height: 292px;
-  overflow: hidden;
-}
+
 .moviecard3,
 .season8 {
   position: relative;
@@ -88,9 +95,11 @@
   cursor: pointer;
 }
 .season8 {
+  top:145px;
   display: inline-block;
   width: 63px;
   height: 18px;
+  z-index:2;
 }
 .details11 {
   position: absolute;
@@ -103,7 +112,7 @@
   justify-content: flex-start;
   gap: var(--gap-8xs);
 }
-.linearfill11 {
+/* .linearfill11 {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -120,14 +129,14 @@
     rgba(255, 255, 255, 0)
   );
   overflow: hidden;
-}
+} */
 .recommendations,
 .recommendations2 {
+  align-self: stretch;
   display: flex;
   justify-content: flex-start;
 }
 .recommendations2 {
-  width: 1770px;
   overflow-x: auto;
   flex-direction: row;
   align-items: center;

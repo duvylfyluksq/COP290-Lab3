@@ -27,8 +27,8 @@ const MoviesContainer = ({
       </div>
       <div className="right4">
         <div className="searchbar3">
-          <img className="vector-icon20" alt="" src="/vector4.svg" />
-          <div className="search-movies-tv3">Search Movies, TV Shows</div>
+        <img className="vector-icon84" alt="" src="/vector23.svg" />
+          <input type="text" placeholder="What's on your mind?" class="type" />
         </div>
         <div className="navbar-rhs3" onClick={onNavbarRHSContainerClick}>
           <img className="vector-icon21" alt="" src="/vector6.svg" />
