@@ -58,3 +58,21 @@
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
 }
+.colored{
+  background-color: var(--color-darkorchid-100);
+}
+
+.colored2{
+  background-color: var(--color-darkorchid-100);
+  color:#FFC055;
+}
+
+.coloured{
+  background-color:#FFC055;
+}
+
+.vector-icon12{
+  top:-20px;
+  left:50%;
+
+}

@@ -229,16 +229,3 @@
   font-family: var(--font-roboto);
   overflow-x:hidden;
 }
-
-.colored{
-  background-color: var(--color-darkorchid-100);
-}
-
-.colored2{
-  background-color: var(--color-darkorchid-100);
-  color:#FFC055;
-}
-
-.coloured{
-  background-color:#FFC055;
-}

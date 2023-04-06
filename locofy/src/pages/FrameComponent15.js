@@ -248,6 +248,7 @@ const FrameComponent15 = () => {
               </div>
             </div>
           </div>
+
         <MoviesContainer
           coordinates="/vector33.svg"
           onLogoContainerClick={onLogoContainerClick}

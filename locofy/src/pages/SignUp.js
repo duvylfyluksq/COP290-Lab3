@@ -27,7 +27,7 @@ const SignUp = () => {
   const onNavbarRHSContainerClick = useCallback(() => {
     navigate("/signin");
   }, [navigate]);
-
+  
   return (
     <div className="signup">
       <div className="body20">

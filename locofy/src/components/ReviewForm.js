@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMemo } from "react";
 import "./ReviewForm.css";
+import { useState } from 'react';
 
 const ReviewForm = ({
   picture,
@@ -22,6 +23,11 @@ const ReviewForm = ({
     };
   }, [bodyFrameCursor]);
 
+  const [charCount2, setCharCount2] = useState(0);
+  function handleInputChange2(event) {
+    const inputValue = event.target.value;
+    setCharCount2(inputValue.length);
+  }
   return (
     <div className="review">
       <div className="indocked">
@@ -83,10 +89,11 @@ const ReviewForm = ({
           <div className="add-comment">Add Comment</div>
           <div className="body21">
             <div className="bodyframe">
-              <div className="commentbody">Write Your Comment</div>
+              <textarea className="commentbody" placeholder='Write a comment' cols='80' rows='3'  maxlength="200"
+              onChange={handleInputChange2} />
             </div>
             <div className="maxchar">
-              <div className="max-characters">{`Max Characters: 200 `}</div>
+              <div className="max-characters">Characters left: {200-charCount2}</div>
             </div>
           </div>
           <div className="comment">

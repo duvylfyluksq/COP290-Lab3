@@ -37,7 +37,17 @@ const SignIn = () => {
   const onNavbarRHSContainerClick = useCallback(() => {
     navigate("/signin");
   }, [navigate]);
-
+  function toggleVisibility1() {  
+    var getPassword = document.getElementById("Password1");
+    var image = document.getElementById("your-img");
+    if (getPassword.type === "password") {  
+      getPassword.type = "text";
+      image.setAttribute("src", "/hidepasswordicon.svg");
+    } else {  
+      getPassword.type = "password";
+      image.setAttribute("src", "/showpasswordicon.svg");
+    }  
+  };
   return (
     <div className="signin">
        <div className="body15">
@@ -47,7 +57,16 @@ const SignIn = () => {
           createAccountText="Welcome Back!"
         />
         <input type="text" className="password" placeholder="Username" />
-        <input type="password" className="password" placeholder="Password" />
+        <input type="password" id="Password1" className="password" placeholder="Password" />
+          <div className="hideorshowpassword">
+            <img
+              id="your-img"
+              className="showpasswordicon"
+              alt=""
+              src="/showpasswordicon.svg"
+              onClick={() => toggleVisibility1()}
+            />
+          </div>
         <FooterContainer
           onLoginContainerClick={onLoginContainerClick}
           onSignUpTextClick={onSignUpTextClick}

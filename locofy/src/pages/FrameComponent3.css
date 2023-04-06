@@ -23,7 +23,7 @@
   gap: var(--gap-3xs);
 }
 .postslist {
-  width: 1770px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--gap-24xl);
@@ -73,11 +73,12 @@
 }
 .paginationfooter3,
 .reviewlist {
+  width:100%;
   display: flex;
   padding: 0 0 var(--padding-6xl);
 }
 .paginationfooter3 {
-  width: 1371px;
+  width: 60%;
   flex-direction: row;
   box-sizing: border-box;
   align-items: center;
@@ -94,7 +95,7 @@
 .reviews-duvylfyluksq-in {
   position: absolute;
   left: 0;
-  width: 1920px;
+  width: 100%;
 }
 .body3 {
   top: 133px;
