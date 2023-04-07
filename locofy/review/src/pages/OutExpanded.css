@@ -1,0 +1,38 @@
+.commentssection {
+  border-radius: 0 0 var(--br-11xl) var(--br-11xl);
+  background-color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border-top: 3px solid var(--color-darkorchid-200);
+  box-sizing: border-box;
+  height: 667px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-xl);
+  gap: var(--gap-xl);
+}
+.commentssection,
+.outexpanded1 {
+  align-self: stretch;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.outexpanded,
+.outexpanded1,
+.review2 {
+  display: flex;
+  flex-direction: column;
+}
+.review2 {
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.outexpanded {
+  position: relative;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}

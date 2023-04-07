@@ -5,6 +5,7 @@ import MoviesContainer from '../components/MoviesContainer';
 import "./Continue.css";
 
 const Continue = () => {
+  
   const navigate = useNavigate();
 
   const onLogoContainerClick = useCallback(() => {
@@ -31,12 +32,21 @@ const Continue = () => {
     navigate("/homesignedin");
   }, [navigate]);
 
+  function changecolour(buttonNumber){
+    var genres = document.querySelectorAll(".filterbrowseinteraction21");
+    if(genres[buttonNumber].classList.contains('colored2')){
+    genres[buttonNumber].classList.remove('colored2');
+    }else{
+    genres[buttonNumber].classList.add('colored2');
+    }
+  }
+
   return (
     <div className="continue">
       <div className="body16">
         <div className="bio">
           <div className="bio1">Bio</div>
-          <input
+          <textarea
             className="body17"
             type="text"
             placeholder="What kind of a film buff are you?"
@@ -50,80 +60,80 @@ const Continue = () => {
           </div>
           <div className="genretags1">
             <div className="horizontalrow7">
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(0)}>
+                <div className="adventure21" >Adventure</div>
               </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(1)}>
+                <div className="adventure21" >Adventure</div>
               </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-            </div>
-            <div className="horizontalrow7">
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(2)}>
+                <div className="adventure21" >Adventure</div>
               </button>
             </div>
             <div className="horizontalrow7">
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(3)}>
+                <div className="adventure21" >Adventure</div>
               </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(4)}>
+                <div className="adventure21" >Adventure</div>
               </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-            </div>
-            <div className="horizontalrow7">
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(5)}>
+                <div className="adventure21" >Adventure</div>
               </button>
             </div>
             <div className="horizontalrow7">
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(6)}>
+                <div className="adventure21" >Adventure</div>
               </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(7)}>
+                <div className="adventure21" >Adventure</div>
               </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-            </div>
-            <div className="horizontalrow7">
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
-              </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(8)}>
+                <div className="adventure21" >Adventure</div>
               </button>
             </div>
             <div className="horizontalrow7">
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(9)}>
+                <div className="adventure21" >Adventure</div>
               </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(10)}>
+                <div className="adventure21" >Adventure</div>
               </button>
-              <button className="filterbrowseinteraction21">
-                <div className="adventure21">Adventure</div>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(11)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+            </div>
+            <div className="horizontalrow7">
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(12)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(13)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(14)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+            </div>
+            <div className="horizontalrow7">
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(15)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(16)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(17)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+            </div>
+            <div className="horizontalrow7">
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(18)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(19)}>
+                <div className="adventure21" >Adventure</div>
+              </button>
+              <button className="filterbrowseinteraction21" onClick={() =>changecolour(20)}>
+                <div className="adventure21" >Adventure</div>
               </button>
             </div>
           </div>

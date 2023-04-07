@@ -249,15 +249,15 @@
   overflow-x:hidden;
 }
 
-.colored{
-  background-color: var(--color-darkorchid-100);
+.colored67{
+  background-color: var(--color-darkorchid-100) !important;
 }
 
 .colored2{
-  background-color: var(--color-darkorchid-100);
-  color:#FFC055;
+  background-color: var(--color-darkorchid-100) !important;
+  color:#FFC055 !important;
 }
 
-.coloured{
-  background-color:#FFC055;
+.coloured78{
+  background-color:#FFC055 !important;
 }

@@ -10,6 +10,28 @@ from swagger_server import db
 from swagger_server import util
 
 
+def review_id_get(id, sort_type_reviews=None, sort_order=None):  # noqa: E501
+    try:
+        id = json.loads(id)
+        if (id['show_id'] is None):
+            id = MovieId.from_dict(id['movie_id'])
+        elif (id['movie_id'] is None):
+            id = ShowId.from_dict(id['show_id'])
+        else:
+            raise TypeError
+        L = []
+        if (sort_type_reviews is None):
+            if (isinstance(id, MovieId)):
+                L = db.getReviews_forMovie(db.getMovie(id.id))
+            else:
+                L = db.getReviews_forTvshow(db.getTvshow(id.id))
+        else:
+            L = db.sortReviewTitle(id, sort_type_reviews, sort_order)
+        return (L, 200)
+    except Exception as err:
+        return (f'Error: {err}', 400)
+
+
 def review_post(movie_id, show_id, user_id, rating, title, content, creation_time):  # noqa: E501
     movie_id = json.loads(movie_id)
     show_id = json.loads(show_id)
@@ -17,10 +39,10 @@ def review_post(movie_id, show_id, user_id, rating, title, content, creation_tim
     try:
         if (show_id is None):
             db.addReview(Review(review_id=None, movie_id=(MovieId.from_dict(movie_id)).id, show_id=None, user_id=user_id,
-                                rating=rating, likes={}, title=title, content=content, creation_time=creation_time))
+                                rating=rating, title=title, content=content, creation_time=creation_time))
         elif (movie_id is None):
             db.addReview(Review(review_id=None, movie_id=None, show_id=(ShowId.from_dict(show_id)).id, user_id=user_id,
-                                rating=rating, likes={}, title=title, content=content, creation_time=creation_time))
+                                rating=rating, title=title, content=content, creation_time=creation_time))
         else:
             raise TypeError
         return ("Review added successfully", 200)
@@ -46,37 +68,9 @@ def review_review_id_likes_put(review_id, user_id):  # noqa: E501
         return (f'Error: {err}', 400)
 
 
-def review_title_id_get(id, sort_type_reviews=None, sort_order=None):  # noqa: E501
+def review_user_id_get(user_id, sort_type_reviews=None, sort_order=None):  # noqa: E501
     try:
-        id = json.loads(id)
-        if (id['show_id'] is None):
-            id = MovieId.from_dict(id['movie_id'])
-        elif (id['movie_id'] is None):
-            id = ShowId.from_dict(id['show_id'])
-        else:
-            raise TypeError
-        L = []
-        if (sort_type_reviews is None):
-            if (isinstance(id, MovieId)):
-                L = db.getReviews_forMovie(db.getMovie(id.id))
-            else:
-                L = db.getReviews_forTvshow(db.getTvshow(id.id))
-        else:
-            L = db.sortReviewTitle(id, sort_type_reviews, sort_order)
-        return (L, 200)
-    except Exception as err:
-        return (f'Error: {err}', 400)
-
-
-def review_user_user_id_get(user_id, sort_type_reviews=None, sort_order=None):  # noqa: E501
-    try:
+        print(db.sortReviewUser(user_id, sort_type_reviews, sort_order))
         return (db.sortReviewUser(user_id, sort_type_reviews, sort_order), 200)
-    except Exception as err:
-        return (f'Error: {err}', 400)
-
-
-def review_review_id_comment_get(review_id):  # noqa: E501
-    try:
-        return (db.getComments_fromReview(db.getReview(review_id)), 200)
     except Exception as err:
         return (f'Error: {err}', 400)

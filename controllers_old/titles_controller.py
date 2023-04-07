@@ -104,23 +104,3 @@ def tvshow_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E50
             return (titles, 200)
     except Exception as err:
         return (f'Error: {err}', 400)
-
-
-def title_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
-    try:
-        L = db.sortBrowse(sort_type_browse, sort_order)
-        if genre is None:
-            return (L, 200)
-        else:
-            titles = []
-            for i in L:
-                check = False
-                for j in genre:
-                    if j in i.genres:
-                        check = True
-                        break
-                if (check):
-                    titles.append(i)
-            return (titles, 200)
-    except Exception as err:
-        return (f'Error: {err}', 400)
