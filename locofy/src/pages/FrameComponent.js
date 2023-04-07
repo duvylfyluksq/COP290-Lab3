@@ -16,16 +16,16 @@ const FrameComponent = () => {
   }, [navigate]);
 
   const onMoviesTextClick = useCallback(() => {
-    // Please sync "MovieBrowse-In" to the project
-  }, []);
+    navigate("/moviebrowsein");
+  }, [navigate]);
 
   const onTVShowsTextClick = useCallback(() => {
     navigate("/tvshowbrowsein");
   }, [navigate]);
 
   const onGenresTextClick = useCallback(() => {
-    // Please sync "Genres-In" to the project
-  }, []);
+    navigate("/genresin");
+  }, [navigate]);
 
   const onFluentcompose24FilledClick = useCallback(() => {
     navigate("/makepost");

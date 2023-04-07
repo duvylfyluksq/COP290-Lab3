@@ -23,6 +23,9 @@ import FrameComponent14 from "./pages/FrameComponent14";
 import FrameComponent15 from "./pages/FrameComponent15";
 import FrameComponent16 from "./pages/FrameComponent16";
 import FrameComponent17 from "./pages/FrameComponent17";
+import Moviebrowsein from "./pages/Moviebrowsein";
+import Mixedbrowseout from "./pages/Mixedbrowseout";
+import Tvshowvrowseout from "./pages/Tvshowbrowseout";
 import Genresin from "./pages/Genresin";
 import Tvshowin from "./pages/Tvshowin";
 import Moviein from "./pages/Moviein";
@@ -176,8 +179,11 @@ function App() {
       <Route path="/genresout" element={<FrameComponent12 />} />
       <Route path="/genresin" element={<Genresin />} />
       <Route path="/mixedbrowsein" element={<FrameComponent13 />} />
+      <Route path="/mixedbrowseout" element={<Mixedbrowseout/>} />
       <Route path="/tvshowbrowsein" element={<FrameComponent14 />} />
+      <Route path="/tvshowbrowseout" element={<Tvshowvrowseout />} />
       <Route path="/moviebrowseout" element={<FrameComponent15 />} />
+      <Route path="/moviebrowsein" element={<Moviebrowsein />} />
       <Route path="/homesignedin" element={<FrameComponent16 />} />
       <Route path="/" element={<FrameComponent17 />} />
       <Route path="/homesignedout" element={<FrameComponent17 />} />

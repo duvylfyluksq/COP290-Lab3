@@ -42,8 +42,8 @@ const FrameComponent9 = () => {
   }, [navigate]);
 
   const onTVShowsTextClick = useCallback(() => {
-    // Please sync "TVShowBrowse-Out" to the project
-  }, []);
+    navigate("/tvshowbrowseout");
+  }, [navigate]);
 
   const onGenresTextClick = useCallback(() => {
     navigate("/genresout");

@@ -9,108 +9,112 @@ const FrameComponent12 = () => {
   const navigate = useNavigate();
 
   const onGenreCardContainerClick = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer1Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer2Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer3Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer4Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer5Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer6Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer7Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer8Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer9Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer10Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer11Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer12Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer13Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer14Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer15Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer16Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer17Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer18Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer19Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onGenreCardContainer20Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
+    // Please sync "MixedBrowse-In" to the project
   }, []);
 
   const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
+    navigate("/homesignedin");
   }, [navigate]);
 
   const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
+    navigate("/moviebrowsein");
   }, [navigate]);
 
   const onTVShowsTextClick = useCallback(() => {
-    // Please sync "TVShowBrowse-Out" to the project
-  }, []);
+    navigate("/tvshowbrowsein");
+  }, [navigate]);
 
   const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
+    navigate("/genresin");
   }, [navigate]);
 
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
+  const onFluentcompose24FilledClick = useCallback(() => {
+    navigate("/makepost");
   }, [navigate]);
+
+  const onProfileMenuClick = useCallback(() => {
+    // Please sync "UserPage/InSelf" to the project
+  }, []);
 
   return (
     <div className="genres-out-parent">
