@@ -1,18 +1,36 @@
-import React from 'react';
-import { useCallback } from "react";
+import React,{ useState,useCallback,useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import WelcomeBackContainer from "../components/WelcomeBackContainer";
 import FooterContainer from "../components/FooterContainer";
 import LinksContainer1 from "../components/LinksContainer1";
 import "./SignIn.css";
 import MoviesContainer from '../components/MoviesContainer';
+import {UserApi} from '../api/UserApi';
+import {User} from '../model/User';
+
 
 const SignIn = () => {
+  
   const navigate = useNavigate();
 
+  const api = new UserApi();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+
   const onLoginContainerClick = useCallback(() => {
-    navigate("/homesignedin");
-  }, [navigate]);
+    api.userSigninPost(username, password, (response) => {
+      if (response.status !== 200) {
+        console.log(response.data);
+      } else {
+        console.log(response.data)
+        const userData = response.data;
+        const user = User.constructFromObject(userData)
+        navigate('/homesignedin', {state});
+      }
+    });
+  }, [username, password, navigate]);
+  
 
   const onSignUpTextClick = useCallback(() => {
     navigate("/signup");
@@ -56,8 +74,9 @@ const SignIn = () => {
           welcomeBackText="/vector37.svg"
           createAccountText="Welcome Back!"
         />
-        <input type="text" className="password" placeholder="Username" />
-        <input type="password" id="Password1" className="password" placeholder="Password" />
+        <input type="text" className="password" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
+        <input type="password" id="Password1" className="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+
           <div className="hideorshowpassword">
             <img
               id="your-img"
