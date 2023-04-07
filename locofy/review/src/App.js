@@ -4,6 +4,7 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+
 import InDocked from "./pages/InDocked";
 import InExpanded from "./pages/InExpanded";
 import OutExpanded from "./pages/OutExpanded";

@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import {
   Routes,
   Route,
@@ -36,7 +36,7 @@ import SignUp from "./pages/SignUp";
 import SignInTile from "./pages/SignInTile";
 import { useEffect } from "react";
 
-
+function App(){
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
