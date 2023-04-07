@@ -58,28 +58,29 @@ const FrameComponent11 = () => {
   }, [navigate]);
 
   const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
+    navigate("/homesignedin");
   }, [navigate]);
 
   const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
+    navigate("/moviebrowsein");
   }, [navigate]);
 
   const onTVShowsTextClick = useCallback(() => {
-    // Please sync "TVShowBrowse-Out" to the project
-  }, []);
+    navigate("/tvshowbrowsein");
+  }, [navigate]);
 
   const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
+    navigate("/genresin");
   }, [navigate]);
 
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
+  const onFluentcompose24FilledClick = useCallback(() => {
+    navigate("/makepost");
   }, [navigate]);
 
-  const onSeeAllReviewsClick = useCallback(() => {
-    navigate("/reviewsmovieout");
-  }, [navigate]);
+  const onProfileMenuClick = useCallback(() => {
+    // Please sync "UserPage/InSelf" to the project
+  }, []);
+
 
   return (
     <div className="tvshow-out-parent">

@@ -2,7 +2,6 @@ import React from 'react';
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import HorizontalRowContainer from "../components/HorizontalRowContainer";
-import LinksContainer1 from "../components/LinksContainer1";
 import MoviesContainer from '../components/MoviesContainer';
 import "./FrameComponent12.css";
 
