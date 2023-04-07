@@ -10,6 +10,7 @@ const HorizontalRowContainer = ({
     <div className="horizontalrow14">
       <div className="genrecard" onClick={onGenreCardContainerClick}>
         <img className="tvshowcard-icon4" alt="" src="/tvshowcard@2x.png" />
+        <div className="gradient-overlay"></div>
         <div className="linearfill7">
           <div className="details7">
             <div className="genre7">Genre</div>
@@ -18,6 +19,7 @@ const HorizontalRowContainer = ({
       </div>
       <div className="genrecard" onClick={onGenreCardContainer1Click}>
         <img className="tvshowcard-icon4" alt="" src="/tvshowcard@2x.png" />
+        <div className="gradient-overlay"></div>
         <div className="linearfill7">
           <div className="details7">
             <div className="genre7">Genre</div>
@@ -26,6 +28,7 @@ const HorizontalRowContainer = ({
       </div>
       <div className="genrecard" onClick={onGenreCardContainer2Click}>
         <img className="tvshowcard-icon4" alt="" src="/tvshowcard@2x.png" />
+        <div className="gradient-overlay"></div>
         <div className="linearfill7">
           <div className="details7">
             <div className="genre7">Genre</div>
