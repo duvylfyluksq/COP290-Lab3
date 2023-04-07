@@ -1,6 +1,6 @@
 # Fmd.UserApi
 
-All URIs are relative to *https://virtserver.swaggerhub.com/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
+All URIs are relative to *http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**profileUserIdPfpPut**](UserApi.md#profileUserIdPfpPut) | **PUT** /profile/{user_id}/pfp | Update profile picture
 [**profileUserIdUsernamePut**](UserApi.md#profileUserIdUsernamePut) | **PUT** /profile/{user_id}/username | Update username
 [**userSigninPost**](UserApi.md#userSigninPost) | **POST** /user/signin | Sign in user with credentials
-[**userSignupPost**](UserApi.md#userSignupPost) | **POST** /user/signup | Create a new user account
+[**userSignupPost**](UserApi.md#userSignupPost) | **POST** /user/signup | Sign Up
 [**userUserIdGet**](UserApi.md#userUserIdGet) | **GET** /user/{user_id} | Get User object(user details) from user id
 [**watchlistUserIdGet**](UserApi.md#watchlistUserIdGet) | **GET** /watchlist/{user_id} | Get all titles in user watchlist
 [**watchlistUserIdPut**](UserApi.md#watchlistUserIdPut) | **PUT** /watchlist/{user_id} | Add/Remove title from watchlist
@@ -233,7 +233,7 @@ No authorization required
 
 <a name="userSigninPost"></a>
 # **userSigninPost**
-> User userSigninPost(username, password)
+> User userSigninPost(opts)
 
 Sign in user with credentials
 
@@ -242,10 +242,10 @@ Sign in user with credentials
 import {Fmd} from 'fmd';
 
 let apiInstance = new Fmd.UserApi();
-let username = "username_example"; // String | Username
-let password = "password_example"; // String | Password
-
-apiInstance.userSigninPost(username, password, (error, data, response) => {
+let opts = { 
+  'body': new Fmd.UserSigninBody() // UserSigninBody | 
+};
+apiInstance.userSigninPost(opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -258,8 +258,7 @@ apiInstance.userSigninPost(username, password, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **String**| Username | 
- **password** | **String**| Password | 
+ **body** | [**UserSigninBody**](UserSigninBody.md)|  | [optional] 
 
 ### Return type
 
@@ -271,28 +270,24 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a name="userSignupPost"></a>
 # **userSignupPost**
-> User userSignupPost(username, password, confirmPassword, interests, pfp, bio)
+> User userSignupPost(opts)
 
-Create a new user account
+Sign Up
 
 ### Example
 ```javascript
 import {Fmd} from 'fmd';
 
 let apiInstance = new Fmd.UserApi();
-let username = "username_example"; // String | Username
-let password = "password_example"; // String | Password
-let confirmPassword = "confirmPassword_example"; // String | Confirm Password
-let interests = ["interests_example"]; // [String] | Favourite Genres
-let pfp = "pfp_example"; // String | profile picture
-let bio = "bio_example"; // String | about user
-
-apiInstance.userSignupPost(username, password, confirmPassword, interests, pfp, bio, (error, data, response) => {
+let opts = { 
+  'body': new Fmd.UserSignupBody() // UserSignupBody | 
+};
+apiInstance.userSignupPost(opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -305,12 +300,7 @@ apiInstance.userSignupPost(username, password, confirmPassword, interests, pfp, 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **String**| Username | 
- **password** | **String**| Password | 
- **confirmPassword** | **String**| Confirm Password | 
- **interests** | [**[String]**](String.md)| Favourite Genres | 
- **pfp** | **String**| profile picture | 
- **bio** | **String**| about user | 
+ **body** | [**UserSignupBody**](UserSignupBody.md)|  | [optional] 
 
 ### Return type
 
@@ -322,7 +312,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 <a name="userUserIdGet"></a>

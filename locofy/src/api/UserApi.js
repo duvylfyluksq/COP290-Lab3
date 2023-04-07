@@ -301,15 +301,15 @@ export class UserApi {
      * @param {module:api/UserApi~userSigninPostCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    userSigninPost(username, password, callback) {
+    userSigninPost(Username, Password, callback) {
       
       let postBody = null;
       // verify the required parameter 'username' is set
-      if (username === undefined || username === null) {
+      if (Username === undefined || Username === null) {
         throw new Error("Missing the required parameter 'username' when calling userSigninPost");
       }
       // verify the required parameter 'password' is set
-      if (password === undefined || password === null) {
+      if (Password === undefined || Password === null) {
         throw new Error("Missing the required parameter 'password' when calling userSigninPost");
       }
 
@@ -317,7 +317,7 @@ export class UserApi {
         
       };
       let queryParams = {
-        'Username': username,'Password': password
+        'Username': Username,'Password': Password
       };
       let headerParams = {
         

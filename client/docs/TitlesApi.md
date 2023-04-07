@@ -1,6 +1,6 @@
 # Fmd.TitlesApi
 
-All URIs are relative to *https://virtserver.swaggerhub.com/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
+All URIs are relative to *http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

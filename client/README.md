@@ -91,7 +91,7 @@ api.reviewPost(movieId, showId, userId, rating, title, content, creationTime, ca
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://virtserver.swaggerhub.com/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
+All URIs are relative to *http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -112,7 +112,7 @@ Class | Method | HTTP request | Description
 *Fmd.UserApi* | [**profileUserIdPfpPut**](docs/UserApi.md#profileUserIdPfpPut) | **PUT** /profile/{user_id}/pfp | Update profile picture
 *Fmd.UserApi* | [**profileUserIdUsernamePut**](docs/UserApi.md#profileUserIdUsernamePut) | **PUT** /profile/{user_id}/username | Update username
 *Fmd.UserApi* | [**userSigninPost**](docs/UserApi.md#userSigninPost) | **POST** /user/signin | Sign in user with credentials
-*Fmd.UserApi* | [**userSignupPost**](docs/UserApi.md#userSignupPost) | **POST** /user/signup | Create a new user account
+*Fmd.UserApi* | [**userSignupPost**](docs/UserApi.md#userSignupPost) | **POST** /user/signup | Sign Up
 *Fmd.UserApi* | [**userUserIdGet**](docs/UserApi.md#userUserIdGet) | **GET** /user/{user_id} | Get User object(user details) from user id
 *Fmd.UserApi* | [**watchlistUserIdGet**](docs/UserApi.md#watchlistUserIdGet) | **GET** /watchlist/{user_id} | Get all titles in user watchlist
 *Fmd.UserApi* | [**watchlistUserIdPut**](docs/UserApi.md#watchlistUserIdPut) | **PUT** /watchlist/{user_id} | Add/Remove title from watchlist
@@ -128,6 +128,8 @@ Class | Method | HTTP request | Description
  - [Fmd.Title](docs/Title.md)
  - [Fmd.Tvshow](docs/Tvshow.md)
  - [Fmd.User](docs/User.md)
+ - [Fmd.UserSigninBody](docs/UserSigninBody.md)
+ - [Fmd.UserSignupBody](docs/UserSignupBody.md)
 
 ## Documentation for Authorization
 

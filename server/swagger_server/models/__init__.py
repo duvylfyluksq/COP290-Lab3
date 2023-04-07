@@ -11,3 +11,5 @@ from swagger_server.models.show_id import ShowId
 from swagger_server.models.title import Title
 from swagger_server.models.tvshow import Tvshow
 from swagger_server.models.user import User
+from swagger_server.models.user_signin_body import UserSigninBody
+from swagger_server.models.user_signup_body import UserSignupBody

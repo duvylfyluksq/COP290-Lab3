@@ -16,6 +16,8 @@
 import {ApiClient} from "../ApiClient";
 import {Title} from '../model/Title';
 import {User} from '../model/User';
+import {UserSigninBody} from '../model/UserSigninBody';
+import {UserSignupBody} from '../model/UserSignupBody';
 
 /**
 * User service.
@@ -296,28 +298,20 @@ export class UserApi {
 
     /**
      * Sign in user with credentials
-     * @param {String} username Username
-     * @param {String} password Password
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserSigninBody} opts.body 
      * @param {module:api/UserApi~userSigninPostCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    userSigninPost(username, password, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'username' is set
-      if (username === undefined || username === null) {
-        throw new Error("Missing the required parameter 'username' when calling userSigninPost");
-      }
-      // verify the required parameter 'password' is set
-      if (password === undefined || password === null) {
-        throw new Error("Missing the required parameter 'password' when calling userSigninPost");
-      }
+    userSigninPost(opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
 
       let pathParams = {
         
       };
       let queryParams = {
-        'Username': username,'Password': password
+        
       };
       let headerParams = {
         
@@ -327,7 +321,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = ['application/json'];
       let returnType = User;
 
@@ -346,49 +340,21 @@ export class UserApi {
      */
 
     /**
-     * Create a new user account
-     * @param {String} username Username
-     * @param {String} password Password
-     * @param {String} confirmPassword Confirm Password
-     * @param {Array.<String>} interests Favourite Genres
-     * @param {String} pfp profile picture
-     * @param {String} bio about user
+     * Sign Up
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserSignupBody} opts.body 
      * @param {module:api/UserApi~userSignupPostCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    userSignupPost(username, password, confirmPassword, interests, pfp, bio, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'username' is set
-      if (username === undefined || username === null) {
-        throw new Error("Missing the required parameter 'username' when calling userSignupPost");
-      }
-      // verify the required parameter 'password' is set
-      if (password === undefined || password === null) {
-        throw new Error("Missing the required parameter 'password' when calling userSignupPost");
-      }
-      // verify the required parameter 'confirmPassword' is set
-      if (confirmPassword === undefined || confirmPassword === null) {
-        throw new Error("Missing the required parameter 'confirmPassword' when calling userSignupPost");
-      }
-      // verify the required parameter 'interests' is set
-      if (interests === undefined || interests === null) {
-        throw new Error("Missing the required parameter 'interests' when calling userSignupPost");
-      }
-      // verify the required parameter 'pfp' is set
-      if (pfp === undefined || pfp === null) {
-        throw new Error("Missing the required parameter 'pfp' when calling userSignupPost");
-      }
-      // verify the required parameter 'bio' is set
-      if (bio === undefined || bio === null) {
-        throw new Error("Missing the required parameter 'bio' when calling userSignupPost");
-      }
+    userSignupPost(opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
 
       let pathParams = {
         
       };
       let queryParams = {
-        'Username': username,'Password': password,'Confirm_Password': confirmPassword,'interests': this.apiClient.buildCollectionParam(interests, 'multi'),'pfp': pfp,'bio': bio
+        
       };
       let headerParams = {
         
@@ -398,7 +364,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = ['application/json'];
       let returnType = User;
 

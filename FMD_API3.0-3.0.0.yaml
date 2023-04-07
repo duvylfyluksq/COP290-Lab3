@@ -11,8 +11,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 3.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/VEDANTANEOGI_1/FMD_API3.0/3.0.0
-  description: SwaggerHub API Auto Mocking
+- url: http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0
 tags:
 - name: Reviews
   description: Everything about reviews
@@ -229,27 +228,23 @@ paths:
       tags:
       - User
       summary: Sign in user with credentials
-      parameters:
-      - name: Username
-        in: query
-        description: Username
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          maxLength: 25
-          example: bobdylan
-      - name: Password
-        in: query
-        description: Password
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          maxLength: 25
-          example: godofnoobs_42
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  maxLength: 25
+                  example: bobdylan
+                password:
+                  type: string
+                  maxLength: 25
+                  example: godofnoobs_42
+              required:
+                - username
+                - password
       responses:
         "200":
           description: User signed in successfully
@@ -268,74 +263,44 @@ paths:
     post:
       tags:
       - User
-      summary: Create a new user account
-      parameters:
-      - name: Username
-        in: query
-        description: Username
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          maxLength: 25
-          example: bobdylan
-      - name: Password
-        in: query
-        description: Password
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          maxLength: 25
-          example: godofnoobs_42
-      - name: Confirm_Password
-        in: query
-        description: Confirm Password
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          maxLength: 25
-          example: godofnoobs_42
-      - name: interests
-        in: query
-        description: Favourite Genres
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: string
-          minItems: 3
-          maxItems: 3
-          example:
-            - Adventure
-            - Comedy
-            - Thriller
-      - name: pfp
-        in: query
-        description: profile picture
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          format: uri
-          example: https://fmd.com/pfp.jpeg
-      - name: bio
-        in: query
-        description: about user
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          example: i am bobdylan, i work with duvylfyluksq
-          maxLength: 100
+      summary: Sign Up
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  maxLength: 25
+                  example: bobdylan
+                password:
+                  type: string
+                  maxLength: 25
+                  example: godofnoobs_42
+                confirm_password:
+                  type: string
+                  maxLength: 25
+                  example: godofnoobs_42
+                pfp:
+                  type: string
+                  example: https:example.com/pic.jpeg
+                bio:
+                  type: string
+                  example: hi im bobdylan
+                interests:
+                  type: array
+                  items:
+                    type: string
+                  maxItems: 3
+                  minItems: 3
+              required:
+                - username
+                - password
+                - confirm_password
+                - bio
+                - pfp
+                - interests
       responses:
         "200":
           description: User account created successfully

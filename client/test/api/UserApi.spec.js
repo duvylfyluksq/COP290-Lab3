@@ -129,8 +129,9 @@
         it('should call userSigninPost successfully', function(done) {
           // TODO: uncomment, update parameter values for userSigninPost call and complete the assertions
           /*
+          var opts = {};
 
-          instance.userSigninPost(username, password, function(error, data, response) {
+          instance.userSigninPost(opts, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -149,8 +150,9 @@
         it('should call userSignupPost successfully', function(done) {
           // TODO: uncomment, update parameter values for userSignupPost call and complete the assertions
           /*
+          var opts = {};
 
-          instance.userSignupPost(username, password, confirmPassword, interests, pfp, bio, function(error, data, response) {
+          instance.userSignupPost(opts, function(error, data, response) {
             if (error) {
               done(error);
               return;

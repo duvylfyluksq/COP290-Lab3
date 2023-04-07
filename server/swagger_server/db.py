@@ -435,7 +435,7 @@ def getComments_fromReview(Review: Review) -> List[Comment]:
         return [Comment.from_dict(i) for i in r]
 
 
-def checkLogin(username: str, password: str) -> bool:
+def checkLogin(username: str, password: str) -> Tuple[bool, Optional[User]]:
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `user` where `username`=%s"""
         cursor.execute(sql, (username,))

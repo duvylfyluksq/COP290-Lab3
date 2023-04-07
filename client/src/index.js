@@ -22,6 +22,8 @@ import {ShowId} from './model/ShowId';
 import {Title} from './model/Title';
 import {Tvshow} from './model/Tvshow';
 import {User} from './model/User';
+import {UserSigninBody} from './model/UserSigninBody';
+import {UserSignupBody} from './model/UserSignupBody';
 import {ReviewsApi} from './api/ReviewsApi';
 import {TitlesApi} from './api/TitlesApi';
 import {UserApi} from './api/UserApi';
@@ -111,6 +113,18 @@ export {
      * @property {module:model/User}
      */
     User,
+
+    /**
+     * The UserSigninBody model constructor.
+     * @property {module:model/UserSigninBody}
+     */
+    UserSigninBody,
+
+    /**
+     * The UserSignupBody model constructor.
+     * @property {module:model/UserSignupBody}
+     */
+    UserSignupBody,
 
     /**
     * The ReviewsApi service constructor.
