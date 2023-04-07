@@ -1,0 +1,90 @@
+.signintile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.username {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 14px;
+  gap: 10px;
+  width: 366px;
+  height: 49px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  border:none;
+}
+
+.password{
+    display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 17px 14px;
+gap: 10px;
+
+width: 366px;
+height: 49px;
+
+background: #FFFFFF;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+border:none;
+/* Inside auto layout */
+
+/* flex: none;
+order: 1;
+flex-grow: 0; */
+}
+.hideorshowpassword,
+.password {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.showpasswordicon {
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  top:-350%;
+  cursor:pointer;
+  left:650%;
+}
+
+.signintile {
+  position: absolute;
+  /* top: 179px; */
+  /* left: 679px; */
+  border-radius: var(--br-31xl);
+  background-color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border: 7px solid var(--color-darkorchid-200);
+  box-sizing: border-box;
+  width: 562px;
+  height: 796px;
+  padding: var(--padding-21xl) 0 var(--padding-21xl) var(--padding-3xs);
+  align-items: center;
+}
+.body15 {
+  position: absolute;
+  display: flex;
+  top: 73px;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  height: 947px;
+}
+.signin {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 1080px;
+}

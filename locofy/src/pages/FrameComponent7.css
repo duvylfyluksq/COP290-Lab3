@@ -1,0 +1,107 @@
+.vector-icon4,
+.watchlist7 {
+  position: relative;
+  flex-shrink: 0;
+}
+.watchlist7 {
+  font-weight: 600;
+  display: inline-block;
+  width: 190px;
+  height: 49px;
+}
+.vector-icon4 {
+  width: 40px;
+  height: 30px;
+}
+.watchlistheader4 {
+  width: 257px;
+  height: 59px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.watchlistdisplay4 {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-24xl);
+}
+.watchlist8 {
+  position: relative;
+  font-size: var(--font-size-11xl);
+  display: inline-block;
+  width: 282px;
+  height: 38px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.watchlist6 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-31xl);
+}
+.posts1,
+.recentposts3 {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.recentposts3 {
+  font-weight: 600;
+  width: 273px;
+  height: 49px;
+}
+.posts1 {
+  font-size: var(--font-size-11xl);
+  width: 194px;
+  height: 38px;
+  cursor: pointer;
+}
+.recentposts2 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 var(--padding-6xl);
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-31xl);
+}
+.bobdylan-inself,
+.body7 {
+  position: absolute;
+  left: 0;
+  width: 1920px;
+}
+.body7 {
+  top: 133px;
+  height: 947px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-56xl);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-81xl);
+}
+.bobdylan-inself {
+  top: 0;
+  background-color: var(--color-white);
+  height: 1080px;
+  overflow: hidden;
+}
+.bobdylan-inself-parent {
+  position: relative;
+  width: 100%;
+  height: 1080px;
+  text-align: left;
+  font-size: var(--font-size-26xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+  overflow-x:hidden;
+}
