@@ -16,13 +16,15 @@ class Tvshow(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, show_id: ShowId=None, title: str=None, season: int=None, cast: List[str]=None, director: str=None, writer: str=None, rating: float=None, genres: List[str]=None, release_date: date=None, duration: str=None, poster: str=None):  # noqa: E501
+    def __init__(self, show_id: ShowId=None, title: str=None, plot: str=None, season: int=None, cast: List[str]=None, director: str=None, writer: str=None, rating: float=None, genres: List[str]=None, release_date: date=None, duration: str=None, poster: str=None):  # noqa: E501
         """Tvshow - a model defined in Swagger
 
         :param show_id: The show_id of this Tvshow.  # noqa: E501
         :type show_id: ShowId
         :param title: The title of this Tvshow.  # noqa: E501
         :type title: str
+        :param plot: The plot of this Tvshow.  # noqa: E501
+        :type plot: str
         :param season: The season of this Tvshow.  # noqa: E501
         :type season: int
         :param cast: The cast of this Tvshow.  # noqa: E501
@@ -45,6 +47,7 @@ class Tvshow(Model):
         self.swagger_types = {
             'show_id': ShowId,
             'title': str,
+            'plot': str,
             'season': int,
             'cast': List[str],
             'director': str,
@@ -59,6 +62,7 @@ class Tvshow(Model):
         self.attribute_map = {
             'show_id': 'show_id',
             'title': 'title',
+            'plot': 'plot',
             'season': 'season',
             'cast': 'cast',
             'director': 'director',
@@ -71,6 +75,7 @@ class Tvshow(Model):
         }
         self._show_id = show_id
         self._title = title
+        self._plot = plot
         self._season = season
         self._cast = cast
         self._director = director
@@ -133,6 +138,27 @@ class Tvshow(Model):
         """
 
         self._title = title
+
+    @property
+    def plot(self) -> str:
+        """Gets the plot of this Tvshow.
+
+
+        :return: The plot of this Tvshow.
+        :rtype: str
+        """
+        return self._plot
+
+    @plot.setter
+    def plot(self, plot: str):
+        """Sets the plot of this Tvshow.
+
+
+        :param plot: The plot of this Tvshow.
+        :type plot: str
+        """
+
+        self._plot = plot
 
     @property
     def season(self) -> int:

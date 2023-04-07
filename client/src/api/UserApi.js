@@ -409,6 +409,52 @@ export class UserApi {
       );
     }
     /**
+     * Callback function to receive the result of the userUserIdGet operation.
+     * @callback moduleapi/UserApi~userUserIdGetCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/User{ data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get User object(user details) from user id
+     * @param {Number} userId UserId
+     * @param {module:api/UserApi~userUserIdGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
+     */
+    userUserIdGet(userId, callback) {
+      
+      let postBody = null;
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling userUserIdGet");
+      }
+
+      let pathParams = {
+        'user_id': userId
+      };
+      let queryParams = {
+        
+      };
+      let headerParams = {
+        
+      };
+      let formParams = {
+        
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = User;
+
+      return this.apiClient.callApi(
+        '/user/{user_id}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+    /**
      * Callback function to receive the result of the watchlistUserIdGet operation.
      * @callback moduleapi/UserApi~watchlistUserIdGetCallback
      * @param {String} error Error message, if any.

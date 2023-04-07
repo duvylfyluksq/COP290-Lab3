@@ -44,6 +44,8 @@ export class Movie {
         obj.movieId = MovieId.constructFromObject(data['movie_id']);
       if (data.hasOwnProperty('title'))
         obj.title = ApiClient.convertToType(data['title'], 'String');
+      if (data.hasOwnProperty('plot'))
+        obj.plot = ApiClient.convertToType(data['plot'], 'String');
       if (data.hasOwnProperty('cast'))
         obj.cast = ApiClient.convertToType(data['cast'], ['String']);
       if (data.hasOwnProperty('director'))
@@ -74,6 +76,11 @@ Movie.prototype.movieId = undefined;
  * @member {String} title
  */
 Movie.prototype.title = undefined;
+
+/**
+ * @member {String} plot
+ */
+Movie.prototype.plot = undefined;
 
 /**
  * @member {Array.<String>} cast

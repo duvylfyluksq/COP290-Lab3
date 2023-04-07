@@ -301,6 +301,34 @@ paths:
         "404":
           description: No titles found
       x-openapi-router-controller: swagger_server.controllers.titles_controller
+  /user/{user_id}:
+    get:
+      tags:
+      - User
+      summary: Get User object(user details) from user id
+      operationId: user_user_id_get
+      parameters:
+      - name: user_id
+        in: path
+        description: UserId
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1
+      responses:
+        "200":
+          description: User details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        "404":
+          description: User not found
+        "500":
+          description: Internal Server Error
+      x-openapi-router-controller: swagger_server.controllers.user_controller
   /user/signin:
     post:
       tags:
@@ -959,6 +987,7 @@ components:
           - Leonardo Di Caprio
           - Kate Winslet
           - Bradd Pitt
+          plot: plot
           release_date: 2001-08-19T00:00:00.000+00:00
           director: Christopher Nolan
           genres:
@@ -979,6 +1008,7 @@ components:
           - Bradd Pitt
           show_id:
             id: 42
+          plot: plot
           release_date: 2001-08-19T00:00:00.000+00:00
           director: Christopher Nolan
           genres:
@@ -1080,6 +1110,9 @@ components:
         title:
           type: string
           example: Inception
+        plot:
+          maxLength: 500
+          type: string
         cast:
           maxItems: 3
           type: array
@@ -1126,6 +1159,7 @@ components:
         - Leonardo Di Caprio
         - Kate Winslet
         - Bradd Pitt
+        plot: plot
         release_date: 2001-08-19T00:00:00.000+00:00
         director: Christopher Nolan
         genres:
@@ -1146,6 +1180,9 @@ components:
         title:
           type: string
           example: Peaky Blinders
+        plot:
+          maxLength: 500
+          type: string
         season:
           type: integer
           example: 2
@@ -1197,6 +1234,7 @@ components:
         - Bradd Pitt
         show_id:
           id: 42
+        plot: plot
         release_date: 2001-08-19T00:00:00.000+00:00
         director: Christopher Nolan
         genres:

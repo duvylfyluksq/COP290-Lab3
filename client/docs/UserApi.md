@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**profileUserIdUsernamePut**](UserApi.md#profileUserIdUsernamePut) | **PUT** /profile/{user_id}/username | Update username
 [**userSigninPost**](UserApi.md#userSigninPost) | **POST** /user/signin | Sign in user with credentials
 [**userSignupPost**](UserApi.md#userSignupPost) | **POST** /user/signup | Create a new user account
+[**userUserIdGet**](UserApi.md#userUserIdGet) | **GET** /user/{user_id} | Get User object(user details) from user id
 [**watchlistUserIdGet**](UserApi.md#watchlistUserIdGet) | **GET** /watchlist/{user_id} | Get all titles in user watchlist
 [**watchlistUserIdPut**](UserApi.md#watchlistUserIdPut) | **PUT** /watchlist/{user_id} | Add/Remove title from watchlist
 [**watchlistUserIdRemovePut**](UserApi.md#watchlistUserIdRemovePut) | **PUT** /watchlist/{user_id}/remove | Remove title from user&#x27;s watchlist
@@ -310,6 +311,47 @@ Name | Type | Description  | Notes
  **interests** | [**[String]**](String.md)| Favourite Genres | 
  **pfp** | **String**| profile picture | 
  **bio** | **String**| about user | 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="userUserIdGet"></a>
+# **userUserIdGet**
+> User userUserIdGet(userId)
+
+Get User object(user details) from user id
+
+### Example
+```javascript
+import {Fmd} from 'fmd';
+
+let apiInstance = new Fmd.UserApi();
+let userId = 56; // Number | UserId
+
+apiInstance.userUserIdGet(userId, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **Number**| UserId | 
 
 ### Return type
 

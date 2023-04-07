@@ -44,6 +44,8 @@ export class Tvshow {
         obj.showId = ShowId.constructFromObject(data['show_id']);
       if (data.hasOwnProperty('title'))
         obj.title = ApiClient.convertToType(data['title'], 'String');
+      if (data.hasOwnProperty('plot'))
+        obj.plot = ApiClient.convertToType(data['plot'], 'String');
       if (data.hasOwnProperty('season'))
         obj.season = ApiClient.convertToType(data['season'], 'Number');
       if (data.hasOwnProperty('cast'))
@@ -76,6 +78,11 @@ Tvshow.prototype.showId = undefined;
  * @member {String} title
  */
 Tvshow.prototype.title = undefined;
+
+/**
+ * @member {String} plot
+ */
+Tvshow.prototype.plot = undefined;
 
 /**
  * @member {Number} season

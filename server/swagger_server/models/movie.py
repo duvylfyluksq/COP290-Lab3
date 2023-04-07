@@ -16,13 +16,15 @@ class Movie(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, movie_id: MovieId=None, title: str=None, cast: List[str]=None, director: str=None, writer: str=None, rating: float=None, genres: List[str]=None, release_date: date=None, duration: str=None, poster: str=None):  # noqa: E501
+    def __init__(self, movie_id: MovieId=None, title: str=None, plot: str=None, cast: List[str]=None, director: str=None, writer: str=None, rating: float=None, genres: List[str]=None, release_date: date=None, duration: str=None, poster: str=None):  # noqa: E501
         """Movie - a model defined in Swagger
 
         :param movie_id: The movie_id of this Movie.  # noqa: E501
         :type movie_id: MovieId
         :param title: The title of this Movie.  # noqa: E501
         :type title: str
+        :param plot: The plot of this Movie.  # noqa: E501
+        :type plot: str
         :param cast: The cast of this Movie.  # noqa: E501
         :type cast: List[str]
         :param director: The director of this Movie.  # noqa: E501
@@ -43,6 +45,7 @@ class Movie(Model):
         self.swagger_types = {
             'movie_id': MovieId,
             'title': str,
+            'plot': str,
             'cast': List[str],
             'director': str,
             'writer': str,
@@ -56,6 +59,7 @@ class Movie(Model):
         self.attribute_map = {
             'movie_id': 'movie_id',
             'title': 'title',
+            'plot': 'plot',
             'cast': 'cast',
             'director': 'director',
             'writer': 'writer',
@@ -67,6 +71,7 @@ class Movie(Model):
         }
         self._movie_id = movie_id
         self._title = title
+        self._plot = plot
         self._cast = cast
         self._director = director
         self._writer = writer
@@ -128,6 +133,27 @@ class Movie(Model):
         """
 
         self._title = title
+
+    @property
+    def plot(self) -> str:
+        """Gets the plot of this Movie.
+
+
+        :return: The plot of this Movie.
+        :rtype: str
+        """
+        return self._plot
+
+    @plot.setter
+    def plot(self, plot: str):
+        """Sets the plot of this Movie.
+
+
+        :param plot: The plot of this Movie.
+        :type plot: str
+        """
+
+        self._plot = plot
 
     @property
     def cast(self) -> List[str]:

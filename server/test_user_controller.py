@@ -155,6 +155,18 @@ class TestUserController(BaseTestCase):
         self.assertStatus(response, 200,
                           'Response body is : ' + response.data.decode('utf-8'))
 
+    def test_user_user_id_get(self):
+        """Test case for user_user_id_get
+
+        Get User object(user details) from user id
+        """
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/{user_id}'.format(
+                user_id=2),
+            method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
 
 if __name__ == '__main__':
     import unittest

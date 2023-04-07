@@ -165,6 +165,26 @@
           done();
         });
       });
+      describe('userUserIdGet', function() {
+        it('should call userUserIdGet successfully', function(done) {
+          // TODO: uncomment, update parameter values for userUserIdGet call and complete the assertions
+          /*
+
+          instance.userUserIdGet(userId, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+            // TODO: update response assertions
+            expect(data).to.be.a(Fmd.User);
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
       describe('watchlistUserIdGet', function() {
         it('should call watchlistUserIdGet successfully', function(done) {
           // TODO: uncomment, update parameter values for watchlistUserIdGet call and complete the assertions

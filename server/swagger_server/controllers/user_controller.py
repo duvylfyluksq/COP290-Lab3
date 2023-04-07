@@ -162,3 +162,10 @@ def watchlist_user_id_remove_put(user_id, id):  # noqa: E501
         print(f"Error in watchlist_user_id_put: {err}")
         print(traceback.format_exc())
         return (f'Error: {err}', 500)
+
+
+def user_user_id_get(user_id):  # noqa: E501
+    try:
+        return (db.getUser(user_id), 200)
+    except Exception as err:
+        return (f'User not found: {err}', 404)

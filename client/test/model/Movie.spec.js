@@ -52,6 +52,12 @@
         // expect(instance.title).to.be(expectedValueLiteral);
       });
 
+      it('should have the property plot (base name: "plot")', function() {
+        // TODO: update the code to test the property plot
+        expect(instance).to.have.property('plot');
+        // expect(instance.plot).to.be(expectedValueLiteral);
+      });
+
       it('should have the property cast (base name: "cast")', function() {
         // TODO: update the code to test the property cast
         expect(instance).to.have.property('cast');

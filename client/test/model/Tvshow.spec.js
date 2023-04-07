@@ -52,6 +52,12 @@
         // expect(instance.title).to.be(expectedValueLiteral);
       });
 
+      it('should have the property plot (base name: "plot")', function() {
+        // TODO: update the code to test the property plot
+        expect(instance).to.have.property('plot');
+        // expect(instance.plot).to.be(expectedValueLiteral);
+      });
+
       it('should have the property season (base name: "season")', function() {
         // TODO: update the code to test the property season
         expect(instance).to.have.property('season');

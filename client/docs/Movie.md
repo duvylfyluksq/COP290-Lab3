@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **movieId** | [**MovieId**](MovieId.md) |  | [optional] 
 **title** | **String** |  | [optional] 
+**plot** | **String** |  | [optional] 
 **cast** | **[String]** |  | [optional] 
 **director** | **String** |  | [optional] 
 **writer** | **String** |  | [optional] 

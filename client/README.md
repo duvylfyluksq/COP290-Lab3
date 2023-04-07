@@ -113,6 +113,7 @@ Class | Method | HTTP request | Description
 *Fmd.UserApi* | [**profileUserIdUsernamePut**](docs/UserApi.md#profileUserIdUsernamePut) | **PUT** /profile/{user_id}/username | Update username
 *Fmd.UserApi* | [**userSigninPost**](docs/UserApi.md#userSigninPost) | **POST** /user/signin | Sign in user with credentials
 *Fmd.UserApi* | [**userSignupPost**](docs/UserApi.md#userSignupPost) | **POST** /user/signup | Create a new user account
+*Fmd.UserApi* | [**userUserIdGet**](docs/UserApi.md#userUserIdGet) | **GET** /user/{user_id} | Get User object(user details) from user id
 *Fmd.UserApi* | [**watchlistUserIdGet**](docs/UserApi.md#watchlistUserIdGet) | **GET** /watchlist/{user_id} | Get all titles in user watchlist
 *Fmd.UserApi* | [**watchlistUserIdPut**](docs/UserApi.md#watchlistUserIdPut) | **PUT** /watchlist/{user_id} | Add/Remove title from watchlist
 *Fmd.UserApi* | [**watchlistUserIdRemovePut**](docs/UserApi.md#watchlistUserIdRemovePut) | **PUT** /watchlist/{user_id}/remove | Remove title from user&#x27;s watchlist
