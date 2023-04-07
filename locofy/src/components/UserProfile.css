@@ -4,8 +4,8 @@
   flex-shrink: 0;
 }
 .picture-icon2 {
-  width: 300px;
-  height: 300px;
+  width: 70%;
+  height: width;
   object-fit: cover;
 }
 .duvylfyluksq2 {
@@ -18,8 +18,8 @@
   border-radius: var(--br-56xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 509px;
-  height: 590px;
+  width:20%;
+  height: 390px;
   flex-shrink: 0;
   overflow: hidden;
   display: flex;
@@ -41,8 +41,14 @@
   height: 32px;
 }
 .biotext {
-  width: 1057px;
-  height: 72px;
+  position: relative;
+  display: inline-block;
+  width: 60%;
+  height: 70px;
+  top:-10%;
+  overflow-y:hidden;
+  flex-shrink: 0;
+  font-size:19px;
 }
 .bio2 {
   width: 1028px;
@@ -101,7 +107,7 @@
 .interests {
   height: 97px;
   flex-direction: column;
-  gap: var(--gap-11xl);
+  gap: var(--gap-mini);
 }
 .num,
 .posts4,
@@ -117,7 +123,7 @@
 }
 .num,
 .posts4 {
-  width: 105px;
+  width: 43%;
   height: 33px;
 }
 .posts4 {
@@ -135,7 +141,7 @@
   position: relative;
   font-weight: 300;
   display: inline-block;
-  width: 153px;
+  width: 39%;
   height: 33px;
   flex-shrink: 0;
 }
@@ -144,14 +150,15 @@
   justify-content: flex-start;
 }
 .statinfo {
+  font-size:25px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: var(--gap-41xl);
+  gap: var(--gap-mini);
 }
 .stats {
   flex-direction: column;
-  gap: var(--gap-11xl);
+  gap: var(--gap-mini);
 }
 .right7,
 .stats,
@@ -163,8 +170,8 @@
   border-radius: var(--br-56xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 1186px;
-  height: 586px;
+  width: 45%;
+  height: 390px;
   flex-shrink: 0;
   overflow: hidden;
   flex-direction: column;

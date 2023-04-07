@@ -4,8 +4,8 @@
   flex-shrink: 0;
 }
 .picture-icon3 {
-  width: 300px;
-  height: 300px;
+  width: 50%;
+  height: width;
   object-fit: cover;
 }
 .imageicon {
@@ -40,8 +40,8 @@
   border-radius: var(--br-56xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 509px;
-  height: 590px;
+  width: 20%;
+  height: 390px;
   flex-shrink: 0;
   overflow: hidden;
   display: flex;
@@ -54,6 +54,7 @@
 .bio5 {
   position: relative;
   font-weight: 500;
+
 }
 .editicon1 {
   position: relative;
@@ -72,12 +73,15 @@
 .biotext1 {
   position: relative;
   display: inline-block;
-  width: 1057px;
-  height: 72px;
+  width: 100%;
+  height: 70px;
+  top:-10%;
+  overflow-y:hidden;
   flex-shrink: 0;
+  font-size:19px;
 }
 .bio4 {
-  width: 1028px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -85,7 +89,7 @@
   gap: var(--gap-xl);
 }
 .interests5 {
-  margin: 0;
+  margin-top:5%;
 }
 .adventure45,
 .interests4 {
@@ -116,7 +120,7 @@
 }
 .genres8,
 .interests3 {
-  width: 858px;
+  width: 80%;
   flex-shrink: 0;
   display: flex;
   align-items: flex-start;
@@ -133,7 +137,7 @@
 .interests3 {
   height: 97px;
   flex-direction: column;
-  gap: var(--gap-11xl);
+  gap: var(--gap-mini);
 }
 .num3,
 .posts7,
@@ -149,7 +153,7 @@
 }
 .num3,
 .posts7 {
-  width: 105px;
+  width: 39%;
   height: 33px;
 }
 .posts7 {
@@ -167,19 +171,21 @@
   position: relative;
   font-weight: 300;
   display: inline-block;
-  width: 153px;
+  width: 39%;
   height: 33px;
   flex-shrink: 0;
 }
 .statinfo1,
 .stats3 {
   justify-content: flex-start;
+  top:-10%;
 }
 .statinfo1 {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: var(--gap-41xl);
+  font-size:25px;
+  gap: var(--gap-mini);
 }
 .stats3 {
   flex-direction: column;
@@ -195,8 +201,8 @@
   border-radius: var(--br-56xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 1186px;
-  height: 586px;
+  width: 43%;
+  height: 390px;
   flex-shrink: 0;
   overflow: hidden;
   flex-direction: column;

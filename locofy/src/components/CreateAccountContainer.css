@@ -46,6 +46,7 @@
   width: 24px;
   height: 24px;
   overflow: hidden;
+  left:-10%;
 }
 .hideorshowpassword,
 .password {

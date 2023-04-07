@@ -3,7 +3,7 @@
   font-size: var(--font-size-26xl);
   font-weight: 500;
   display: inline-block;
-  width: 800px;
+  width: 80%;
 }
 .by1 {
   position: relative;
@@ -29,7 +29,7 @@
   gap: var(--gap-3xs);
 }
 .sublayout7 {
-  width: 769px;
+  width: 75%;
   flex-shrink: 0;
 }
 .reviewername1 {
@@ -64,18 +64,23 @@
   gap: var(--gap-xl);
 }
 .reviewheader1 {
-  width: 800px;
+  width: 80%;
   height: 130px;
   flex-shrink: 0;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--gap-8xs);
 }
+.lorem-ipsum-dolor1::-webkit-scrollbar{
+  width:0px;
+  background-color:transparent;
+}
 .lorem-ipsum-dolor1 {
   font-size: var(--font-size-11xl);
   display: inline-block;
-  width: 1330px;
-  height: 249px;
+  width: 100%;
+  height: 50%;
+  overflow-y:auto;
 }
 .comments1,
 .lorem-ipsum-dolor1,
@@ -127,14 +132,14 @@
 }
 .review2,
 .reviewfooter1 {
-  width: 1331px;
+  width: 100%;
   align-items: flex-end;
 }
 .review2 {
   border-radius: var(--br-11xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  width: 1374px;
+  width: 70%;
   height: 504px;
   flex-shrink: 0;
   flex-direction: column;
@@ -143,6 +148,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: var(--gap-11xl);
+  padding: var(--padding-3xs) var(--padding-xl);
+  margin-bottom:3%;
   text-align: left;
   font-size: var(--font-size-xl);
   color: var(--color-darkorchid-100);

@@ -78,11 +78,23 @@ const FrameComponent6 = () => {
               <img className="vector-icon3" alt="" src="/vector.svg" />
             </div>
             <div className="watchlistdisplay3">
-              <MovieWatchListContainer />
-              <BottomFooter />
-              <MovieWatchListContainer />
-              <BottomFooter />
-              <BottomFooter />
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
+            <MovieWatchListContainer 
+            image="/joker@2x.png"
+            rating="x.y"
+            title="Eternal Sunshine Of The Spotless.. "
+            />
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
             </div>
             <div className="watchlist5" onClick={onWatchlistText1Click}>
               View Entire Watchlist

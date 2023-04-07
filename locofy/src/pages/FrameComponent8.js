@@ -68,19 +68,31 @@ const FrameComponent8 = () => {
       <div className="duvylfyluksq-out">
         <div className="body8">
           <UserProfile />
-          <div className="watchlist9">
-            <div className="watchlistheader5">
-              <div className="watchlist10">Watchlist</div>
-              <img className="vector-icon5" alt="" src="/vector.svg" />
+          <div className="watchlist3">
+            <div className="watchlistheader3">
+              <div className="watchlist4">Watchlist</div>
+              <img className="vector-icon3" alt="" src="/vector.svg" />
             </div>
-            <div className="watchlistdisplay5">
-              <MovieWatchListContainer />
-              <BottomFooter />
-              <MovieWatchListContainer />
-              <BottomFooter />
-              <BottomFooter />
+            <div className="watchlistdisplay3">
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
+            <MovieWatchListContainer 
+            image="/joker@2x.png"
+            rating="x.y"
+            title="Eternal Sunshine Of The Spotless.. "
+            />
+            <BottomFooter
+            image="/joker@2x.png"
+            rating="a.b"
+            title="How I met your mother"
+            season="Season 5"            
+            />
             </div>
-            <div className="watchlist11" onClick={onWatchlistText1Click}>
+            <div className="watchlist5" onClick={onWatchlistText1Click}>
               View Entire Watchlist
             </div>
           </div>

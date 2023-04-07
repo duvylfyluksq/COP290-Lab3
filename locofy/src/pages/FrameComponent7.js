@@ -54,11 +54,36 @@ const FrameComponent7 = () => {
               <img className="vector-icon4" alt="" src="/vector.svg" />
             </div>
             <div className="watchlistdisplay4">
-              <WatchListMovieContainer productId="/materialsymbolsdeleteoutline1.svg" />
-              <Footer productId="/materialsymbolsdeleteoutline1.svg" />
-              <WatchListMovieContainer productId="/materialsymbolsdeleteoutline1.svg" />
-              <Footer productId="/materialsymbolsdeleteoutline1.svg" />
-              <Footer productId="/materialsymbolsdeleteoutline1.svg" />
+            <WatchListMovieContainer
+              image="/joker@2x.png"
+              rating="x.y"
+              title="Eternal Sunshine Of The Sjloawidhwoadqoih"
+              productId="/materialsymbolsdeleteoutline.svg"
+            />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
+            <WatchListMovieContainer
+              image="/joker@2x.png"
+              rating="x.y"
+              title="Eternal Sunshine Of The Spotless.. "
+              productId="/materialsymbolsdeleteoutline.svg"
+            />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
+            <Footer 
+              image="/joker@2x.png"
+              rating="a.b"
+              title="How I Met Your Mother"
+              season="Season 5"
+              productId="/materialsymbolsdeleteoutline.svg" />
             </div>
             <div className="watchlist8" onClick={onWatchlistText1Click}>
               View Entire Watchlist

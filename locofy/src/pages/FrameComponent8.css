@@ -1,19 +1,19 @@
-.vector-icon5,
-.watchlist10 {
+.vector-icon3,
+.watchlist4 {
   position: relative;
   flex-shrink: 0;
 }
-.watchlist10 {
+.watchlist4 {
   font-weight: 600;
   display: inline-block;
   width: 190px;
   height: 49px;
 }
-.vector-icon5 {
+.vector-icon3 {
   width: 40px;
   height: 30px;
 }
-.watchlistheader5 {
+.watchlistheader3 {
   width: 257px;
   height: 59px;
   flex-shrink: 0;
@@ -22,15 +22,15 @@
   align-items: center;
   justify-content: space-between;
 }
-.watchlistdisplay5 {
-  width: 1770px;
+.watchlistdisplay3 {
+  width: 95%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   gap: var(--gap-24xl);
 }
-.watchlist11 {
+.watchlist5 {
   position: relative;
   font-size: var(--font-size-11xl);
   display: inline-block;
@@ -39,7 +39,7 @@
   flex-shrink: 0;
   cursor: pointer;
 }
-.watchlist9 {
+.watchlist3 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -56,6 +56,7 @@
   font-weight: 600;
   width: 273px;
   height: 49px;
+  
 }
 .posts2 {
   font-size: var(--font-size-11xl);
@@ -75,7 +76,7 @@
 .duvylfyluksq-out {
   position: absolute;
   left: 0;
-  width: 1920px;
+  width: 120%;
 }
 .body8 {
   top: 133px;
@@ -103,4 +104,5 @@
   font-size: var(--font-size-26xl);
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
+  overflow-x:hidden;
 }

@@ -23,7 +23,7 @@
   justify-content: space-between;
 }
 .watchlistdisplay4 {
-  width: 1770px;
+  width: 95%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -103,4 +103,5 @@
   font-size: var(--font-size-26xl);
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
+  overflow-x:hidden;
 }
