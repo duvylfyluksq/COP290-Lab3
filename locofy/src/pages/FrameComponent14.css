@@ -44,6 +44,10 @@
   height: 18px;
   flex-shrink: 0;
 }
+.vector-icon12{
+  top:5%;
+  left:-5%;
+}
 .sort-by {
   font-weight: 500;
   display: inline-block;
