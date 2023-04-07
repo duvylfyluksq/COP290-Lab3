@@ -103,7 +103,7 @@ class TestUserController(BaseTestCase):
 
         Create a new user account
         """
-        query_string = [('Username', 'payal'), ('Password', 'password_example'), ('Confirm_Password', 'password_example'), (
+        query_string = [('Username', 'amaiya'), ('Password', 'password_example'), ('Confirm_Password', 'password_example'), (
             'interests', 'interests_example,interests_example,interests_example'), ('pfp', 'pfp_example'), ('bio', 'bio_example')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/signup',

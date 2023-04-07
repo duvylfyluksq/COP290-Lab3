@@ -58,7 +58,7 @@ class TestReviewsController(BaseTestCase):
                         ('content', 'hahahahahahahahahahahahahahah')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{review_id}/comment'.format(
-                review_id=416),
+                review_id=1),
             method='POST',
             query_string=query_string)
         self.assert200(response,

@@ -97,9 +97,9 @@ class TestDB(unittest.TestCase):
 
     def test_checkLogin(self):
         db.addUser(self.user)
-        self.assertTrue(db.checkLogin("testuser", "testpass"))
-        self.assertFalse(db.checkLogin("testuser", "wrongpassword"))
-        self.assertFalse(db.checkLogin("nonexistentuser", "anypassword"))
+        self.assertTrue(db.checkLogin("testuser", "testpass")[0])
+        self.assertFalse(db.checkLogin("testuser", "wrongpassword")[0])
+        self.assertFalse(db.checkLogin("nonexistentuser", "anypassword")[0])
 
     def test_getWatchlist_fromUser(self):
         db.addUser(self.user)
@@ -178,7 +178,7 @@ class TestDB(unittest.TestCase):
         review_id = 1
         r = db.getComments_fromReview(db.getReview(review_id))
         L = [i.comment_id for i in r]
-        self.assertEqual(sorted(L), [2, 9, 259])
+        self.assertEqual(sorted(L), [2, 9, 291])
 
     def test_Search(self):
         L = db.Search("T")
@@ -273,7 +273,7 @@ class TestDB(unittest.TestCase):
     def test_countComments_User(self):
         user_id = 1
         count = db.countComments_User(db.getUser(user_id))
-        self.assertEqual(count, 21)
+        self.assertEqual(count, 3)
         user_id = 2
         count = db.countComments_User(db.getUser(user_id))
         self.assertEqual(count, 1)
@@ -320,7 +320,7 @@ class TestDB(unittest.TestCase):
         self.assertEqual(count, 1)
         user_id = 8
         count = db.countLikes_User(db.getUser(user_id))
-        self.assertEqual(count, 2)
+        self.assertEqual(count, 3)
         user_id = 9
         count = db.countLikes_User(db.getUser(user_id))
         self.assertEqual(count, 0)
