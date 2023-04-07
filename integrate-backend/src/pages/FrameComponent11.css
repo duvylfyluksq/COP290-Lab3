@@ -1,0 +1,253 @@
+.peakyblinders-icon40 {
+  position: relative;
+  height: width;
+  width:100%;
+}
+.left40 {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-mini) 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+.vector-icon7,
+.xy101 {
+  position: relative;
+  flex-shrink: 0;
+}
+.xy101 {
+  display: inline-block;
+  width: 63px;
+  height: 22px;
+}
+.vector-icon7 {
+  width: 25px;
+  height: 23.75px;
+}
+.rating1 {
+  width: 101px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.avgduration {
+  margin: 0;
+}
+.episodeduration {
+  position: relative;
+  display: inline-block;
+  width: 134px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.genre4 {
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  display: inline-block;
+  width: 63px;
+  height: 22px;
+}
+.genre23 {
+  position: relative;
+  border-radius: var(--br-3xs);
+  background-color: var(--color-darkorchid-100);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 70px;
+  height: 25px;
+  flex-shrink: 0;
+}
+.descriptionheader60,
+.genres1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.genres1 {
+  align-items: flex-start;
+  gap: var(--gap-9xl);
+  text-align: center;
+  color: var(--color-goldenrod);
+}
+.descriptionheader60 {
+  width:100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.season50,
+.title400,
+.year1000 {
+  position: relative;
+}
+.title400 {
+  align-self: stretch;
+  font-weight: 500;
+  font-size:55px;
+}
+.season5001,
+.year1000 {
+  font-weight: 300;
+  font-size:20px;
+  display: inline-block;
+  /* width: 94px;
+  height: 36px; */
+  flex-shrink: 0;
+}
+.season5001{
+  top:-20%;
+  gap: var(--gap-mini);
+}
+/* .year1000 {
+  font-size: var(--font-size-11xl);
+  font-weight: 300;
+  width: 82px;
+  height: 29px;
+} */
+.title300 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-mini);
+}
+.plotsynopsis100 {
+  height:103px;
+  align-self: stretch;
+  position: relative;
+  font-size: 20px;
+  top:-10%;
+  overflow-y:hidden;
+}
+.descriptionbody60 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-mini);
+}
+.line-icon100 {
+  bottom:30%;
+  position: relative;
+  width: 2%;
+  height:50%;
+  flex-shrink: 0;
+}
+.credits100 {
+  width:70%;
+  bottom:30%;
+  flex: 1;
+  position: relative;
+  gap:var(--gap-31xl);
+}
+
+.subsublayout100 {
+  width:120%;
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--gap-11xl);
+  font-size: 25px;
+}
+.tvshowdescription100,
+.right100,
+.sublayout100,
+.subsublayout100 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sublayout100 {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 70px;
+  font-size: var(--font-size-51xl);
+}
+.tvshowdescription100,
+.right100 {
+  flex-shrink: 0;
+}
+.right100 {
+  width: 70%;
+  overflow: hidden;
+  flex-direction: column;
+  padding: var(--padding-mini) var(--padding-3xs);
+  box-sizing: border-box;
+  align-items: flex-start;
+  gap: var(--gap-mini);
+  height:inherit;
+}
+.tvshowdescription100 {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 85%;
+  overflow-x:auto;
+  height: 400px;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-21xl);
+  padding: var(--padding-31xl) var(--padding-56xl);
+}
+.reviews1 {
+  position: relative;
+  font-weight: 600;
+}
+.see-all-reviews1 {
+  position: relative;
+  font-size: var(--font-size-11xl);
+  display: inline-block;
+  width: 230px;
+  height: 38px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.reviewlist5 {
+  width: 1770px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-3xs) 0;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-31xl);
+  font-size: var(--font-size-41xl);
+}
+.body11,
+.tvshow-out {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow-y: auto;
+  overflow-x:hidden;
+}
+.body11 {
+  height: 947px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-31xl) var(--padding-56xl);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-41xl);
+}
+.tvshow-out {
+  top: 0;
+  background-color: var(--color-white);
+  height: 1080px;
+  overflow-x:hidden;
+}
+.tvshow-out-parent {
+  position: relative;
+  width: 10%;
+  height: 1080px;
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+  overflow-x:hidden;
+}
