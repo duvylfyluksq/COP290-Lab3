@@ -16,9 +16,11 @@
   position: relative;
   font-weight: 500;
   display: inline-block;
-  width: 423px;
+  width: 30%;
   height: 28px;
   flex-shrink: 0;
+  z-index:2;
+  top:110px;
 }
 .details7 {
   position: absolute;
@@ -30,7 +32,7 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
-.linearfill7 {
+/* .linearfill7 {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -47,11 +49,11 @@
     rgba(255, 255, 255, 0)
   );
   overflow: hidden;
-}
+} */
 .genrecard {
   position: relative;
-  width: 490px;
-  height: 320px;
+  width: 90%;
+  height: 200px;
   flex-shrink: 0;
   cursor: pointer;
 }

@@ -5,6 +5,7 @@ import ReviewsContainer from "../components/ReviewsContainer";
 import ReviewContainer from "../components/ReviewContainer";
 import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent9.css";
+import SortPanelReviewsPageRadios from '../components/SortPanelReviewsPageRadios';
 
 const FrameComponent9 = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const FrameComponent9 = () => {
             <div className="showing3">Showing Reviews For</div>
             <div className="title">Eternal Sunshine Of The Spo...</div>
           </div>
-          <ReviewsContainer />
+          <SortPanelReviewsPageRadios />
           <div className="reviewlist3">
             <div className="postslist6">
               <ReviewContainer

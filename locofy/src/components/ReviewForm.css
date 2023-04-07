@@ -134,7 +134,7 @@
   align-items: flex-end;
 }
 .review1 {
-  width:60%;
+  width:90%;
   border-radius: var(--br-11xl) var(--br-11xl) 0 0;
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
@@ -234,7 +234,7 @@
   color: var(--color-goldenrod);
 }
 .addcomment {
-  width:60%;
+  width:90%;
   border-radius: 0 0 var(--br-11xl) var(--br-11xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
