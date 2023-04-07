@@ -441,9 +441,12 @@ def checkLogin(username: str, password: str) -> bool:
         cursor.execute(sql, (username,))
         r = cursor.fetchone()
         if r is not None and r['password'] == password:
-            return True
+            r['watchlist_movies'] = json.loads(r['watchlist_movies'])
+            r['watchlist_shows'] = json.loads(r['watchlist_shows'])
+            r['interests'] = json.loads(r['interests'])
+            return (True, User.from_dict(r))
         else:
-            return False
+            return (False, None)
 
 
 def checKUsername(username: str) -> bool:

@@ -74,7 +74,11 @@ def user_signin_post(Username, Password):  # noqa: E501
     # postman works
     # unittest works
     try:
-        return (db.checkLogin(Username, Password), 200)
+        ans = db.checkLogin(Username, Password)
+        if (ans[0]):
+            return (ans[1], 200)
+        else:
+            return (f'Error logging in: {err}', 400)
     except Exception as err:
         return (f'Error logging in: {err}', 400)
 
@@ -87,7 +91,7 @@ def user_signup_post(Username, Password, Confirm_Password, interests, pfp, bio):
                     interests=interests, pfp=pfp, bio=bio, watchlist_movies={}, watchlist_shows={})
         try:
             db.addUser(user)
-            return ('User added successfully', 200)
+            return (user, 200)
         except Exception as err:
             return (f'Error adding user: {err}', 400)
     else:
