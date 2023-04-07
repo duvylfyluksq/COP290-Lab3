@@ -1,12 +1,12 @@
 .showing,
-.username {
+.usrnamee {
   position: relative;
   display: inline-block;
   width: 414px;
   height: 49px;
   flex-shrink: 0;
 }
-.username {
+.usrnamee {
   font-weight: 600;
   width: 614px;
 }

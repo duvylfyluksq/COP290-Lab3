@@ -91,7 +91,7 @@ const FrameComponent3 = () => {
         <div className="body3">
           <div className="reviewsheader">
             <div className="showing">Showing Reviews By</div>
-            <div className="username">duvylfyluksq</div>
+            <div className="usrnamee">duvylfyluksq</div>
           </div>
           <SortPanelReviewsPageRadios />
           <div className="reviewlist">

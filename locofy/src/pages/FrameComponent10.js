@@ -89,15 +89,15 @@ const FrameComponent10 = () => {
     <div className="movie-out-parent">
       <div className="movie-out">
         <div className="body10">
-          <div className="moviedescription">
-            <div className="left">
-              <img className="joker-icon" alt="" src="/joker1@2x.png" />
+          <div className="moviedescription50">
+            <div className="left50">
+              <img className="joker-icon70" alt="" src="/joker1@2x.png" />
             </div>
-            <div className="right">
-              <div className="descriptionheader">
+            <div className="right50">
+              <div className="descriptionheader50">
                 <div className="rating">
                   <div className="xy10">x.y/10</div>
-                  <img className="vector-icon6" alt="" src="/vector2.svg" />
+                  <img className="vector-icon60" alt="" src="/vector2.svg" />
                 </div>
                 <div className="duration">
                   <p className="director-john-doe">Duration</p>
@@ -114,29 +114,31 @@ const FrameComponent10 = () => {
                   </div>
                 </div>
               </div>
-              <div className="sublayout">
+              <div className="sublayout50">
                 <div className="descriptionbody">
-                  <div className="title1">
-                    <div className="title2">Title</div>
-                    <div className="year">(Year)</div>
+                  <div className="title100">
+                    <div className="title200">Title</div>
+                    <div className="year500">(Year)</div>
                   </div>
-                  <div className="plotsynopsis">
+                  <div className="plotsynopsis50">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis
-                    aute irure dolor in reprehenderit in
+                    do eiusmod tempor irwohferifhowhfdsohjfowefwfewbewuhgdewugefwigfiewuewhidsonx
+                    hewjoifjewpkfewjsk ksjbdiwbxiw iforwjocdkcndwojs xiwjoc dwowdno cdwnciwn cozzidw   hewjoifjewpkfewjskcbwdi icdwocj 
+                    dncdi cdj nco dodxk ncod xnceoipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor irwohferifhowhfdsohjfowefwfewbewuhgdewugefwigfiewuewhidsonx
+                    hewjoifjewpkfewjsk ksjbdiwbxiw iforwjocdkcndwojs xiwjoc dwowdno cdwnciwn cozzidw   hewjoifjewpkfewjskcbwdi icdwocj 
+                    dncdi cdj nco dodxk ncod xnceo
                   </div>
                 </div>
-                <div className="subsublayout">
-                  <img className="line-icon" alt="" src="/line.svg" />
-                  <div className="credits">
+                <div className="subsublayout50">
+                  <img className="line-icon50" alt="" src="/line.svg" />
+                  <div className="credits50">
                     <p className="director-john-doe">Director: John Doe</p>
-                    <p className="director-john-doe">&nbsp;</p>
+                    {/* <p className="director-john-doe">&nbsp;</p> */}
                     <p className="director-john-doe">
                       Writers: John Doe, Jane Doe, John Doe
                     </p>
-                    <p className="director-john-doe">&nbsp;</p>
+                    {/* <p className="director-john-doe">&nbsp;</p> */}
                     <p className="director-john-doe">{`Cast: John Doe, Jane Doe, John Doe `}</p>
                   </div>
                 </div>

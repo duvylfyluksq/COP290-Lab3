@@ -19,9 +19,10 @@ const MoreMoviesLikeThisContainer = ({
   }, [propCursor]);
 
   return (
-    <div className="moremovieslikethis">
+    <div className="moremovieslikethis50">
       <div className="moviecard" onClick={onMovieCardContainerClick}>
         <img className="moviecard-icon" alt="" src="/moviecard@2x.png" />
+        <div className='gradient-overlay'></div>
         <div className="linearfill">
           <div className="details">
             <div className="rating14">
@@ -34,6 +35,7 @@ const MoreMoviesLikeThisContainer = ({
       </div>
       <div className="moviecard" onClick={onTVShowCardContainerClick}>
         <img className="moviecard-icon" alt="" src="/moviecard@2x.png" />
+        <div className='gradient-overlay'></div>
         <div className="linearfill1">
           <div className="details1">
             <div className="rating14">
@@ -47,6 +49,7 @@ const MoreMoviesLikeThisContainer = ({
       </div>
       <div className="moviecard" onClick={onMovieCardContainer1Click}>
         <img className="moviecard-icon" alt="" src="/moviecard@2x.png" />
+        <div className='gradient-overlay'></div>
         <div className="linearfill">
           <div className="details">
             <div className="rating14">
@@ -59,6 +62,7 @@ const MoreMoviesLikeThisContainer = ({
       </div>
       <div className="moviecard" onClick={onTVShowCardContainer1Click}>
         <img className="moviecard-icon" alt="" src="/moviecard@2x.png" />
+        <div className='gradient-overlay'></div>
         <div className="linearfill1">
           <div className="details1">
             <div className="rating14">
@@ -72,6 +76,7 @@ const MoreMoviesLikeThisContainer = ({
       </div>
       <div className="moviecard" onClick={onMovieCardContainer2Click}>
         <img className="moviecard-icon" alt="" src="/moviecard@2x.png" />
+        <div className='gradient-overlay'></div>
         <div className="linearfill">
           <div className="details">
             <div className="rating14">
@@ -84,6 +89,7 @@ const MoreMoviesLikeThisContainer = ({
       </div>
       <div className="moviecard" onClick={onTVShowCardContainer2Click}>
         <img className="moviecard-icon" alt="" src="/moviecard@2x.png" />
+        <div className='gradient-overlay'></div>
         <div className="linearfill1">
           <div className="details1">
             <div className="rating14">
@@ -101,6 +107,7 @@ const MoreMoviesLikeThisContainer = ({
         style={tVShowCardStyle}
       >
         <img className="moviecard-icon" alt="" src="/moviecard@2x.png" />
+        <div className='gradient-overlay'></div>
         <div className="linearfill1">
           <div className="details1">
             <div className="rating14">

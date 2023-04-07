@@ -85,16 +85,16 @@ const FrameComponent11 = () => {
     <div className="tvshow-out-parent">
       <div className="tvshow-out">
         <div className="body11">
-          <div className="tvshowdescription">
-            <div className="left1">
+          <div className="tvshowdescription100">
+            <div className="left40">
               <img
-                className="peakyblinders-icon"
+                className="peakyblinders-icon40"
                 alt=""
                 src="/peakyblinders@2x.png"
               />
             </div>
-            <div className="right1">
-              <div className="descriptionheader1">
+            <div className="right100">
+              <div className="descriptionheader60">
                 <div className="rating1">
                   <div className="xy101">x.y/10</div>
                   <img className="vector-icon7" alt="" src="/vector1.svg" />
@@ -114,37 +114,25 @@ const FrameComponent11 = () => {
                   </div>
                 </div>
               </div>
-              <div className="sublayout1">
-                <div className="descriptionbody1">
-                  <div className="title3">
-                    <div className="title4">
-                      <p className="avgduration">
-                        <span>Title</span>
-                        <span className="span">{` `}</span>
-                      </p>
-                    </div>
-                    <div className="season">Season z</div>
-                    <div className="year1">
-                      <p className="avgduration">(Year)</p>
-                    </div>
+              <div className="sublayout100">
+                <div className="descriptionbody60">
+                  <div className="title100">
+                    <div className="title200">Title</div>
+                    <div className="season5001">Season</div>
+                    <div className="year500">(Year)</div>
                   </div>
-                  <div className="plotsynopsis1">
+                  <div className="plotsynopsis100">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis
-                    aute irure dolor in reprehenderit in
+                    do eiusmod tempor igap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);
                   </div>
                 </div>
-                <div className="subsublayout1">
-                  <img className="line-icon1" alt="" src="/line.svg" />
-                  <div className="credits1">
+                <div className="subsublayout100">
+                  <img className="line-icon100" alt="" src="/line.svg" />
+                  <div className="credits100">
                     <p className="avgduration">Director: John Doe</p>
-                    <p className="avgduration">&nbsp;</p>
                     <p className="avgduration">
                       Writers: John Doe, Jane Doe, John Doe
                     </p>
-                    <p className="avgduration">&nbsp;</p>
                     <p className="avgduration">{`Cast: John Doe, Jane Doe, John Doe `}</p>
                   </div>
                 </div>
