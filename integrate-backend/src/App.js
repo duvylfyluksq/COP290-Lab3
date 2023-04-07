@@ -194,5 +194,5 @@ import { useEffect } from "react";
       <Route path="/signintile" element={<SignInTile />} />
     </Routes>
   );
-}
+
 export default App;
