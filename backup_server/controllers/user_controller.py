@@ -10,6 +10,8 @@ import traceback
 
 from swagger_server.models.title import Title  # noqa: E501
 from swagger_server.models.user import User  # noqa: E501
+from swagger_server.models.user_signin_body import UserSigninBody
+from swagger_server.models.user_signup_body import UserSignupBody
 
 
 def profile_user_id_bio_put(user_id, bio):  # noqa: E501
@@ -143,29 +145,51 @@ def user_user_id_get(user_id):  # noqa: E501
         return (f'User not found: {err}', 404)
 
 
-def user_signin_post(Username, Password):  # noqa: E501
+def user_signin_post(body=None):  # noqa: E501
     # postman works
-    # unittest works
-    try:
-        ans = db.checkLogin(Username, Password)
-        if (ans[0]):
-            return (ans[1], 200)
-        else:
-            return (f'Error logging in: {err}', 400)
-    except Exception as err:
-        return (f'Error logging in: {err}', 400)
 
-
-def user_signup_post(Username, Password, Confirm_Password, interests, pfp, bio):  # noqa: E501
-    # postman works
-    # unittest works
-    if (Password == Confirm_Password):
-        user = User(user_id=None, username=Username, password=Password,
-                    interests=interests, pfp=pfp, bio=bio, watchlist_movies={}, watchlist_shows={})
+    if connexion.request.is_json:
+        body = UserSigninBody.from_dict(connexion.request.get_json())  # noqa: E501
+        password = body.password
+        username = body.username
         try:
-            db.addUser(user)
-            return (user, 200)
+            ans = db.checkLogin(username, password)
+            if (ans[0]):
+                return (ans[1], 200)
+            else:
+                return (f'User not found', 404)
         except Exception as err:
-            return (f'Error adding user: {err}', 400)
-    else:
-        return (f'Passwords not matching', 400)
+            return (f'Error logging in: {err}', 400)
+    return 'do some magic!'
+
+
+def user_signup_post(body=None):  # noqa: E501
+    """Sign Up
+
+     # noqa: E501
+
+    :param body: 
+    :type body: dict | bytes
+
+    :rtype: User
+    """
+    if connexion.request.is_json:
+        body = UserSignupBody.from_dict(connexion.request.get_json())
+        username = body.username
+        password = body.password
+        bio = body.bio
+        confirm_password = body.confirm_password
+        interests = body.interests
+        pfp = body.pfp
+        if (password == confirm_password):
+            user = User(user_id=None, username=username, password=password,
+                        interests=interests, pfp=pfp, bio=bio, watchlist_movies={}, watchlist_shows={})
+            try:
+                db.addUser(user)
+                return (user, 200)
+            except Exception as err:
+                return (f'Error adding user: {err}', 400)
+        else:
+            return (f'Passwords not matching', 400)
+
+    return 'do some magic!'

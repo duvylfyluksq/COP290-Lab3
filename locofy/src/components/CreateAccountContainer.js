@@ -28,7 +28,7 @@ const CreateAccountContainer = () => {
       if (response.status !== 200) {
         console.log(response.body);
       } else {
-        console.log(response.body)
+        console.log("Success, going to select bio and interests")
         const user = User.constructFromObject(response.body);
         navigate('/continue', {state: {user: user} });
       }

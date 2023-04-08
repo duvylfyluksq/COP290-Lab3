@@ -16,6 +16,11 @@
 import {ApiClient} from "../ApiClient";
 import {Title} from '../model/Title';
 import {User} from '../model/User';
+import {UserIdBioBody} from '../model/UserIdBioBody';
+import {UserIdInterestsBody} from '../model/UserIdInterestsBody';
+import {UserIdPasswordBody} from '../model/UserIdPasswordBody';
+import {UserIdPfpBody} from '../model/UserIdPfpBody';
+import {UserIdUsernameBody} from '../model/UserIdUsernameBody';
 import {UserSigninBody} from '../model/UserSigninBody';
 import {UserSignupBody} from '../model/UserSignupBody';
 
@@ -48,27 +53,24 @@ export class UserApi {
 
     /**
      * Update user bio
-     * @param {Number} user_id ID of the user
-     * @param {String} bio New bio
+     * @param {Number} userId ID of the user
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserIdBioBody} opts.body 
      * @param {module:api/UserApi~profileUserIdBioPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdBioPut(user_id, bio, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'user_id' is set
+    profileUserIdBioPut(user_id, opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
+      // verify the required parameter 'userId' is set
       if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdBioPut");
-      }
-      // verify the required parameter 'bio' is set
-      if (bio === undefined || bio === null) {
-        throw new Error("Missing the required parameter 'bio' when calling profileUserIdBioPut");
+        throw new Error("Missing the required parameter 'userId' when calling profileUserIdBioPut");
       }
 
       let pathParams = {
         'user_id': user_id
       };
       let queryParams = {
-        'bio': bio
+        
       };
       let headerParams = {
         
@@ -78,7 +80,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
 
@@ -98,27 +100,24 @@ export class UserApi {
 
     /**
      * Update interests
-     * @param {Number} user_id ID of the user
-     * @param {Array.<String>} interests New Profile Picture
+     * @param {Number} userId ID of the user
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserIdInterestsBody} opts.body 
      * @param {module:api/UserApi~profileUserIdInterestsPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdInterestsPut(user_id, interests, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'user_id' is set
+    profileUserIdInterestsPut(user_id, opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
+      // verify the required parameter 'userId' is set
       if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdInterestsPut");
-      }
-      // verify the required parameter 'interests' is set
-      if (interests === undefined || interests === null) {
-        throw new Error("Missing the required parameter 'interests' when calling profileUserIdInterestsPut");
+        throw new Error("Missing the required parameter 'userId' when calling profileUserIdInterestsPut");
       }
 
       let pathParams = {
         'user_id': user_id
       };
       let queryParams = {
-        'interests': this.apiClient.buildCollectionParam(interests, 'multi')
+        
       };
       let headerParams = {
         
@@ -128,7 +127,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
 
@@ -148,27 +147,24 @@ export class UserApi {
 
     /**
      * Update Password
-     * @param {Number} user_id ID of the user
-     * @param {String} password New password
+     * @param {Number} userId ID of the user
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserIdPasswordBody} opts.body 
      * @param {module:api/UserApi~profileUserIdPasswordPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdPasswordPut(user_id, password, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'user_id' is set
+    profileUserIdPasswordPut(user_id, opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
+      // verify the required parameter 'userId' is set
       if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdPasswordPut");
-      }
-      // verify the required parameter 'password' is set
-      if (password === undefined || password === null) {
-        throw new Error("Missing the required parameter 'password' when calling profileUserIdPasswordPut");
+        throw new Error("Missing the required parameter 'userId' when calling profileUserIdPasswordPut");
       }
 
       let pathParams = {
         'user_id': user_id
       };
       let queryParams = {
-        'password': password
+        
       };
       let headerParams = {
         
@@ -178,7 +174,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
 
@@ -198,27 +194,24 @@ export class UserApi {
 
     /**
      * Update profile picture
-     * @param {Number} user_id ID of the user
-     * @param {String} pfp New Profile Picture
+     * @param {Number} userId ID of the user
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserIdPfpBody} opts.body 
      * @param {module:api/UserApi~profileUserIdPfpPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdPfpPut(user_id, pfp, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'user_id' is set
-      if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdPfpPut");
-      }
-      // verify the required parameter 'pfp' is set
-      if (pfp === undefined || pfp === null) {
-        throw new Error("Missing the required parameter 'pfp' when calling profileUserIdPfpPut");
+    profileUserIdPfpPut(userId, opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling profileUserIdPfpPut");
       }
 
       let pathParams = {
-        'user_id': user_id
+        'user_id': userId
       };
       let queryParams = {
-        'pfp': pfp
+        
       };
       let headerParams = {
         
@@ -228,7 +221,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
 
@@ -248,27 +241,24 @@ export class UserApi {
 
     /**
      * Update username
-     * @param {Number} user_id ID of the user
-     * @param {String} username New username
+     * @param {Number} userId ID of the user
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserIdUsernameBody} opts.body 
      * @param {module:api/UserApi~profileUserIdUsernamePutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdUsernamePut(user_id, username, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'user_id' is set
-      if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdUsernamePut");
-      }
-      // verify the required parameter 'username' is set
-      if (username === undefined || username === null) {
-        throw new Error("Missing the required parameter 'username' when calling profileUserIdUsernamePut");
+    profileUserIdUsernamePut(userId, opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling profileUserIdUsernamePut");
       }
 
       let pathParams = {
-        'user_id': user_id
+        'user_id': userId
       };
       let queryParams = {
-        'username': username
+        
       };
       let headerParams = {
         
@@ -278,7 +268,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = [];
       let returnType = null;
 
@@ -349,6 +339,7 @@ export class UserApi {
     userSignupPost(opts, callback) {
       opts = opts || {};
       let postBody = opts['body'];
+
       let pathParams = {
         
       };
@@ -383,20 +374,20 @@ export class UserApi {
 
     /**
      * Get User object(user details) from user id
-     * @param {Number} user_id UserId
+     * @param {Number} userId UserId
      * @param {module:api/UserApi~userUserIdGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    userUserIdGet(user_id, callback) {
+    userUserIdGet(userId, callback) {
       
       let postBody = null;
-      // verify the required parameter 'user_id' is set
-      if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling userUserIdGet");
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling userUserIdGet");
       }
 
       let pathParams = {
-        'user_id': user_id
+        'user_id': userId
       };
       let queryParams = {
         
@@ -420,6 +411,206 @@ export class UserApi {
       );
     }
     /**
+     * Callback function to receive the result of the watchlistMovieRemoveUserIdPut operation.
+     * @callback moduleapi/UserApi~watchlistMovieRemoveUserIdPutCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Remove Movie from user&#x27;s watchlist
+     * @param {Number} userId ID of the user
+     * @param {Number} id id of the Movie to be removed from user&#x27;s watchlist
+     * @param {module:api/UserApi~watchlistMovieRemoveUserIdPutCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    watchlistMovieRemoveUserIdPut(userId, id, callback) {
+      
+      let postBody = null;
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling watchlistMovieRemoveUserIdPut");
+      }
+      // verify the required parameter 'id' is set
+      if (id === undefined || id === null) {
+        throw new Error("Missing the required parameter 'id' when calling watchlistMovieRemoveUserIdPut");
+      }
+
+      let pathParams = {
+        'user_id': userId
+      };
+      let queryParams = {
+        'id': id
+      };
+      let headerParams = {
+        
+      };
+      let formParams = {
+        
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/watchlist/movie/remove/{user_id}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+    /**
+     * Callback function to receive the result of the watchlistMovieUserIdPut operation.
+     * @callback moduleapi/UserApi~watchlistMovieUserIdPutCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Add/Remove movie from watchlist
+     * @param {Number} userId ID of the user
+     * @param {Number} id ID of the movie
+     * @param {module:api/UserApi~watchlistMovieUserIdPutCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    watchlistMovieUserIdPut(userId, id, callback) {
+      
+      let postBody = null;
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling watchlistMovieUserIdPut");
+      }
+      // verify the required parameter 'id' is set
+      if (id === undefined || id === null) {
+        throw new Error("Missing the required parameter 'id' when calling watchlistMovieUserIdPut");
+      }
+
+      let pathParams = {
+        'user_id': userId
+      };
+      let queryParams = {
+        'id': id
+      };
+      let headerParams = {
+        
+      };
+      let formParams = {
+        
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/watchlist/movie/{user_id}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+    /**
+     * Callback function to receive the result of the watchlistTvshowRemoveUserIdPut operation.
+     * @callback moduleapi/UserApi~watchlistTvshowRemoveUserIdPutCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Remove TV show from user&#x27;s watchlist
+     * @param {Number} userId ID of the user
+     * @param {Number} id id of the TV show to be removed from user&#x27;s watchlist
+     * @param {module:api/UserApi~watchlistTvshowRemoveUserIdPutCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    watchlistTvshowRemoveUserIdPut(userId, id, callback) {
+      
+      let postBody = null;
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling watchlistTvshowRemoveUserIdPut");
+      }
+      // verify the required parameter 'id' is set
+      if (id === undefined || id === null) {
+        throw new Error("Missing the required parameter 'id' when calling watchlistTvshowRemoveUserIdPut");
+      }
+
+      let pathParams = {
+        'user_id': userId
+      };
+      let queryParams = {
+        'id': id
+      };
+      let headerParams = {
+        
+      };
+      let formParams = {
+        
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/watchlist/tvshow/remove/{user_id}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+    /**
+     * Callback function to receive the result of the watchlistTvshowUserIdPut operation.
+     * @callback moduleapi/UserApi~watchlistTvshowUserIdPutCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Add/Remove TV show from watchlist
+     * @param {Number} userId ID of the user
+     * @param {Number} id ID of TV show
+     * @param {module:api/UserApi~watchlistTvshowUserIdPutCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    watchlistTvshowUserIdPut(userId, id, callback) {
+      
+      let postBody = null;
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling watchlistTvshowUserIdPut");
+      }
+      // verify the required parameter 'id' is set
+      if (id === undefined || id === null) {
+        throw new Error("Missing the required parameter 'id' when calling watchlistTvshowUserIdPut");
+      }
+
+      let pathParams = {
+        'user_id': userId
+      };
+      let queryParams = {
+        'id': id
+      };
+      let headerParams = {
+        
+      };
+      let formParams = {
+        
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/watchlist/tvshow/{user_id}', 'PUT',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+    /**
      * Callback function to receive the result of the watchlistUserIdGet operation.
      * @callback moduleapi/UserApi~watchlistUserIdGetCallback
      * @param {String} error Error message, if any.
@@ -429,20 +620,20 @@ export class UserApi {
 
     /**
      * Get all titles in user watchlist
-     * @param {Number} user_id ID of the user
+     * @param {Number} userId ID of the user
      * @param {module:api/UserApi~watchlistUserIdGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    watchlistUserIdGet(user_id, callback) {
+    watchlistUserIdGet(userId, callback) {
       
       let postBody = null;
-      // verify the required parameter 'user_id' is set
-      if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling watchlistUserIdGet");
+      // verify the required parameter 'userId' is set
+      if (userId === undefined || userId === null) {
+        throw new Error("Missing the required parameter 'userId' when calling watchlistUserIdGet");
       }
 
       let pathParams = {
-        'user_id': user_id
+        'user_id': userId
       };
       let queryParams = {
         
@@ -461,106 +652,6 @@ export class UserApi {
 
       return this.apiClient.callApi(
         '/watchlist/{user_id}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
-      );
-    }
-    /**
-     * Callback function to receive the result of the watchlistUserIdPut operation.
-     * @callback moduleapi/UserApi~watchlistUserIdPutCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Add/Remove title from watchlist
-     * @param {Number} user_id ID of the user
-     * @param {String} id id of TVShow/Movie to be added to the watchlist
-     * @param {module:api/UserApi~watchlistUserIdPutCallback} callback The callback function, accepting three arguments: error, data, response
-     */
-    watchlistUserIdPut(user_id, id, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'user_id' is set
-      if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling watchlistUserIdPut");
-      }
-      // verify the required parameter 'id' is set
-      if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling watchlistUserIdPut");
-      }
-
-      let pathParams = {
-        'user_id': user_id
-      };
-      let queryParams = {
-        'id': id
-      };
-      let headerParams = {
-        
-      };
-      let formParams = {
-        
-      };
-
-      let authNames = [];
-      let contentTypes = [];
-      let accepts = [];
-      let returnType = null;
-
-      return this.apiClient.callApi(
-        '/watchlist/{user_id}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
-      );
-    }
-    /**
-     * Callback function to receive the result of the watchlistUserIdRemovePut operation.
-     * @callback moduleapi/UserApi~watchlistUserIdRemovePutCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Remove title from user&#x27;s watchlist
-     * @param {Number} user_id ID of the user
-     * @param {String} id id of the Title to be removed from user&#x27;s watchlist
-     * @param {module:api/UserApi~watchlistUserIdRemovePutCallback} callback The callback function, accepting three arguments: error, data, response
-     */
-    watchlistUserIdRemovePut(user_id, id, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'user_id' is set
-      if (user_id === undefined || user_id === null) {
-        throw new Error("Missing the required parameter 'user_id' when calling watchlistUserIdRemovePut");
-      }
-      // verify the required parameter 'id' is set
-      if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling watchlistUserIdRemovePut");
-      }
-
-      let pathParams = {
-        'user_id': user_id
-      };
-      let queryParams = {
-        'id': id
-      };
-      let headerParams = {
-        
-      };
-      let formParams = {
-        
-      };
-
-      let authNames = [];
-      let contentTypes = [];
-      let accepts = [];
-      let returnType = null;
-
-      return this.apiClient.callApi(
-        '/watchlist/{user_id}/remove', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

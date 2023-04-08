@@ -37,6 +37,56 @@ export class ReviewsApi {
     }
 
     /**
+     * Callback function to receive the result of the reviewMovieIdGet operation.
+     * @callback moduleapi/ReviewsApi~reviewMovieIdGetCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/Review>{ data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get all reviews of a movie
+     * Returns a list of reviews for a particular movie
+     * @param {Number} id ID of the Movie
+     * @param {Object} opts Optional parameters
+     * @param {module:model/String} opts.sortTypeReviews Parameter based on which reviews will be sorted
+     * @param {Boolean} opts.sortOrder sorting order
+     * @param {module:api/ReviewsApi~reviewMovieIdGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
+     */
+    reviewMovieIdGet(id, opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+      // verify the required parameter 'id' is set
+      if (id === undefined || id === null) {
+        throw new Error("Missing the required parameter 'id' when calling reviewMovieIdGet");
+      }
+
+      let pathParams = {
+        'id': id
+      };
+      let queryParams = {
+        'sort_type_reviews': opts['sortTypeReviews'],'sort_order': opts['sortOrder']
+      };
+      let headerParams = {
+        
+      };
+      let formParams = {
+        
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [Review];
+
+      return this.apiClient.callApi(
+        '/review/movie/{id}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+    /**
      * Callback function to receive the result of the reviewPost operation.
      * @callback moduleapi/ReviewsApi~reviewPostCallback
      * @param {String} error Error message, if any.
@@ -265,29 +315,29 @@ export class ReviewsApi {
       );
     }
     /**
-     * Callback function to receive the result of the reviewTitleIdGet operation.
-     * @callback moduleapi/ReviewsApi~reviewTitleIdGetCallback
+     * Callback function to receive the result of the reviewTvshowIdGet operation.
+     * @callback moduleapi/ReviewsApi~reviewTvshowIdGetCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/Review>{ data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * Get all reviews of a title
-     * Returns a list of reviews for a particular title
-     * @param {String} id ID of the Movie or TVShow
+     * Get all reviews of a Tvshow
+     * Returns a list of reviews for a particular Tvshow
+     * @param {Number} id ID of the Tvshow
      * @param {Object} opts Optional parameters
      * @param {module:model/String} opts.sortTypeReviews Parameter based on which reviews will be sorted
      * @param {Boolean} opts.sortOrder sorting order
-     * @param {module:api/ReviewsApi~reviewTitleIdGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/ReviewsApi~reviewTvshowIdGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    reviewTitleIdGet(id, opts, callback) {
+    reviewTvshowIdGet(id, opts, callback) {
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling reviewTitleIdGet");
+        throw new Error("Missing the required parameter 'id' when calling reviewTvshowIdGet");
       }
 
       let pathParams = {
@@ -309,7 +359,7 @@ export class ReviewsApi {
       let returnType = [Review];
 
       return this.apiClient.callApi(
-        '/review/title/{id}', 'GET',
+        '/review/tvshow/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

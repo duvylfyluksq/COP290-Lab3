@@ -40,11 +40,11 @@ export class Comment {
     if (data) {
       obj = obj || new Comment();
       if (data.hasOwnProperty('comment_id'))
-        obj.commentId = ApiClient.convertToType(data['comment_id'], 'Number');
+        obj.comment_id = ApiClient.convertToType(data['comment_id'], 'Number');
       if (data.hasOwnProperty('review_id'))
-        obj.reviewId = ApiClient.convertToType(data['review_id'], 'Number');
+        obj.review_id = ApiClient.convertToType(data['review_id'], 'Number');
       if (data.hasOwnProperty('user_id'))
-        obj.userId = ApiClient.convertToType(data['user_id'], 'Number');
+        obj.user_id = ApiClient.convertToType(data['user_id'], 'Number');
       if (data.hasOwnProperty('content'))
         obj.content = ApiClient.convertToType(data['content'], 'String');
     }
@@ -53,19 +53,19 @@ export class Comment {
 }
 
 /**
- * @member {Number} commentId
+ * @member {Number} comment_id
  */
-Comment.prototype.commentId = undefined;
+Comment.prototype.comment_id = undefined;
 
 /**
- * @member {Number} reviewId
+ * @member {Number} review_id
  */
-Comment.prototype.reviewId = undefined;
+Comment.prototype.review_id = undefined;
 
 /**
- * @member {Number} userId
+ * @member {Number} user_id
  */
-Comment.prototype.userId = undefined;
+Comment.prototype.user_id = undefined;
 
 /**
  * @member {String} content

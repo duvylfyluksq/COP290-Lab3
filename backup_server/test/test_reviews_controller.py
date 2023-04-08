@@ -13,6 +13,19 @@ from swagger_server.test import BaseTestCase
 class TestReviewsController(BaseTestCase):
     """ReviewsController integration test stubs"""
 
+    def test_review_movie_id_get(self):
+        """Test case for review_movie_id_get
+
+        Get all reviews of a movie
+        """
+        query_string = []
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/movie/{id}'.format(
+                id=4),
+            method='GET', query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
     def test_review_post(self):
         """Test case for review_post
 
@@ -49,12 +62,24 @@ class TestReviewsController(BaseTestCase):
         self.assert200(response, 'Response body is : ' +
                        response.data.decode('utf-8'))
 
+    def test_review_review_id_comment_get(self):
+        """Test case for review_review_id_comment_get
+
+        Get all comments of a review
+        """
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{review_id}/comment'.format(
+                review_id=5),
+            method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
     def test_review_review_id_comment_post(self):
         """Test case for review_review_id_comment_post
 
         Add comment to review
         """
-        query_string = [('user_id', 1),
+        query_string = [('user_id', 9),
                         ('content', 'hahahahahahahahahahahahahahah')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{review_id}/comment'.format(
@@ -78,16 +103,15 @@ class TestReviewsController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_review_title_id_get(self):
-        """Test case for review_title_id_get
+    def test_review_tvshow_id_get(self):
+        """Test case for review_tvshow_id_get
 
-        Get all reviews of a title
+        Get all reviews of a tvshow
         """
-        payload = json.dumps({"movie_id": {"id": 4}, "show_id": None})
         query_string = []
         response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/title/{id}'.format(
-                id=payload),
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/movie/{id}'.format(
+                id=4),
             method='GET', query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -104,18 +128,6 @@ class TestReviewsController(BaseTestCase):
                 user_id=5),
             method='GET',
             query_string=query_string)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_review_review_id_comment_get(self):
-        """Test case for review_review_id_comment_get
-
-        Get all comments of a review
-        """
-        response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/review/{review_id}/comment'.format(
-                review_id=5),
-            method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

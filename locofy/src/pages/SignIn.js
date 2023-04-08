@@ -31,7 +31,7 @@ const SignIn = () => {
       if (response.status !== 200) {
         console.log(response.body);
       } else {
-        console.log(response.body)
+        console.log("Sign in successful")
         const user = User.constructFromObject(response.body);
         navigate('/homesignedin', {state: {user: user}});
       }

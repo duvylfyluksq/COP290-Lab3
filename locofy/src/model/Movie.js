@@ -41,7 +41,7 @@ export class Movie {
     if (data) {
       obj = obj || new Movie();
       if (data.hasOwnProperty('movie_id'))
-        obj.movieId = MovieId.constructFromObject(data['movie_id']);
+        obj.movie_id = MovieId.constructFromObject(data['movie_id']);
       if (data.hasOwnProperty('title'))
         obj.title = ApiClient.convertToType(data['title'], 'String');
       if (data.hasOwnProperty('plot'))
@@ -57,7 +57,7 @@ export class Movie {
       if (data.hasOwnProperty('genres'))
         obj.genres = ApiClient.convertToType(data['genres'], ['String']);
       if (data.hasOwnProperty('release_date'))
-        obj.releaseDate = ApiClient.convertToType(data['release_date'], 'Date');
+        obj.release_date = ApiClient.convertToType(data['release_date'], 'Date');
       if (data.hasOwnProperty('duration'))
         obj.duration = ApiClient.convertToType(data['duration'], 'String');
       if (data.hasOwnProperty('poster'))
@@ -68,9 +68,9 @@ export class Movie {
 }
 
 /**
- * @member {module:model/MovieId} movieId
+ * @member {module:model/MovieId} movie_id
  */
-Movie.prototype.movieId = undefined;
+Movie.prototype.movie_id = undefined;
 
 /**
  * @member {String} title
@@ -108,9 +108,9 @@ Movie.prototype.rating = undefined;
 Movie.prototype.genres = undefined;
 
 /**
- * @member {Date} releaseDate
+ * @member {Date} release_date
  */
-Movie.prototype.releaseDate = undefined;
+Movie.prototype.release_date = undefined;
 
 /**
  * @member {String} duration

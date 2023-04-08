@@ -84,34 +84,6 @@ class TestUserController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_user_signin_post(self):
-        """Test case for user_signin_post
-
-        Sign in user with credentials
-        """
-        query_string = [('Username', 'username_example'),
-                        ('Password', 'password_example')]
-        response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/signin',
-            method='POST',
-            query_string=query_string)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_user_signup_post(self):
-        """Test case for user_signup_post
-
-        Create a new user account
-        """
-        query_string = [('Username', 'amaiya'), ('Password', 'password_example'), ('Confirm_Password', 'password_example'), (
-            'interests', 'interests_example,interests_example,interests_example'), ('pfp', 'pfp_example'), ('bio', 'bio_example')]
-        response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/signup',
-            method='POST',
-            query_string=query_string)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
     def test_watchlist_user_id_get(self):
         """Test case for watchlist_user_id_get
 
@@ -154,6 +126,46 @@ class TestUserController(BaseTestCase):
             query_string=query_string)
         self.assertStatus(response, 200,
                           'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_user_user_id_get(self):
+        """Test case for user_user_id_get
+
+        Get User object(user details) from user id
+        """
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/{user_id}'.format(
+                user_id=2),
+            method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_user_signin_post(self):
+        """Test case for user_signin_post
+
+        Sign in user with credentials
+        """
+        query_string = [('Username', 'akshit'),
+                        ('Password', 'password123')]
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/signin',
+            method='POST',
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_user_signup_post(self):
+        """Test case for user_signup_post
+
+        Create a new user account
+        """
+        query_string = [('Username', 'amaiya'), ('Password', 'password_example'), ('Confirm_Password', 'password_example'), (
+            'interests', 'interests_example,interests_example,interests_example'), ('pfp', 'pfp_example'), ('bio', 'bio_example')]
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/user/signup',
+            method='POST',
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
 
 
 if __name__ == '__main__':

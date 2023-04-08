@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import MoviesContainer from '../components/MoviesContainer';
 import "./Continue.css";
 import {UserApi} from '../api/UserApi';
+import { UserIdBioBody } from '../model/UserIdBioBody';
+import { UserIdInterestsBody } from '../model/UserIdInterestsBody';
 import {User} from '../model/User';
 
 const Continue = () => {
@@ -37,14 +39,21 @@ const Continue = () => {
     navigate("/signin");
   }, [navigate]);
 
+
+
   const updateUserBio = (bio) => {
-    api.profileUserIdBioPut(user_id, bio, (error, data, response) => {
+    const bioBody = new UserIdBioBody(bio);
+      const opts = {
+        body: bioBody,
+      };
+    api.profileUserIdBioPut(user_id, opts, (error, data, response) => {
       if (error) {
         console.error("Error occurred:", error);
         return;
       }
       if (response.status === 200) {
-        console.log("Bio updated successfully", response.body);
+        console.log("Bio updated successfully");
+        navigate("/homesignedin", {state: {user: user}});
       } else {
         console.log("Failed to update bio:", response.body);
       }
@@ -52,20 +61,24 @@ const Continue = () => {
   };
 
   const updateUserInterests = (interests) => {
-    api.profileUserIdInterestsPut(user_id, interests, (error, data, response) => {
+    const interestsBody = new UserIdInterestsBody(interests);
+      const opts = {
+        body: interestsBody,
+      };
+    api.profileUserIdInterestsPut(user_id, opts, (error, data, response) => {
       if (error) {
         console.error("Error occurred:", error);
         return;
       }
       if (response.status === 200) {
-        console.log("Interests updated successfully", response.body);
-
+        console.log("Interests updated successfully");
+        updateUserBio(bio);
       } else {
         console.log("Failed to update interests:", response.body);
       }
     });
   };
-
+  
   
 
   const onContinueClick = useCallback(() => {
@@ -82,10 +95,10 @@ const Continue = () => {
       return;
     }
     console.log(selected);
-    updateUserBio(bio);
     updateUserInterests(selected);
-    navigate("/homesignedin");
-  }, [api,bio,navigate]);
+  }, [api, bio, navigate]);
+  
+
 
   
 
