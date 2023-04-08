@@ -16,6 +16,8 @@
 import {ApiClient} from "../ApiClient";
 import {Title} from '../model/Title';
 import {User} from '../model/User';
+import {UserSigninBody} from '../model/UserSigninBody';
+import {UserSignupBody} from '../model/UserSignupBody';
 
 /**
 * User service.
@@ -46,16 +48,16 @@ export class UserApi {
 
     /**
      * Update user bio
-     * @param {Number} userId ID of the user
+     * @param {Number} user_id ID of the user
      * @param {String} bio New bio
      * @param {module:api/UserApi~profileUserIdBioPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdBioPut(userId, bio, callback) {
+    profileUserIdBioPut(user_id, bio, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling profileUserIdBioPut");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdBioPut");
       }
       // verify the required parameter 'bio' is set
       if (bio === undefined || bio === null) {
@@ -63,7 +65,7 @@ export class UserApi {
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         'bio': bio
@@ -96,16 +98,16 @@ export class UserApi {
 
     /**
      * Update interests
-     * @param {Number} userId ID of the user
+     * @param {Number} user_id ID of the user
      * @param {Array.<String>} interests New Profile Picture
      * @param {module:api/UserApi~profileUserIdInterestsPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdInterestsPut(userId, interests, callback) {
+    profileUserIdInterestsPut(user_id, interests, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling profileUserIdInterestsPut");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdInterestsPut");
       }
       // verify the required parameter 'interests' is set
       if (interests === undefined || interests === null) {
@@ -113,7 +115,7 @@ export class UserApi {
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         'interests': this.apiClient.buildCollectionParam(interests, 'multi')
@@ -146,16 +148,16 @@ export class UserApi {
 
     /**
      * Update Password
-     * @param {Number} userId ID of the user
+     * @param {Number} user_id ID of the user
      * @param {String} password New password
      * @param {module:api/UserApi~profileUserIdPasswordPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdPasswordPut(userId, password, callback) {
+    profileUserIdPasswordPut(user_id, password, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling profileUserIdPasswordPut");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdPasswordPut");
       }
       // verify the required parameter 'password' is set
       if (password === undefined || password === null) {
@@ -163,7 +165,7 @@ export class UserApi {
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         'password': password
@@ -196,16 +198,16 @@ export class UserApi {
 
     /**
      * Update profile picture
-     * @param {Number} userId ID of the user
+     * @param {Number} user_id ID of the user
      * @param {String} pfp New Profile Picture
      * @param {module:api/UserApi~profileUserIdPfpPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdPfpPut(userId, pfp, callback) {
+    profileUserIdPfpPut(user_id, pfp, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling profileUserIdPfpPut");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdPfpPut");
       }
       // verify the required parameter 'pfp' is set
       if (pfp === undefined || pfp === null) {
@@ -213,7 +215,7 @@ export class UserApi {
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         'pfp': pfp
@@ -246,16 +248,16 @@ export class UserApi {
 
     /**
      * Update username
-     * @param {Number} userId ID of the user
+     * @param {Number} user_id ID of the user
      * @param {String} username New username
      * @param {module:api/UserApi~profileUserIdUsernamePutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    profileUserIdUsernamePut(userId, username, callback) {
+    profileUserIdUsernamePut(user_id, username, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling profileUserIdUsernamePut");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling profileUserIdUsernamePut");
       }
       // verify the required parameter 'username' is set
       if (username === undefined || username === null) {
@@ -263,7 +265,7 @@ export class UserApi {
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         'username': username
@@ -296,28 +298,20 @@ export class UserApi {
 
     /**
      * Sign in user with credentials
-     * @param {String} username Username
-     * @param {String} password Password
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserSigninBody} opts.body 
      * @param {module:api/UserApi~userSigninPostCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    userSigninPost(Username, Password, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'username' is set
-      if (Username === undefined || Username === null) {
-        throw new Error("Missing the required parameter 'username' when calling userSigninPost");
-      }
-      // verify the required parameter 'password' is set
-      if (Password === undefined || Password === null) {
-        throw new Error("Missing the required parameter 'password' when calling userSigninPost");
-      }
+    userSigninPost(opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
 
       let pathParams = {
         
       };
       let queryParams = {
-        'Username': Username,'Password': Password
+        
       };
       let headerParams = {
         
@@ -327,7 +321,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = ['application/json'];
       let returnType = User;
 
@@ -346,49 +340,20 @@ export class UserApi {
      */
 
     /**
-     * Create a new user account
-     * @param {String} username Username
-     * @param {String} password Password
-     * @param {String} confirmPassword Confirm Password
-     * @param {Array.<String>} interests Favourite Genres
-     * @param {String} pfp profile picture
-     * @param {String} bio about user
+     * Sign Up
+     * @param {Object} opts Optional parameters
+     * @param {module:model/UserSignupBody} opts.body 
      * @param {module:api/UserApi~userSignupPostCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    userSignupPost(username, password, confirmPassword, interests, pfp, bio, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'username' is set
-      if (username === undefined || username === null) {
-        throw new Error("Missing the required parameter 'username' when calling userSignupPost");
-      }
-      // verify the required parameter 'password' is set
-      if (password === undefined || password === null) {
-        throw new Error("Missing the required parameter 'password' when calling userSignupPost");
-      }
-      // verify the required parameter 'confirmPassword' is set
-      if (confirmPassword === undefined || confirmPassword === null) {
-        throw new Error("Missing the required parameter 'confirmPassword' when calling userSignupPost");
-      }
-      // verify the required parameter 'interests' is set
-      if (interests === undefined || interests === null) {
-        throw new Error("Missing the required parameter 'interests' when calling userSignupPost");
-      }
-      // verify the required parameter 'pfp' is set
-      if (pfp === undefined || pfp === null) {
-        throw new Error("Missing the required parameter 'pfp' when calling userSignupPost");
-      }
-      // verify the required parameter 'bio' is set
-      if (bio === undefined || bio === null) {
-        throw new Error("Missing the required parameter 'bio' when calling userSignupPost");
-      }
-
+    userSignupPost(opts, callback) {
+      opts = opts || {};
+      let postBody = opts['body'];
       let pathParams = {
         
       };
       let queryParams = {
-        'Username': username,'Password': password,'Confirm_Password': confirmPassword,'interests': this.apiClient.buildCollectionParam(interests, 'multi'),'pfp': pfp,'bio': bio
+        
       };
       let headerParams = {
         
@@ -398,7 +363,7 @@ export class UserApi {
       };
 
       let authNames = [];
-      let contentTypes = [];
+      let contentTypes = ['application/json'];
       let accepts = ['application/json'];
       let returnType = User;
 
@@ -418,20 +383,20 @@ export class UserApi {
 
     /**
      * Get User object(user details) from user id
-     * @param {Number} userId UserId
+     * @param {Number} user_id UserId
      * @param {module:api/UserApi~userUserIdGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    userUserIdGet(userId, callback) {
+    userUserIdGet(user_id, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling userUserIdGet");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling userUserIdGet");
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         
@@ -464,20 +429,20 @@ export class UserApi {
 
     /**
      * Get all titles in user watchlist
-     * @param {Number} userId ID of the user
+     * @param {Number} user_id ID of the user
      * @param {module:api/UserApi~watchlistUserIdGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    watchlistUserIdGet(userId, callback) {
+    watchlistUserIdGet(user_id, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling watchlistUserIdGet");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling watchlistUserIdGet");
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         
@@ -510,16 +475,16 @@ export class UserApi {
 
     /**
      * Add/Remove title from watchlist
-     * @param {Number} userId ID of the user
+     * @param {Number} user_id ID of the user
      * @param {String} id id of TVShow/Movie to be added to the watchlist
      * @param {module:api/UserApi~watchlistUserIdPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    watchlistUserIdPut(userId, id, callback) {
+    watchlistUserIdPut(user_id, id, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling watchlistUserIdPut");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling watchlistUserIdPut");
       }
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -527,7 +492,7 @@ export class UserApi {
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         'id': id
@@ -560,16 +525,16 @@ export class UserApi {
 
     /**
      * Remove title from user&#x27;s watchlist
-     * @param {Number} userId ID of the user
+     * @param {Number} user_id ID of the user
      * @param {String} id id of the Title to be removed from user&#x27;s watchlist
      * @param {module:api/UserApi~watchlistUserIdRemovePutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    watchlistUserIdRemovePut(userId, id, callback) {
+    watchlistUserIdRemovePut(user_id, id, callback) {
       
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling watchlistUserIdRemovePut");
+      // verify the required parameter 'user_id' is set
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling watchlistUserIdRemovePut");
       }
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -577,7 +542,7 @@ export class UserApi {
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         'id': id

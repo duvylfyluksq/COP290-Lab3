@@ -1,0 +1,6 @@
+{'bio': 'a',
+ 'confirm_password': 'lmaolala',
+ 'interests': ['a', 'a', 'a'],
+ 'password': 'lmaolala',
+ 'pfp': 'a',
+ 'username': 'lmaolala'}

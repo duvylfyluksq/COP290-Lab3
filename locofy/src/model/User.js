@@ -40,7 +40,7 @@ export class User {
     if (data) {
       obj = obj || new User();
       if (data.hasOwnProperty('user_id'))
-        obj.userId = ApiClient.convertToType(data['user_id'], 'Number');
+        obj.user_id = ApiClient.convertToType(data['user_id'], 'Number');
       if (data.hasOwnProperty('username'))
         obj.username = ApiClient.convertToType(data['username'], 'String');
       if (data.hasOwnProperty('password'))
@@ -50,9 +50,9 @@ export class User {
       if (data.hasOwnProperty('pfp'))
         obj.pfp = ApiClient.convertToType(data['pfp'], 'String');
       if (data.hasOwnProperty('watchlist_movies'))
-        obj.watchlistMovies = ApiClient.convertToType(data['watchlist_movies'], {'String': 'Boolean'});
+        obj.watchlist_movies = ApiClient.convertToType(data['watchlist_movies'], {'String': 'Boolean'});
       if (data.hasOwnProperty('watchlist_shows'))
-        obj.watchlistShows = ApiClient.convertToType(data['watchlist_shows'], {'String': 'Boolean'});
+        obj.watchlist_shows = ApiClient.convertToType(data['watchlist_shows'], {'String': 'Boolean'});
       if (data.hasOwnProperty('interests'))
         obj.interests = ApiClient.convertToType(data['interests'], ['String']);
     }
@@ -61,9 +61,9 @@ export class User {
 }
 
 /**
- * @member {Number} userId
+ * @member {Number} user_id
  */
-User.prototype.userId = undefined;
+User.prototype.user_id = undefined;
 
 /**
  * @member {String} username
@@ -86,14 +86,14 @@ User.prototype.bio = undefined;
 User.prototype.pfp = undefined;
 
 /**
- * @member {Object.<String, Boolean>} watchlistMovies
+ * @member {Object.<String, Boolean>} watchlist_movies
  */
-User.prototype.watchlistMovies = undefined;
+User.prototype.watchlist_movies = undefined;
 
 /**
- * @member {Object.<String, Boolean>} watchlistShows
+ * @member {Object.<String, Boolean>} watchlist_shows
  */
-User.prototype.watchlistShows = undefined;
+User.prototype.watchlist_shows = undefined;
 
 /**
  * @member {Array.<String>} interests

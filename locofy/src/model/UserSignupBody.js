@@ -49,6 +49,7 @@ export class UserSignupBody {
    * @return {module:model/UserSignupBody} The populated <code>UserSignupBody</code> instance.
    */
   static constructFromObject(data, obj) {
+    
     if (data) {
       obj = obj || new UserSignupBody();
       if (data.hasOwnProperty('username'))
