@@ -349,7 +349,6 @@ export class UserApi {
     userSignupPost(opts, callback) {
       opts = opts || {};
       let postBody = opts['body'];
-
       let pathParams = {
         
       };

@@ -7,6 +7,7 @@ import "./SignIn.css";
 import MoviesContainer from '../components/MoviesContainer';
 import {UserApi} from '../api/UserApi';
 import {UserSigninBody} from '../model/UserSigninBody';
+import {User} from  '../model/User';
 
 
 const SignIn = () => {
@@ -22,7 +23,6 @@ const SignIn = () => {
     const opts = {
       body: userSigninBody,
     };
-    console.log("rip");
     api.userSigninPost(opts, (error, data, response) => {
       if (error) {
         console.error("Error occurred:", error);
@@ -32,7 +32,8 @@ const SignIn = () => {
         console.log(response.body);
       } else {
         console.log(response.body)
-        navigate('/homesignedin');
+        const user = User.constructFromObject(response.body);
+        navigate('/homesignedin', {state: {user: user}});
       }
     });
   }, [username, password, navigate, api]);

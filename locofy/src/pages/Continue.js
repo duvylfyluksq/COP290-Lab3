@@ -1,12 +1,18 @@
 import React from 'react';
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import MoviesContainer from '../components/MoviesContainer';
 import "./Continue.css";
+import {UserApi} from '../api/UserApi';
+import {User} from '../model/User';
 
 const Continue = () => {
   
   const navigate = useNavigate();
+  const [bio, setBio] = useState('');
+  
+  const location = useLocation();
+  const user = location.state.user;
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
@@ -28,7 +34,30 @@ const Continue = () => {
     navigate("/signin");
   }, [navigate]);
 
+
+  const updateUserBio = async (bio) => {
+    try {
+      const updatedUser = await api.userUpdateUser(
+        user.user_id,
+        { bio: bio },
+        {},
+        (error, data, response) => {
+          if (error) {
+            console.error(error);
+          } else {
+            console.log(data);
+          }
+        }
+      );
+      console.log(updatedUser);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+
   const onContinueClick = useCallback(() => {
+
     navigate("/homesignedin");
   }, [navigate]);
 
@@ -52,6 +81,7 @@ const Continue = () => {
             placeholder="What kind of a film buff are you?"
             maxLength={200}
             required
+            onChange={(e) => setBio(e.target.value)}
           />
         </div>
         <div className="select">

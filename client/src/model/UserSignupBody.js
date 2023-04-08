@@ -27,15 +27,15 @@ export class UserSignupBody {
    * @class
    * @param username {String} 
    * @param password {String} 
-   * @param confirmPassword {String} 
+   * @param confirm_password {String} 
    * @param pfp {String} 
    * @param bio {String} 
    * @param interests {Array.<String>} 
    */
-  constructor(username, password, confirmPassword, pfp, bio, interests) {
+  constructor(username, password, confirm_password, pfp, bio, interests) {
     this.username = username;
     this.password = password;
-    this.confirmPassword = confirmPassword;
+    this.confirm_password = confirm_password;
     this.pfp = pfp;
     this.bio = bio;
     this.interests = interests;
@@ -56,7 +56,7 @@ export class UserSignupBody {
       if (data.hasOwnProperty('password'))
         obj.password = ApiClient.convertToType(data['password'], 'String');
       if (data.hasOwnProperty('confirm_password'))
-        obj.confirmPassword = ApiClient.convertToType(data['confirm_password'], 'String');
+        obj.confirm_password = ApiClient.convertToType(data['confirm_password'], 'String');
       if (data.hasOwnProperty('pfp'))
         obj.pfp = ApiClient.convertToType(data['pfp'], 'String');
       if (data.hasOwnProperty('bio'))
@@ -79,9 +79,9 @@ UserSignupBody.prototype.username = undefined;
 UserSignupBody.prototype.password = undefined;
 
 /**
- * @member {String} confirmPassword
+ * @member {String} confirm_password
  */
-UserSignupBody.prototype.confirmPassword = undefined;
+UserSignupBody.prototype.confirm_password = undefined;
 
 /**
  * @member {String} pfp

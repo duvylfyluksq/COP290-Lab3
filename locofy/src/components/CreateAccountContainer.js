@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./CreateAccountContainer.css";
 import {UserApi} from '../api/UserApi';
 import {UserSignupBody} from '../model/UserSignupBody';
+import {User} from  '../model/User';
 
 const CreateAccountContainer = () => {
   
@@ -12,14 +13,13 @@ const CreateAccountContainer = () => {
   const api = new UserApi();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmpassword, setConfirmpassword] = useState('');
+  const [confirm_password, setConfirm_password] = useState('');
 
   const onSignUpClick = useCallback(() => {
-    const userSignupBody = new UserSignupBody(username, password, confirmpassword, "a" , "a", ["a","a","a"]);
+    const userSignupBody = new UserSignupBody(username, password, confirm_password, "a" , "a", ["a","a","a"]);
     const opts = {
       body: userSignupBody,
     };
-    console.log(opts);
     api.userSignupPost(opts, (error, data, response) => {
       if (error) {
         console.error("Error occurred:", error);
@@ -29,10 +29,11 @@ const CreateAccountContainer = () => {
         console.log(response.body);
       } else {
         console.log(response.body)
-        navigate('/continue');
+        const user = User.constructFromObject(response.body);
+        navigate('/continue', {state: {user: user} });
       }
     });
-  }, [username, password, confirmpassword,navigate,api]);
+  }, [username, password, confirm_password,navigate,api]);
 
   const image = document.getElementById("your-img");
   function toggleVisibility1() {  
@@ -84,7 +85,7 @@ const CreateAccountContainer = () => {
           </div>
         </div>
         <div className="password">
-        <input type="password" id="Password2" className="usrname" placeholder="Confirm Password" onChange={(e) => setConfirmpassword(e.target.value)} />
+        <input type="password" id="Password2" className="usrname" placeholder="Confirm Password" onChange={(e) => setConfirm_password(e.target.value)} />
           <div className="hideorshowpassword">
             <img
               id="my-img"
