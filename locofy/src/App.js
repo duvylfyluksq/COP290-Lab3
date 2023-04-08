@@ -23,12 +23,12 @@ import FrameComponent14 from "./pages/FrameComponent14";
 import FrameComponent15 from "./pages/FrameComponent15";
 import FrameComponent16 from "./pages/FrameComponent16";
 import FrameComponent17 from "./pages/FrameComponent17";
-import Moviebrowsein from "./pages/Moviebrowsein";
-import Mixedbrowseout from "./pages/Mixedbrowseout";
-import Tvshowvrowseout from "./pages/Tvshowbrowseout";
-import Genresin from "./pages/Genresin";
-import Tvshowin from "./pages/Tvshowin";
-import Moviein from "./pages/Moviein";
+import FrameComponent18 from "./pages/FrameComponent18";
+import FrameComponent19 from "./pages/FrameComponent19";
+import FrameComponent20 from "./pages/FrameComponent20";
+import FrameComponent21 from "./pages/FrameComponent21";
+import FrameComponent22 from "./pages/FrameComponent22";
+import FrameComponent23 from "./pages/FrameComponent23";
 import SignIn from "./pages/SignIn";
 import Continue from "./pages/Continue";
 import MakePost from "./pages/MakePost";
@@ -53,6 +53,30 @@ function App(){
 
     switch (pathname) {
       case "/":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/frame-23":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/frame-22":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/frame-21":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/frame-20":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/frame-19":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/frame-18":
         title = "";
         metaDescription = "";
         break;
@@ -173,17 +197,11 @@ function App(){
       <Route path="/duvylfyluksqout" element={<FrameComponent8 />} />
       <Route path="/reviewsmovieout" element={<FrameComponent9 />} />
       <Route path="/movieout" element={<FrameComponent10 />} />
-      <Route path="/moviein" element={<Moviein />} />
       <Route path="/tvshowout" element={<FrameComponent11 />} />
-      <Route path="/tvshowin" element={<Tvshowin />} />
       <Route path="/genresout" element={<FrameComponent12 />} />
-      <Route path="/genresin" element={<Genresin />} />
       <Route path="/mixedbrowsein" element={<FrameComponent13 />} />
-      <Route path="/mixedbrowseout" element={<Mixedbrowseout/>} />
       <Route path="/tvshowbrowsein" element={<FrameComponent14 />} />
-      <Route path="/tvshowbrowseout" element={<Tvshowvrowseout />} />
       <Route path="/moviebrowseout" element={<FrameComponent15 />} />
-      <Route path="/moviebrowsein" element={<Moviebrowsein />} />
       <Route path="/homesignedin" element={<FrameComponent16 />} />
       <Route path="/" element={<FrameComponent17 />} />
       <Route path="/homesignedout" element={<FrameComponent17 />} />
@@ -192,6 +210,12 @@ function App(){
       <Route path="/makepost" element={<MakePost />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signintile" element={<SignInTile />} />
+      <Route path="/moviebrowsein" element={<FrameComponent18 />} />
+      <Route path="/tvshowbrowseout" element={<FrameComponent19 />} />
+      <Route path="/mixedbrowseout" element={<FrameComponent20 />} />
+      <Route path="/genresin" element={<FrameComponent21 />} />
+      <Route path="/tvshowin" element={<FrameComponent22 />} />
+      <Route path="/moviein" element={<FrameComponent23 />} />
     </Routes>
   );
 }
