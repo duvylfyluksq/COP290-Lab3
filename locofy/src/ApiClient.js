@@ -33,7 +33,7 @@ export class ApiClient {
         /**
          * The base URL against which to resolve every API call's (relative) path.
          * @type {String}
-         * @default https://virtserver.swaggerhub.com/VEDANTANEOGI_1/FMD_API3.0/3.0.0
+         * @default http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0
          */
         this.basePath = 'http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0'.replace(/\/+$/, '');
 

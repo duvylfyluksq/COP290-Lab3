@@ -329,7 +329,7 @@ export class UserApi {
         '/user/signin', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
-      );
+      )
     }
     /**
      * Callback function to receive the result of the userSignupPost operation.

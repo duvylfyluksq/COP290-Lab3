@@ -174,6 +174,8 @@ def user_signup_post(body=None):  # noqa: E501
     :rtype: User
     """
     if connexion.request.is_json:
+        with open('error.txt', 'w') as f:
+            f.write("lmaolala")
         body = UserSignupBody.from_dict(connexion.request.get_json())
         username = body.username
         password = body.password
@@ -181,6 +183,8 @@ def user_signup_post(body=None):  # noqa: E501
         confirm_password = body.confirm_password
         interests = body.interests
         pfp = body.pfp
+        with open('error.txt', 'w') as f:
+            f.write(str(body))
         if (password == confirm_password):
             user = User(user_id=None, username=username, password=password,
                         interests=interests, pfp=pfp, bio=bio, watchlist_movies={}, watchlist_shows={})

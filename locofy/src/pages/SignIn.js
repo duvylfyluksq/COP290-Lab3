@@ -6,7 +6,7 @@ import LinksContainer1 from "../components/LinksContainer1";
 import "./SignIn.css";
 import MoviesContainer from '../components/MoviesContainer';
 import {UserApi} from '../api/UserApi';
-import {User} from '../model/User';
+import {UserSigninBody} from '../model/UserSigninBody';
 
 
 const SignIn = () => {
@@ -17,20 +17,25 @@ const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-
   const onLoginContainerClick = useCallback(() => {
-    api.userSigninPost(username, password, (response) => {
+    const userSigninBody = new UserSigninBody(username, password);
+    const opts = {
+      body: userSigninBody,
+    };
+    console.log("rip");
+    api.userSigninPost(opts, (error, data, response) => {
+      if (error) {
+        console.error("Error occurred:", error);
+        return;
+      }
       if (response.status !== 200) {
-        console.log(response.data);
+        console.log(response.body);
       } else {
-        console.log(response.data)
-        const userData = response.data;
-        const user = User.constructFromObject(userData)
-        navigate('/homesignedin', {state});
+        console.log(response.body)
+        navigate('/homesignedin');
       }
     });
-  }, [username, password, navigate,api]);
-  
+  }, [username, password, navigate, api]);
 
   const onSignUpTextClick = useCallback(() => {
     navigate("/signup");

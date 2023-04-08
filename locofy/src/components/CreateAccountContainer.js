@@ -1,15 +1,39 @@
-import React from 'react';
-import { useCallback } from "react";
+import React,{ useState,useCallback,useEffect } from 'react';
 import WelcomeBackContainer from "./WelcomeBackContainer";
 import { useNavigate } from "react-router-dom";
 import "./CreateAccountContainer.css";
+import {UserApi} from '../api/UserApi';
+import {UserSignupBody} from '../model/UserSignupBody';
 
 const CreateAccountContainer = () => {
+  
   const navigate = useNavigate();
 
+  const api = new UserApi();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmpassword] = useState('');
+
   const onSignUpClick = useCallback(() => {
-    navigate("/continue");
-  }, [navigate]);
+    const userSignupBody = new UserSignupBody(username, password, confirmpassword, "a" , "a", ["a","a","a"]);
+    const opts = {
+      body: userSignupBody,
+    };
+    console.log(opts);
+    api.userSignupPost(opts, (error, data, response) => {
+      if (error) {
+        console.error("Error occurred:", error);
+        return;
+      }
+      if (response.status !== 200) {
+        console.log(response.body);
+      } else {
+        console.log(response.body)
+        navigate('/continue');
+      }
+    });
+  }, [username, password, confirmpassword,navigate,api]);
+
   const image = document.getElementById("your-img");
   function toggleVisibility1() {  
     var getPassword = document.getElementById("Password1");
@@ -44,11 +68,11 @@ const CreateAccountContainer = () => {
       <form className="fields2">
         <div className="username4">
           <div className="username5">
-            <input type="text" className="usrname" placeholder="Username" />
+            <input type="text" className="usrname" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
           </div>
         </div>
         <div className="password">
-        <input type="password" id="Password1" className="usrname" placeholder="Password" />
+        <input type="password" id="Password1" className="usrname" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
           <div className="hideorshowpassword">
             <img
               id="your-img"
@@ -60,7 +84,7 @@ const CreateAccountContainer = () => {
           </div>
         </div>
         <div className="password">
-        <input type="password" id="Password2" className="usrname" placeholder="Confirm Password" />
+        <input type="password" id="Password2" className="usrname" placeholder="Confirm Password" onChange={(e) => setConfirmpassword(e.target.value)} />
           <div className="hideorshowpassword">
             <img
               id="my-img"
