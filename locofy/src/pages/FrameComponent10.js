@@ -134,11 +134,9 @@ const FrameComponent10 = () => {
                   <img className="line-icon50" alt="" src="/line.svg" />
                   <div className="credits50">
                     <p className="director-john-doe">Director: John Doe</p>
-                    {/* <p className="director-john-doe">&nbsp;</p> */}
                     <p className="director-john-doe">
                       Writers: John Doe, Jane Doe, John Doe
                     </p>
-                    {/* <p className="director-john-doe">&nbsp;</p> */}
                     <p className="director-john-doe">{`Cast: John Doe, Jane Doe, John Doe `}</p>
                   </div>
                 </div>
@@ -147,6 +145,7 @@ const FrameComponent10 = () => {
           </div>
           <div className="reviewlist4">
             <div className="reviews">Reviews</div>
+            <div className="reviews139">
             <ReviewContainer
               onPictureIconClick={onPictureIconClick}
               onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
@@ -162,7 +161,9 @@ const FrameComponent10 = () => {
             <div className="see-all-reviews" onClick={onSeeAllReviewsClick}>
               See All Reviews
             </div>
+            </div>
             <div className="reviews">More Like This</div>
+            <div className="more-like-this">
             <MoreMoviesLikeThisContainer
               onMovieCardContainerClick={onMovieCardContainerClick}
               onTVShowCardContainerClick={onTVShowCardContainerClick}
@@ -172,6 +173,7 @@ const FrameComponent10 = () => {
               onTVShowCardContainer2Click={onTVShowCardContainer2Click}
               onTVShowCardContainer3Click={onTVShowCardContainer3Click}
             />
+            </div>
           </div>
         </div>
         <MoviesContainer

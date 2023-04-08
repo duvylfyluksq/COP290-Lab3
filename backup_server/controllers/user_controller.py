@@ -1,3 +1,8 @@
+from swagger_server import db, util
+from swagger_server.models.show_id import ShowId
+from swagger_server.models.movie_id import MovieId
+from swagger_server.models.tvshow import Tvshow
+from swagger_server.models.movie import Movie
 import connexion
 import six
 import json
@@ -5,11 +10,6 @@ import traceback
 
 from swagger_server.models.title import Title  # noqa: E501
 from swagger_server.models.user import User  # noqa: E501
-from swagger_server.models.movie import Movie
-from swagger_server.models.tvshow import Tvshow
-from swagger_server.models.movie_id import MovieId
-from swagger_server.models.show_id import ShowId
-from swagger_server import db, util
 
 
 def profile_user_id_bio_put(user_id, bio):  # noqa: E501
@@ -68,34 +68,6 @@ def profile_user_id_username_put(user_id, username):  # noqa: E501
             return (f'Error updating username: {err}', 400)
     except Exception as err:
         return (f'User not found :{err}', 404)
-
-
-def user_signin_post(Username, Password):  # noqa: E501
-    # postman works
-    # unittest works
-    try:
-        ans = db.checkLogin(Username, Password)
-        if (ans[0]):
-            return (ans[1], 200)
-        else:
-            return (f'Error logging in: {err}', 400)
-    except Exception as err:
-        return (f'Error logging in: {err}', 400)
-
-
-def user_signup_post(Username, Password, Confirm_Password, interests, pfp, bio):  # noqa: E501
-    # postman works
-    # unittest works
-    if (Password == Confirm_Password):
-        user = User(user_id=None, username=Username, password=Password,
-                    interests=interests, pfp=pfp, bio=bio, watchlist_movies={}, watchlist_shows={})
-        try:
-            db.addUser(user)
-            return (user, 200)
-        except Exception as err:
-            return (f'Error adding user: {err}', 400)
-    else:
-        return (f'Passwords not matching', 400)
 
 
 def watchlist_user_id_get(user_id):  # noqa: E501
@@ -162,3 +134,38 @@ def watchlist_user_id_remove_put(user_id, id):  # noqa: E501
         print(f"Error in watchlist_user_id_put: {err}")
         print(traceback.format_exc())
         return (f'Error: {err}', 500)
+
+
+def user_user_id_get(user_id):  # noqa: E501
+    try:
+        return (db.getUser(user_id), 200)
+    except Exception as err:
+        return (f'User not found: {err}', 404)
+
+
+def user_signin_post(Username, Password):  # noqa: E501
+    # postman works
+    # unittest works
+    try:
+        ans = db.checkLogin(Username, Password)
+        if (ans[0]):
+            return (ans[1], 200)
+        else:
+            return (f'Error logging in: {err}', 400)
+    except Exception as err:
+        return (f'Error logging in: {err}', 400)
+
+
+def user_signup_post(Username, Password, Confirm_Password, interests, pfp, bio):  # noqa: E501
+    # postman works
+    # unittest works
+    if (Password == Confirm_Password):
+        user = User(user_id=None, username=Username, password=Password,
+                    interests=interests, pfp=pfp, bio=bio, watchlist_movies={}, watchlist_shows={})
+        try:
+            db.addUser(user)
+            return (user, 200)
+        except Exception as err:
+            return (f'Error adding user: {err}', 400)
+    else:
+        return (f'Passwords not matching', 400)

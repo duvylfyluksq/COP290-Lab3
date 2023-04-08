@@ -207,7 +207,7 @@
   cursor: pointer;
 }
 .reviewlist5 {
-  width: 1770px;
+  width: 90%;
   display: flex;
   flex-direction: column;
   padding: var(--padding-3xs) 0;
@@ -225,6 +225,10 @@
   overflow-y: auto;
   overflow-x:hidden;
 }
+.body11::-webkit-scrollbar{
+  width:0px;
+  background-color: transparent;
+}
 .body11 {
   height: 947px;
   display: flex;
@@ -238,16 +242,19 @@
 .tvshow-out {
   top: 0;
   background-color: var(--color-white);
-  height: 1080px;
+  height: 947px;
   overflow-x:hidden;
+  width:200%;
 }
 .tvshow-out-parent {
   position: relative;
-  width: 10%;
-  height: 1080px;
+  height: 947px;
   text-align: left;
   font-size: var(--font-size-xl);
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
   overflow-x:hidden;
+}
+.reviews139{
+  width:150%;
 }

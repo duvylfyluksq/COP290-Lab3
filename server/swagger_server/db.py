@@ -177,20 +177,29 @@ def sortRecent_Review_Title(id: Union[MovieId, ShowId]) -> List[Review]:
 
 
 def sortReviewUser(user_id: int, sort_type: str, sort_order: Optional[bool]) -> List[Review]:
+    L = []
     if (sort_type == "Recent"):
         L = sortRecent_Review_User(user_id)
     elif (sort_type == "Likes"):
         L = sortLikes_Review_User(user_id)
+    elif (sort_type is None):
+        L = getReviews_forUser(getUser(user_id))
     if (sort_order):
         L.reverse()
     return L
 
 
 def sortReviewTitle(id: Union[ShowId, MovieId], sort_type: str, sort_order: Optional[bool]) -> List[Review]:
+    L = []
     if (sort_type == "Recent"):
         L = sortRecent_Review_Title(id)
     elif (sort_type == "Likes"):
         L = sortLikes_Review_Title(id)
+    elif (sort_type is None):
+        if (isinstance(id, MovieId)):
+            L = getReviews_forMovie(getMovie(id.id))
+        elif (isinstance(id, ShowId)):
+            L = getReviews_forShow(getTvshow(id.id))
     if (sort_order):
         L.reverse()
     return L

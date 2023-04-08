@@ -141,6 +141,7 @@ const FrameComponent11 = () => {
           </div>
           <div className="reviewlist5">
             <div className="reviews1">Reviews</div>
+            <div className="reviews139">
             <ReviewContainer
               onPictureIconClick={onPictureIconClick}
               onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
@@ -156,7 +157,9 @@ const FrameComponent11 = () => {
             <div className="see-all-reviews1" onClick={onSeeAllReviewsClick}>
               See All Reviews
             </div>
+            </div>
             <div className="reviews1">More Like This</div>
+            <div className="more-like-this">
             <MoreMoviesLikeThisContainer
               propCursor="unset"
               onMovieCardContainerClick={onMovieCardContainerClick}
@@ -166,6 +169,7 @@ const FrameComponent11 = () => {
               onMovieCardContainer2Click={onMovieCardContainer2Click}
               onTVShowCardContainer2Click={onTVShowCardContainer2Click}
             />
+            </div>
           </div>
         </div>
         <MoviesContainer

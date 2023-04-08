@@ -78,6 +78,7 @@ const SignIn = () => {
         <input type="password" id="Password1" className="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
 
           <div className="hideorshowpassword">
+          <pre>                                                       </pre>
             <img
               id="your-img"
               className="showpasswordicon"
