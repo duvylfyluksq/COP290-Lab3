@@ -1,0 +1,19 @@
+.commenttttt{
+    width:80%;
+    height:10%;
+    /* top:-10%; */
+    border-radius: var(--br-21xl);
+  background-color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  padding: var(--padding-21xl);
+  gap: var(--gap-21xl);
+  text-align: left;
+  align-items: center;
+  font-size: 20px;
+  color: var(--color-darkorchid-100);
+  font-family: var(--font-roboto);
+  overflow-y:hidden;
+}
+.contentt{
+    top:-10%;
+}
