@@ -2,7 +2,7 @@
   position: relative;
   font-size: var(--font-size-26xl);
   font-weight: 500;
-  display: inline-block;
+  display: flex;
   width: 80%;
 }
 .by1 {
@@ -96,6 +96,7 @@
 .vector-icon29 {
   width: 22px;
   height: 11px;
+  cursor:pointer;
 }
 .commentsdropdown1 {
   display: flex;
@@ -117,6 +118,7 @@
 .likebutton-icon1 {
   width: 25px;
   height: 25px;
+  cursor:pointer;
 }
 .likes5,
 .review2,
@@ -133,14 +135,14 @@
 .review2,
 .reviewfooter1 {
   width: 100%;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 .review2 {
   border-radius: var(--br-11xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   width: 65%;
-  height: 504px;
+  /* minHeight: {calc(100vh - 200px + ${commentHeight}px)} */
   flex-shrink: 0;
   flex-direction: column;
   padding: var(--padding-xl);
@@ -154,4 +156,13 @@
   font-size: var(--font-size-xl);
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
+}
+
+/* .commentt-containerr{
+  display:hidden;
+} */
+
+.commentt-container{
+  width:32%;
+  top:10%;
 }

@@ -54,8 +54,8 @@ const FrameComponent4 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself");
+  }, [navigate]);
 
   return (
     <div className="reviews-bobdylan-in-parent">

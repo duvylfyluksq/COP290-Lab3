@@ -9,31 +9,31 @@ const FrameComponent18 = () => {
   const navigate = useNavigate();
 
   const onMovieDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
 
   const onMovieDescriptionBrowsePageContainer1Click = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
 
   const onMovieDescriptionBrowsePageContainer2Click = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
 
   const onMovieDescriptionBrowsePageContainer3Click = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
 
   const onMovieDescriptionBrowsePageContainer4Click = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
 
   const onMovieDescriptionBrowsePageContainer5Click = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
 
   const onMovieDescriptionBrowsePageContainer6Click = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
 
   const onLogoContainerClick = useCallback(() => {
@@ -57,8 +57,8 @@ const FrameComponent18 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself")
+  }, [navigate]);
   function changeColor(buttonNumber){
     var buttons = document.querySelectorAll("#button");
     for (var i = 0; i < buttons.length; i++) {

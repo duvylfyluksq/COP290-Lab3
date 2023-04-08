@@ -1,31 +1,35 @@
 import React from 'react';
 import { useCallback } from "react";
+import { useMemo } from "react";
 import "./MovieListContainer.css";
 
-const MovieListContainer = () => {
-  const onMovieCardContainer3Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+const MovieListContainer = ({
+  propHeight,
+  propFlexShrink,
+  propAlignSelf,
+  propWidth,
+  propAlignSelf1,
+  onMovieCardContainer3Click,
+  onMovieCardContainer4Click,
+  onMovieCardContainer5Click,
+  onMovieCardContainer6Click,
+  onMovieCardContainer7Click,
+  onMovieCardContainer8Click,
+}) => {
+  const trendingMoviesStyle = useMemo(() => {
+    return {
+      height: propHeight,
+      flexShrink: propFlexShrink,
+      alignSelf: propAlignSelf,
+    };
+  }, [propHeight, propFlexShrink, propAlignSelf]);
 
-  const onMovieCardContainer4Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onMovieCardContainer5Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onMovieCardContainer6Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onMovieCardContainer7Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onMovieCardContainer8Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+  const trendingMovies1Style = useMemo(() => {
+    return {
+      width: propWidth,
+      alignSelf: propAlignSelf1,
+    };
+  }, [propWidth, propAlignSelf1]);
 
   return (
     <div className="top-movies">

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useMemo } from "react";
 import "./ReviewForm.css";
-import { useState } from 'react';
+import CommentContainer from './commentContainer';
+import { useRef,useState } from 'react';
 
 const ReviewForm = ({
   picture,
@@ -28,8 +29,33 @@ const ReviewForm = ({
     const inputValue = event.target.value;
     setCharCount2(inputValue.length);
   }
+  const [commentHeight, setCommentHeight] = useState(0);
+  function liking(){
+    var like= document.querySelectorAll("#likebutton-icon");
+    if(like[0].classList.contains('liked')){
+      like[0].classList.remove('liked');
+      like[0].setAttribute("src","/likebutton.svg");
+    }else{
+      like[0].classList.add('liked');
+      like[0].setAttribute("src","/likedbutton.svg");
+    }
+  }
+  const [showComments, setShowComments] = useState(false);
+  const reviewContainerRef = useRef(null);
+  React.useEffect(() => {
+    const reviewContainer = reviewContainerRef.current;
+    if (showComments) {
+      reviewContainer.style.height = `$calc(100vh - 200px + ${commentHeight}px)`;
+    } else {
+      reviewContainer.style.height = '';
+    }
+  }, [showComments],
+  );
+  function toggleComments() {
+    setShowComments(!showComments);
+  }
   return (
-    <div className="review">
+    <div className="review" ref={reviewContainerRef}>
       <div className="indocked">
         <div className="review1">
           <div className="reviewheader">
@@ -77,13 +103,18 @@ const ReviewForm = ({
           <div className="reviewfooter">
             <div className="commentsdropdown">
               <div className="comments">Comments</div>
-              <img className="vector-icon25" alt="" src="/vector9.svg" />
+              <img className="vector-icon25" alt="" src="/vector9.svg" onClick={toggleComments} />
             </div>
             <div className="options">
               <div className="likes2">424242</div>
-              <img className="likebutton-icon" alt="" src="/likebutton.svg" />
+              <img id="likebutton-icon" className="likebutton-icon" alt="" src="/likebutton.svg" onClick={()=>liking()} />
             </div>
           </div>
+              {showComments && (
+            <div className="commentt-container"
+            ref={el => el && setCommentHeight(el.offsetHeight)}
+            ><CommentContainer />
+            </div>)}
         </div>
         <div className="addcomment">
           <div className="add-comment">Add Comment</div>

@@ -6,19 +6,6 @@ import "./MakePost.css";
 import NavbarContainer from '../components/NavbarContainer';
 import { useNavigate } from 'react-router-dom';
 
-// const button=document.getElementById("rating");
-// button.addEventListener("click",function changeColor(){
-//   for (var i = 0; i < buttons.length; i++) {
-//     buttons[i].className="uncolored";
-//     }
-// buttons[buttonNumber - 1].className="colored";
-// });
-// function changeColor(buttonNumber) {
-//   for (var i = 0; i < buttons.length; i++) {
-//       buttons[i].className="uncolored";
-//   }
-//   buttons[buttonNumber - 1].className="colored";
-// }
 
 
 const MakePost = () => {
@@ -65,8 +52,8 @@ const onFluentcompose24FilledClick = useCallback(() => {
 }, [navigate]);
 
 const onProfileMenuClick = useCallback(() => {
-  // Please sync "UserPage/InSelf" to the project
-}, []);
+  navigate("/bobdylaninself")
+}, [navigate]);
   
   return (
     <div className="makepost">

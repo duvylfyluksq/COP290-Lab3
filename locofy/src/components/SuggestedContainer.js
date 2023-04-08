@@ -2,34 +2,15 @@ import React from 'react';
 import { useCallback } from "react";
 import "./SuggestedContainer.css";
 
-const SuggestedContainer = () => {
-  const onMovieCardContainerClick = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onTVShowCardContainerClick = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onMovieCardContainer1Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onTVShowCardContainer1Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onMovieCardContainer2Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onTVShowCardContainer2Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
-  const onTVShowCardContainer3Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+const SuggestedContainer = ({
+  onMovieCardContainerClick,
+  onTVShowCardContainerClick,
+  onMovieCardContainer1Click,
+  onTVShowCardContainer1Click,
+  onMovieCardContainer2Click,
+  onTVShowCardContainer2Click,
+  onTVShowCardContainer3Click
+}) => {
 
   return (
     <div className="recommendations">

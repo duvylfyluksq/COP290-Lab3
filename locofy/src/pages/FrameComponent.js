@@ -32,8 +32,8 @@ const FrameComponent = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself")
+  }, [navigate]);
   // const [numBoxes, setNumBoxes] = useState(5); // State variable for the number of boxes to display
   // const [currentIndex, setCurrentIndex] = useState(0); // State variable for the index of the first box to display
 

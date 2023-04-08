@@ -54,8 +54,8 @@ const FrameComponent3 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself")
+  }, [navigate]);
   function changeColor(buttonNumber){
     var buttons = document.querySelectorAll("#button");
     for (var i = 0; i < buttons.length; i++) {
@@ -63,25 +63,6 @@ const FrameComponent3 = () => {
         buttons[i].classList.add('colored');
     } else {
         buttons[i].classList.remove('colored');
-    }
-    }
-  }
-
-  function changecolour(buttonNumber){
-    var genres = document.querySelectorAll("#adventure");
-    if(genres[buttonNumber].classList.contains('colored2')){
-    genres[buttonNumber].classList.remove('colored2');
-    }else{
-    genres[buttonNumber].classList.add('colored2');
-    }
-  }
-  function active(buttonNumber){
-    var logos = document.querySelectorAll("#sorting");
-    for (var i = 0; i < logos.length; i++) {
-      if (i == buttonNumber - 1) {
-        logos[i].classList.add('coloured');
-    } else {
-        logos[i].classList.remove('coloured');
     }
     }
   }

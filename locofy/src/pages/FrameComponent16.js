@@ -13,97 +13,146 @@ import "./FrameComponent16.css";
 const FrameComponent16 = () => {
   const navigate = useNavigate();
 
+  const onTVShowCardContainerClick = useCallback(() => {
+    navigate("/tvshowin")
+  }, [navigate]);
+
+  const onTVShowCardContainer1Click = useCallback(() => {
+    navigate("/tvshowin")
+  }, [navigate]);
+
+  const onMovieCardContainerClick = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
+
+  const onTVShowCardContainer2Click = useCallback(() => {
+    navigate("/tvshowin")
+  }, [navigate]);
+
+  const onMovieCardContainer1Click = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
+
+  const onMovieCardContainer2Click = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
+  const onTVShowCardContainer3Click = useCallback(() => {
+    navigate("/tvshowin")
+  }, [navigate]);
+
+
+  const onMovieCardContainer3Click = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
+
+  const onMovieCardContainer4Click = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
+
+  const onMovieCardContainer5Click = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
+
+  const onMovieCardContainer6Click = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
+
+  const onMovieCardContainer7Click = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
+  const onMovieCardContainer8Click = useCallback(() => {
+    navigate("/moviein")
+  }, [navigate]);
   const onTVShowCardContainer4Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer5Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer6Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer7Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer8Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onMovieCardContainer9Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/moviein")
+  }, [navigate]);
 
   const onTVShowCardContainer9Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onMovieCardContainer10Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/moviein")
+  }, [navigate]);
 
   const onTVShowCardContainer10Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onMovieCardContainer11Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
+    navigate("/moviein")
+  }, [navigate]);
   const onTVShowCardContainer11Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer12Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onMovieCardContainer12Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/moviein")
+  }, [navigate]);
 
   const onMovieCardContainer13Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/moviein")
+  }, [navigate]);
 
   const onMovieCardContainer14Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/moviein")
+  }, [navigate]);
 
   const onMovieCardContainer15Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/moviein")
+  }, [navigate]);
 
   const onMovieCardContainer16Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
+    navigate("/moviein")
+  }, [navigate]);
 
   const onMovieCardContainer17Click = useCallback(() => {
-    // Please sync "Movie-In" to the project
-  }, []);
-
+    navigate("/moviein")
+  }, [navigate]);
+  
   const onTVShowCardContainer13Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer14Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer15Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer16Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowCardContainer17Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedin");
@@ -126,15 +175,30 @@ const FrameComponent16 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
+    navigate("/bobdylaninself")
   }, []);
 
   return (
     <div className="home-signedin-parent">
       <div className="home-signedin">
         <div className="body13">
-          <SuggestedContainer />
-          <MovieListContainer />
+          <SuggestedContainer 
+          onMovieCardContainerClick={onMovieCardContainerClick}
+          onTVShowCardContainerClick={onTVShowCardContainerClick}
+          onMovieCardContainer1Click={onMovieCardContainer1Click}
+          onTVShowCardContainer1Click={onTVShowCardContainer1Click}
+          onMovieCardContainer2Click={onMovieCardContainer2Click}
+          onTVShowCardContainer2Click={onTVShowCardContainer2Click}
+          onTVShowCardContainer3Click={onTVShowCardContainer3Click}
+          />
+          <MovieListContainer 
+          onMovieCardContainer3Click={onMovieCardContainer3Click}
+          onMovieCardContainer4Click={onMovieCardContainer4Click}
+          onMovieCardContainer5Click={onMovieCardContainer5Click}
+          onMovieCardContainer6Click={onMovieCardContainer6Click}
+          onMovieCardContainer7Click={onMovieCardContainer7Click}
+          onMovieCardContainer8Click={onMovieCardContainer8Click}
+          />
           <TVShowsContainer
             onTVShowCardContainer4Click={onTVShowCardContainer4Click}
             onTVShowCardContainer5Click={onTVShowCardContainer5Click}
