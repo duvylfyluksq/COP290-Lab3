@@ -30,8 +30,8 @@ const FrameComponent2 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself")
+  }, [navigate]);
 
   return (
     <div className="watchlist-inself-parent">

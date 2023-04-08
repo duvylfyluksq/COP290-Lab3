@@ -29,7 +29,7 @@ const NavbarContainer = ({
     navigate("/watchlistinself");
   }, [navigate]);
   const onViewProfileClick = useCallback(() => {
-    navigate("/userinself");
+    navigate("/bobdylaninself");
   }, [navigate]);
   const onLogoutClick = useCallback(() => {
     navigate("/homesignedout");

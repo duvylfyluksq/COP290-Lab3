@@ -11,38 +11,40 @@ const FrameComponent13 = () => {
   const navigate = useNavigate();
 
   const onTVShowDescriptionBrowsePageContainerClick = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer1Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer2Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer3Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
+
   const onMovieDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
 
   const onMovieDescriptionBrowsePageContainer1Click = useCallback(() => {
-    navigate("/movieout");
+    navigate("/moviein");
   }, [navigate]);
+
   const onTVShowDescriptionBrowsePageContainer4Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer5Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer6Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowin")
+  }, [navigate]);
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedin");
@@ -65,8 +67,9 @@ const FrameComponent13 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself")
+  }, [navigate]);
+
   function changeColor(buttonNumber){
     var buttons = document.querySelectorAll("#button");
     for (var i = 0; i < buttons.length; i++) {

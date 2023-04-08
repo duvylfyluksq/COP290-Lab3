@@ -11,20 +11,21 @@ const FrameComponent20 = () => {
   const navigate = useNavigate();
 
   const onTVShowDescriptionBrowsePageContainerClick = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowout")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer1Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowout")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer2Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowout")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer3Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowout")
+  }, [navigate]);
+
   const onMovieDescriptionBrowsePageContainerClick = useCallback(() => {
     navigate("/movieout");
   }, [navigate]);
@@ -33,16 +34,16 @@ const FrameComponent20 = () => {
     navigate("/movieout");
   }, [navigate]);
   const onTVShowDescriptionBrowsePageContainer4Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowout")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer5Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowout")
+  }, [navigate]);
 
   const onTVShowDescriptionBrowsePageContainer6Click = useCallback(() => {
-    // Please sync "TVShow-In" to the project
-  }, []);
+    navigate("/tvshowout")
+  }, [navigate]);
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");

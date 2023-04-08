@@ -9,88 +9,88 @@ const FrameComponent20 = () => {
   const navigate = useNavigate();
 
   const onGenreCardContainerClick = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer1Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer2Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer3Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer4Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer5Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer6Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer7Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer8Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer9Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer10Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer11Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer12Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer13Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer14Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer15Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer16Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer17Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer18Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer19Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onGenreCardContainer20Click = useCallback(() => {
-    // Please sync "MixedBrowse-Out" to the project
-  }, []);
+    navigate("/mixedbrwosein")
+  }, [navigate]);
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedin");
@@ -113,8 +113,8 @@ const FrameComponent20 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself")
+  }, [navigate]);
 
   return (
     <div className="genres-out-parent">

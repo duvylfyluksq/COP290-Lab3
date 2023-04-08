@@ -10,55 +10,55 @@ const FrameComponent23 = () => {
   const navigate = useNavigate();
 
   const onPictureIconClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
+    navigate("/duvylfyluksqin");
   }, [navigate]);
 
   const onDuvylfyluksqTextClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
+    navigate("/duvylfyluksqin");
   }, [navigate]);
 
   const onPictureIcon1Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
+    navigate("/duvylfyluksqin");
   }, [navigate]);
 
   const onDuvylfyluksqText1Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
+    navigate("/duvylfyluksqin");
   }, [navigate]);
 
   const onPictureIcon2Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
+    navigate("/duvylfyluksqin");
   }, [navigate]);
 
   const onDuvylfyluksqText2Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
+    navigate("/duvylfyluksqin");
   }, [navigate]);
 
   const onMovieCardContainerClick = useCallback(() => {
-    navigate("/tvshowout");
+    navigate("/tvshowin");
   }, [navigate]);
 
   const onTVShowCardContainerClick = useCallback(() => {
-    navigate("/tvshowout");
+    navigate("/tvshowin");
   }, [navigate]);
 
   const onMovieCardContainer1Click = useCallback(() => {
-    navigate("/tvshowout");
+    navigate("/tvshowin");
   }, [navigate]);
 
   const onTVShowCardContainer1Click = useCallback(() => {
-    navigate("/tvshowout");
+    navigate("/tvshowin");
   }, [navigate]);
 
   const onMovieCardContainer2Click = useCallback(() => {
-    navigate("/tvshowout");
+    navigate("/tvshowin");
   }, [navigate]);
 
   const onTVShowCardContainer2Click = useCallback(() => {
-    navigate("/tvshowout");
+    navigate("/tvshowin");
   }, [navigate]);
 
   const onTVShowCardContainer3Click = useCallback(() => {
-    navigate("/tvshowout");
+    navigate("/tvshowin");
   }, [navigate]);
 
   const onLogoContainerClick = useCallback(() => {
@@ -82,8 +82,8 @@ const FrameComponent23 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself")
+  }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
     navigate("/reviewsmovieout");

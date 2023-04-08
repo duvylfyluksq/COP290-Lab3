@@ -56,8 +56,8 @@ const FrameComponent6 = () => {
   }, [navigate]);
 
   const onProfileMenuClick = useCallback(() => {
-    // Please sync "UserPage/InSelf" to the project
-  }, []);
+    navigate("/bobdylaninself")
+  }, [navigate]);
 
   const onWatchlistText1Click = useCallback(() => {
     navigate("/watchlistinother");
