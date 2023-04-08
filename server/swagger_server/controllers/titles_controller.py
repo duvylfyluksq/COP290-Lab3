@@ -47,6 +47,17 @@ def movie_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
         return (f'Error: {err}', 400)
 
 
+def movie_id_get(id_):  # noqa: E501
+    id = id_
+    try:
+        try:
+            return (db.getMovie(id), 200)
+        except Exception as err:
+            return (f'Movie not found: {err}', 404)
+    except Exception as err:
+        return (f'Error: {err}', 400)
+
+
 def search_get(expression):  # noqa: E501
     # unittest working
     try:
@@ -55,17 +66,22 @@ def search_get(expression):  # noqa: E501
         return (f'Error: {err}', 400)
 
 
-def title_id_get(id):  # noqa: E501
-    # unittest working
+def title_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
     try:
-        try:
-            id = json.loads(id)
-            if id['movie_id'] is not None:
-                return (Title(movie=db.getMovie((MovieId.from_dict(id['movie_id'])).id), tvshow=None), 200)
-            elif id['show_id'] is not None:
-                return (Title(movie=None, tvshow=db.getTvshow((ShowId.from_dict(id['show_id'])).id)), 200)
-        except Exception as err:
-            return (f'Title not found: {err}', 404)
+        L = db.sortBrowse(sort_type_browse, sort_order)
+        if genre is None:
+            return (L, 200)
+        else:
+            titles = []
+            for i in L:
+                check = False
+                for j in genre:
+                    if j in i.genres:
+                        check = True
+                        break
+                if (check):
+                    titles.append(i)
+            return (titles, 200)
     except Exception as err:
         return (f'Error: {err}', 400)
 
@@ -106,21 +122,12 @@ def tvshow_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E50
         return (f'Error: {err}', 400)
 
 
-def title_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
+def tvshow_id_get(id_):  # noqa: E501
+    id = id_
     try:
-        L = db.sortBrowse(sort_type_browse, sort_order)
-        if genre is None:
-            return (L, 200)
-        else:
-            titles = []
-            for i in L:
-                check = False
-                for j in genre:
-                    if j in i.genres:
-                        check = True
-                        break
-                if (check):
-                    titles.append(i)
-            return (titles, 200)
+        try:
+            return (db.getTvshow(id), 200)
+        except Exception as err:
+            return (f'Show not found: {err}', 404)
     except Exception as err:
         return (f'Error: {err}', 400)

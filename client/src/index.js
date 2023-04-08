@@ -22,6 +22,11 @@ import {ShowId} from './model/ShowId';
 import {Title} from './model/Title';
 import {Tvshow} from './model/Tvshow';
 import {User} from './model/User';
+import {UserIdBioBody} from './model/UserIdBioBody';
+import {UserIdInterestsBody} from './model/UserIdInterestsBody';
+import {UserIdPasswordBody} from './model/UserIdPasswordBody';
+import {UserIdPfpBody} from './model/UserIdPfpBody';
+import {UserIdUsernameBody} from './model/UserIdUsernameBody';
 import {UserSigninBody} from './model/UserSigninBody';
 import {UserSignupBody} from './model/UserSignupBody';
 import {ReviewsApi} from './api/ReviewsApi';
@@ -113,6 +118,36 @@ export {
      * @property {module:model/User}
      */
     User,
+
+    /**
+     * The UserIdBioBody model constructor.
+     * @property {module:model/UserIdBioBody}
+     */
+    UserIdBioBody,
+
+    /**
+     * The UserIdInterestsBody model constructor.
+     * @property {module:model/UserIdInterestsBody}
+     */
+    UserIdInterestsBody,
+
+    /**
+     * The UserIdPasswordBody model constructor.
+     * @property {module:model/UserIdPasswordBody}
+     */
+    UserIdPasswordBody,
+
+    /**
+     * The UserIdPfpBody model constructor.
+     * @property {module:model/UserIdPfpBody}
+     */
+    UserIdPfpBody,
+
+    /**
+     * The UserIdUsernameBody model constructor.
+     * @property {module:model/UserIdUsernameBody}
+     */
+    UserIdUsernameBody,
 
     /**
      * The UserSigninBody model constructor.

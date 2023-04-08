@@ -4,12 +4,61 @@ All URIs are relative to *http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**reviewMovieIdGet**](ReviewsApi.md#reviewMovieIdGet) | **GET** /review/movie/{id} | Get all reviews of a movie
 [**reviewPost**](ReviewsApi.md#reviewPost) | **POST** /review | Add a new review
 [**reviewReviewIdCommentGet**](ReviewsApi.md#reviewReviewIdCommentGet) | **GET** /review/{review_id}/comment | Get all comments of a review
 [**reviewReviewIdCommentPost**](ReviewsApi.md#reviewReviewIdCommentPost) | **POST** /review/{review_id}/comment | Add comment to review
 [**reviewReviewIdLikesPut**](ReviewsApi.md#reviewReviewIdLikesPut) | **PUT** /review/{review_id}/likes | Like/Unlike Review
-[**reviewTitleIdGet**](ReviewsApi.md#reviewTitleIdGet) | **GET** /review/title/{id} | Get all reviews of a title
+[**reviewTvshowIdGet**](ReviewsApi.md#reviewTvshowIdGet) | **GET** /review/tvshow/{id} | Get all reviews of a Tvshow
 [**reviewUserUserIdGet**](ReviewsApi.md#reviewUserUserIdGet) | **GET** /review/user/{user_id} | Get all reviews of a user
+
+<a name="reviewMovieIdGet"></a>
+# **reviewMovieIdGet**
+> [Review] reviewMovieIdGet(id, opts)
+
+Get all reviews of a movie
+
+Returns a list of reviews for a particular movie
+
+### Example
+```javascript
+import {Fmd} from 'fmd';
+
+let apiInstance = new Fmd.ReviewsApi();
+let id = 56; // Number | ID of the Movie
+let opts = { 
+  'sortTypeReviews': "sortTypeReviews_example", // String | Parameter based on which reviews will be sorted
+  'sortOrder': true // Boolean | sorting order
+};
+apiInstance.reviewMovieIdGet(id, opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **Number**| ID of the Movie | 
+ **sortTypeReviews** | **String**| Parameter based on which reviews will be sorted | [optional] 
+ **sortOrder** | **Boolean**| sorting order | [optional] 
+
+### Return type
+
+[**[Review]**](Review.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a name="reviewPost"></a>
 # **reviewPost**
@@ -195,25 +244,25 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
-<a name="reviewTitleIdGet"></a>
-# **reviewTitleIdGet**
-> [Review] reviewTitleIdGet(id, opts)
+<a name="reviewTvshowIdGet"></a>
+# **reviewTvshowIdGet**
+> [Review] reviewTvshowIdGet(id, opts)
 
-Get all reviews of a title
+Get all reviews of a Tvshow
 
-Returns a list of reviews for a particular title
+Returns a list of reviews for a particular Tvshow
 
 ### Example
 ```javascript
 import {Fmd} from 'fmd';
 
 let apiInstance = new Fmd.ReviewsApi();
-let id = "id_example"; // String | ID of the Movie or TVShow
+let id = 56; // Number | ID of the Tvshow
 let opts = { 
   'sortTypeReviews': "sortTypeReviews_example", // String | Parameter based on which reviews will be sorted
   'sortOrder': true // Boolean | sorting order
 };
-apiInstance.reviewTitleIdGet(id, opts, (error, data, response) => {
+apiInstance.reviewTvshowIdGet(id, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -226,7 +275,7 @@ apiInstance.reviewTitleIdGet(id, opts, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**| ID of the Movie or TVShow | 
+ **id** | **Number**| ID of the Tvshow | 
  **sortTypeReviews** | **String**| Parameter based on which reviews will be sorted | [optional] 
  **sortOrder** | **Boolean**| sorting order | [optional] 
 

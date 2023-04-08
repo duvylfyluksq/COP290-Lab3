@@ -19,7 +19,9 @@ class TestTitlesController(BaseTestCase):
 
         Sort/Filter movies
         """
-        query_string = [('genre', 'Action, Adventure'), ('sort_order', True)]
+        query_string = [('genre', 'genre_example'),
+                        ('sort_type_browse', 'sort_type_browse_example'),
+                        ('sort_order', true)]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/movie',
             method='GET',
@@ -27,44 +29,25 @@ class TestTitlesController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
+    def test_movie_id_get(self):
+        """Test case for movie_id_get
+
+        Get information about a Movie
+        """
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/movie/{id}'.format(id=56),
+            method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
     def test_search_get(self):
         """Test case for search_get
 
+        
         """
-        query_string = [('expression', 'vin')]
+        query_string = [('expression', 'expression_example')]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/search',
-            method='GET',
-            query_string=query_string)
-        self.assert200(response, 'Response body is : ' +
-                       response.data.decode('utf-8'))
-
-    def test_title_id_get(self):
-        """Test case for title_id_get
-
-        Get information about a Movie/TV Show
-        """
-        payload = json.dumps({"movie_id": {"id": 1}, "show_id": None})
-        response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title/{id}'.format(id=payload),
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-        payload = json.dumps({"movie_id": None, "show_id": {"id": 1}})
-        response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title/{id}'.format(id=payload),
-            method='GET')
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
-
-    def test_tvshow_get(self):
-        """Test case for tvshow_get
-
-        Sort/Filter TV Shows
-        """
-        query_string = [('genre', 'Crime'), ('sort_type_browse', 'Rat')]
-        response = self.client.open(
-            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/tvshow',
             method='GET',
             query_string=query_string)
         self.assert200(response,
@@ -75,11 +58,39 @@ class TestTitlesController(BaseTestCase):
 
         Sort/Filter Movies and TV Shows
         """
-        query_string = [('genre', 'Drama')]
+        query_string = [('genre', 'genre_example'),
+                        ('sort_type_browse', 'sort_type_browse_example'),
+                        ('sort_order', true)]
         response = self.client.open(
             '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/title',
             method='GET',
             query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_tvshow_get(self):
+        """Test case for tvshow_get
+
+        Sort/Filter TV Shows
+        """
+        query_string = [('genre', 'genre_example'),
+                        ('sort_type_browse', 'sort_type_browse_example'),
+                        ('sort_order', true)]
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/tvshow',
+            method='GET',
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_tvshow_id_get(self):
+        """Test case for tvshow_id_get
+
+        Get information about a TV Show
+        """
+        response = self.client.open(
+            '/VEDANTANEOGI_1/FMD_API3.0/3.0.0/tvshow/{id}'.format(id=56),
+            method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 

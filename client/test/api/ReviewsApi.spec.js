@@ -35,6 +35,33 @@
 
   describe('(package)', function() {
     describe('ReviewsApi', function() {
+      describe('reviewMovieIdGet', function() {
+        it('should call reviewMovieIdGet successfully', function(done) {
+          // TODO: uncomment, update parameter values for reviewMovieIdGet call and complete the assertions
+          /*
+          var opts = {};
+
+          instance.reviewMovieIdGet(id, opts, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+            // TODO: update response assertions
+            let dataCtr = data;
+            expect(dataCtr).to.be.an(Array);
+            expect(dataCtr).to.not.be.empty();
+            for (let p in dataCtr) {
+              let data = dataCtr[p];
+              expect(data).to.be.a(Fmd.Review);
+            }
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
       describe('reviewPost', function() {
         it('should call reviewPost successfully', function(done) {
           // TODO: uncomment, update parameter values for reviewPost call
@@ -117,13 +144,13 @@
           done();
         });
       });
-      describe('reviewTitleIdGet', function() {
-        it('should call reviewTitleIdGet successfully', function(done) {
-          // TODO: uncomment, update parameter values for reviewTitleIdGet call and complete the assertions
+      describe('reviewTvshowIdGet', function() {
+        it('should call reviewTvshowIdGet successfully', function(done) {
+          // TODO: uncomment, update parameter values for reviewTvshowIdGet call and complete the assertions
           /*
           var opts = {};
 
-          instance.reviewTitleIdGet(id, opts, function(error, data, response) {
+          instance.reviewTvshowIdGet(id, opts, function(error, data, response) {
             if (error) {
               done(error);
               return;

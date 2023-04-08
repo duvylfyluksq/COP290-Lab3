@@ -62,6 +62,26 @@
           done();
         });
       });
+      describe('movieIdGet', function() {
+        it('should call movieIdGet successfully', function(done) {
+          // TODO: uncomment, update parameter values for movieIdGet call and complete the assertions
+          /*
+
+          instance.movieIdGet(id, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+            // TODO: update response assertions
+            expect(data).to.be.a(Fmd.Movie);
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
       describe('searchGet', function() {
         it('should call searchGet successfully', function(done) {
           // TODO: uncomment, update parameter values for searchGet call and complete the assertions
@@ -115,26 +135,6 @@
           done();
         });
       });
-      describe('titleIdGet', function() {
-        it('should call titleIdGet successfully', function(done) {
-          // TODO: uncomment, update parameter values for titleIdGet call and complete the assertions
-          /*
-
-          instance.titleIdGet(id, function(error, data, response) {
-            if (error) {
-              done(error);
-              return;
-            }
-            // TODO: update response assertions
-            expect(data).to.be.a(Fmd.Title);
-
-            done();
-          });
-          */
-          // TODO: uncomment and complete method invocation above, then delete this line and the next:
-          done();
-        });
-      });
       describe('tvshowGet', function() {
         it('should call tvshowGet successfully', function(done) {
           // TODO: uncomment, update parameter values for tvshowGet call and complete the assertions
@@ -154,6 +154,26 @@
               let data = dataCtr[p];
               expect(data).to.be.a(Fmd.Tvshow);
             }
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
+      describe('tvshowIdGet', function() {
+        it('should call tvshowIdGet successfully', function(done) {
+          // TODO: uncomment, update parameter values for tvshowIdGet call and complete the assertions
+          /*
+
+          instance.tvshowIdGet(id, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+            // TODO: update response assertions
+            expect(data).to.be.a(Fmd.Tvshow);
 
             done();
           });

@@ -71,22 +71,19 @@ Please follow the [installation](#installation) instruction and execute the foll
 var Fmd = require('fmd');
 
 var api = new Fmd.ReviewsApi()
-var movieId = "movieId_example"; // {String} ID of the movie for which the review is being posted(null if TVShow)
-var showId = "showId_example"; // {String} ID of the TVShow for which the review is being posted(null if Movie)
-var userId = 56; // {Number} ID of the user who is posting the review
-var rating = 56; // {Number} rating by the user
-var title = "title_example"; // {String} the review title of the review to be added
-var content = "content_example"; // {String} content of the review
-var creationTime = new Date("2013-10-20T19:20:30+01:00"); // {Date} creation time
-
+var id = 56; // {Number} ID of the Movie
+var opts = { 
+  'sortTypeReviews': "sortTypeReviews_example", // {String} Parameter based on which reviews will be sorted
+  'sortOrder': true // {Boolean} sorting order
+};
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.reviewPost(movieId, showId, userId, rating, title, content, creationTime, callback);
+api.reviewMovieIdGet(id, opts, callback);
 ```
 
 ## Documentation for API Endpoints
@@ -95,17 +92,19 @@ All URIs are relative to *http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*Fmd.ReviewsApi* | [**reviewMovieIdGet**](docs/ReviewsApi.md#reviewMovieIdGet) | **GET** /review/movie/{id} | Get all reviews of a movie
 *Fmd.ReviewsApi* | [**reviewPost**](docs/ReviewsApi.md#reviewPost) | **POST** /review | Add a new review
 *Fmd.ReviewsApi* | [**reviewReviewIdCommentGet**](docs/ReviewsApi.md#reviewReviewIdCommentGet) | **GET** /review/{review_id}/comment | Get all comments of a review
 *Fmd.ReviewsApi* | [**reviewReviewIdCommentPost**](docs/ReviewsApi.md#reviewReviewIdCommentPost) | **POST** /review/{review_id}/comment | Add comment to review
 *Fmd.ReviewsApi* | [**reviewReviewIdLikesPut**](docs/ReviewsApi.md#reviewReviewIdLikesPut) | **PUT** /review/{review_id}/likes | Like/Unlike Review
-*Fmd.ReviewsApi* | [**reviewTitleIdGet**](docs/ReviewsApi.md#reviewTitleIdGet) | **GET** /review/title/{id} | Get all reviews of a title
+*Fmd.ReviewsApi* | [**reviewTvshowIdGet**](docs/ReviewsApi.md#reviewTvshowIdGet) | **GET** /review/tvshow/{id} | Get all reviews of a Tvshow
 *Fmd.ReviewsApi* | [**reviewUserUserIdGet**](docs/ReviewsApi.md#reviewUserUserIdGet) | **GET** /review/user/{user_id} | Get all reviews of a user
 *Fmd.TitlesApi* | [**movieGet**](docs/TitlesApi.md#movieGet) | **GET** /movie | Sort/Filter movies
+*Fmd.TitlesApi* | [**movieIdGet**](docs/TitlesApi.md#movieIdGet) | **GET** /movie/{id} | Get information about a Movie
 *Fmd.TitlesApi* | [**searchGet**](docs/TitlesApi.md#searchGet) | **GET** /search | 
 *Fmd.TitlesApi* | [**titleGet**](docs/TitlesApi.md#titleGet) | **GET** /title | Sort/Filter Movies and TV Shows
-*Fmd.TitlesApi* | [**titleIdGet**](docs/TitlesApi.md#titleIdGet) | **GET** /title/{id} | Get information about a Movie/TV Show
 *Fmd.TitlesApi* | [**tvshowGet**](docs/TitlesApi.md#tvshowGet) | **GET** /tvshow | Sort/Filter TV Shows
+*Fmd.TitlesApi* | [**tvshowIdGet**](docs/TitlesApi.md#tvshowIdGet) | **GET** /tvshow/{id} | Get information about a TV Show
 *Fmd.UserApi* | [**profileUserIdBioPut**](docs/UserApi.md#profileUserIdBioPut) | **PUT** /profile/{user_id}/bio | Update user bio
 *Fmd.UserApi* | [**profileUserIdInterestsPut**](docs/UserApi.md#profileUserIdInterestsPut) | **PUT** /profile/{user_id}/interests | Update interests
 *Fmd.UserApi* | [**profileUserIdPasswordPut**](docs/UserApi.md#profileUserIdPasswordPut) | **PUT** /profile/{user_id}/password | Update Password
@@ -114,9 +113,11 @@ Class | Method | HTTP request | Description
 *Fmd.UserApi* | [**userSigninPost**](docs/UserApi.md#userSigninPost) | **POST** /user/signin | Sign in user with credentials
 *Fmd.UserApi* | [**userSignupPost**](docs/UserApi.md#userSignupPost) | **POST** /user/signup | Sign Up
 *Fmd.UserApi* | [**userUserIdGet**](docs/UserApi.md#userUserIdGet) | **GET** /user/{user_id} | Get User object(user details) from user id
+*Fmd.UserApi* | [**watchlistMovieRemoveUserIdPut**](docs/UserApi.md#watchlistMovieRemoveUserIdPut) | **PUT** /watchlist/movie/remove/{user_id} | Remove Movie from user&#x27;s watchlist
+*Fmd.UserApi* | [**watchlistMovieUserIdPut**](docs/UserApi.md#watchlistMovieUserIdPut) | **PUT** /watchlist/movie/{user_id} | Add/Remove movie from watchlist
+*Fmd.UserApi* | [**watchlistTvshowRemoveUserIdPut**](docs/UserApi.md#watchlistTvshowRemoveUserIdPut) | **PUT** /watchlist/tvshow/remove/{user_id} | Remove TV show from user&#x27;s watchlist
+*Fmd.UserApi* | [**watchlistTvshowUserIdPut**](docs/UserApi.md#watchlistTvshowUserIdPut) | **PUT** /watchlist/tvshow/{user_id} | Add/Remove TV show from watchlist
 *Fmd.UserApi* | [**watchlistUserIdGet**](docs/UserApi.md#watchlistUserIdGet) | **GET** /watchlist/{user_id} | Get all titles in user watchlist
-*Fmd.UserApi* | [**watchlistUserIdPut**](docs/UserApi.md#watchlistUserIdPut) | **PUT** /watchlist/{user_id} | Add/Remove title from watchlist
-*Fmd.UserApi* | [**watchlistUserIdRemovePut**](docs/UserApi.md#watchlistUserIdRemovePut) | **PUT** /watchlist/{user_id}/remove | Remove title from user&#x27;s watchlist
 
 ## Documentation for Models
 
@@ -128,6 +129,11 @@ Class | Method | HTTP request | Description
  - [Fmd.Title](docs/Title.md)
  - [Fmd.Tvshow](docs/Tvshow.md)
  - [Fmd.User](docs/User.md)
+ - [Fmd.UserIdBioBody](docs/UserIdBioBody.md)
+ - [Fmd.UserIdInterestsBody](docs/UserIdInterestsBody.md)
+ - [Fmd.UserIdPasswordBody](docs/UserIdPasswordBody.md)
+ - [Fmd.UserIdPfpBody](docs/UserIdPfpBody.md)
+ - [Fmd.UserIdUsernameBody](docs/UserIdUsernameBody.md)
  - [Fmd.UserSigninBody](docs/UserSigninBody.md)
  - [Fmd.UserSignupBody](docs/UserSignupBody.md)
 

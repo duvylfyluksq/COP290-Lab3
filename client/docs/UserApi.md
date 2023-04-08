@@ -12,13 +12,15 @@ Method | HTTP request | Description
 [**userSigninPost**](UserApi.md#userSigninPost) | **POST** /user/signin | Sign in user with credentials
 [**userSignupPost**](UserApi.md#userSignupPost) | **POST** /user/signup | Sign Up
 [**userUserIdGet**](UserApi.md#userUserIdGet) | **GET** /user/{user_id} | Get User object(user details) from user id
+[**watchlistMovieRemoveUserIdPut**](UserApi.md#watchlistMovieRemoveUserIdPut) | **PUT** /watchlist/movie/remove/{user_id} | Remove Movie from user&#x27;s watchlist
+[**watchlistMovieUserIdPut**](UserApi.md#watchlistMovieUserIdPut) | **PUT** /watchlist/movie/{user_id} | Add/Remove movie from watchlist
+[**watchlistTvshowRemoveUserIdPut**](UserApi.md#watchlistTvshowRemoveUserIdPut) | **PUT** /watchlist/tvshow/remove/{user_id} | Remove TV show from user&#x27;s watchlist
+[**watchlistTvshowUserIdPut**](UserApi.md#watchlistTvshowUserIdPut) | **PUT** /watchlist/tvshow/{user_id} | Add/Remove TV show from watchlist
 [**watchlistUserIdGet**](UserApi.md#watchlistUserIdGet) | **GET** /watchlist/{user_id} | Get all titles in user watchlist
-[**watchlistUserIdPut**](UserApi.md#watchlistUserIdPut) | **PUT** /watchlist/{user_id} | Add/Remove title from watchlist
-[**watchlistUserIdRemovePut**](UserApi.md#watchlistUserIdRemovePut) | **PUT** /watchlist/{user_id}/remove | Remove title from user&#x27;s watchlist
 
 <a name="profileUserIdBioPut"></a>
 # **profileUserIdBioPut**
-> profileUserIdBioPut(userId, bio)
+> profileUserIdBioPut(userId, opts)
 
 Update user bio
 
@@ -28,9 +30,10 @@ import {Fmd} from 'fmd';
 
 let apiInstance = new Fmd.UserApi();
 let userId = 56; // Number | ID of the user
-let bio = "bio_example"; // String | New bio
-
-apiInstance.profileUserIdBioPut(userId, bio, (error, data, response) => {
+let opts = { 
+  'body': new Fmd.UserIdBioBody() // UserIdBioBody | 
+};
+apiInstance.profileUserIdBioPut(userId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -44,7 +47,7 @@ apiInstance.profileUserIdBioPut(userId, bio, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | **Number**| ID of the user | 
- **bio** | **String**| New bio | 
+ **body** | [**UserIdBioBody**](UserIdBioBody.md)|  | [optional] 
 
 ### Return type
 
@@ -56,12 +59,12 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 <a name="profileUserIdInterestsPut"></a>
 # **profileUserIdInterestsPut**
-> profileUserIdInterestsPut(userId, interests)
+> profileUserIdInterestsPut(userId, opts)
 
 Update interests
 
@@ -71,9 +74,10 @@ import {Fmd} from 'fmd';
 
 let apiInstance = new Fmd.UserApi();
 let userId = 56; // Number | ID of the user
-let interests = ["interests_example"]; // [String] | New Profile Picture
-
-apiInstance.profileUserIdInterestsPut(userId, interests, (error, data, response) => {
+let opts = { 
+  'body': new Fmd.UserIdInterestsBody() // UserIdInterestsBody | 
+};
+apiInstance.profileUserIdInterestsPut(userId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -87,7 +91,7 @@ apiInstance.profileUserIdInterestsPut(userId, interests, (error, data, response)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | **Number**| ID of the user | 
- **interests** | [**[String]**](String.md)| New Profile Picture | 
+ **body** | [**UserIdInterestsBody**](UserIdInterestsBody.md)|  | [optional] 
 
 ### Return type
 
@@ -99,12 +103,12 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 <a name="profileUserIdPasswordPut"></a>
 # **profileUserIdPasswordPut**
-> profileUserIdPasswordPut(userId, password)
+> profileUserIdPasswordPut(userId, opts)
 
 Update Password
 
@@ -114,9 +118,10 @@ import {Fmd} from 'fmd';
 
 let apiInstance = new Fmd.UserApi();
 let userId = 56; // Number | ID of the user
-let password = "password_example"; // String | New password
-
-apiInstance.profileUserIdPasswordPut(userId, password, (error, data, response) => {
+let opts = { 
+  'body': new Fmd.UserIdPasswordBody() // UserIdPasswordBody | 
+};
+apiInstance.profileUserIdPasswordPut(userId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -130,7 +135,7 @@ apiInstance.profileUserIdPasswordPut(userId, password, (error, data, response) =
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | **Number**| ID of the user | 
- **password** | **String**| New password | 
+ **body** | [**UserIdPasswordBody**](UserIdPasswordBody.md)|  | [optional] 
 
 ### Return type
 
@@ -142,12 +147,12 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 <a name="profileUserIdPfpPut"></a>
 # **profileUserIdPfpPut**
-> profileUserIdPfpPut(userId, pfp)
+> profileUserIdPfpPut(userId, opts)
 
 Update profile picture
 
@@ -157,9 +162,10 @@ import {Fmd} from 'fmd';
 
 let apiInstance = new Fmd.UserApi();
 let userId = 56; // Number | ID of the user
-let pfp = "pfp_example"; // String | New Profile Picture
-
-apiInstance.profileUserIdPfpPut(userId, pfp, (error, data, response) => {
+let opts = { 
+  'body': new Fmd.UserIdPfpBody() // UserIdPfpBody | 
+};
+apiInstance.profileUserIdPfpPut(userId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -173,7 +179,7 @@ apiInstance.profileUserIdPfpPut(userId, pfp, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | **Number**| ID of the user | 
- **pfp** | **String**| New Profile Picture | 
+ **body** | [**UserIdPfpBody**](UserIdPfpBody.md)|  | [optional] 
 
 ### Return type
 
@@ -185,12 +191,12 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 <a name="profileUserIdUsernamePut"></a>
 # **profileUserIdUsernamePut**
-> profileUserIdUsernamePut(userId, username)
+> profileUserIdUsernamePut(userId, opts)
 
 Update username
 
@@ -200,9 +206,10 @@ import {Fmd} from 'fmd';
 
 let apiInstance = new Fmd.UserApi();
 let userId = 56; // Number | ID of the user
-let username = "username_example"; // String | New username
-
-apiInstance.profileUserIdUsernamePut(userId, username, (error, data, response) => {
+let opts = { 
+  'body': new Fmd.UserIdUsernameBody() // UserIdUsernameBody | 
+};
+apiInstance.profileUserIdUsernamePut(userId, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -216,7 +223,7 @@ apiInstance.profileUserIdUsernamePut(userId, username, (error, data, response) =
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **userId** | **Number**| ID of the user | 
- **username** | **String**| New username | 
+ **body** | [**UserIdUsernameBody**](UserIdUsernameBody.md)|  | [optional] 
 
 ### Return type
 
@@ -228,7 +235,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: Not defined
 
 <a name="userSigninPost"></a>
@@ -356,6 +363,178 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="watchlistMovieRemoveUserIdPut"></a>
+# **watchlistMovieRemoveUserIdPut**
+> watchlistMovieRemoveUserIdPut(userId, id)
+
+Remove Movie from user&#x27;s watchlist
+
+### Example
+```javascript
+import {Fmd} from 'fmd';
+
+let apiInstance = new Fmd.UserApi();
+let userId = 56; // Number | ID of the user
+let id = 56; // Number | id of the Movie to be removed from user's watchlist
+
+apiInstance.watchlistMovieRemoveUserIdPut(userId, id, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **Number**| ID of the user | 
+ **id** | **Number**| id of the Movie to be removed from user&#x27;s watchlist | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="watchlistMovieUserIdPut"></a>
+# **watchlistMovieUserIdPut**
+> watchlistMovieUserIdPut(userId, id)
+
+Add/Remove movie from watchlist
+
+### Example
+```javascript
+import {Fmd} from 'fmd';
+
+let apiInstance = new Fmd.UserApi();
+let userId = 56; // Number | ID of the user
+let id = 56; // Number | ID of the movie
+
+apiInstance.watchlistMovieUserIdPut(userId, id, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **Number**| ID of the user | 
+ **id** | **Number**| ID of the movie | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="watchlistTvshowRemoveUserIdPut"></a>
+# **watchlistTvshowRemoveUserIdPut**
+> watchlistTvshowRemoveUserIdPut(userId, id)
+
+Remove TV show from user&#x27;s watchlist
+
+### Example
+```javascript
+import {Fmd} from 'fmd';
+
+let apiInstance = new Fmd.UserApi();
+let userId = 56; // Number | ID of the user
+let id = 56; // Number | id of the TV show to be removed from user's watchlist
+
+apiInstance.watchlistTvshowRemoveUserIdPut(userId, id, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **Number**| ID of the user | 
+ **id** | **Number**| id of the TV show to be removed from user&#x27;s watchlist | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+<a name="watchlistTvshowUserIdPut"></a>
+# **watchlistTvshowUserIdPut**
+> watchlistTvshowUserIdPut(userId, id)
+
+Add/Remove TV show from watchlist
+
+### Example
+```javascript
+import {Fmd} from 'fmd';
+
+let apiInstance = new Fmd.UserApi();
+let userId = 56; // Number | ID of the user
+let id = 56; // Number | ID of TV show
+
+apiInstance.watchlistTvshowUserIdPut(userId, id, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **Number**| ID of the user | 
+ **id** | **Number**| ID of TV show | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
 <a name="watchlistUserIdGet"></a>
 # **watchlistUserIdGet**
 > [Title] watchlistUserIdGet(userId)
@@ -396,90 +575,4 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
-<a name="watchlistUserIdPut"></a>
-# **watchlistUserIdPut**
-> watchlistUserIdPut(userId, id)
-
-Add/Remove title from watchlist
-
-### Example
-```javascript
-import {Fmd} from 'fmd';
-
-let apiInstance = new Fmd.UserApi();
-let userId = 56; // Number | ID of the user
-let id = "id_example"; // String | id of TVShow/Movie to be added to the watchlist
-
-apiInstance.watchlistUserIdPut(userId, id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-});
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | **Number**| ID of the user | 
- **id** | **String**| id of TVShow/Movie to be added to the watchlist | 
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-<a name="watchlistUserIdRemovePut"></a>
-# **watchlistUserIdRemovePut**
-> watchlistUserIdRemovePut(userId, id)
-
-Remove title from user&#x27;s watchlist
-
-### Example
-```javascript
-import {Fmd} from 'fmd';
-
-let apiInstance = new Fmd.UserApi();
-let userId = 56; // Number | ID of the user
-let id = "id_example"; // String | id of the Title to be removed from user's watchlist
-
-apiInstance.watchlistUserIdRemovePut(userId, id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-});
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | **Number**| ID of the user | 
- **id** | **String**| id of the Title to be removed from user&#x27;s watchlist | 
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
 

@@ -39,8 +39,9 @@
         it('should call profileUserIdBioPut successfully', function(done) {
           // TODO: uncomment, update parameter values for profileUserIdBioPut call
           /*
+          var opts = {};
 
-          instance.profileUserIdBioPut(userId, bio, function(error, data, response) {
+          instance.profileUserIdBioPut(userId, opts, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -57,8 +58,9 @@
         it('should call profileUserIdInterestsPut successfully', function(done) {
           // TODO: uncomment, update parameter values for profileUserIdInterestsPut call
           /*
+          var opts = {};
 
-          instance.profileUserIdInterestsPut(userId, interests, function(error, data, response) {
+          instance.profileUserIdInterestsPut(userId, opts, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -75,8 +77,9 @@
         it('should call profileUserIdPasswordPut successfully', function(done) {
           // TODO: uncomment, update parameter values for profileUserIdPasswordPut call
           /*
+          var opts = {};
 
-          instance.profileUserIdPasswordPut(userId, password, function(error, data, response) {
+          instance.profileUserIdPasswordPut(userId, opts, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -93,8 +96,9 @@
         it('should call profileUserIdPfpPut successfully', function(done) {
           // TODO: uncomment, update parameter values for profileUserIdPfpPut call
           /*
+          var opts = {};
 
-          instance.profileUserIdPfpPut(userId, pfp, function(error, data, response) {
+          instance.profileUserIdPfpPut(userId, opts, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -111,8 +115,9 @@
         it('should call profileUserIdUsernamePut successfully', function(done) {
           // TODO: uncomment, update parameter values for profileUserIdUsernamePut call
           /*
+          var opts = {};
 
-          instance.profileUserIdUsernamePut(userId, username, function(error, data, response) {
+          instance.profileUserIdUsernamePut(userId, opts, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -187,6 +192,78 @@
           done();
         });
       });
+      describe('watchlistMovieRemoveUserIdPut', function() {
+        it('should call watchlistMovieRemoveUserIdPut successfully', function(done) {
+          // TODO: uncomment, update parameter values for watchlistMovieRemoveUserIdPut call
+          /*
+
+          instance.watchlistMovieRemoveUserIdPut(userId, id, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
+      describe('watchlistMovieUserIdPut', function() {
+        it('should call watchlistMovieUserIdPut successfully', function(done) {
+          // TODO: uncomment, update parameter values for watchlistMovieUserIdPut call
+          /*
+
+          instance.watchlistMovieUserIdPut(userId, id, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
+      describe('watchlistTvshowRemoveUserIdPut', function() {
+        it('should call watchlistTvshowRemoveUserIdPut successfully', function(done) {
+          // TODO: uncomment, update parameter values for watchlistTvshowRemoveUserIdPut call
+          /*
+
+          instance.watchlistTvshowRemoveUserIdPut(userId, id, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
+      describe('watchlistTvshowUserIdPut', function() {
+        it('should call watchlistTvshowUserIdPut successfully', function(done) {
+          // TODO: uncomment, update parameter values for watchlistTvshowUserIdPut call
+          /*
+
+          instance.watchlistTvshowUserIdPut(userId, id, function(error, data, response) {
+            if (error) {
+              done(error);
+              return;
+            }
+
+            done();
+          });
+          */
+          // TODO: uncomment and complete method invocation above, then delete this line and the next:
+          done();
+        });
+      });
       describe('watchlistUserIdGet', function() {
         it('should call watchlistUserIdGet successfully', function(done) {
           // TODO: uncomment, update parameter values for watchlistUserIdGet call and complete the assertions
@@ -204,42 +281,6 @@
             for (let p in dataCtr) {
               let data = dataCtr[p];
               expect(data).to.be.a(Fmd.Title);
-            }
-
-            done();
-          });
-          */
-          // TODO: uncomment and complete method invocation above, then delete this line and the next:
-          done();
-        });
-      });
-      describe('watchlistUserIdPut', function() {
-        it('should call watchlistUserIdPut successfully', function(done) {
-          // TODO: uncomment, update parameter values for watchlistUserIdPut call
-          /*
-
-          instance.watchlistUserIdPut(userId, id, function(error, data, response) {
-            if (error) {
-              done(error);
-              return;
-            }
-
-            done();
-          });
-          */
-          // TODO: uncomment and complete method invocation above, then delete this line and the next:
-          done();
-        });
-      });
-      describe('watchlistUserIdRemovePut', function() {
-        it('should call watchlistUserIdRemovePut successfully', function(done) {
-          // TODO: uncomment, update parameter values for watchlistUserIdRemovePut call
-          /*
-
-          instance.watchlistUserIdRemovePut(userId, id, function(error, data, response) {
-            if (error) {
-              done(error);
-              return;
             }
 
             done();

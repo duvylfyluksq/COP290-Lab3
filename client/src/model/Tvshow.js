@@ -41,7 +41,7 @@ export class Tvshow {
     if (data) {
       obj = obj || new Tvshow();
       if (data.hasOwnProperty('show_id'))
-        obj.showId = ShowId.constructFromObject(data['show_id']);
+        obj.show_id = ShowId.constructFromObject(data['show_id']);
       if (data.hasOwnProperty('title'))
         obj.title = ApiClient.convertToType(data['title'], 'String');
       if (data.hasOwnProperty('plot'))
@@ -59,7 +59,7 @@ export class Tvshow {
       if (data.hasOwnProperty('genres'))
         obj.genres = ApiClient.convertToType(data['genres'], ['String']);
       if (data.hasOwnProperty('release_date'))
-        obj.releaseDate = ApiClient.convertToType(data['release_date'], 'Date');
+        obj.release_date = ApiClient.convertToType(data['release_date'], 'Date');
       if (data.hasOwnProperty('duration'))
         obj.duration = ApiClient.convertToType(data['duration'], 'String');
       if (data.hasOwnProperty('poster'))
@@ -70,9 +70,9 @@ export class Tvshow {
 }
 
 /**
- * @member {module:model/ShowId} showId
+ * @member {module:model/ShowId} show_id
  */
-Tvshow.prototype.showId = undefined;
+Tvshow.prototype.show_id = undefined;
 
 /**
  * @member {String} title
@@ -115,9 +115,9 @@ Tvshow.prototype.rating = undefined;
 Tvshow.prototype.genres = undefined;
 
 /**
- * @member {Date} releaseDate
+ * @member {Date} release_date
  */
-Tvshow.prototype.releaseDate = undefined;
+Tvshow.prototype.release_date = undefined;
 
 /**
  * @member {String} duration

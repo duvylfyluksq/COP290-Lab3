@@ -5,10 +5,11 @@ All URIs are relative to *http://localhost:8080/VEDANTANEOGI_1/FMD_API3.0/3.0.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**movieGet**](TitlesApi.md#movieGet) | **GET** /movie | Sort/Filter movies
+[**movieIdGet**](TitlesApi.md#movieIdGet) | **GET** /movie/{id} | Get information about a Movie
 [**searchGet**](TitlesApi.md#searchGet) | **GET** /search | 
 [**titleGet**](TitlesApi.md#titleGet) | **GET** /title | Sort/Filter Movies and TV Shows
-[**titleIdGet**](TitlesApi.md#titleIdGet) | **GET** /title/{id} | Get information about a Movie/TV Show
 [**tvshowGet**](TitlesApi.md#tvshowGet) | **GET** /tvshow | Sort/Filter TV Shows
+[**tvshowIdGet**](TitlesApi.md#tvshowIdGet) | **GET** /tvshow/{id} | Get information about a TV Show
 
 <a name="movieGet"></a>
 # **movieGet**
@@ -46,6 +47,49 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[Movie]**](Movie.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="movieIdGet"></a>
+# **movieIdGet**
+> Movie movieIdGet(id)
+
+Get information about a Movie
+
+Returns information about a particular Movie, including its title, genre, director, actors, release date, and description.
+
+### Example
+```javascript
+import {Fmd} from 'fmd';
+
+let apiInstance = new Fmd.TitlesApi();
+let id = 56; // Number | ID of the Movie
+
+apiInstance.movieIdGet(id, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **Number**| ID of the Movie | 
+
+### Return type
+
+[**Movie**](Movie.md)
 
 ### Authorization
 
@@ -145,49 +189,6 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="titleIdGet"></a>
-# **titleIdGet**
-> Title titleIdGet(id)
-
-Get information about a Movie/TV Show
-
-Returns information about a particular Movie/TV Show, including its title, genre, director, actors, release date, and description.
-
-### Example
-```javascript
-import {Fmd} from 'fmd';
-
-let apiInstance = new Fmd.TitlesApi();
-let id = "id_example"; // String | ID of the Movie or TV Show
-
-apiInstance.titleIdGet(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **String**| ID of the Movie or TV Show | 
-
-### Return type
-
-[**Title**](Title.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
 <a name="tvshowGet"></a>
 # **tvshowGet**
 > [Tvshow] tvshowGet(opts)
@@ -224,6 +225,49 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[Tvshow]**](Tvshow.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="tvshowIdGet"></a>
+# **tvshowIdGet**
+> Tvshow tvshowIdGet(id)
+
+Get information about a TV Show
+
+Returns information about a particular TV Show, including its title, genre, director, actors, release date, and description.
+
+### Example
+```javascript
+import {Fmd} from 'fmd';
+
+let apiInstance = new Fmd.TitlesApi();
+let id = 56; // Number | ID of the TV Show
+
+apiInstance.tvshowIdGet(id, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **Number**| ID of the TV Show | 
+
+### Return type
+
+[**Tvshow**](Tvshow.md)
 
 ### Authorization
 

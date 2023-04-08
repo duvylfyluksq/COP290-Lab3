@@ -315,26 +315,53 @@ paths:
         "500":
           description: Internal server error
 
-  /review/title/{id}:
+  /review/movie/{id}:
     get:
       tags:
       - Reviews
-      summary: Get all reviews of a title
-      description: Returns a list of reviews for a particular title
+      summary: Get all reviews of a movie
+      description: Returns a list of reviews for a particular movie
       parameters:
       - name: id
         in: path
-        description: ID of the Movie or TVShow
+        description: ID of the Movie
         required: true
-        style: simple
-        explode: false
         schema:
-          type: string
+          type: integer
       - $ref: '#/components/parameters/sort_type_reviews'
       - $ref: '#/components/parameters/sort_order'
       responses:
         "200":
-          description: List of reviews for Movie/TVShow
+          description: List of reviews for Movie
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/review'
+        "400":
+          description: Invalid request
+        "404":
+          description: Title not found
+    
+  /review/tvshow/{id}:
+    get:
+      tags:
+      - Reviews
+      summary: Get all reviews of a Tvshow
+      description: Returns a list of reviews for a particular Tvshow
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Tvshow
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/sort_type_reviews'
+      - $ref: '#/components/parameters/sort_order'
+      responses:
+        "200":
+          description: List of reviews for TVShow
           content:
             application/json:
               schema:
@@ -452,32 +479,56 @@ paths:
         "404":
           description: Review not found
 
-  /title/{id}:
+  /movie/{id}:
     get:
       tags:
       - Titles
-      summary: Get information about a Movie/TV Show
-      description: Returns information about a particular Movie/TV Show, including its title, genre, director, actors, release date, and description.
+      summary: Get information about a Movie
+      description: Returns information about a particular Movie, including its title, genre, director, actors, release date, and description.
       parameters:
       - name: id
         in: path
-        description: ID of the Movie or TV Show
+        description: ID of the Movie
         required: true
-        style: simple
-        explode: false
         schema:
-          type: string
+          type: integer
       responses:
         "200":
           description: Information about the Movie/TV Show
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/title'
+                $ref: '#/components/schemas/movie'
         "400":
           description: Invalid request
         "404":
-          description: Movie/TV Show not found
+          description: Movie not found
+    
+  /tvshow/{id}:
+    get:
+      tags:
+      - Titles
+      summary: Get information about a TV Show
+      description: Returns information about a particular TV Show, including its title, genre, director, actors, release date, and description.
+      parameters:
+      - name: id
+        in: path
+        description: ID of the TV Show
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Information about the Movie/TV Show
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tvshow'
+        "400":
+          description: Invalid request
+        "404":
+          description: TV Show not found
+    
 
   /review/user/{user_id}:
     get:
@@ -537,40 +588,38 @@ paths:
                   $ref: '#/components/schemas/title'
         "400":
           description: Bad request. Invalid user ID
-
+  
+  /watchlist/movie/{user_id}:
     put:
       tags:
       - User
-      summary: Add/Remove title from watchlist
+      summary: Add/Remove movie from watchlist
       parameters:
       - name: user_id
         in: path
         description: ID of the user
         required: true
-        style: simple
-        explode: false
         schema:
           type: integer
           example: 42
       - name: id
         in: query
-        description: id of TVShow/Movie to be added to the watchlist
+        description: ID of the movie
         required: true
-        style: form
-        explode: true
         schema:
-          type: string
+          type: integer
+          example: 42
       responses:
         "201":
           description: Title added/removed successfully
         "400":
           description: Bad request. Invalid user ID or title not provided
-
-  /watchlist/{user_id}/remove:
+          
+  /watchlist/tvshow/{user_id}:
     put:
       tags:
       - User
-      summary: Remove title from user's watchlist
+      summary: Add/Remove TV show from watchlist
       parameters:
       - name: user_id
         in: path
@@ -583,19 +632,73 @@ paths:
           example: 42
       - name: id
         in: query
-        description: id of the Title to be removed from user's watchlist
+        description: ID of TV show
+        required: True
+        schema: 
+          type: integer
+          example: 69
+      responses:
+        "201":
+          description: Title added/removed successfully
+        "400":
+          description: Bad request. Invalid user ID or title not provided  
+
+  /watchlist/movie/remove/{user_id}:
+    put:
+      tags:
+      - User
+      summary: Remove Movie from user's watchlist
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
         required: true
-        style: form
+        style: simple
         explode: false
         schema:
-          type: string
+          type: integer
+          example: 42
+      - name: id
+        in: query
+        description: id of the Movie to be removed from user's watchlist
+        required: true
+        schema:
+          type: integer
+          example: 42
       responses:
         "200":
-          description: Title removed successfully from user's wishlist
+          description: Movie removed successfully from user's wishlist
         "400":
           description: Bad request. Invalid user ID or missing required fields
-        "404":
-          description: User not found or title not found in user's wishlist
+
+  /watchlist/tvshow/remove/{user_id}:
+    put:
+      tags:
+      - User
+      summary: Remove TV show from user's watchlist
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 42
+      - name: id
+        in: query
+        description: id of the TV show to be removed from user's watchlist
+        required: true
+        schema:
+          type: integer
+          example: 69
+      responses:
+        "200":
+          description: TV show removed successfully from user's wishlist
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
+
 
   /profile/{user_id}/username:
     put:
@@ -612,16 +715,17 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: username
-        in: query
-        description: New username
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          maxLength: 25
-          example: bobdylan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  maxLength: 25
+              required:
+                - username
       responses:
         "200":
           description: Username updated successfully
@@ -645,16 +749,17 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: pfp
-        in: query
-        description: New Profile Picture
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          format: uri
-          example: https://fmd.com/pfp.jpeg
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pfp:
+                  type: string
+                  example: https://www.example.com/1.jpeg 
+              required:
+                - pfp
       responses:
         "200":
           description: Profile Picture updated successfully
@@ -678,16 +783,17 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: password
-        in: query
-        description: New password
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          maxLength: 25
-          example: godofnoobs_42
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  maxLength: 25
+              required:
+                - password
       responses:
         "200":
           description: Password updated successfully
@@ -711,22 +817,24 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: interests
-        in: query
-        description: New Profile Picture
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: string
-          minItems: 3
-          maxItems: 3
-          example:
-            - Adventure
-            - Comedy
-            - Thriller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                interests:
+                  type: array
+                  items:
+                    type: string
+                    minItems: 3
+                    maxItems: 3
+                    example:
+                      - 'Adventure'
+                      - 'Murder'
+                      - 'Gore'
+              required:
+                - interests
       responses:
         "200":
           description: Interests updated successfully
@@ -750,16 +858,17 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: bio
-        in: query
-        description: New bio
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          example: i am bobdylan, i work with duvylfyluksq
-          maxLength: 100
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bio:
+                  type: string
+                  maxLength: 200
+              required:
+                - bio
       responses:
         "200":
           description: Bio updated successfully
@@ -1057,4 +1166,3 @@ components:
           type: string
           maxLength: 200
           example: im a puppet on a string, tracy island time travelling diamond, coulda shaped heartaches
-

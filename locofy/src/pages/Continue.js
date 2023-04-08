@@ -10,9 +10,12 @@ const Continue = () => {
   
   const navigate = useNavigate();
   const [bio, setBio] = useState('');
-  
+  const api = new UserApi();
+
+
   const location = useLocation();
   const user = location.state.user;
+  const user_id = user.user_id;
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
@@ -34,32 +37,57 @@ const Continue = () => {
     navigate("/signin");
   }, [navigate]);
 
-
-  const updateUserBio = async (bio) => {
-    try {
-      const updatedUser = await api.userUpdateUser(
-        user.user_id,
-        { bio: bio },
-        {},
-        (error, data, response) => {
-          if (error) {
-            console.error(error);
-          } else {
-            console.log(data);
-          }
-        }
-      );
-      console.log(updatedUser);
-    } catch (error) {
-      console.error(error);
-    }
+  const updateUserBio = (bio) => {
+    api.profileUserIdBioPut(user_id, bio, (error, data, response) => {
+      if (error) {
+        console.error("Error occurred:", error);
+        return;
+      }
+      if (response.status === 200) {
+        console.log("Bio updated successfully", response.body);
+      } else {
+        console.log("Failed to update bio:", response.body);
+      }
+    });
   };
+
+  const updateUserInterests = (interests) => {
+    api.profileUserIdInterestsPut(user_id, interests, (error, data, response) => {
+      if (error) {
+        console.error("Error occurred:", error);
+        return;
+      }
+      if (response.status === 200) {
+        console.log("Interests updated successfully", response.body);
+
+      } else {
+        console.log("Failed to update interests:", response.body);
+      }
+    });
+  };
+
   
 
   const onContinueClick = useCallback(() => {
-
+    var selected = [];
+    var genres = document.querySelectorAll(".filterbrowseinteraction21");
+    console.log(genres);
+    for (let i = 0; i < genres.length; i++) {
+      if (genres[i].classList.contains('colored2')) {
+        selected.push(genres[i].textContent);
+      }
+    }
+    if (selected.length !== 3) {
+      alert('Please select exactly 3 interests before continuing');
+      return;
+    }
+    console.log(selected);
+    updateUserBio(bio);
+    updateUserInterests(selected);
     navigate("/homesignedin");
-  }, [navigate]);
+  }, [api,bio,navigate]);
+
+  
 
   function changecolour(buttonNumber){
     var genres = document.querySelectorAll(".filterbrowseinteraction21");

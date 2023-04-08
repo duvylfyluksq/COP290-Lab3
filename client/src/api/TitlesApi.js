@@ -83,6 +83,53 @@ export class TitlesApi {
       );
     }
     /**
+     * Callback function to receive the result of the movieIdGet operation.
+     * @callback moduleapi/TitlesApi~movieIdGetCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/Movie{ data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get information about a Movie
+     * Returns information about a particular Movie, including its title, genre, director, actors, release date, and description.
+     * @param {Number} id ID of the Movie
+     * @param {module:api/TitlesApi~movieIdGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
+     */
+    movieIdGet(id, callback) {
+      
+      let postBody = null;
+      // verify the required parameter 'id' is set
+      if (id === undefined || id === null) {
+        throw new Error("Missing the required parameter 'id' when calling movieIdGet");
+      }
+
+      let pathParams = {
+        'id': id
+      };
+      let queryParams = {
+        
+      };
+      let headerParams = {
+        
+      };
+      let formParams = {
+        
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = Movie;
+
+      return this.apiClient.callApi(
+        '/movie/{id}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+    /**
      * Callback function to receive the result of the searchGet operation.
      * @callback moduleapi/TitlesApi~searchGetCallback
      * @param {String} error Error message, if any.
@@ -174,53 +221,6 @@ export class TitlesApi {
       );
     }
     /**
-     * Callback function to receive the result of the titleIdGet operation.
-     * @callback moduleapi/TitlesApi~titleIdGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Title{ data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Get information about a Movie/TV Show
-     * Returns information about a particular Movie/TV Show, including its title, genre, director, actors, release date, and description.
-     * @param {String} id ID of the Movie or TV Show
-     * @param {module:api/TitlesApi~titleIdGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
-     */
-    titleIdGet(id, callback) {
-      
-      let postBody = null;
-      // verify the required parameter 'id' is set
-      if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling titleIdGet");
-      }
-
-      let pathParams = {
-        'id': id
-      };
-      let queryParams = {
-        
-      };
-      let headerParams = {
-        
-      };
-      let formParams = {
-        
-      };
-
-      let authNames = [];
-      let contentTypes = [];
-      let accepts = ['application/json'];
-      let returnType = Title;
-
-      return this.apiClient.callApi(
-        '/title/{id}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, callback
-      );
-    }
-    /**
      * Callback function to receive the result of the tvshowGet operation.
      * @callback moduleapi/TitlesApi~tvshowGetCallback
      * @param {String} error Error message, if any.
@@ -261,6 +261,53 @@ export class TitlesApi {
 
       return this.apiClient.callApi(
         '/tvshow', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+    /**
+     * Callback function to receive the result of the tvshowIdGet operation.
+     * @callback moduleapi/TitlesApi~tvshowIdGetCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/Tvshow{ data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get information about a TV Show
+     * Returns information about a particular TV Show, including its title, genre, director, actors, release date, and description.
+     * @param {Number} id ID of the TV Show
+     * @param {module:api/TitlesApi~tvshowIdGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
+     */
+    tvshowIdGet(id, callback) {
+      
+      let postBody = null;
+      // verify the required parameter 'id' is set
+      if (id === undefined || id === null) {
+        throw new Error("Missing the required parameter 'id' when calling tvshowIdGet");
+      }
+
+      let pathParams = {
+        'id': id
+      };
+      let queryParams = {
+        
+      };
+      let headerParams = {
+        
+      };
+      let formParams = {
+        
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = Tvshow;
+
+      return this.apiClient.callApi(
+        '/tvshow/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

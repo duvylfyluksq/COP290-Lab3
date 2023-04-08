@@ -155,7 +155,7 @@ class TestDB(unittest.TestCase):
         movie_id = 1
         r = db.getReviews_forMovie(db.getMovie(movie_id))
         L = [i.review_id for i in r]
-        self.assertEqual(sorted(L), [1, 2])
+        self.assertEqual(sorted(L), [1, 2, 497, 498, 499, 500])
 
     def test_getReviews_forShow(self):
         show_id = 2
@@ -178,7 +178,7 @@ class TestDB(unittest.TestCase):
         review_id = 1
         r = db.getComments_fromReview(db.getReview(review_id))
         L = [i.comment_id for i in r]
-        self.assertEqual(sorted(L), [2, 9, 291])
+        self.assertEqual(sorted(L), [2, 9, 291, 298, 300])
 
     def test_Search(self):
         L = db.Search("T")
@@ -273,7 +273,7 @@ class TestDB(unittest.TestCase):
     def test_countComments_User(self):
         user_id = 1
         count = db.countComments_User(db.getUser(user_id))
-        self.assertEqual(count, 3)
+        self.assertEqual(count, 6)
         user_id = 2
         count = db.countComments_User(db.getUser(user_id))
         self.assertEqual(count, 1)
@@ -320,7 +320,7 @@ class TestDB(unittest.TestCase):
         self.assertEqual(count, 1)
         user_id = 8
         count = db.countLikes_User(db.getUser(user_id))
-        self.assertEqual(count, 3)
+        self.assertEqual(count, 2)
         user_id = 9
         count = db.countLikes_User(db.getUser(user_id))
         self.assertEqual(count, 0)

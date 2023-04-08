@@ -42,15 +42,15 @@ export class Review {
     if (data) {
       obj = obj || new Review();
       if (data.hasOwnProperty('review_id'))
-        obj.reviewId = ApiClient.convertToType(data['review_id'], 'Number');
+        obj.review_id = ApiClient.convertToType(data['review_id'], 'Number');
       if (data.hasOwnProperty('title'))
         obj.title = ApiClient.convertToType(data['title'], 'String');
       if (data.hasOwnProperty('movie_id'))
-        obj.movieId = MovieId.constructFromObject(data['movie_id']);
+        obj.movie_id = MovieId.constructFromObject(data['movie_id']);
       if (data.hasOwnProperty('show_id'))
-        obj.showId = ShowId.constructFromObject(data['show_id']);
+        obj.show_id = ShowId.constructFromObject(data['show_id']);
       if (data.hasOwnProperty('user_id'))
-        obj.userId = ApiClient.convertToType(data['user_id'], 'Number');
+        obj.user_id = ApiClient.convertToType(data['user_id'], 'Number');
       if (data.hasOwnProperty('likes'))
         obj.likes = ApiClient.convertToType(data['likes'], {'String': 'Boolean'});
       if (data.hasOwnProperty('rating'))
@@ -58,16 +58,16 @@ export class Review {
       if (data.hasOwnProperty('content'))
         obj.content = ApiClient.convertToType(data['content'], 'String');
       if (data.hasOwnProperty('creation_time'))
-        obj.creationTime = ApiClient.convertToType(data['creation_time'], 'Date');
+        obj.creation_time = ApiClient.convertToType(data['creation_time'], 'Date');
     }
     return obj;
   }
 }
 
 /**
- * @member {Number} reviewId
+ * @member {Number} review_id
  */
-Review.prototype.reviewId = undefined;
+Review.prototype.review_id = undefined;
 
 /**
  * @member {String} title
@@ -75,19 +75,19 @@ Review.prototype.reviewId = undefined;
 Review.prototype.title = undefined;
 
 /**
- * @member {module:model/MovieId} movieId
+ * @member {module:model/MovieId} movie_id
  */
-Review.prototype.movieId = undefined;
+Review.prototype.movie_id = undefined;
 
 /**
- * @member {module:model/ShowId} showId
+ * @member {module:model/ShowId} show_id
  */
-Review.prototype.showId = undefined;
+Review.prototype.show_id = undefined;
 
 /**
- * @member {Number} userId
+ * @member {Number} user_id
  */
-Review.prototype.userId = undefined;
+Review.prototype.user_id = undefined;
 
 /**
  * @member {Object.<String, Boolean>} likes
@@ -105,7 +105,7 @@ Review.prototype.rating = undefined;
 Review.prototype.content = undefined;
 
 /**
- * @member {Date} creationTime
+ * @member {Date} creation_time
  */
-Review.prototype.creationTime = undefined;
+Review.prototype.creation_time = undefined;
 

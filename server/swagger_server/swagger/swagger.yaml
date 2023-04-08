@@ -378,22 +378,22 @@ paths:
         "500":
           description: Internal server error
       x-openapi-router-controller: swagger_server.controllers.user_controller
-  /review/title/{id}:
+  /review/movie/{id}:
     get:
       tags:
       - Reviews
-      summary: Get all reviews of a title
-      description: Returns a list of reviews for a particular title
-      operationId: review_title_id_get
+      summary: Get all reviews of a movie
+      description: Returns a list of reviews for a particular movie
+      operationId: review_movie_id_get
       parameters:
       - name: id
         in: path
-        description: ID of the Movie or TVShow
+        description: ID of the Movie
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       - name: sort_type_reviews
         in: query
         description: Parameter based on which reviews will be sorted
@@ -418,7 +418,60 @@ paths:
           - false
       responses:
         "200":
-          description: List of reviews for Movie/TVShow
+          description: List of reviews for Movie
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/review'
+                x-content-type: application/json
+        "400":
+          description: Invalid request
+        "404":
+          description: Title not found
+      x-openapi-router-controller: swagger_server.controllers.reviews_controller
+  /review/tvshow/{id}:
+    get:
+      tags:
+      - Reviews
+      summary: Get all reviews of a Tvshow
+      description: Returns a list of reviews for a particular Tvshow
+      operationId: review_tvshow_id_get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Tvshow
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: sort_type_reviews
+        in: query
+        description: Parameter based on which reviews will be sorted
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          enum:
+          - Likes
+          - Recent
+      - name: sort_order
+        in: query
+        description: sorting order
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
+      responses:
+        "200":
+          description: List of reviews for TVShow
           content:
             application/json:
               schema:
@@ -543,34 +596,63 @@ paths:
         "404":
           description: Review not found
       x-openapi-router-controller: swagger_server.controllers.reviews_controller
-  /title/{id}:
+  /movie/{id}:
     get:
       tags:
       - Titles
-      summary: Get information about a Movie/TV Show
-      description: "Returns information about a particular Movie/TV Show, including\
-        \ its title, genre, director, actors, release date, and description."
-      operationId: title_id_get
+      summary: Get information about a Movie
+      description: "Returns information about a particular Movie, including its title,\
+        \ genre, director, actors, release date, and description."
+      operationId: movie_id_get
       parameters:
       - name: id
         in: path
-        description: ID of the Movie or TV Show
+        description: ID of the Movie
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       responses:
         "200":
           description: Information about the Movie/TV Show
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/title'
+                $ref: '#/components/schemas/movie'
         "400":
           description: Invalid request
         "404":
-          description: Movie/TV Show not found
+          description: Movie not found
+      x-openapi-router-controller: swagger_server.controllers.titles_controller
+  /tvshow/{id}:
+    get:
+      tags:
+      - Titles
+      summary: Get information about a TV Show
+      description: "Returns information about a particular TV Show, including its\
+        \ title, genre, director, actors, release date, and description."
+      operationId: tvshow_id_get
+      parameters:
+      - name: id
+        in: path
+        description: ID of the TV Show
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Information about the Movie/TV Show
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tvshow'
+        "400":
+          description: Invalid request
+        "404":
+          description: TV Show not found
       x-openapi-router-controller: swagger_server.controllers.titles_controller
   /review/user/{user_id}:
     get:
@@ -655,11 +737,12 @@ paths:
         "400":
           description: Bad request. Invalid user ID
       x-openapi-router-controller: swagger_server.controllers.user_controller
+  /watchlist/movie/{user_id}:
     put:
       tags:
       - User
-      summary: Add/Remove title from watchlist
-      operationId: watchlist_user_id_put
+      summary: Add/Remove movie from watchlist
+      operationId: watchlist_movie_user_id_put
       parameters:
       - name: user_id
         in: path
@@ -672,24 +755,25 @@ paths:
           example: 42
       - name: id
         in: query
-        description: id of TVShow/Movie to be added to the watchlist
+        description: ID of the movie
         required: true
         style: form
         explode: true
         schema:
-          type: string
+          type: integer
+          example: 42
       responses:
         "201":
           description: Title added/removed successfully
         "400":
           description: Bad request. Invalid user ID or title not provided
       x-openapi-router-controller: swagger_server.controllers.user_controller
-  /watchlist/{user_id}/remove:
+  /watchlist/tvshow/{user_id}:
     put:
       tags:
       - User
-      summary: Remove title from user's watchlist
-      operationId: watchlist_user_id_remove_put
+      summary: Add/Remove TV show from watchlist
+      operationId: watchlist_tvshow_user_id_put
       parameters:
       - name: user_id
         in: path
@@ -702,19 +786,80 @@ paths:
           example: 42
       - name: id
         in: query
-        description: id of the Title to be removed from user's watchlist
+        description: ID of TV show
         required: true
         style: form
+        explode: true
+        schema:
+          type: integer
+          example: 69
+      responses:
+        "201":
+          description: Title added/removed successfully
+        "400":
+          description: Bad request. Invalid user ID or title not provided
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+  /watchlist/movie/remove/{user_id}:
+    put:
+      tags:
+      - User
+      summary: Remove Movie from user's watchlist
+      operationId: watchlist_movie_remove_user_id_put
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
         explode: false
         schema:
-          type: string
+          type: integer
+          example: 42
+      - name: id
+        in: query
+        description: id of the Movie to be removed from user's watchlist
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 42
       responses:
         "200":
-          description: Title removed successfully from user's wishlist
+          description: Movie removed successfully from user's wishlist
         "400":
           description: Bad request. Invalid user ID or missing required fields
-        "404":
-          description: User not found or title not found in user's wishlist
+      x-openapi-router-controller: swagger_server.controllers.user_controller
+  /watchlist/tvshow/remove/{user_id}:
+    put:
+      tags:
+      - User
+      summary: Remove TV show from user's watchlist
+      operationId: watchlist_tvshow_remove_user_id_put
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 42
+      - name: id
+        in: query
+        description: id of the TV show to be removed from user's watchlist
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 69
+      responses:
+        "200":
+          description: TV show removed successfully from user's wishlist
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
       x-openapi-router-controller: swagger_server.controllers.user_controller
   /profile/{user_id}/username:
     put:
@@ -732,16 +877,11 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: username
-        in: query
-        description: New username
-        required: true
-        style: form
-        explode: false
-        schema:
-          maxLength: 25
-          type: string
-          example: bobdylan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_id_username_body'
       responses:
         "200":
           description: Username updated successfully
@@ -766,16 +906,11 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: pfp
-        in: query
-        description: New Profile Picture
-        required: true
-        style: form
-        explode: false
-        schema:
-          type: string
-          format: uri
-          example: https://fmd.com/pfp.jpeg
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_id_pfp_body'
       responses:
         "200":
           description: Profile Picture updated successfully
@@ -800,16 +935,11 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: password
-        in: query
-        description: New password
-        required: true
-        style: form
-        explode: false
-        schema:
-          maxLength: 25
-          type: string
-          example: godofnoobs_42
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_id_password_body'
       responses:
         "200":
           description: Password updated successfully
@@ -834,22 +964,11 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: interests
-        in: query
-        description: New Profile Picture
-        required: true
-        style: form
-        explode: true
-        schema:
-          maxItems: 3
-          minItems: 3
-          type: array
-          example:
-          - Adventure
-          - Comedy
-          - Thriller
-          items:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_id_interests_body'
       responses:
         "200":
           description: Interests updated successfully
@@ -874,16 +993,11 @@ paths:
         schema:
           type: integer
           example: 42
-      - name: bio
-        in: query
-        description: New bio
-        required: true
-        style: form
-        explode: false
-        schema:
-          maxLength: 100
-          type: string
-          example: "i am bobdylan, i work with duvylfyluksq"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_id_bio_body'
       responses:
         "200":
           description: Bio updated successfully
@@ -1293,6 +1407,50 @@ components:
           type: array
           items:
             type: string
+    user_id_username_body:
+      required:
+      - username
+      type: object
+      properties:
+        username:
+          maxLength: 25
+          type: string
+    user_id_pfp_body:
+      required:
+      - pfp
+      type: object
+      properties:
+        pfp:
+          type: string
+          example: https://www.example.com/1.jpeg
+    user_id_password_body:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          maxLength: 25
+          type: string
+    user_id_interests_body:
+      required:
+      - interests
+      type: object
+      properties:
+        interests:
+          type: array
+          items:
+            maxItems: 3
+            minItems: 3
+            type: string
+            example: "[\"Adventure\",\"Murder\",\"Gore\"]"
+    user_id_bio_body:
+      required:
+      - bio
+      type: object
+      properties:
+        bio:
+          maxLength: 200
+          type: string
   parameters:
     genre:
       name: genre
