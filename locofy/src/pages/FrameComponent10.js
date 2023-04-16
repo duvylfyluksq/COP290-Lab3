@@ -5,11 +5,13 @@ import ReviewContainer from "../components/ReviewContainer";
 import MoreMoviesLikeThisContainer from "../components/MoreMoviesLikeThisContainer";
 import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent10.css";
-import {uselocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 
 const FrameComponent10 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const movie = location.state.movie;
 
   const onPictureIconClick = useCallback(() => {
     navigate("/duvylfyluksqout");
@@ -93,53 +95,43 @@ const FrameComponent10 = () => {
         <div className="body10">
           <div className="moviedescription50">
             <div className="left50">
-              <img className="joker-icon70" alt="" src="/joker1@2x.png" />
+              <img className="joker-icon70" alt="" src={movie.poster} />
             </div>
             <div className="right50">
               <div className="descriptionheader50">
                 <div className="rating">
-                  <div className="xy10">x.y/10</div>
+                  <div className="xy10">{movie.rating}/10</div>
                   <img className="vector-icon60" alt="" src="/vector2.svg" />
                 </div>
                 <div className="duration">
-                  <p className="director-john-doe">Duration</p>
+                  <p className="director-john-doe">{movie.duration}</p>
                 </div>
                 <div className="genres">
-                  <div className="genre2">
-                    <div className="genre">Genre</div>
-                  </div>
-                  <div className="genre2">
-                    <div className="genre">Genre</div>
-                  </div>
-                  <div className="genre2">
-                    <div className="genre">Genre</div>
-                  </div>
+                {movie.genres.map((genre) => (
+                <div className="genre2">
+                  <div className="genre">{genre}</div>
+                </div>
+              ))}
                 </div>
               </div>
               <div className="sublayout50">
                 <div className="descriptionbody">
                   <div className="title100">
-                    <div className="title200">Title</div>
-                    <div className="year500">(Year)</div>
+                    <div className="title200">{movie.title}</div>
+                    <div className="year500">({movie.release_date.getFullYear()})</div>
                   </div>
                   <div className="plotsynopsis50">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor irwohferifhowhfdsohjfowefwfewbewuhgdewugefwigfiewuewhidsonx
-                    hewjoifjewpkfewjsk ksjbdiwbxiw iforwjocdkcndwojs xiwjoc dwowdno cdwnciwn cozzidw   hewjoifjewpkfewjskcbwdi icdwocj 
-                    dncdi cdj nco dodxk ncod xnceoipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor irwohferifhowhfdsohjfowefwfewbewuhgdewugefwigfiewuewhidsonx
-                    hewjoifjewpkfewjsk ksjbdiwbxiw iforwjocdkcndwojs xiwjoc dwowdno cdwnciwn cozzidw   hewjoifjewpkfewjskcbwdi icdwocj 
-                    dncdi cdj nco dodxk ncod xnceo
+                    {movie.plot}
                   </div>
                 </div>
                 <div className="subsublayout50">
                   <img className="line-icon50" alt="" src="/line.svg" />
                   <div className="credits50">
-                    <p className="director-john-doe">Director: John Doe</p>
+                    <p className="director-john-doe">Director: {movie.director}</p>
                     <p className="director-john-doe">
-                      Writers: John Doe, Jane Doe, John Doe
+                      Writer: {movie.writer}
                     </p>
-                    <p className="director-john-doe">{`Cast: John Doe, Jane Doe, John Doe `}</p>
+                    <p className="director-john-doe">Cast: {movie.cast.join(", ")}</p>
                   </div>
                 </div>
               </div>

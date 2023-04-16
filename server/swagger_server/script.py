@@ -12,18 +12,19 @@ connection = pymysql.connect(
 )
 cursor = connection.cursor()
 
-with open('movie_only.tsv', 'r') as f:
+with open('tvseries_only.tsv', 'r') as f:
     i = 0
     next(f)
-
+    l = 0
     for line in f:
+        l += 1
         if (i < 1000):
             columns = line.strip().split('\t')
             id = columns[0]
             type = columns[1]
             if (type == 'movie' or type == 'tvSeries'):
                 response = requests.get(
-                    f'https://www.omdbapi.com/?i={id}&apikey=699eff14&plot=full')
+                    f'https://www.omdbapi.com/?i={id}&apikey=d1eddf7d&plot=full')
                 print("Request Sent")
                 if response.status_code == 200:
                     print("Response Ok")
@@ -44,12 +45,15 @@ with open('movie_only.tsv', 'r') as f:
                             print("Added")
                             connection.commit()
                         else:
-                            query = "INSERT INTO `tvshow` (title, cast, director, writer, rating, genres, release_date, duration, poster, plot, season) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                            query = "INSERT INTO `tvshow` (title, cast, director, writer, rating, genres, release_date, duration, poster, plot, season) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
                             values = (data['Title'], cast, data['Director'], data['Writer'], float(
                                 data['imdbRating']), genres, date, data['Runtime'], data['Poster'], data['Plot'], 1)
                             cursor.execute(query, values)
                             print("Added")
                             connection.commit()
+                else:
+                    break
                 i += 1
         else:
             break
+    print(l, i)
