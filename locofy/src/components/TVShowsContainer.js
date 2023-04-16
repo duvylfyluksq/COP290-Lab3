@@ -8,28 +8,34 @@ const api = new TitlesApi();
 
 const TVShowCard = ({ tvShow, onClick }) => (
   <div className="tvshowcard8" onClick={onClick}>
-    <img className="tvshowcard-icon11" alt="" src={tvShow.imageSrc} />
+    <img className="tvshowcard-icon11" alt="" src={tvShow.poster} />
     <div className="gradient-overlay"></div>
     <div className="linearfill23">
       <div className="details23">
         <div className="rating38">
           <div className="xy1028">{tvShow.rating}/10</div>
-          <img className="vector-icon58" alt="" src={tvShow.ratingIconSrc} />
+          <img className="vector-icon58" alt="" src= '/vector19.svg' />
         </div>
         <div className="title33">{tvShow.title}</div>
-        <div className="season12">{tvShow.season}</div>
+        <div className="season12">Season {tvShow.season}</div>
       </div>
     </div>
   </div>
 );
 
 const TVShowsContainer = ({
+  shows,
   propHeight,
   propFlexShrink,
   propAlignSelf,
   propWidth,
   propAlignSelf1,
-  onTVShowCardClick,
+  // onTVShowCardClick,
+  onTVShowCardContainer4Click,
+  onTVShowCardContainer5Click,
+  onTVShowCardContainer6Click,
+  onTVShowCardContainer7Click,
+  onTVShowCardContainer8Click,
 }) => {
   const topTVShowsStyle = useMemo(() => {
     return {
@@ -58,7 +64,7 @@ const TVShowsContainer = ({
   ];
 
   const navigate = useNavigate();
-  const [shows, setShows] = useState([]);
+  // const [shows, setShows] = useState([]);
 
   // useEffect(() => {
   //   const opts = { sortTypeBrowse: "Rat" };
@@ -75,15 +81,19 @@ const TVShowsContainer = ({
   //   });
   // }, []);
   
+  const onTVShowCardClick = useCallback((show) => {
+    navigate("/tvshowout", { state: { show } });
+  }, [navigate]);
+
   return (
     <div className="top-tv-shows" style={topTVShowsStyle}>
       <div className="top-tv-shows1">Top TV Shows</div>
       <div className="top-tv-shows2" style={topTVShows1Style}>
-        {tvShows.map((tvShow, index) => (
+        {shows.map((tvShow, index) => (
           <TVShowCard
             key={index}
             tvShow={tvShow}
-            onClick={() => onTVShowCardClick(index)}
+            onClick={() => onTVShowCardClick(tvShow)}
           />
         ))}
       </div>

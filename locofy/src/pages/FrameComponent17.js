@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieLinkContainer from "../components/MovieLinkContainer";
 import TVShowsContainer from "../components/TVShowsContainer";
@@ -10,10 +10,46 @@ import Navbar2 from "../components/Navbar2";
 import "./FrameComponent17.css";
 import MoviesContainer from '../components/MoviesContainer';
 // import Left from './images/left_arrow.jpg'
+import { useState } from 'react';
+import { TitlesApi } from '../api/TitlesApi';
+import {Movie} from "../model/Movie";
+import {Tvshow} from "../model/Tvshow";
 
+const api = new TitlesApi();
 const FrameComponent17 = () => {
   const navigate = useNavigate();
+  const [movies, setMovies] = useState([]);
+  const [shows, setShows] = useState([]);
+  const [release, setRelease] = useState([]);
 
+  useEffect(() => {
+    const opts = { sortTypeBrowse: "Rat" };
+    api.movieGet(opts, (error, data, response) => {
+      if (response.status === 200) {
+        const movieList = data.slice(0, 5).map((movieData) =>
+          Movie.constructFromObject(movieData)
+        );
+        console.log(movieList);
+        setMovies(movieList);
+    api.tvshowGet(opts, (error, data, response) => {
+          if (response.status === 200) {
+            const showList = data.slice(0, 5).map((showData) =>
+              Tvshow.constructFromObject(showData)
+            );
+            console.log(showList);
+            setShows(showList);
+          } else {
+            console.log(error);
+          }
+        });
+      } else {
+        console.log(error);
+      }
+    });
+  }, []);
+
+  
+  
   const onMovieCardContainerClick = useCallback(() => {
     navigate("/movieout");
   }, [navigate]);
@@ -146,12 +182,15 @@ const FrameComponent17 = () => {
     navigate("/signin");
   }, [navigate]);
 
+  
+
   return (
     <div className="home-signedout-parent">
       <div className="home-signedout">
         <div className="body14">
-          <MovieLinkContainer />
-          <TVShowsContainer
+          <MovieLinkContainer  movies = {movies}/>
+          <TVShowsContainer 
+            shows  = {shows}
             propHeight="unset"
             propFlexShrink="unset"
             propAlignSelf="stretch"
