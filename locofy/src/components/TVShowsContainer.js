@@ -1,6 +1,10 @@
-import React from 'react';
-import { useMemo } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import "./TVShowsContainer.css";
+import { TitlesApi } from "../api/TitlesApi";
+import { Tvshow } from "../model/Tvshow";
+
+const api = new TitlesApi();
 
 const TVShowCard = ({ tvShow, onClick }) => (
   <div className="tvshowcard8" onClick={onClick}>
@@ -53,6 +57,24 @@ const TVShowsContainer = ({
     // Add more TV shows here
   ];
 
+  const navigate = useNavigate();
+  const [shows, setShows] = useState([]);
+
+  // useEffect(() => {
+  //   const opts = { sortTypeBrowse: "Rat" };
+  //   api.tvshowGet(opts, (error, data, response) => {
+  //     if (response.status === 200) {
+  //       const showList = data.slice(0, 5).map((showData) =>
+  //         Tvshow.constructFromObject(showData)
+  //       );
+  //       console.log(showList);
+  //       setShows(showList);
+  //     } else {
+  //       console.log(error);
+  //     }
+  //   });
+  // }, []);
+  
   return (
     <div className="top-tv-shows" style={topTVShowsStyle}>
       <div className="top-tv-shows1">Top TV Shows</div>
