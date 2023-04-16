@@ -5,6 +5,8 @@ import ReviewContainer from "../components/ReviewContainer";
 import MoreMoviesLikeThisContainer from "../components/MoreMoviesLikeThisContainer";
 import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent10.css";
+import {uselocation} from "react-router-dom";
+
 
 const FrameComponent10 = () => {
   const navigate = useNavigate();
