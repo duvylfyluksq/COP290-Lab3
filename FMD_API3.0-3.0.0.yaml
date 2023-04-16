@@ -699,6 +699,37 @@ paths:
         "400":
           description: Bad request. Invalid user ID or missing required fields
 
+  /profile/stats/{user_id}:
+    get:
+      tags:
+      - User
+      summary: Get stats for a user
+      parameters:
+      - name: user_id
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 42
+      responses:
+        "200":
+          description: User Stats fetched successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  example: 42
+                minItems: 3
+                maxItems: 3
+        "400":
+          description: Bad request. Invalid user ID or missing required fields
+        "404":
+          description: User not found
 
   /profile/{user_id}/username:
     put:
@@ -827,12 +858,9 @@ paths:
                   type: array
                   items:
                     type: string
-                    minItems: 3
-                    maxItems: 3
-                    example:
-                      - 'Adventure'
-                      - 'Murder'
-                      - 'Gore'
+                    example: Adventure
+                  minItems: 3
+                  maxItems: 3
               required:
                 - interests
       responses:
