@@ -1,14 +1,40 @@
 import React from 'react';
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import BrowsePageContainer from "../components/BrowsePageContainer";
 import LeftContainer from "../components/LeftContainer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./FrameComponent13.css";
 import MoviesContainer from '../components/MoviesContainer';
 import MovieDescriptionContainerBrows from '../components/MovieDescriptionContainerBrows';
+import {Title} from '../model/Title';
+import { TitlesApi } from '../api/TitlesApi';
+
+const api = new TitlesApi();
 
 const FrameComponent20 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [titles, setTitles] = useState([]);
+  const [selectedgenre, setSelectedGenre] = useState([location.state.genre]);
+  const [sortparam, setSortparam] = useState("Rat");
+  const [sortype,setsorttype] = useState(false);
+
+  useEffect(() => {
+   
+    api.titleGet({sortTypeBrowse: sortparam, genre: selectedgenre, sortOrder: sortype},(error, data, response) => {
+      if (response.status === 200) {
+        const titleList = data.map((titleData) =>
+        Title.constructFromObject(titleData)
+        );
+        console.log(showList);
+        setTitles(titleList);
+
+      } else {
+        console.log(error);
+      }
+    });
+  }, [selectedgenre,sortparam,sortype]);
 
   const onTVShowDescriptionBrowsePageContainerClick = useCallback(() => {
     navigate("/tvshowout")
@@ -97,49 +123,25 @@ const FrameComponent20 = () => {
   return (
       <div className="mixedbrowse-in">
         <div className="scrolllist">
-          <BrowsePageContainer
-            dimensions="/vector8.svg"
-            onTVShowDescriptionBrowsePageContainerClick={
-              onTVShowDescriptionBrowsePageContainerClick
-            }
-          />
-          <MovieDescriptionContainerBrows
-            productId="/vector31.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainerClick
-            }
-          />
-          <BrowsePageContainer
-            dimensions="/vector8.svg"
-            onTVShowDescriptionBrowsePageContainerClick={
-              onTVShowDescriptionBrowsePageContainer2Click
-            }
-          />
-          <BrowsePageContainer
-            dimensions="/vector8.svg"
-            onTVShowDescriptionBrowsePageContainerClick={
-              onTVShowDescriptionBrowsePageContainer3Click
-            }
-          />
-          <MovieDescriptionContainerBrows
-            productId="/vector31.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainerClick
-            }
-          />
-          <BrowsePageContainer
-            dimensions="/vector8.svg"
-            onTVShowDescriptionBrowsePageContainerClick={
-              onTVShowDescriptionBrowsePageContainer5Click
-            }
-          />
-          <BrowsePageContainer
-            dimensions="/vector8.svg"
-            onTVShowDescriptionBrowsePageContainerClick={
-              onTVShowDescriptionBrowsePageContainer6Click
-            }
-          />
-        </div>
+        {titles.map((title, index) => (
+            <>
+              {title.movie ? (
+                <MovieDescriptionContainerBrows
+                  key={index}
+                  movie={title.movie}
+                  productId="/vector29.svg"
+                />
+              ) : (
+                <BrowsePageContainer
+                  key={index}
+                  show={title.show}
+                  dimensions="/vector29.svg"
+                />
+              )}
+            </>
+          ))}
+
+          </div>
         <div className="left2">
           <div className="sort">
             <div className="sortbyheader">
@@ -183,76 +185,76 @@ const FrameComponent20 = () => {
                   <div className="adventure">Adventure</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(1)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Action</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(2)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Drama</div>
                 </div>
               </div>
               <div className="horizontalrow">
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(3)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Comedy</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(4)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Romance</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(5)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Horror</div>
                 </div>
               </div>
               <div className="horizontalrow">
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(6)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Thriller</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(7)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Sci-Fi</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(8)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Mystery</div>
                 </div>
               </div>
               <div className="horizontalrow">
               <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(9)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Crime</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(10)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Animation</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(11)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Biography</div>
                 </div>
               </div>
               <div className="horizontalrow">
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(12)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">History</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(13)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">War</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(14)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Sport</div>
                 </div>
               </div>
               <div className="horizontalrow">
               <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(15)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Fantasy</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(16)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Documentary</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(17)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Dark</div>
                 </div>
               </div>
               <div className="horizontalrow">
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(18)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Psychological</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(19)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Western</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(20)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Musical</div>
                 </div>
               </div>
             </div>

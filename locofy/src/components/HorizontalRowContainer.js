@@ -1,37 +1,53 @@
-import React from 'react';
+import React,{useCallback} from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 import "./HorizontalRowContainer.css";
 
 const HorizontalRowContainer = ({
-  onGenreCardContainerClick,
-  onGenreCardContainer1Click,
-  onGenreCardContainer2Click,
+  a,b,c,
 }) => {
+  const navigate = useNavigate();
+
+  const onGenreCardContainerClick1 = useCallback(() => {
+    const genre = a;
+    navigate("/mixedbrowseout", {state: {genre}})
+  }, [navigate]);
+
+  const onGenreCardContainerClick2 = useCallback(() => {
+    const genre = b;
+    navigate("/mixedbrowseout", {state: {genre}})
+  }, [navigate]);
+
+  const onGenreCardContainerClick3 = useCallback(() => {
+    const genre = c;
+    navigate("/mixedbrowseout", {state: {genre}})
+  }, [navigate]);
+
   return (
     <div className="horizontalrow14">
-      <div className="genrecard" onClick={onGenreCardContainerClick}>
+      <div className="genrecard" onClick={onGenreCardContainerClick1}>
         <img className="tvshowcard-icon4" alt="" src="/tvshowcard@2x.png" />
         <div className="gradient-overlay"></div>
         <div className="linearfill7">
           <div className="details7">
-            <div className="genre7">Genre</div>
+            <div className="genre7">{a}</div>
           </div>
         </div>
       </div>
-      <div className="genrecard" onClick={onGenreCardContainer1Click}>
+      <div className="genrecard" onClick={onGenreCardContainerClick2}>
         <img className="tvshowcard-icon4" alt="" src="/tvshowcard@2x.png" />
         <div className="gradient-overlay"></div>
         <div className="linearfill7">
           <div className="details7">
-            <div className="genre7">Genre</div>
+            <div className="genre7">{b}</div>
           </div>
         </div>
       </div>
-      <div className="genrecard" onClick={onGenreCardContainer2Click}>
+      <div className="genrecard" onClick={onGenreCardContainerClick3}>
         <img className="tvshowcard-icon4" alt="" src="/tvshowcard@2x.png" />
         <div className="gradient-overlay"></div>
         <div className="linearfill7">
           <div className="details7">
-            <div className="genre7">Genre</div>
+            <div className="genre7">{c}</div>
           </div>
         </div>
       </div>

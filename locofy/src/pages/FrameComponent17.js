@@ -61,60 +61,6 @@ const FrameComponent17 = () => {
       }
     });
   }, []);
-
-  // useEffect(() => {
-  //   const fetchMovies = () => {
-  //     const opts = { sortTypeBrowse: "Rat" };
-  //     api.movieGet(opts, (error, data, response) => {
-  //       if (response.status === 200) {
-  //         const movieList = data.slice(0, 5).map((movieData) =>
-  //           Movie.constructFromObject(movieData)
-  //         );
-  //         console.log(movieList);
-  //         setMovies(movieList);
-  //       } else {
-  //         console.log(error);
-  //       }
-  //     });
-  //   };
-
-  //   const fetchTVShows = () => {
-  //     const opts = { sortTypeBrowse: "Rat" };
-  //     api.tvshowGet(opts, (error, data, response) => {
-  //       if (response.status === 200) {
-  //         const showList = data.slice(0, 5).map((showData) =>
-  //           Tvshow.constructFromObject(showData)
-  //         );
-  //         console.log(showList);
-  //         setShows(showList);
-  //       } else {
-  //         console.log(error);
-  //       }
-  //     });
-  //   };
-
-  //   const fetchNewReleases = () => {
-  //     const opts = { sortTypeBrowse: "Rel" };
-  //     api.titleGet(opts, (error, data, response) => {
-  //       if (response.status === 200) {
-  //         const newReleaseList = data.slice(0, 5).map((releaseData) =>
-  //           Title.constructFromObject(releaseData)
-  //         );
-  //         console.log(newReleaseList);
-  //         setRelease(newReleaseList);
-  //       } else {
-  //         console.log(error);
-  //       }
-  //     });
-  //   };
-
-  //   fetchMovies();
-  //   fetchTVShows();
-  //   fetchNewReleases();
-  // }, []);
-  
-
-
   
   const onMovieCardContainerClick = useCallback(() => {
     navigate("/movieout");
