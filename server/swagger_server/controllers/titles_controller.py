@@ -75,8 +75,6 @@ def title_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
                 X.append(Title(movie=i, tvshow=None))
             else:
                 X.append(Title(movie=None, tvshow=i))
-        with open('error.txt', 'w') as f:
-            f.write(str(X))
         if genre is None:
             return (X, 200)
         else:
@@ -84,9 +82,14 @@ def title_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
             for i in X:
                 check = False
                 for j in genre:
-                    if j in i.genres:
-                        check = True
-                        break
+                    if (i.movie is not None):
+                        if j in i.movie.genres:
+                            check = True
+                            break
+                    else:
+                        if j in i.tvshow.genres:
+                            check = True
+                            break
                 if (check):
                     titles.append(i)
             return (titles, 200)

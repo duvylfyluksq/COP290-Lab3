@@ -16,18 +16,49 @@ const FrameComponent20 = () => {
   const location = useLocation();
 
   const [titles, setTitles] = useState([]);
-  const [selectedgenre, setSelectedGenre] = useState([location.state.genre]);
+  const [selectedgenre, setSelectedGenre] = useState(location.state.genre ? [location.state.genre] : []);;
   const [sortparam, setSortparam] = useState("Rat");
   const [sortype,setsorttype] = useState(false);
 
   useEffect(() => {
-   
+  const genres = [
+    "Adventure",
+    "Action",
+    "Drama",
+    "Comedy",
+    "Romance",
+    "Horror",
+    "Thriller",
+    "Sci-Fi",
+    "Mystery",
+    "Crime",
+    "Animation",
+    "Biography",
+    "History",
+    "War",
+    "Sport",
+    "Fantasy",
+    "Documentary",
+    "Dark",
+    "Psychological",
+    "Western",
+    "Musical",
+  ];
+
+  const index = genres.findIndex((genre) => genre === location.state.genre);
+  if (index >= 0) {
+    changecolour(index);
+  }
+}, []);
+
+
+  useEffect(() => {
     api.titleGet({sortTypeBrowse: sortparam, genre: selectedgenre, sortOrder: sortype},(error, data, response) => {
       if (response.status === 200) {
         const titleList = data.map((titleData) =>
         Title.constructFromObject(titleData)
         );
-        console.log(showList);
+        console.log(titleList);
         setTitles(titleList);
 
       } else {
@@ -36,40 +67,7 @@ const FrameComponent20 = () => {
     });
   }, [selectedgenre,sortparam,sortype]);
 
-  const onTVShowDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer1Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer2Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer3Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer1Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-  const onTVShowDescriptionBrowsePageContainer4Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer5Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer6Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
+  
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
@@ -102,24 +100,78 @@ const FrameComponent20 = () => {
     }
   }
 
-  function changecolour(buttonNumber){
-    var genres = document.querySelectorAll("#adventure");
-    if(genres[buttonNumber].classList.contains('colored2')){
-    genres[buttonNumber].classList.remove('colored2');
-    }else{
-    genres[buttonNumber].classList.add('colored2');
-    }
+  function changecolour(buttonNumber) {
+  const genres = [
+    "Adventure",
+    "Action",
+    "Drama",
+    "Comedy",
+    "Romance",
+    "Horror",
+    "Thriller",
+    "Sci-Fi",
+    "Mystery",
+    "Crime",
+    "Animation",
+    "Biography",
+    "History",
+    "War",
+    "Sport",
+    "Fantasy",
+    "Documentary",
+    "Dark",
+    "Psychological",
+    "Western",
+    "Musical",
+  ];
+
+  const genreButtons = document.querySelectorAll("#adventure");
+  if (genreButtons[buttonNumber].classList.contains("colored2")) {
+    genreButtons[buttonNumber].classList.remove("colored2");
+    setSelectedGenre((prevSelectedGenres) => {
+      const newSelectedGenres = prevSelectedGenres.filter(
+        (genre) => genre !== genres[buttonNumber]
+      );
+      return newSelectedGenres;
+    });
+  } else {
+    genreButtons[buttonNumber].classList.add("colored2");
+    setSelectedGenre((prevSelectedGenres) => {
+      if (!prevSelectedGenres.includes(genres[buttonNumber])) {
+        const newSelectedGenres = [...prevSelectedGenres, genres[buttonNumber]];
+        return newSelectedGenres;
+      }
+      return prevSelectedGenres;
+    });
   }
-  function active(buttonNumber){
-    var logos = document.querySelectorAll("#sorting");
-    for (var i = 0; i < logos.length; i++) {
-      if (i == buttonNumber - 1) {
-        logos[i].classList.add('coloured');
-    } else {
-        logos[i].classList.remove('coloured');
-    }
-    }
+}
+
+function handleSortButtonClick(sortType) {
+  setSortparam(sortType);
+}
+
+function active(buttonNumber){
+
+  switch(buttonNumber){
+    case 1:
+      setsorttype(false);
+      break;
+    case 2:
+      setsorttype(true);
+      break;
+    default:
+      setsorttype(false);
   }
+  var logos = document.querySelectorAll("#sorting");
+  for (var i = 0; i < logos.length; i++) {
+    if (i == buttonNumber - 1) {
+      logos[i].classList.add('coloured78');
+  } else {
+      logos[i].classList.remove('coloured78');
+  }
+  }
+}
+
   return (
       <div className="mixedbrowse-in">
         <div className="scrolllist">
@@ -134,13 +186,12 @@ const FrameComponent20 = () => {
               ) : (
                 <BrowsePageContainer
                   key={index}
-                  show={title.show}
+                  show={title.tvshow}
                   dimensions="/vector29.svg"
                 />
               )}
             </>
           ))}
-
           </div>
         <div className="left2">
           <div className="sort">
@@ -154,21 +205,21 @@ const FrameComponent20 = () => {
             <div className="sortfieldsinteraction">
               <div className="horizontallist">
                 <div className="popularity">
-                  <div id='button' className="button" onClick={() => changeColor(1)} />
+                  <div id='button' className="button" onClick={() => handleSortButtonClick("Rat")} />
                   <div className="rating3">Rating</div>
                 </div>
                 <div className="popularity">
-                  <div id='button' className="button" onClick={() => changeColor(2)} />
+                  <div id='button' className="button" onClick={() => handleSortButtonClick("Pop")} />
                   <div className="popularity1">Popularity</div>
                 </div>
               </div>
               <div className="horizontallist1">
                 <div className="popularity">
-                  <div id='button' className="button" onClick={() => changeColor(3)} />
+                  <div id='button' className="button" onClick={() => handleSortButtonClick("Rel")} />
                   <div className="releasedate1">Release Date</div>
                 </div>
                 <div className="popularity">
-                  <div id='button' className="button" onClick={() => changeColor(4)} />
+                  <div id='button' className="button" onClick={() => handleSortButtonClick("Lex")} />
                   <div className="alphabetical">Alphabetical</div>
                 </div>
               </div>
