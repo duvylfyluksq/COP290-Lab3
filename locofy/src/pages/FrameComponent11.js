@@ -1,5 +1,8 @@
 import React from 'react';
 import { useCallback } from "react";
+
+import {useLocation} from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 import ReviewContainer from "../components/ReviewContainer";
 import MoreMoviesLikeThisContainer from "../components/MoreMoviesLikeThisContainer";
@@ -8,6 +11,8 @@ import "./FrameComponent11.css";
 
 const FrameComponent11 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const show = location.state.show;
 
   const onPictureIconClick = useCallback(() => {
     navigate("/duvylfyluksqout");
@@ -90,50 +95,45 @@ const FrameComponent11 = () => {
               <img
                 className="peakyblinders-icon40"
                 alt=""
-                src="/peakyblinders@2x.png"
+                src={show.poster}
               />
             </div>
             <div className="right100">
               <div className="descriptionheader60">
                 <div className="rating1">
-                  <div className="xy101">x.y/10</div>
+                  <div className="xy101">{show.rating}/10</div>
                   <img className="vector-icon7" alt="" src="/vector1.svg" />
                 </div>
                 <div className="episodeduration">
-                  <p className="avgduration">AvgDuration</p>
+                  <p className="avgduration">{show.duration}</p>
                 </div>
                 <div className="genres1">
-                  <div className="genre23">
-                    <div className="genre4">Genre</div>
-                  </div>
-                  <div className="genre23">
-                    <div className="genre4">Genre</div>
-                  </div>
-                  <div className="genre23">
-                    <div className="genre4">Genre</div>
-                  </div>
+                {show.genres.map((genre) => (
+                <div className="genre2">
+                  <div className="genre">{genre}</div>
+                </div>
+              ))}
                 </div>
               </div>
               <div className="sublayout100">
                 <div className="descriptionbody60">
                   <div className="title100">
-                    <div className="title200">Title</div>
-                    <div className="season5001">Season</div>
-                    <div className="year500">(Year)</div>
+                    <div className="title200">{show.title}</div>
+                    <div className="season5001">Season {show.season}</div>
+                    <div className="year500">({show.release_date.getFullYear()})</div>
                   </div>
                   <div className="plotsynopsis100">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor igap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);gap: var(--gap-mini);
+                    {show.plot}
                   </div>
                 </div>
                 <div className="subsublayout100">
                   <img className="line-icon100" alt="" src="/line.svg" />
                   <div className="credits100">
-                    <p className="avgduration">Director: John Doe</p>
+                    <p className="avgduration">Director: {show.director}</p>
                     <p className="avgduration">
-                      Writers: John Doe, Jane Doe, John Doe
+                      Writer: {show.writer}
                     </p>
-                    <p className="avgduration">{`Cast: John Doe, Jane Doe, John Doe `}</p>
+                    <p className="avgduration">Cast: {show.cast.join(", ")}</p>
                   </div>
                 </div>
               </div>

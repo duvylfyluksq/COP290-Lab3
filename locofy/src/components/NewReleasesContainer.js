@@ -1,21 +1,20 @@
 import React from 'react';
-import { useMemo } from "react";
+import { useMemo, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./NewReleasesContainer.css";
+import {Movie} from "../model/Movie";
 
 const NewReleasesContainer = ({
+  releases,
   propHeight,
   propFlexShrink,
   propAlignSelf,
   propWidth,
   propAlignSelf1,
-  onMovieCardContainer9Click,
-  onTVShowCardContainer9Click,
-  onMovieCardContainer10Click,
-  onTVShowCardContainer10Click,
-  onMovieCardContainer11Click,
-  onTVShowCardContainer11Click,
-  onTVShowCardContainer12Click,
 }) => {
+
+  const navigate = useNavigate();
+
   const newReleasesStyle = useMemo(() => {
     return {
       height: propHeight,
@@ -31,105 +30,58 @@ const NewReleasesContainer = ({
     };
   }, [propWidth, propAlignSelf1]);
 
+  const onCardClick = useCallback((release) => {
+    const isMovie = release instanceof Movie;
+    const content = release;
+    if (isMovie) {
+    navigate("/movieout", { state: { movie: content} });
+  } else {
+    navigate("/tvshowout", { state: { show: content } });
+  }
+  }, [navigate]);
+
+  const renderCard = (release, index) => {
+    
+    const isMovie = !!release.movie;
+    const content = isMovie ? release.movie : release.tvshow;
+    console.log(isMovie);
+    return (
+      <a
+        key={index}
+        className="moviecard12"
+        onClick={() => onCardClick(content)}
+      >
+        <img
+          className="moviecard-icon12"
+          alt=""
+          src= {content.poster}
+        />
+        <div className="gradient-overlay"></div>
+        <div className={isMovie ? "linearfill28" : "linearfill29"}>
+          <div className="details28">
+            <div className="rating43">
+              <div className="xy1033">{content.rating}/10</div>
+              <img
+                className="vector-icon63"
+                alt=""
+                src='/vector19.svg'
+              />
+            </div>
+            <div className="title38">{content.title}</div>
+            {!isMovie && <div className="season17">Season {content.season}</div>}
+          </div>
+        </div>
+      </a>
+    );
+  };
+
+
+
   return (
-    <div className="new-releases">
+    <div className="new-releases" style={newReleasesStyle}>
       <div className="new-releases2">New Releases</div>
-      <div className="new-releases3">
-        <a className="moviecard12" onClick={onMovieCardContainer9Click}>
-          <img className="moviecard-icon12" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill28">
-            <div className="details28">
-              <div className="rating43">
-                <div className="xy1033">x.y/10</div>
-                <img className="vector-icon63" alt="" src="/vector19.svg" />
-              </div>
-              <div className="title38">Title</div>
-            </div>
-          </div>
-        </a>
-        <a className="moviecard12" onClick={onTVShowCardContainer9Click}>
-          <img className="moviecard-icon12" alt="" src="/tvshowcard1@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill29">
-            <div className="details29">
-              <div className="rating43">
-                <div className="xy1033">x.y/10</div>
-                <img className="vector-icon63" alt="" src="/vector34.svg" />
-              </div>
-              <div className="title38">Title</div>
-              <div className="season17">Season z</div>
-            </div>
-          </div>
-        </a>
-        <a className="moviecard12" onClick={onMovieCardContainer10Click}>
-          <img className="moviecard-icon12" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill28">
-            <div className="details28">
-              <div className="rating43">
-                <div className="xy1033">x.y/10</div>
-                <img className="vector-icon63" alt="" src="/vector19.svg" />
-              </div>
-              <div className="title38">Title</div>
-            </div>
-          </div>
-        </a>
-        <a className="moviecard12" onClick={onTVShowCardContainer10Click}>
-          <img className="moviecard-icon12" alt="" src="/tvshowcard1@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill29">
-            <div className="details29">
-              <div className="rating43">
-                <div className="xy1033">x.y/10</div>
-                <img className="vector-icon63" alt="" src="/vector34.svg" />
-              </div>
-              <div className="title38">Title</div>
-              <div className="season17">Season z</div>
-            </div>
-          </div>
-        </a>
-        <a className="moviecard12" onClick={onMovieCardContainer11Click}>
-          <img className="moviecard-icon12" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill28">
-            <div className="details28">
-              <div className="rating43">
-                <div className="xy1033">x.y/10</div>
-                <img className="vector-icon63" alt="" src="/vector19.svg" />
-              </div>
-              <div className="title38">Title</div>
-            </div>
-          </div>
-        </a>
-        <a className="moviecard12" onClick={onTVShowCardContainer11Click}>
-          <img className="moviecard-icon12" alt="" src="/tvshowcard1@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill29">
-            <div className="details29">
-              <div className="rating43">
-                <div className="xy1033">x.y/10</div>
-                <img className="vector-icon63" alt="" src="/vector34.svg" />
-              </div>
-              <div className="title38">Title</div>
-              <div className="season17">Season z</div>
-            </div>
-          </div>
-        </a>
-        <a className="moviecard12" onClick={onTVShowCardContainer12Click}>
-          <img className="moviecard-icon12" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill29">
-            <div className="details29">
-              <div className="rating43">
-                <div className="xy1033">x.y/10</div>
-                <img className="vector-icon63" alt="" src="/vector19.svg" />
-              </div>
-              <div className="title38">Title</div>
-              <div className="season17">Season z</div>
-            </div>
-          </div>
-        </a>
+      <div className="new-releases3" style={newReleases1Style}>
+        {releases.map((release, index) => renderCard(release, index))}
       </div>
     </div>
   );

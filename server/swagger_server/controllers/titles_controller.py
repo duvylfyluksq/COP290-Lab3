@@ -69,11 +69,19 @@ def search_get(expression):  # noqa: E501
 def title_get(genre=None, sort_type_browse=None, sort_order=None):  # noqa: E501
     try:
         L = db.sortBrowse(sort_type_browse, sort_order)
+        X = []
+        for i in L:
+            if (isinstance(i, Movie)):
+                X.append(Title(movie=i, tvshow=None))
+            else:
+                X.append(Title(movie=None, tvshow=i))
+        with open('error.txt', 'w') as f:
+            f.write(str(X))
         if genre is None:
-            return (L, 200)
+            return (X, 200)
         else:
             titles = []
-            for i in L:
+            for i in X:
                 check = False
                 for j in genre:
                     if j in i.genres:
