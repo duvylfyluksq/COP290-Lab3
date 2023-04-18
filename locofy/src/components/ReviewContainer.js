@@ -4,7 +4,7 @@ import "./ReviewContainer.css";
 import CommentContainer from './commentContainer';
 import { useRef,useState } from 'react';
 
-const ReviewContainer = ({ onPictureIconClick, onDuvylfyluksqTextClick }) => {
+const ReviewContainer = ({ onPictureIconClick, onDuvylfyluksqTextClick,review }) => {
   const [commentHeight, setCommentHeight] = useState(0);
   function liking(){
     var like= document.querySelectorAll("#likebutton-icon1");
@@ -34,7 +34,7 @@ const ReviewContainer = ({ onPictureIconClick, onDuvylfyluksqTextClick }) => {
   return (
     <div className="review2" ref={reviewContainerRef}>
       <div className="reviewheader1">
-        <div className="review-title1">Review Title</div>
+        <div className="review-title1">{review.title}</div>
         <div className="reviewername1">
           <div className="by1">by</div>
           <div className="sublayout7">
@@ -52,22 +52,13 @@ const ReviewContainer = ({ onPictureIconClick, onDuvylfyluksqTextClick }) => {
         <div className="rating12">
           <div className="rating-xy101">
             <span className="rating13">Rating:</span>
-            <span> x.y/10</span>
+            <span> {review.rating}/10</span>
           </div>
           <img className="vector-icon28" alt="" src="/vector8.svg" />
         </div>
       </div>
       <div className="lorem-ipsum-dolor1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum. laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.
+        {review.content}
       </div>
       <div id = 'reviewfooter1' className="reviewfooter1">
         <div className="commentsdropdown1">

@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import "./SuggestedContainer.css";
 
 const SuggestedContainer = ({
+  user,
   onMovieCardContainerClick,
   onTVShowCardContainerClick,
   onMovieCardContainer1Click,

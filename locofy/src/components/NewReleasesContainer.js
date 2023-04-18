@@ -5,6 +5,7 @@ import "./NewReleasesContainer.css";
 import {Movie} from "../model/Movie";
 
 const NewReleasesContainer = ({
+  user,
   releases,
   propHeight,
   propFlexShrink,
@@ -34,9 +35,9 @@ const NewReleasesContainer = ({
     const isMovie = release instanceof Movie;
     const content = release;
     if (isMovie) {
-    navigate("/movieout", { state: { movie: content} });
+    navigate("/movieout", { state: { movie: content, user} });
   } else {
-    navigate("/tvshowout", { state: { show: content } });
+    navigate("/tvshowout", { state: { show: content, user} });
   }
   }, [navigate]);
 

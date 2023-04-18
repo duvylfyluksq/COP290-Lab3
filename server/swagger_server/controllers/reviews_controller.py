@@ -12,6 +12,8 @@ from swagger_server import util
 
 def review_movie_id_get(id_, sort_type_reviews=None, sort_order=None):  # noqa: E501
     id = id_
+    sort_type_reviews = connexion.request.args.get('sort_type_reviews')
+    sort_order = connexion.request.args.get('sort_order')
     try:
         L = []
         if (sort_type_reviews == "Recent"):

@@ -7,15 +7,20 @@ import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent10.css";
 import {useLocation} from "react-router-dom";
 import {Movie} from "../model/Movie";
+import {Review} from "../model/Review";
 import { TitlesApi } from '../api/TitlesApi';
+import { ReviewsApi } from '../api/ReviewsApi';
 
 const api = new TitlesApi();
+const revapi = new ReviewsApi();
 
 const FrameComponent10 = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const mov = location.state.movie;
+  console.log(mov);
   const [movies,setMovies] = useState([]);
+  const [reviews,setReviews] = useState([]);
 
   useEffect(() => {
       api.movieGet({genre: mov.genres}, (error, data, response) => {
@@ -26,6 +31,19 @@ const FrameComponent10 = () => {
           console.log(movieList);
           const updatedMovies = movieList.filter((m) => m.title !== mov.title);
           setMovies(updatedMovies);
+          
+          revapi.reviewMovieIdGet(mov.movie_id.id, {},(error, data, response) => {
+            if (response.status === 200) {
+            
+              const reviewList = data.slice(0, 3).map((reviewData) =>
+              Review.constructFromObject(reviewData)
+              );
+              console.log(reviewList);
+              setReviews(reviewList);
+            } else {
+              console.log(error);
+            }
+          });
         } else {
           console.log(error);
         }
@@ -80,6 +98,15 @@ const FrameComponent10 = () => {
     navigate("/reviewsmovieout");
   }, [navigate]);
 
+  const reviewblock = reviews.map((review, index) => (
+    <ReviewContainer
+      review={review}
+      key={index}
+      onPictureIconClick={onPictureIconClick}
+      onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
+    />
+  ));
+
   return (
     <div className="movie-out-parent">
       <div className="movie-out">
@@ -131,18 +158,7 @@ const FrameComponent10 = () => {
           <div className="reviewlist4">
             <div className="reviews">Reviews</div>
             <div className="reviews139">
-            <ReviewContainer
-              onPictureIconClick={onPictureIconClick}
-              onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
-            />
-            <ReviewContainer
-              onPictureIconClick={onPictureIcon1Click}
-              onDuvylfyluksqTextClick={onDuvylfyluksqText1Click}
-            />
-            <ReviewContainer
-              onPictureIconClick={onPictureIcon2Click}
-              onDuvylfyluksqTextClick={onDuvylfyluksqText2Click}
-            />
+            {reviewblock}
             <div className="see-all-reviews" onClick={onSeeAllReviewsClick}>
               See All Reviews
             </div>

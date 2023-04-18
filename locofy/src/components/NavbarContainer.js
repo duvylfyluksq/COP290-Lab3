@@ -6,9 +6,9 @@ import { useCallback } from "react";
 
 
 const NavbarContainer = ({
-  dimensions,
+  user,
   dimensionsText,
-  dimensionsId,
+  dimensions,
   propBoxShadow,
   onLogoContainerClick,
   onMoviesTextClick,
@@ -67,12 +67,12 @@ const NavbarContainer = ({
             <img
               className="profilemenu-icon2"
               alt=""
-              src={dimensionsId}
+              src={user.pfp}
               onClick={onProfileMenuClick}
             />
           </button>
           <div class="dropdown">
-              <span class="name">bobdylan</span>
+              <span class="name">{user.username}</span>
               <hr />
               <a href="" onClick={onWatchlistClick}>Watchlist</a><br />
               <a href="" onClick={onViewProfileClick}>View Profile</a><br />

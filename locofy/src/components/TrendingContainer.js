@@ -3,16 +3,14 @@ import { useMemo } from "react";
 import "./TrendingContainer.css";
 
 const TrendingContainer = ({
+  user,
+  shows,
   propHeight,
   propFlexShrink,
   propAlignSelf,
   propWidth,
   propAlignSelf1,
-  onTVShowCardContainer13Click,
-  onTVShowCardContainer14Click,
-  onTVShowCardContainer15Click,
-  onTVShowCardContainer16Click,
-  onTVShowCardContainer17Click,
+  onTVShowCardClick,
 }) => {
   const trendingTVShowsStyle = useMemo(() => {
     return {
@@ -31,79 +29,27 @@ const TrendingContainer = ({
 
   return (
     <div className="trending-tv-shows" style={trendingTVShowsStyle}>
-      <div className="trending-tv-shows-container">Trending TV Shows
-      </div>
+      <div className="trending-tv-shows-container">Trending TV Shows</div>
       <div className="trending-tv-shows2" style={trendingTVShows1Style}>
-        <div className="tvshowcard17" onClick={onTVShowCardContainer13Click}>
-          <img className="tvshowcard-icon20" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill41">
-            <div className="details41">
-              <div className="rating56">
-                <div className="xy1046">x.y/10</div>
-                <img className="vector-icon76" alt="" src="/vector19.svg" />
+        {shows.map((show, index) => (
+          <div
+            key={index}
+            className="tvshowcard17"
+          >
+            <img className="tvshowcard-icon20" alt={show.title} src={show.poster} />
+            <div className="gradient-overlay"></div>
+            <div className="linearfill41">
+              <div className="details41">
+                <div className="rating56">
+                  <div className="xy1046">{show.rating}/10</div>
+                  <img className="vector-icon76" alt="" src="/vector19.svg" />
+                </div>
+                <div className="title51">{show.title}</div>
+                <div className="season21">Season {show.season}</div>
               </div>
-              <div className="title51">Title</div>
-              <div className="season21">Season z</div>
             </div>
           </div>
-        </div>
-        <div className="tvshowcard17" onClick={onTVShowCardContainer14Click}>
-          <img className="tvshowcard-icon20" alt="" src="/tvshowcard1@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill41">
-            <div className="details41">
-              <div className="rating56">
-                <div className="xy1046">x.y/10</div>
-                <img className="vector-icon76" alt="" src="/vector34.svg" />
-              </div>
-              <div className="title51">Title</div>
-              <div className="season21">Season z</div>
-            </div>
-          </div>
-        </div>
-        <div className="tvshowcard17" onClick={onTVShowCardContainer15Click}>
-          <img className="tvshowcard-icon20" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill41">
-            <div className="details41">
-              <div className="rating56">
-                <div className="xy1046">x.y/10</div>
-                <img className="vector-icon76" alt="" src="/vector19.svg" />
-              </div>
-              <div className="title51">Title</div>
-              <div className="season21">Season z</div>
-            </div>
-          </div>
-        </div>
-        <div className="tvshowcard17" onClick={onTVShowCardContainer16Click}>
-          <img className="tvshowcard-icon20" alt="" src="/tvshowcard1@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill41">
-            <div className="details41">
-              <div className="rating56">
-                <div className="xy1046">x.y/10</div>
-                <img className="vector-icon76" alt="" src="/vector34.svg" />
-              </div>
-              <div className="title51">Title</div>
-              <div className="season21">Season z</div>
-            </div>
-          </div>
-        </div>
-        <div className="tvshowcard17" onClick={onTVShowCardContainer17Click}>
-          <img className="tvshowcard-icon20" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill41">
-            <div className="details41">
-              <div className="rating56">
-                <div className="xy1046">x.y/10</div>
-                <img className="vector-icon76" alt="" src="/vector19.svg" />
-              </div>
-              <div className="title51">Title</div>
-              <div className="season21">Season z</div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

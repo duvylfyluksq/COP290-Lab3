@@ -22,6 +22,8 @@ const FrameComponent17 = () => {
   const [movies, setMovies] = useState([]);
   const [shows, setShows] = useState([]);
   const [release, setRelease] = useState([]);
+  const [trmovie, setTrmovie] = useState([]);
+  const [trshow, setTrshow] = useState([]);
 
   useEffect(() => {
     
@@ -47,7 +49,29 @@ const FrameComponent17 = () => {
                 );
                 console.log(newreleaselist);
                 setRelease(newreleaselist);
-                
+                api.movieGet({sortTypeBrowse:"Pop"}, (error, data, response) => {
+                  if (response.status === 200) {
+                    const trmovieList = data.slice(0, 5).map((trmovieData) =>
+                    Movie.constructFromObject(trmovieData)
+                    );
+                    console.log(trmovieList);
+                    setTrmovie(trmovieList);
+                    api.tvshowGet({sortTypeBrowse:"Pop"}, (error, data, response) => {
+                      if (response.status === 200) {
+                        const trshowList = data.slice(0, 5).map((trshowDaata) =>
+                        Tvshow.constructFromObject(trshowDaata)
+                        );
+                        console.log(trshowList);
+                        setTrshow(trshowList);
+                        
+                      } else {
+                        console.log(error);
+                      }
+                    });
+                  } else {
+                    console.log(error);
+                  }
+                });
               } else {
                 console.log(error);
               }
@@ -230,6 +254,7 @@ const FrameComponent17 = () => {
             onTVShowCardContainer12Click={onTVShowCardContainer8Click}
           />
           <TrendingMoviesContainer
+            movies={trmovie}
             propHeight="unset"
             propFlexShrink="unset"
             propAlignSelf="stretch"
@@ -243,6 +268,7 @@ const FrameComponent17 = () => {
             onMovieCardContainer17Click={onMovieCardContainer13Click}
           />
           <TrendingContainer
+            shows = {trshow}
             propHeight="unset"
             propFlexShrink="unset"
             propAlignSelf="stretch"

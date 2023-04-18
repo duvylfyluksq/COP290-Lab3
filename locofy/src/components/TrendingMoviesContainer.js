@@ -1,20 +1,20 @@
 import React from 'react';
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./TrendingMoviesContainer.css";
 
 const TrendingMoviesContainer = ({
+  movies,
   propHeight,
   propFlexShrink,
   propAlignSelf,
   propWidth,
   propAlignSelf1,
-  onMovieCardContainer12Click,
-  onMovieCardContainer13Click,
-  onMovieCardContainer14Click,
-  onMovieCardContainer15Click,
-  onMovieCardContainer16Click,
-  onMovieCardContainer17Click,
+  onMovieCardClick,
 }) => {
+  
+  const navigate = new useNavigate();
+
   const trendingMoviesStyle = useMemo(() => {
     return {
       height: propHeight,
@@ -30,88 +30,33 @@ const TrendingMoviesContainer = ({
     };
   }, [propWidth, propAlignSelf1]);
 
+  const onMovieCardContainerClick = useCallback((movie) => {
+    navigate("/movieout", {state:{movie}});
+  }, [navigate]);
+
   return (
     <div className="trending-movies" style={trendingMoviesStyle}>
       <div className="trending-movies1">Trending Movies</div>
       <div className="trending-movies3" style={trendingMovies1Style}>
-        <div className="moviecard15" onClick={onMovieCardContainer12Click}>
-          <img className="moviecard-icon15" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill35">
-            <div className="details35">
-              <div className="rating50">
-                <div className="xy1040">x.y/10</div>
-                <img className="vector-icon70" alt="" src="/vector19.svg" />
+        {movies.map((movie, index) => (
+          <div
+            key={index}
+            className="moviecard15"
+            onClick={() => onMovieCardContainerClick(movie)}
+          >
+            <img className="moviecard-icon15" alt={movie.title} src={movie.poster} />
+            <div className="gradient-overlay"></div>
+            <div className="linearfill35">
+              <div className="details35">
+                <div className="rating50">
+                  <div className="xy1040">{movie.rating}/10</div>
+                  <img className="vector-icon70" alt="" src="/vector19.svg" />
+                </div>
+                <div className="title45">{movie.title}</div>
               </div>
-              <div className="title45">Title</div>
             </div>
           </div>
-        </div>
-        <div className="moviecard15" onClick={onMovieCardContainer13Click}>
-          <img className="moviecard-icon15" alt="" src="/tvshowcard1@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill35">
-            <div className="details35">
-              <div className="rating50">
-                <div className="xy1040">x.y/10</div>
-                <img className="vector-icon70" alt="" src="/vector34.svg" />
-              </div>
-              <div className="title45">Title</div>
-            </div>
-          </div>
-        </div>
-        <div className="moviecard15" onClick={onMovieCardContainer14Click}>
-          <img className="moviecard-icon15" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill35">
-            <div className="details35">
-              <div className="rating50">
-                <div className="xy1040">x.y/10</div>
-                <img className="vector-icon70" alt="" src="/vector19.svg" />
-              </div>
-              <div className="title45">Title</div>
-            </div>
-          </div>
-        </div>
-        <div className="moviecard15" onClick={onMovieCardContainer15Click}>
-          <img className="moviecard-icon15" alt="" src="/tvshowcard1@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill35">
-            <div className="details35">
-              <div className="rating50">
-                <div className="xy1040">x.y/10</div>
-                <img className="vector-icon70" alt="" src="/vector34.svg" />
-              </div>
-              <div className="title45">Title</div>
-            </div>
-          </div>
-        </div>
-        <div className="moviecard15" onClick={onMovieCardContainer16Click}>
-          <img className="moviecard-icon15" alt="" src="/moviecard@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill35">
-            <div className="details35">
-              <div className="rating50">
-                <div className="xy1040">x.y/10</div>
-                <img className="vector-icon70" alt="" src="/vector19.svg" />
-              </div>
-              <div className="title45">Title</div>
-            </div>
-          </div>
-        </div>
-        <div className="moviecard15" onClick={onMovieCardContainer17Click}>
-          <img className="moviecard-icon15" alt="" src="/tvshowcard1@2x.png" />
-          <div class="gradient-overlay"></div>
-          <div className="linearfill35">
-            <div className="details35">
-              <div className="rating50">
-                <div className="xy1040">x.y/10</div>
-                <img className="vector-icon70" alt="" src="/vector34.svg" />
-              </div>
-              <div className="title45">Title</div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

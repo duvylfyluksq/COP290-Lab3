@@ -370,7 +370,7 @@ def sortBrowse(sort_type: str, sort_order: Optional[bool]) -> List[Union[Movie, 
 
 
 def getReviews_forMovie(Movie: Movie) -> List[Review]:
-    assert Movie.movie_id is not None
+    assert Movie.movie_id.id is not None
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `review` where `movie_id`=%s"""
         cursor.execute(sql, (Movie.movie_id.id,))
