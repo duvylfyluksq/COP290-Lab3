@@ -7,23 +7,6 @@ import { Movie } from "../model/Movie";
 const api = new TitlesApi();
 
 const MovieLinkContainer = ({movies}) => {
-  // const navigate = useNavigate();
-  // const [movies, setMovies] = useState([]);
-
-  // useEffect(() => {
-  //   const opts = { sortTypeBrowse: "Rat" };
-  //   api.movieGet(opts, (error, data, response) => {
-  //     if (response.status === 200) {
-  //       const movieList = data.slice(0, 5).map((movieData) =>
-  //         Movie.constructFromObject(movieData)
-  //       );
-  //       console.log(movieList);
-  //       setMovies(movieList);
-  //     } else {
-  //       console.log(error);
-  //     }
-  //   });
-  // }, []);
 
   const navigate = useNavigate();
 

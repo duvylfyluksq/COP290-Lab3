@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import ReviewContainer from "../components/ReviewContainer";
@@ -6,12 +6,31 @@ import MoreMoviesLikeThisContainer from "../components/MoreMoviesLikeThisContain
 import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent10.css";
 import {useLocation} from "react-router-dom";
+import {Movie} from "../model/Movie";
+import { TitlesApi } from '../api/TitlesApi';
 
+const api = new TitlesApi();
 
 const FrameComponent10 = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const movie = location.state.movie;
+  const mov = location.state.movie;
+  const [movies,setMovies] = useState([]);
+
+  useEffect(() => {
+      api.movieGet({genre: mov.genres}, (error, data, response) => {
+        if (response.status === 200) {
+          const movieList = data.slice(0, 11).map((movieData) =>
+          Movie.constructFromObject(movieData)
+          );
+          console.log(movieList);
+          const updatedMovies = movieList.filter((m) => m.title !== mov.title);
+          setMovies(updatedMovies);
+        } else {
+          console.log(error);
+        }
+      });
+    },[mov]);
 
   const onPictureIconClick = useCallback(() => {
     navigate("/duvylfyluksqout");
@@ -35,34 +54,6 @@ const FrameComponent10 = () => {
 
   const onDuvylfyluksqText2Click = useCallback(() => {
     navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onMovieCardContainerClick = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainerClick = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onMovieCardContainer1Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer1Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onMovieCardContainer2Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer2Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer3Click = useCallback(() => {
-    navigate("/tvshowout");
   }, [navigate]);
 
   const onLogoContainerClick = useCallback(() => {
@@ -95,19 +86,19 @@ const FrameComponent10 = () => {
         <div className="body10">
           <div className="moviedescription50">
             <div className="left50">
-              <img className="joker-icon70" alt="" src={movie.poster} />
+              <img className="joker-icon70" alt="" src={mov.poster} />
             </div>
             <div className="right50">
               <div className="descriptionheader50">
                 <div className="rating">
-                  <div className="xy10">{movie.rating}/10</div>
+                  <div className="xy10">{mov.rating}/10</div>
                   <img className="vector-icon60" alt="" src="/vector2.svg" />
                 </div>
                 <div className="duration">
-                  <p className="director-john-doe">{movie.duration}</p>
+                  <p className="director-john-doe">{mov.duration}</p>
                 </div>
                 <div className="genres">
-                {movie.genres.map((genre) => (
+                {mov.genres.map((genre) => (
                 <div className="genre2">
                   <div className="genre">{genre}</div>
                 </div>
@@ -117,21 +108,21 @@ const FrameComponent10 = () => {
               <div className="sublayout50">
                 <div className="descriptionbody">
                   <div className="title100">
-                    <div className="title200">{movie.title}</div>
-                    <div className="year500">({movie.release_date.getFullYear()})</div>
+                    <div className="title200">{mov.title}</div>
+                    <div className="year500">({mov.release_date.getFullYear()})</div>
                   </div>
                   <div className="plotsynopsis50">
-                    {movie.plot}
+                    {mov.plot}
                   </div>
                 </div>
                 <div className="subsublayout50">
                   <img className="line-icon50" alt="" src="/line.svg" />
                   <div className="credits50">
-                    <p className="director-john-doe">Director: {movie.director}</p>
+                    <p className="director-john-doe">Director: {mov.director}</p>
                     <p className="director-john-doe">
-                      Writer: {movie.writer}
+                      Writer: {mov.writer}
                     </p>
-                    <p className="director-john-doe">Cast: {movie.cast.join(", ")}</p>
+                    <p className="director-john-doe">Cast: {mov.cast.join(", ")}</p>
                   </div>
                 </div>
               </div>
@@ -159,13 +150,7 @@ const FrameComponent10 = () => {
             <div className="reviews">More Like This</div>
             <div className="more-like-this">
             <MoreMoviesLikeThisContainer
-              onMovieCardContainerClick={onMovieCardContainerClick}
-              onTVShowCardContainerClick={onTVShowCardContainerClick}
-              onMovieCardContainer1Click={onMovieCardContainer1Click}
-              onTVShowCardContainer1Click={onTVShowCardContainer1Click}
-              onMovieCardContainer2Click={onMovieCardContainer2Click}
-              onTVShowCardContainer2Click={onTVShowCardContainer2Click}
-              onTVShowCardContainer3Click={onTVShowCardContainer3Click}
+              movies = {movies}
             />
             </div>
           </div>
