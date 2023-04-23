@@ -1,17 +1,20 @@
 import React from 'react';
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./TrendingContainer.css";
 
 const TrendingContainer = ({
-  user,
+  user = [],
   shows,
   propHeight,
   propFlexShrink,
   propAlignSelf,
   propWidth,
   propAlignSelf1,
-  onTVShowCardClick,
 }) => {
+
+  const navigate = useNavigate();
+
   const trendingTVShowsStyle = useMemo(() => {
     return {
       height: propHeight,
@@ -27,6 +30,10 @@ const TrendingContainer = ({
     };
   }, [propWidth, propAlignSelf1]);
 
+  const onTVShowCardContainerClick = useCallback((show) => {
+    navigate("/tvshowout", {state: {show}});
+  }, [navigate]);
+
   return (
     <div className="trending-tv-shows" style={trendingTVShowsStyle}>
       <div className="trending-tv-shows-container">Trending TV Shows</div>
@@ -35,6 +42,7 @@ const TrendingContainer = ({
           <div
             key={index}
             className="tvshowcard17"
+            onClick={() => onTVShowCardContainerClick(show)}
           >
             <img className="tvshowcard-icon20" alt={show.title} src={show.poster} />
             <div className="gradient-overlay"></div>

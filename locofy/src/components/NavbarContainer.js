@@ -35,6 +35,8 @@ const NavbarContainer = ({
     navigate("/homesignedout");
   }, [navigate]);
 
+  const pfp = "../pages/" + user.pfp ;
+
   return (
     <div className="navbar2">
       <div className="logo2" onClick={onLogoContainerClick} style={logoStyle}>
@@ -67,7 +69,7 @@ const NavbarContainer = ({
             <img
               className="profilemenu-icon2"
               alt=""
-              src={user.pfp}
+              src= {pfp}
               onClick={onProfileMenuClick}
             />
           </button>

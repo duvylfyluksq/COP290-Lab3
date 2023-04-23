@@ -5,7 +5,7 @@ import "./NewReleasesContainer.css";
 import {Movie} from "../model/Movie";
 
 const NewReleasesContainer = ({
-  user,
+  user = [],
   releases,
   propHeight,
   propFlexShrink,

@@ -33,7 +33,7 @@ const SignIn = () => {
       } else {
         console.log("Sign in successful")
         const user = User.constructFromObject(response.body);
-        navigate('/homesignedin', {state: {user: user}});
+        navigate('/homesignedin', {state: {user}});
       }
     });
   }, [username, password, navigate, api]);

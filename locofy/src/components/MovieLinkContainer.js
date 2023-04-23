@@ -6,12 +6,12 @@ import { Movie } from "../model/Movie";
 
 const api = new TitlesApi();
 
-const MovieLinkContainer = ({movies, user}) => {
+const MovieLinkContainer = ({movies, user = []}) => {
 
   const navigate = useNavigate();
 
   const onMovieCardClick = useCallback((movie) => {
-    navigate("/movieout", { state: { movie, user } });
+    navigate("/movieout", { state: { movie } });
   }, [navigate]);
 
   return (

@@ -24,6 +24,7 @@ const TVShowCard = ({ tvShow, onClick }) => (
 );
 
 const TVShowsContainer = ({
+  user = [],
   shows,
   propHeight,
   propFlexShrink,

@@ -1,158 +1,109 @@
 import React from 'react';
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import SuggestedContainer from "../components/SuggestedContainer";
-import MovieListContainer from "../components/MovieListContainer";
+import MovieLinkContainer from "../components/MovieLinkContainer";
 import TVShowsContainer from "../components/TVShowsContainer";
 import NewReleasesContainer from "../components/NewReleasesContainer";
 import TrendingMoviesContainer from "../components/TrendingMoviesContainer";
 import TrendingContainer from "../components/TrendingContainer";
 import NavbarContainer from "../components/NavbarContainer";
 import "./FrameComponent16.css";
+import {Movie} from "../model/Movie";
+import {Tvshow} from "../model/Tvshow";
+import {Title} from "../model/Title";
+import {User } from "../model/User";
+import { TitlesApi } from '../api/TitlesApi';
+import {UserApi} from "../api/UserApi";
+
+const api = new TitlesApi();
 
 const FrameComponent16 = () => {
   const navigate = useNavigate();
+  const [suggested, setSuggested] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [shows, setShows] = useState([]);
+  const [release, setRelease] = useState([]);
+  const [trmovie, setTrmovie] = useState([]);
+  const [trshow, setTrshow] = useState([]);
+  const location = useLocation();
+  const user = location.state.user;
+  console.log(user);
 
-  const onTVShowCardContainerClick = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
+  useEffect(() => {
+    
+    const opts = { sortTypeBrowse: "Rat" };
+    api.titleGet({genre: user.interests}, (error, data, response) => {
+      if (response.status === 200) {
+        const suggestedList = data.slice(0, 5).map((suggestedData) =>
+        Title.constructFromObject(suggestedData)
+        );
+        console.log(suggestedList);
+        setSuggested(suggestedList);
+        api.movieGet(opts, (error, data, response) => {
+          if (response.status === 200) {
+            const movieList = data.slice(0, 5).map((movieData) =>
+              Movie.constructFromObject(movieData)
+            );
+            console.log(movieList);
+            setMovies(movieList);
+        api.tvshowGet(opts, (error, data, response) => {
+              if (response.status === 200) {
+                const showList = data.slice(0, 5).map((showData) =>
+                  Tvshow.constructFromObject(showData)
+                );
+                console.log(showList);
+                setShows(showList);
+                api.titleGet({sortTypeBrowse:"Rel"}, (error, data, response) => {
+                  if (response.status === 200) {
+                    const newreleaselist = data.slice(0, 5).map((releaseData) =>
+                    Title.constructFromObject(releaseData)
+                    );
+                    console.log(newreleaselist);
+                    setRelease(newreleaselist);
+                    api.movieGet({sortTypeBrowse:"Pop"}, (error, data, response) => {
+                      if (response.status === 200) {
+                        const trmovieList = data.slice(0, 5).map((trmovieData) =>
+                        Movie.constructFromObject(trmovieData)
+                        );
+                        console.log(trmovieList);
+                        setTrmovie(trmovieList);
+                        api.tvshowGet({sortTypeBrowse:"Pop"}, (error, data, response) => {
+                          if (response.status === 200) {
+                            const trshowList = data.slice(0, 5).map((trshowDaata) =>
+                            Tvshow.constructFromObject(trshowDaata)
+                            );
+                            console.log(trshowList);
+                            setTrshow(trshowList);
+    
+                            
+                          } else {
+                            console.log(error);
+                          }
+                        });
+                      } else {
+                        console.log(error);
+                      }
+                    });
+                  } else {
+                    console.log(error);
+                  }
+                });
+              } else {
+                console.log(error);
+              }
+            });
+          } else {
+            console.log(error);
+          }
+        });
+      } else {
+        console.log(error);
+      }
+    });
+  }, []);
 
-  const onTVShowCardContainer1Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onMovieCardContainerClick = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onTVShowCardContainer2Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onMovieCardContainer1Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer2Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-  const onTVShowCardContainer3Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-
-  const onMovieCardContainer3Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer4Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer5Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer6Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer7Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-  const onMovieCardContainer8Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-  const onTVShowCardContainer4Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer5Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer6Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer7Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer8Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onMovieCardContainer9Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onTVShowCardContainer9Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onMovieCardContainer10Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onTVShowCardContainer10Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onMovieCardContainer11Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-  const onTVShowCardContainer11Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer12Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onMovieCardContainer12Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer13Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer14Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer15Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer16Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-
-  const onMovieCardContainer17Click = useCallback(() => {
-    navigate("/moviein")
-  }, [navigate]);
-  
-  const onTVShowCardContainer13Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer14Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer15Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer16Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
-
-  const onTVShowCardContainer17Click = useCallback(() => {
-    navigate("/tvshowin")
-  }, [navigate]);
+ 
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedin");
@@ -183,55 +134,55 @@ const FrameComponent16 = () => {
       <div className="home-signedin">
         <div className="body13">
           <SuggestedContainer 
-          onMovieCardContainerClick={onMovieCardContainerClick}
-          onTVShowCardContainerClick={onTVShowCardContainerClick}
-          onMovieCardContainer1Click={onMovieCardContainer1Click}
-          onTVShowCardContainer1Click={onTVShowCardContainer1Click}
-          onMovieCardContainer2Click={onMovieCardContainer2Click}
-          onTVShowCardContainer2Click={onTVShowCardContainer2Click}
-          onTVShowCardContainer3Click={onTVShowCardContainer3Click}
+          user = {user}
+          suggested = {suggested}
           />
-          <MovieListContainer 
-          onMovieCardContainer3Click={onMovieCardContainer3Click}
-          onMovieCardContainer4Click={onMovieCardContainer4Click}
-          onMovieCardContainer5Click={onMovieCardContainer5Click}
-          onMovieCardContainer6Click={onMovieCardContainer6Click}
-          onMovieCardContainer7Click={onMovieCardContainer7Click}
-          onMovieCardContainer8Click={onMovieCardContainer8Click}
+          <MovieLinkContainer  
+          movies = {movies}
+          user = {user}
           />
-          <TVShowsContainer
-            onTVShowCardContainer4Click={onTVShowCardContainer4Click}
-            onTVShowCardContainer5Click={onTVShowCardContainer5Click}
-            onTVShowCardContainer6Click={onTVShowCardContainer6Click}
-            onTVShowCardContainer7Click={onTVShowCardContainer7Click}
-            onTVShowCardContainer8Click={onTVShowCardContainer8Click}
+          <TVShowsContainer 
+            shows  = {shows}
+            user = {user}
+            propHeight="unset"
+            propFlexShrink="unset"
+            propAlignSelf="stretch"
+            propWidth="unset"
+            propAlignSelf1="stretch"
+           
+      
           />
           <NewReleasesContainer
-            onMovieCardContainer9Click={onMovieCardContainer9Click}
-            onTVShowCardContainer9Click={onTVShowCardContainer9Click}
-            onMovieCardContainer10Click={onMovieCardContainer10Click}
-            onTVShowCardContainer10Click={onTVShowCardContainer10Click}
-            onMovieCardContainer11Click={onMovieCardContainer11Click}
-            onTVShowCardContainer11Click={onTVShowCardContainer11Click}
-            onTVShowCardContainer12Click={onTVShowCardContainer12Click}
+            releases = {release}
+            user = {user}
+            propHeight="unset"
+            propFlexShrink="unset"
+            propAlignSelf="stretch"
+            propWidth="unset"
+            propAlignSelf1="stretch"
           />
           <TrendingMoviesContainer
-            onMovieCardContainer12Click={onMovieCardContainer12Click}
-            onMovieCardContainer13Click={onMovieCardContainer13Click}
-            onMovieCardContainer14Click={onMovieCardContainer14Click}
-            onMovieCardContainer15Click={onMovieCardContainer15Click}
-            onMovieCardContainer16Click={onMovieCardContainer16Click}
-            onMovieCardContainer17Click={onMovieCardContainer17Click}
+            movies={trmovie}
+            user = {user}
+            propHeight="unset"
+            propFlexShrink="unset"
+            propAlignSelf="stretch"
+            propWidth="unset"
+            propAlignSelf1="stretch"
+            
           />
           <TrendingContainer
-            onTVShowCardContainer13Click={onTVShowCardContainer13Click}
-            onTVShowCardContainer14Click={onTVShowCardContainer14Click}
-            onTVShowCardContainer15Click={onTVShowCardContainer15Click}
-            onTVShowCardContainer16Click={onTVShowCardContainer16Click}
-            onTVShowCardContainer17Click={onTVShowCardContainer17Click}
+            shows = {trshow}
+            user = {user}
+            propHeight="unset"
+            propFlexShrink="unset"
+            propAlignSelf="stretch"
+            propWidth="unset"
+            propAlignSelf1="stretch"
           />
         </div>
         <NavbarContainer
+          user = {user}
           dimensions="/vector35.svg"
           dimensionsText="/fluentcompose24filled1.svg"
           dimensionsId="/profilemenu8.svg"

@@ -4,7 +4,7 @@ import "./ReviewContainer.css";
 import CommentContainer from './commentContainer';
 import { useRef,useState } from 'react';
 
-const ReviewContainer = ({ onPictureIconClick, onDuvylfyluksqTextClick,review }) => {
+const ReviewContainer = ({review ,user}) => {
   const [commentHeight, setCommentHeight] = useState(0);
   function liking(){
     var like= document.querySelectorAll("#likebutton-icon1");
@@ -28,6 +28,7 @@ const ReviewContainer = ({ onPictureIconClick, onDuvylfyluksqTextClick,review })
   }, [showComments],
   );
 
+
   function toggleComments() {
     setShowComments(!showComments);
   }
@@ -41,11 +42,10 @@ const ReviewContainer = ({ onPictureIconClick, onDuvylfyluksqTextClick,review })
             <img
               className="picture-icon1"
               alt=""
-              src="/picture@2x.png"
-              onClick={onPictureIconClick}
+              src={user.pfp}
             />
-            <div className="duvylfyluksq1" onClick={onDuvylfyluksqTextClick}>
-              duvylfyluksq
+            <div className="duvylfyluksq1">
+              {user.username}
             </div>
           </div>
         </div>

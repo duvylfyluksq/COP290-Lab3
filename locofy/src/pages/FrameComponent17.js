@@ -274,11 +274,6 @@ const FrameComponent17 = () => {
             propAlignSelf="stretch"
             propWidth="unset"
             propAlignSelf1="stretch"
-            onTVShowCardContainer13Click={onTVShowCardContainer9Click}
-            onTVShowCardContainer14Click={onTVShowCardContainer10Click}
-            onTVShowCardContainer15Click={onTVShowCardContainer11Click}
-            onTVShowCardContainer16Click={onTVShowCardContainer12Click}
-            onTVShowCardContainer17Click={onTVShowCardContainer13Click}
           />
         </div>
         <MoviesContainer

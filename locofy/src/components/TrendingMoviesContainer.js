@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import "./TrendingMoviesContainer.css";
 
 const TrendingMoviesContainer = ({
+  user = [],
   movies,
   propHeight,
   propFlexShrink,

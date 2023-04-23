@@ -7,12 +7,16 @@ import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent10.css";
 import {useLocation} from "react-router-dom";
 import {Movie} from "../model/Movie";
+import {User } from "../model/User";
 import {Review} from "../model/Review";
 import { TitlesApi } from '../api/TitlesApi';
 import { ReviewsApi } from '../api/ReviewsApi';
+import {UserApi} from "../api/UserApi";
 
 const api = new TitlesApi();
 const revapi = new ReviewsApi();
+const userapi = new UserApi();
+
 
 const FrameComponent10 = () => {
   const navigate = useNavigate();
@@ -21,8 +25,30 @@ const FrameComponent10 = () => {
   console.log(mov);
   const [movies,setMovies] = useState([]);
   const [reviews,setReviews] = useState([]);
+  const [users,setUsers] = useState();  
+  const [fetched, setFetched] = useState(false);
 
+    
+  const fetchUsersSequentially = (reviewList, index, userList, callback) => {
+    if (index >= reviewList.length) {
+      callback(userList);
+      return;
+    }
+  
+    const review = reviewList[index];
+    userapi.userUserIdGet(review.user_id, (error, data, response) => {
+      if (response.status === 200) {
+        const newUser = User.constructFromObject(data);
+        console.log(newUser);
+        userList.push(newUser);
+        fetchUsersSequentially(reviewList, index + 1, userList, callback);
+      } else {
+        console.log(error);
+      }
+    });
+  };
   useEffect(() => {
+    if(!fetched){
       api.movieGet({genre: mov.genres}, (error, data, response) => {
         if (response.status === 200) {
           const movieList = data.slice(0, 11).map((movieData) =>
@@ -34,21 +60,28 @@ const FrameComponent10 = () => {
           
           revapi.reviewMovieIdGet(mov.movie_id.id, {},(error, data, response) => {
             if (response.status === 200) {
-            
               const reviewList = data.slice(0, 3).map((reviewData) =>
               Review.constructFromObject(reviewData)
               );
               console.log(reviewList);
               setReviews(reviewList);
+              console.log("lmao");
+              console.log(reviews);
+              fetchUsersSequentially(reviewList, 0, [], (userList) => {
+                setUsers(userList);
+              });
+              
             } else {
               console.log(error);
             }
           });
+
         } else {
           console.log(error);
         }
       });
-    },[mov]);
+    }
+    },[mov, fetched]);
 
   const onPictureIconClick = useCallback(() => {
     navigate("/duvylfyluksqout");
@@ -98,14 +131,20 @@ const FrameComponent10 = () => {
     navigate("/reviewsmovieout");
   }, [navigate]);
 
-  const reviewblock = reviews.map((review, index) => (
-    <ReviewContainer
-      review={review}
-      key={index}
-      onPictureIconClick={onPictureIconClick}
-      onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
-    />
+  
+  const reviewBlock = reviews.map((review, index) => (
+    users && users.length === reviews.length ? (
+      <ReviewContainer
+        review={review}
+        key={index}
+        user={users[index]}
+        onPictureIconClick={onPictureIconClick}
+        onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
+      />
+    ) : null
   ));
+  
+  
 
   return (
     <div className="movie-out-parent">
@@ -158,7 +197,7 @@ const FrameComponent10 = () => {
           <div className="reviewlist4">
             <div className="reviews">Reviews</div>
             <div className="reviews139">
-            {reviewblock}
+            {reviewBlock}
             <div className="see-all-reviews" onClick={onSeeAllReviewsClick}>
               See All Reviews
             </div>
