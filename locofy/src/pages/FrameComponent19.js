@@ -35,36 +35,6 @@ const FrameComponent19 = () => {
     });
   }, [selectedgenre,sortparam,sortype]);
 
-
-  
-  const onTVShowDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer1Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer2Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer3Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer4Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer5Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
-  const onTVShowDescriptionBrowsePageContainer6Click = useCallback(() => {
-    navigate("/tvshowout")
-  }, [navigate]);
-
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);

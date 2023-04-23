@@ -13,12 +13,6 @@ const MoreMoviesLikeThisContainer = ({
     navigate("/movieout", {state:{movie}});
   }, [navigate]);
 
-  const tVShowCardStyle = useMemo(() => {
-    return {
-      cursor: propCursor,
-    };
-  }, [propCursor]);
-
   return (
     <div className="moremovieslikethis50">
       {movies.map((movie, index) => (

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import UserProfile from "../components/UserProfile";
 import MovieWatchListContainer from "../components/MovieWatchListContainer";
 import BottomFooter from "../components/BottomFooter";

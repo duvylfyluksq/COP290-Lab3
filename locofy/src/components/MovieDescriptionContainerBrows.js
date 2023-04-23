@@ -11,7 +11,7 @@ const MovieDescriptionContainerBrows = ({
 
   const onMovieDescriptionBrowsePageContainerClick = useCallback(() => {
     navigate("/movieout", {state: {movie} });
-  }, [navigate]);
+  }, [navigate,movie]);
 
   return (
     <div

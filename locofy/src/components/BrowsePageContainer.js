@@ -10,7 +10,7 @@ const BrowsePageContainer = ({
 
   const onTVShowDescriptionBrowsePageContainerClick = useCallback(() => {
     navigate("/tvshowout", {state: {show}})
-  }, [navigate]);
+  }, [navigate,show]);
 
   return (
     <div

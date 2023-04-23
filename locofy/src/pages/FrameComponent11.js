@@ -1,18 +1,86 @@
 import React from 'react';
-import { useCallback } from "react";
+import {useState, useCallback, useEffect } from "react";
 
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
 import ReviewContainer from "../components/ReviewContainer";
 import MoreMoviesLikeThisContainer from "../components/MoreMoviesLikeThisContainer";
 import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent11.css";
+import {Tvshow} from "../model/Tvshow";
+import {User } from "../model/User";
+import {Review} from "../model/Review";
+import { TitlesApi } from '../api/TitlesApi';
+import { ReviewsApi } from '../api/ReviewsApi';
+import {UserApi} from "../api/UserApi";
+
+const api = new TitlesApi();
+const revapi = new ReviewsApi();
+const userapi = new UserApi();
 
 const FrameComponent11 = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const show = location.state.show;
+  const [shows,setShows] = useState([]);
+  const [reviews,setReviews] = useState([]);
+  const [users,setUsers] = useState();  
+  const [fetched, setFetched] = useState(false);
+
+  const fetchUsersSequentially = (reviewList, index, userList, callback) => {
+    if (index >= reviewList.length) {
+      callback(userList);
+      return;
+    }
+  
+    const review = reviewList[index];
+    userapi.userUserIdGet(review.user_id, (error, data, response) => {
+      if (response.status === 200) {
+        const newUser = User.constructFromObject(data);
+        console.log(newUser);
+        userList.push(newUser);
+        fetchUsersSequentially(reviewList, index + 1, userList, callback);
+      } else {
+        console.log(error);
+      }
+    });
+  };
+  useEffect(() => {
+    if(!fetched){
+      api.tvshowGet({genre: show.genres}, (error, data, response) => {
+        if (response.status === 200) {
+          const showList = data.slice(0, 11).map((showData) =>
+          Tvshow.constructFromObject(showData)
+          );
+          console.log(showList);
+          const updatedShows = showList.filter((m) => m.title !== show.title);
+          setShows(updatedShows);
+          
+          revapi.reviewTvshowIdGet(show.show_id.id, {},(error, data, response) => {
+            if (response.status === 200) {
+              const reviewList = data.slice(0, 3).map((reviewData) =>
+              Review.constructFromObject(reviewData)
+              );
+              console.log(reviewList);
+              setReviews(reviewList);
+              console.log("lmao");
+              console.log(reviews);
+              fetchUsersSequentially(reviewList, 0, [], (userList) => {
+                setUsers(userList);
+              });
+              
+            } else {
+              console.log(error);
+            }
+          });
+
+        } else {
+          console.log(error);
+        }
+      });
+    }
+    },[show, fetched]);
+
 
   const onPictureIconClick = useCallback(() => {
     navigate("/duvylfyluksqout");
@@ -38,30 +106,6 @@ const FrameComponent11 = () => {
     navigate("/duvylfyluksqout");
   }, [navigate]);
 
-  const onMovieCardContainerClick = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onTVShowCardContainerClick = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer1Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onTVShowCardContainer1Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer2Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onTVShowCardContainer2Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
@@ -85,6 +129,18 @@ const FrameComponent11 = () => {
   const onSeeAllReviewsClick = useCallback(() => {
     navigate("/reviewsmovieout");
   }, [navigate]);
+
+  const reviewBlock = reviews.map((review, index) => (
+    users && users.length === reviews.length ? (
+      <ReviewContainer
+        review={review}
+        key={index}
+        user={users[index]}
+        onPictureIconClick={onPictureIconClick}
+        onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
+      />
+    ) : null
+  ));
 
   return (
     <div className="tvshow-out-parent">
@@ -142,18 +198,7 @@ const FrameComponent11 = () => {
           <div className="reviewlist5">
             <div className="reviews1">Reviews</div>
             <div className="reviews139">
-            <ReviewContainer
-              onPictureIconClick={onPictureIconClick}
-              onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
-            />
-            <ReviewContainer
-              onPictureIconClick={onPictureIcon1Click}
-              onDuvylfyluksqTextClick={onDuvylfyluksqText1Click}
-            />
-            <ReviewContainer
-              onPictureIconClick={onPictureIcon2Click}
-              onDuvylfyluksqTextClick={onDuvylfyluksqText2Click}
-            />
+            {reviewBlock}
             <div className="see-all-reviews1" onClick={onSeeAllReviewsClick}>
               See All Reviews
             </div>
@@ -161,13 +206,7 @@ const FrameComponent11 = () => {
             <div className="reviews1">More Like This</div>
             <div className="more-like-this">
             <MoreMoviesLikeThisContainer
-              propCursor="unset"
-              onMovieCardContainerClick={onMovieCardContainerClick}
-              onTVShowCardContainerClick={onTVShowCardContainerClick}
-              onMovieCardContainer1Click={onMovieCardContainer1Click}
-              onTVShowCardContainer1Click={onTVShowCardContainer1Click}
-              onMovieCardContainer2Click={onMovieCardContainer2Click}
-              onTVShowCardContainer2Click={onTVShowCardContainer2Click}
+              movies = {shows}
             />
             </div>
           </div>
