@@ -22,7 +22,6 @@ const FrameComponent10 = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const mov = location.state.movie;
-  console.log(mov);
   const [movies,setMovies] = useState([]);
   const [reviews,setReviews] = useState([]);
   const [users,setUsers] = useState();  
@@ -128,7 +127,7 @@ const FrameComponent10 = () => {
   }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
-    navigate("/reviewsmovieout");
+    navigate("/reviewsmovieout", {state:{mov}});
   }, [navigate]);
 
   

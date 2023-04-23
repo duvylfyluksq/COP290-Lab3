@@ -34,36 +34,6 @@ const FrameComponent15 = () => {
     });
   }, [selectedgenre,sortparam,sortype]);
 
-
-
-  const onMovieDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer1Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer2Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer3Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer4Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer5Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer6Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
