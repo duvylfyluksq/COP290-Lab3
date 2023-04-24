@@ -1,14 +1,14 @@
-.mixedbrowse-in::-webkit-scrollbar{
+.mixedbrowse-in790::-webkit-scrollbar{
     width:0px;
     background-color: transparent;
   }
   
-  
-  .scrolllist {
+
+  .scrolllist790 {
     position: absolute;
     top: 133px;
-    left: 40%;
-    width: 65%;
+    left:2.5%;
+    width: 90%;
     height: 100%;
     overflow-y: auto;
     overflow-x:hidden;
@@ -18,10 +18,10 @@
     box-sizing: border-box;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: var(--gap-6xl);
+    gap: var(--gap-21xl);
   }
   
-  .mixedbrowse-in {
+  .mixedbrowse-in790 {
     position: absolute;
     top: 0;
     left: 0;

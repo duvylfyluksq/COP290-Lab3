@@ -3,7 +3,7 @@ import { useCallback, useState, useEffect } from "react";
 import BrowsePageContainer from "../components/BrowsePageContainer";
 import LeftContainer from "../components/LeftContainer";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./FrameComponent13.css";
+import "./SearchOut.css";
 import MoviesContainer from '../components/MoviesContainer';
 import MovieDescriptionContainerBrows from '../components/MovieDescriptionContainerBrows';
 import {Title} from '../model/Title';
@@ -59,8 +59,8 @@ const SearchOut = () => {
   }, [navigate]);
 
   return (
-      <div className="mixedbrowse-in">
-        <div className="scrolllist">
+      <div className="mixedbrowse-in790">
+        <div className="scrolllist790">
         {titles.map((title, index) => (
             <>
               {title.movie ? (

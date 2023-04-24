@@ -8,10 +8,15 @@ const SuggestedContainer = ({ user, suggested }) => {
   const navigate = useNavigate();
 
   const onCardClick = useCallback((suggested) => {
-    const isMovie = suggested instanceof Movie;
+    const isMovie = !!suggested.movie;
     const content = isMovie ? suggested.movie : suggested.tvshow;
-    const path = isMovie ? '/moviein' : '/tvshowin';
-    navigate(path, { state: { object: content, user } });
+    if (isMovie) {
+        navigate("/moviein", { state: { movie: content, user} });
+   } else 
+    {
+      navigate("/tvshowin", { state: { show: content, user} });
+    }
+
   }, [navigate, user]);
   
 

@@ -128,7 +128,7 @@ const FrameComponent23 = () => {
   }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
-    navigate("/reviewsmovieout", {state:{mov}});
+    navigate("/reviewsmoviein", {state:{mov, user}});
   }, [navigate]);
 
   
@@ -137,6 +137,7 @@ const FrameComponent23 = () => {
       <ReviewContainer
         review={review}
         key={index}
+        host={user}
         user={users[index]}
         onPictureIconClick={onPictureIconClick}
         onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}

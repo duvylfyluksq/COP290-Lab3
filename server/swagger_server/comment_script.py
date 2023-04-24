@@ -6,7 +6,6 @@ from datetime import datetime
 
 total_movies = 300
 total_tvshows = 16
-total_user = 10
 connection = pymysql.connect(
     host="localhost",
     user="root",
@@ -16,6 +15,9 @@ connection = pymysql.connect(
 )
 cursor = connection.cursor()
 
+query = "SELECT user_id from user"
+cursor.execute(query)
+users = [row['user_id'] for row in cursor.fetchall()]
 
 comments = ["Thank you for leaving a review! We're glad to hear that you enjoyed your experience with us.",
 
@@ -34,33 +36,16 @@ comments = ["Thank you for leaving a review! We're glad to hear that you enjoyed
             ]
 
 
-
-
-
-
-
-
-
-
-
-query = "SELECT review_id form review"
+query = "SELECT review_id from review"
 cursor.execute(query)
-result = [row[0] for row in cursor.fetchall()]
-
-
-
-
-
-
+result = [row['review_id'] for row in cursor.fetchall()]
 
 
 for rid in result:
-    userid = random.randint(1,total_user)
+    userid = random.choice(users)
     comment_data = random.choice(comments)
     query = "INSERT INTO `comment` (content, user_id, review_id) VALUES (%s, %s, %s)"
-    values = (comment_data,userid,rid)
-    cursor.execute(query,values)
+    values = (comment_data, userid, rid)
+    cursor.execute(query, values)
     comment_id = cursor.lastrowid
     connection.commit()
-
-

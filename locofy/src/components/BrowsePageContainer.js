@@ -11,7 +11,7 @@ const BrowsePageContainer = ({
 
   const onTVShowDescriptionBrowsePageContainerClick = useCallback(() => {
     const isUser = (user.length != 0);
-    const path = isUser ? '/showin' : '/showout';
+    const path = isUser ? '/tvshowin' : '/tvshowout';
     navigate(path, { state: { show, user } });
   }, [navigate,show]);
 

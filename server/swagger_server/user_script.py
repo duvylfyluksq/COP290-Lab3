@@ -17,15 +17,15 @@ connection = pymysql.connect(
 cursor = connection.cursor()
 
 
-query = "SELECT review_id form review"
+query = "SELECT user_id from user"
 cursor.execute(query)
-result = [row[0] for row in cursor.fetchall()]
+result = [row['user_id'] for row in cursor.fetchall()]
 
 
-for i in range(total_user):
+for i in result:
 
-    query = f'UPDATE users SET profile_pic = {i}.jpeg WHERE user_id = {i}'
+    query = f'UPDATE user SET pfp = %s WHERE user_id = {i}'
 
-    cursor.execute(query)
+    cursor.execute(query, (f'{i}.jpeg',))
 
     connection.commit()

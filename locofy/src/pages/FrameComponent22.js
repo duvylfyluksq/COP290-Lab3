@@ -5,6 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 
 import ReviewContainer from "../components/ReviewContainer";
 import MoreShowsLikeThis from "../components/MoreShowsLikeThis";
+import ReviewForm from '../components/ReviewForm';
 import NavbarContainer from '../components/NavbarContainer';
 import "./FrameComponent11.css";
 import {Tvshow} from "../model/Tvshow";
@@ -112,15 +113,16 @@ const FrameComponent22 = () => {
   }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
-    navigate("/reviewsshowout", {state:{show}});
+    navigate("/reviewsshowin", {state:{show, user}});
   }, [navigate]);
 
   const reviewBlock = reviews.map((review, index) => (
     users && users.length === reviews.length ? (
-      <ReviewContainer
+      <ReviewForm
         review={review}
         key={index}
         user={users[index]}
+        host={user}
         onPictureIconClick={onPictureIconClick}
         onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
       />

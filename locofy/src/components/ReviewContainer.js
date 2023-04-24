@@ -2,21 +2,21 @@ import React from 'react';
 import "./ReviewContainer.css";
 // import Comment from './comment.js';
 import CommentContainer from './commentContainer';
-import { useRef,useState } from 'react';
+import { useRef,useState,useCallback,useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { ReviewsApi } from '../api/ReviewsApi';
+import { Comment } from '../model/Comment';
 
+
+
+const api = new ReviewsApi();
 const ReviewContainer = ({review ,user}) => {
   const [commentHeight, setCommentHeight] = useState(0);
-  function liking(){
-    var like= document.querySelectorAll("#likebutton-icon1");
-    if(like[0].classList.contains('liked')){
-      like[0].classList.remove('liked');
-      like[0].setAttribute("src","/likebutton.svg");
-    }else{
-      like[0].classList.add('liked');
-      like[0].setAttribute("src","/likedbutton.svg");
-    }
-  }
+  
   const [showComments, setShowComments] = useState(false);
+
+
+  const [comments, setcomments] = useState();
   const reviewContainerRef = useRef(null);
   React.useEffect(() => {
     const reviewContainer = reviewContainerRef.current;
@@ -27,11 +27,30 @@ const ReviewContainer = ({review ,user}) => {
     }
   }, [showComments],
   );
+  useEffect(() => {
+    api.reviewReviewIdCommentGet(review.id,(error,data,response)=>{
+      if (response.status == 200){
+        const commentlist = data.slice(0,3).map((comment) =>
+        Comment.constructFromObject(comment));
+         );
+         setcomments(commentlist);
+      
+    }
+    else{
+      console.log(error);
+    }
+  }
+    )
 
+
+
+
+  },[]);
 
   function toggleComments() {
     setShowComments(!showComments);
   }
+  
   return (
     <div className="review2" ref={reviewContainerRef}>
       <div className="reviewheader1">
@@ -69,7 +88,7 @@ const ReviewContainer = ({review ,user}) => {
         </div>
         <div className="likes5">
           <div className="likes6">424242</div>
-          <img id="likebutton-icon1" className="likebutton-icon1" alt="" src="/likebutton.svg" onClick={()=>liking()}/>
+          <img id="likebutton-icon1" className="likebutton-icon1" alt="" src="/likebutton.svg"/>
         </div>
       </div>
       {showComments && (
