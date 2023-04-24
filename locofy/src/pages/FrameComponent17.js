@@ -85,26 +85,6 @@ const FrameComponent17 = () => {
       }
     });
   }, []);
-  
-  const onMovieCardContainerClick = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer1Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer2Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer3Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer4Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
 
   const onTVShowCardContainerClick = useCallback(() => {
     navigate("/tvshowout");

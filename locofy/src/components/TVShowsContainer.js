@@ -83,8 +83,10 @@ const TVShowsContainer = ({
   // }, []);
   
   const onTVShowCardClick = useCallback((show) => {
-    navigate("/tvshowout", { state: { show } });
-  }, [navigate]);
+    const isUser = !(user === []);
+    const path = isUser ? '/tvshowin' : '/tvshowout';
+    navigate(path, { state: { movie, user } });
+  }, [navigate, user]);
 
   return (
     <div className="top-tv-shows" style={topTVShowsStyle}>

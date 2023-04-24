@@ -8,6 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 
 
+
 const MakePost = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,20 +16,25 @@ const MakePost = () => {
 
   const [char1, setchar1] = useState("");
   const [char2, setchar2] = useState("");
-  const [rating, setrating] = useState();
+  const [rating, setrating] = useState(0);
 
   const onPostClick = useCallback(() => {
-    // Please sync "State=SignedIn" to the project
-  }, []);
+
+    navigate("/homesignedin", {state: {user}});
+  }, [navigate]);
+
+
   const [charCount1, setCharCount1] = useState(0);
   function handleInputChange1(event) {
     const inputValue = event.target.value;
     setCharCount1(inputValue.length);
+    setchar1(inputValue);
   }
   const [charCount2, setCharCount2] = useState(0);
   function handleInputChange2(event) {
     const inputValue = event.target.value;
     setCharCount2(inputValue.length);
+    setchar2(inputValue);
   }
   function changeColor(buttonNumber){
     var buttons = document.querySelectorAll("#rating");
@@ -36,6 +42,7 @@ const MakePost = () => {
         buttons[i].classList.remove('colored');
     }
     buttons[buttonNumber - 1].classList.add('colored');
+    setrating(buttonNumber);
   }
   
   

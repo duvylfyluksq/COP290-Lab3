@@ -1,5 +1,7 @@
 import React from 'react';
 import "./SortPanelReviewsPageRadios.css";
+import {useState, useCallback, useEffect } from "react";
+
 
 const SortPanelReviewsPageRadios = () => {
   function changeColor(buttonNumber){

@@ -33,11 +33,23 @@ const NewReleasesContainer = ({
 
   const onCardClick = useCallback((release) => {
     const isMovie = release instanceof Movie;
+    const isUser = !(user === []);
     const content = release;
     if (isMovie) {
-    navigate("/movieout", { state: { movie: content, user} });
+      if (isUser){
+        navigate("/moviein", { state: { movie: content, user} });
+      }
+      else{
+        navigate("/movieout", { state: { movie: content, user} });
+      }
+
   } else {
-    navigate("/tvshowout", { state: { show: content, user} });
+    if (isUser){
+      navigate("/tvshowin", { state: { show: content, user} });
+    }
+    else{
+      navigate("/tvshowout", { state: { show: content, user} });
+    }
   }
   }, [navigate]);
 

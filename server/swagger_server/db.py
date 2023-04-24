@@ -3,7 +3,7 @@ import datetime
 import os
 import json
 import pymysql
-from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId
+from swagger_server.models import User, Movie, Tvshow, Review, Comment, MovieId, ShowId, Title
 
 connection = pymysql.connect(
     host="localhost",
@@ -518,7 +518,7 @@ def countReviews_User(User: User) -> int:
         return len(r)
 
 
-def Search(prefix: str) -> List[Union[Movie, Tvshow]]:
+def Search(prefix: str) -> List[Title]:
     L = []
     with connection.cursor() as cursor:
         sql = """SELECT * FROM `movie` WHERE `title` LIKE %s"""
@@ -529,7 +529,7 @@ def Search(prefix: str) -> List[Union[Movie, Tvshow]]:
             i['cast'] = json.loads(i['cast'])
             i['movie_id'] = {'id': i['movie_id']}
             i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
-            L.append(Movie.from_dict(i))
+            L.append(Title(movie=Movie.from_dict(i), tvshow=None))
         sql = """SELECT * FROM `tvshow` WHERE `title` LIKE %s"""
         cursor.execute(sql, (prefix + '%',))
         r = cursor.fetchall()
@@ -538,7 +538,7 @@ def Search(prefix: str) -> List[Union[Movie, Tvshow]]:
             i['cast'] = json.loads(i['cast'])
             i['show_id'] = {'id': i['show_id']}
             i['release_date'] = i['release_date'].strftime("%Y-%m-%d")
-            L.append(Tvshow.from_dict(i))
+            L.append(Title(movie=None, tvshow=Tvshow.from_dict(i)))
     return L
 
 

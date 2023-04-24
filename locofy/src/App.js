@@ -36,6 +36,7 @@ import SignUp from "./pages/SignUp";
 import SignInTile from "./pages/SignInTile";
 import { useEffect } from "react";
 import ReviewsShowOut from './pages/ReviewsShowOut';
+import SearchOut from './pages/SearchOut';
 
 function App(){
   const action = useNavigationType();
@@ -207,6 +208,7 @@ function App(){
       <Route path="/homesignedin" element={<FrameComponent16 />} />
       <Route path="/" element={<FrameComponent17 />} />
       <Route path="/homesignedout" element={<FrameComponent17 />} />
+      <Route path="/searchout" element={<SearchOut />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/continue" element={<Continue />} />
       <Route path="/makepost" element={<MakePost />} />

@@ -32,7 +32,13 @@ const TrendingMoviesContainer = ({
   }, [propWidth, propAlignSelf1]);
 
   const onMovieCardContainerClick = useCallback((movie) => {
-    navigate("/movieout", {state:{movie}});
+    const isUser = !(user === []);
+    if (isUser){
+      navigate("/moviein", { state: { movie: content, user} });
+    }
+    else{
+      navigate("/movieout", { state: { movie: content, user} });
+    }
   }, [navigate]);
 
   return (

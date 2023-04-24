@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./MoviesContainer.css";
 
 const MoviesContainer = ({
@@ -9,6 +10,20 @@ const MoviesContainer = ({
   onGenresTextClick,
   onNavbarRHSContainerClick,
 }) => {
+  const navigate = useNavigate();
+  const [searchText, setSearchText] = useState("");
+
+  const onSearchEnter = useCallback((e) => {
+    if (e.key === "Enter") {
+      navigate("/searchout", { state: { pref: searchText } });
+    }
+  }, [navigate, searchText]);
+
+  const onSearchTextChange = useCallback((e) => {
+    setSearchText(e.target.value);
+    
+  }, []);
+
   return (
     <div className="navbar3">
       <div className="logo3" onClick={onLogoContainerClick}>
@@ -27,8 +42,15 @@ const MoviesContainer = ({
       </div>
       <div className="right4">
         <div className="searchbar3">
-        <img className="vector-icon84" alt="" src="/vector23.svg" />
-          <input type="text" placeholder="What's on your mind?" class="type" />
+          <img className="vector-icon84" alt="" src="/vector23.svg" />
+          <input 
+            type="text" 
+            placeholder="What's on your mind?" 
+            className="type" 
+            value={searchText}
+            onChange={onSearchTextChange}
+            onKeyDown={onSearchEnter}
+          />
         </div>
         <div className="navbar-rhs3" onClick={onNavbarRHSContainerClick}>
           <img className="vector-icon21" alt="" src="/vector6.svg" />

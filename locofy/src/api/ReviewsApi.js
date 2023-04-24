@@ -54,7 +54,7 @@ export class ReviewsApi {
      * @param {module:api/ReviewsApi~reviewMovieIdGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link <&vendorExtensions.x-jsdoc-type>}
      */
-    reviewMovieIdGet(id, opts, callback) {
+    reviewMovieIdGet(id, opts, callback) { 
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'id' is set

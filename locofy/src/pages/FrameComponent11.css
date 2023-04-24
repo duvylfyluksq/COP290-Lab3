@@ -73,6 +73,8 @@
   gap: var(--gap-9xl);
   text-align: center;
   color: var(--color-goldenrod);
+  font-size: 15px;
+
 }
 .descriptionheader60 {
   width:100%;
@@ -117,7 +119,7 @@
   gap: var(--gap-mini);
 }
 .plotsynopsis100 {
-  height:103px;
+  height:96px;
   align-self: stretch;
   position: relative;
   font-size: 20px;
@@ -147,18 +149,19 @@
   gap:var(--gap-31xl);
 }
 
-.subsublayout100 {
+.subsublayout1001 {
   width:120%;
   align-self: stretch;
   flex-direction: row;
   align-items: flex-start;
   gap: var(--gap-11xl);
   font-size: 25px;
+  margin-top:4%;
 }
 .tvshowdescription100,
 .right100,
 .sublayout100,
-.subsublayout100 {
+.subsublayout1001 {
   display: flex;
   justify-content: flex-start;
 }
@@ -187,6 +190,7 @@
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   width: 85%;
   overflow-x:auto;
+  overflow-y:hidden;
   height: 400px;
   flex-direction: row;
   align-items: center;
@@ -255,6 +259,7 @@
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
   overflow-x:hidden;
+  margin-top:5%;
 }
 .reviews139{
   width:150%;

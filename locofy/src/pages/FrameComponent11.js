@@ -166,7 +166,7 @@ const FrameComponent11 = () => {
                     {show.plot}
                   </div>
                 </div>
-                <div className="subsublayout100">
+                <div className="subsublayout1001">
                   <img className="line-icon100" alt="" src="/line.svg" />
                   <div className="credits100">
                     <p className="avgduration">Director: {show.director}</p>
