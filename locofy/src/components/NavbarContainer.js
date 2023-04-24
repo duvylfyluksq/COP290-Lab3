@@ -40,19 +40,17 @@ const NavbarContainer = ({
 
   const onProfileMenuClick = useCallback(() => {
     navigate("/bobdylaninself", {state: {user}})
-  }, []);
+  }, [navigate]);
 
   const onWatchlistClick = useCallback(() => {
-    navigate("/watchlistinself");
+    navigate("/watchlistinself", {state: {user}});
   }, [navigate]);
   const onViewProfileClick = useCallback(() => {
-    navigate("/bobdylaninself");
+    navigate("/bobdylaninself", {state: {user}});
   }, [navigate]);
   const onLogoutClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
-
-  const pfp = "../pages/" + user.pfp ;
 
   return (
     <div className="navbar2">
@@ -75,23 +73,18 @@ const NavbarContainer = ({
         <input type="text" placeholder="What's on your mind?" class="type" />
       </div>
       <div className="navbar-rhs2">
-        <img
-          className="fluentcompose-24-filled-icon2"
-          alt=""
-          src={dimensionsText}
-          onClick={onFluentcompose24FilledClick}
-        />
+        
         <div class="rhs">
           <button class="signedin">
             <img
               className="profilemenu-icon2"
               alt=""
-              src= {pfp}
+              src= {user.pfp}
               onClick={onProfileMenuClick}
             />
           </button>
-          <div class="dropdown">
-              <span class="name">{user.username}</span>
+          <div className="dropdown">
+              <span className="name">{user.username}</span>
               <hr />
               <a href="" onClick={onWatchlistClick}>Watchlist</a><br />
               <a href="" onClick={onViewProfileClick}>View Profile</a><br />

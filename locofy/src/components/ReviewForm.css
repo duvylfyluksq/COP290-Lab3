@@ -2,8 +2,8 @@
   position: relative;
   font-size: var(--font-size-26xl);
   font-weight: 500;
-  display: inline-block;
-  width: 100%;
+  display: flex;
+  width: 80%;
 }
 .by {
   position: relative;
@@ -12,6 +12,7 @@
 .picture-icon {
   width: 20px;
   height: 20px;
+  border-radius: 50%;
   flex-shrink: 0;
   object-fit: cover;
 }
@@ -29,11 +30,11 @@
   gap: var(--gap-3xs);
 }
 .sublayout6 {
-  width: 769px;
+  width: 75%;
   flex-shrink: 0;
 }
 .reviewername {
-  width: 100%;
+  width: 800px;
   padding: var(--padding-3xs) 0;
   box-sizing: border-box;
 }
@@ -47,13 +48,14 @@
 }
 .rating-xy10 {
   display: inline-block;
-  width: 124px;
+  width: 190px;
   height: 22px;
 }
 .vector-icon24 {
   width: 25px;
   height: 23.75px;
-  
+  left:-50%;
+  top:-10%;
 }
 .rating10,
 .reviewheader {
@@ -65,7 +67,7 @@
   gap: var(--gap-xl);
 }
 .reviewheader {
-  width: 100%;
+  width: 80%;
   height: 130px;
   flex-shrink: 0;
   flex-direction: column;
@@ -80,7 +82,7 @@
   font-size: var(--font-size-11xl);
   display: inline-block;
   width: 100%;
-  height: 249px;
+  height: 50%;
   overflow-y: auto;
 }
 .comments,
@@ -261,7 +263,10 @@
   font-size: var(--font-size-xl);
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
-  width:105%;
+  width:62%;
+  gap:var(--gap-11xl);
+  padding:var(--padding-11xl);
+  margin-left:-2%;
 }
 
 .indocked{

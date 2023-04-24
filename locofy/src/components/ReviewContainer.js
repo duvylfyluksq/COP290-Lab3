@@ -16,40 +16,35 @@ const ReviewContainer = ({review ,user}) => {
   const [showComments, setShowComments] = useState(false);
 
 
-  const [comments, setcomments] = useState();
+  const [comments, setcomments] = useState([]);
   const reviewContainerRef = useRef(null);
-  React.useEffect(() => {
+  useEffect(() => {
     const reviewContainer = reviewContainerRef.current;
     if (showComments) {
+
+      
       reviewContainer.style.height = `$calc(100vh - 200px + ${commentHeight}px)`;
     } else {
       reviewContainer.style.height = '';
     }
   }, [showComments],
   );
-  useEffect(() => {
-    api.reviewReviewIdCommentGet(review.id,(error,data,response)=>{
-      if (response.status == 200){
-        const commentlist = data.slice(0,3).map((comment) =>
-        Comment.constructFromObject(comment));
-         );
-         setcomments(commentlist);
-      
-    }
-    else{
-      console.log(error);
-    }
-  }
-    )
 
-
-
-
-  },[]);
-
-  function toggleComments() {
+  
+  const toggleComments = useCallback(() => {
+    api.reviewReviewIdCommentGet(review.review_id, (error, data, response) => {
+      if (response.status == 200) {
+        const commentlist = data.map((comment) =>
+          Comment.constructFromObject(comment)
+        );
+        console.log(commentlist);
+        setcomments(commentlist);
+      } else {
+        console.log(error);
+      }
+    });
     setShowComments(!showComments);
-  }
+  }, [showComments,comments]);
   
   return (
     <div className="review2" ref={reviewContainerRef}>
@@ -84,7 +79,7 @@ const ReviewContainer = ({review ,user}) => {
       <div id = 'reviewfooter1' className="reviewfooter1">
         <div className="commentsdropdown1">
           <div className="comments1">Comments</div>
-          <img className="vector-icon29" alt="" src="/vector9.svg" onClick={toggleComments} />
+          <img className="vector-icon29" alt="" src="/vector9.svg" onClick={()=>toggleComments()} />
         </div>
         <div className="likes5">
           <div className="likes6">424242</div>
@@ -94,7 +89,7 @@ const ReviewContainer = ({review ,user}) => {
       {showComments && (
         <div className="commentt-container"
         ref={el => el && setCommentHeight(el.offsetHeight)}
-        ><CommentContainer />
+        ><CommentContainer comments = {comments} />
         </div>)}
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import BobDylanContainer from "../components/BobDylanContainer";
 import WatchListMovieContainer from "../components/WatchListMovieContainer";
 import Footer from "../components/Footer";
@@ -10,6 +10,8 @@ import "./FrameComponent7.css";
 
 const FrameComponent7 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const user = location.state.user;
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedin");
@@ -46,7 +48,7 @@ const FrameComponent7 = () => {
     <div className="bobdylan-inself-parent">
       <div className="bobdylan-inself">
         <div className="body7">
-          <BobDylanContainer />
+          <BobDylanContainer user = {user}/>
           <div className="watchlist6">
             <div className="watchlistheader4">
               <div className="watchlist7">Watchlist</div>

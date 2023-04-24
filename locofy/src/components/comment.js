@@ -1,10 +1,36 @@
 import React from 'react';
 import "./comment.css";
+import { useState, useEffect } from 'react';
+import {UserApi} from "../api/UserApi";
+import {User} from "../model/User";
 
+const userapi = new UserApi();
 const Comment = ({
+  comment,
   picture,
   duvylfyluksq}) => {
+    const [user, setUser] = useState({});
+
+    
   
+    useEffect(() => {
+      userapi.userUserIdGet(comment.user_id, (error, data, response) => {
+        if (error) {
+          console.log(error);
+          return;
+        }
+        
+        if (response.status === 200) {
+          const newUser = User.constructFromObject(data); // define User class first
+          console.log(newUser);
+          setUser(newUser);
+        } else {
+          console.log(response.statusText);
+        }
+      });
+    }, [comment.user_id]);
+
+
   return (
     <div className="commenttttt">
       <div className="reviewername1">
@@ -12,22 +38,15 @@ const Comment = ({
             <img
               className="picture-icon1"
               alt=""
-              src="1.jpeg"
+              src={user.pfp}
             />
             <div className="duvylfyluksq1">
-              Akshit
+              {user.username}
             </div>
           </div>
         </div>
         <div className="contentt">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        {comment.content}
         </div>
     </div>
   );

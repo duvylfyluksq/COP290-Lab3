@@ -104,17 +104,16 @@ const FrameComponent22 = () => {
     navigate("/tvshowbrowseout");
   }, [navigate]);
 
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
+  const onMakepostClick = useCallback(() => {
+    navigate("/makepost", {state:{content: show, user}});
   }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
     navigate("/reviewsshowin", {state:{show, user}});
   }, [navigate]);
+
+  const onWatchlistClick = useCallback(() => {
+  }, []);
 
   const reviewBlock = reviews.map((review, index) => (
     users && users.length === reviews.length ? (
@@ -140,6 +139,18 @@ const FrameComponent22 = () => {
                 alt=""
                 src={show.poster}
               />
+              <img
+          className="fluentcompose-24-filled-icon2"
+          alt=""
+          src="/makepost.svg"
+          onClick={onMakepostClick}
+        />
+        <img className="watchlist12345"
+        alt=""
+        src="/watchlist.svg" />
+        <img className="plus5678"
+        alt=""
+        src="/plus.svg" />
             </div>
             <div className="right100">
               <div className="descriptionheader60">
@@ -150,10 +161,10 @@ const FrameComponent22 = () => {
                 <div className="episodeduration">
                   <p className="avgduration">{show.duration}</p>
                 </div>
-                <div className="genres1">
+                <div className="genres509">
                 {show.genres.map((genre) => (
-                <div className="genre2">
-                  <div className="genre">{genre}</div>
+                <div className="genre2509">
+                  <div className="genre509">{genre}</div>
                 </div>
               ))}
                 </div>

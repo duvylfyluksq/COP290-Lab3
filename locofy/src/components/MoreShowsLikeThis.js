@@ -30,11 +30,15 @@ const MoreShowsLikeThis = ({
     };
   }, [propWidth, propAlignSelf1]);
 
-  const onTVShowCardContainerClick = useCallback((show) => {
-    const isUser = (user.length != 0);
-    const path = isUser ? '/showin' : '/showout';
-    navigate(path, { state: { show, user } });
-  }, [navigate]);
+  const onTVShowCardContainerClick = useCallback(
+    (show) => {
+      const isUser = user.length !== 0;
+      const path = isUser ? "/tvshowin" : "/tvshowout";
+      navigate(path, { state: { show, user } });
+    },
+    [navigate]
+  );
+  
 
   return (
     <div className="moremovieslikethis50">

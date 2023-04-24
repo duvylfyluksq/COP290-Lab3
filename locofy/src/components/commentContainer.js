@@ -2,12 +2,16 @@ import React from 'react';
 import "./commentContainer.css";
 import Comment from './comment';
 
-const CommentContainer = () => {
+const CommentContainer = ({comments}) => {
+  console.log("rip");
+  console.log(comments);
   return (
     <div className="commenttttts">
-        <Comment /><br />
-        <Comment /><br />
-        <Comment />
+        {comments.map((comment, index) => (
+      <div key={index}>
+      <Comment comment  = {comment}/><br />
+      </div>
+  ))}
     </div>
   );
 };

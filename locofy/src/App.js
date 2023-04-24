@@ -40,11 +40,34 @@ import { useEffect } from "react";
 import ReviewsShowOut from './pages/ReviewsShowOut';
 import SearchOut from './pages/SearchOut';
 
+// const useScrollToTop = () => {
+//   const history = useHistory();
+
+//   useEffect(() => {
+//     const unlisten = history.listen(() => {
+//       window.scrollTo(0, 0);
+//     });
+
+//     return () => {
+//       unlisten();
+//     };
+//   }, [history]);
+// };
+
+
 function App(){
+
+
   const action = useNavigationType();
   const location = useLocation();
-  const pathname = location.pathname;
 
+  // const { pathname } = useLocation();
+
+  // // useEffect(() => {
+  // //   window.scrollTo(0, 0);
+  // // }, [pathname]);
+
+  const pathname = location.pathname;
   useEffect(() => {
     if (action !== "POP") {
       window.scrollTo(0, 0);

@@ -1,16 +1,16 @@
 import React from 'react';
 import "./BobDylanContainer.css";
 
-const BobDylanContainer = () => {
+const BobDylanContainer = ({user}) => {
   return (
     <div className="userprofile1">
       <div className="left4">
         <div className="picture4">
-          <img className="picture-icon3" alt="" src="/picture3@2x.png" />
+          <img className="picture-icon3" alt="" src={user.pfp} />
           <img className="imageicon" alt="" src="/imageicon.svg" />
         </div>
         <div className="username3">
-          <div className="bobdylan">bobdylan</div>
+          <div className="bobdylan">{user.username}</div>
           <img className="imageicon" alt="" src="/editicon.svg" />
         </div>
       </div>
@@ -21,9 +21,7 @@ const BobDylanContainer = () => {
             <img className="editicon1" alt="" src="/editicon1.svg" />
           </div>
           <div className="biotext1">
-            Im a puppet on a string tracy island, time-traveling diamond
-            cutter-shaped heartaches that come to find you four in some velvet
-            morning years too late...
+            {user.bio}
           </div>
         </div>
         <div className="interests3">
@@ -31,15 +29,12 @@ const BobDylanContainer = () => {
             <p className="interests5">Interests</p>
           </div>
           <div className="genres8">
-            <div className="genre29">
-              <div className="adventure45">Adventure</div>
-            </div>
-            <div className="genre29">
-              <div className="adventure45">Adventure</div>
-            </div>
-            <div className="genre29">
-              <div className="adventure45">Adventure</div>
-            </div>
+
+          {user.interests.map((genre) => (
+        <div className="genre29" key={genre}>
+          <div className="adventure45">{genre}</div>
+        </div>
+      ))}
           </div>
         </div>
         <div className="stats3">

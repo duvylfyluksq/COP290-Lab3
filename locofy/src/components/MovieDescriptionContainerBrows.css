@@ -99,9 +99,15 @@
   border-radius: var(--br-3xs);
   background-color: var(--color-darkorchid-100);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  width: 70px;
-  height: 25px;
+  display:inline-block;
+  width:99px;
+  height: 21px;
   flex-shrink: 0;
+  text-align:right;
+  flex-direction: row;
+  gap: var(--gap-9xl);
+  color: var(--color-goldenrod);
+  font-size: 15px;
 }
 .body23,
 .genres11 {

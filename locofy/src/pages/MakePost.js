@@ -13,6 +13,7 @@ const MakePost = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.state.user;
+  const content = location.state.content;
 
   const [char1, setchar1] = useState("");
   const [char2, setchar2] = useState("");
@@ -50,9 +51,9 @@ const MakePost = () => {
     <div className="makepost">
       <div className="body18">
         <div className="write-a-review-container">
-          <p className="write-a-review"><center>Write a Review</center></p>
+          <p className="write-a-review"><center>Write a Review for {content.title}</center></p>
         </div>
-        <div className="movieorshow">
+        {/* <div className="movieorshow">
           <div className="what-are-you-container">
             <p className="write-a-review">What are you reviewing?</p>
           </div>
@@ -61,7 +62,7 @@ const MakePost = () => {
             type="text"
             placeholder="Search Movies, TV Shows"
           />
-        </div>
+        </div> */}
         <div className="movieorshow">
           <div className="rating5">Rating</div>
           <div className="ratinglist">

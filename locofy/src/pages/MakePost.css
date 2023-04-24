@@ -11,8 +11,9 @@
 .write-a-review-container {
   font-size: var(--font-size-26xl);
   font-weight: 600;
-  width: 299px;
+
   height: 43px;
+  /* margin-left:-32%; */
 }
 .what-are-you-container {
   font-weight: 500;

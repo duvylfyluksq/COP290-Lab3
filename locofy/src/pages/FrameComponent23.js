@@ -123,13 +123,15 @@ const FrameComponent23 = () => {
     navigate("/genresout");
   }, [navigate]);
 
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
+  const onMakepostClick = useCallback(() => {
+    navigate("/makepost", {state: {content: mov, user}});
   }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
     navigate("/reviewsmoviein", {state:{mov, user}});
   }, [navigate]);
+  // const onWatchlistClick = useCallback(() => {
+  // }, []);
 
   
   const reviewBlock = reviews.map((review, index) => (
@@ -154,6 +156,18 @@ const FrameComponent23 = () => {
           <div className="moviedescription50">
             <div className="left50">
               <img className="joker-icon70" alt="" src={mov.poster} />
+              <img
+          className="fluentcompose-24-filled-icon2"
+          alt=""
+          src="/makepost.svg"
+          onClick={onMakepostClick}
+        />
+        <img className="watchlist12345"
+        alt=""
+        src="/watchlist.svg" />
+        <img className="plus5678"
+        alt=""
+        src="/plus.svg" />
             </div>
             <div className="right50">
               <div className="descriptionheader50">
@@ -164,10 +178,10 @@ const FrameComponent23 = () => {
                 <div className="duration">
                   <p className="director-john-doe">{mov.duration}</p>
                 </div>
-                <div className="genres">
+                <div className="genres509">
                 {mov.genres.map((genre) => (
-                <div className="genre2">
-                  <div className="genre">{genre}</div>
+                <div className="genre2509">
+                  <div className="genre509">{genre}</div>
                 </div>
               ))}
                 </div>

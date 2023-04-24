@@ -90,22 +90,6 @@ const FrameComponent10 = () => {
     navigate("/duvylfyluksqout");
   }, [navigate]);
 
-  const onPictureIcon1Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqText1Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onPictureIcon2Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqText2Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
@@ -162,10 +146,10 @@ const FrameComponent10 = () => {
                 <div className="duration">
                   <p className="director-john-doe">{mov.duration}</p>
                 </div>
-                <div className="genres">
+                <div className="genres509">
                 {mov.genres.map((genre) => (
-                <div className="genre2">
-                  <div className="genre">{genre}</div>
+                <div className="genre2509">
+                  <div className="genre509">{genre}</div>
                 </div>
               ))}
                 </div>
