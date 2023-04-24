@@ -213,6 +213,21 @@
   gap: var(--gap-31xl);
   font-size: var(--font-size-41xl);
 }
+.reviewlist9999999::-webkit-scrollbar{
+  width:0px;
+  background-color: transparent;
+}
+.reviewlist9999999 {
+  width: 67.5%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-3xs) 0;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-31xl);
+  font-size: var(--font-size-41xl);
+}
 .body10,
 .movie-out {
   position: absolute;

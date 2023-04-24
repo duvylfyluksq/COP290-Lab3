@@ -131,11 +131,11 @@ const FrameComponent9 = () => {
             <div className="title">{mov.title}</div>
           </div>
           <SortPanelReviewsPageRadios />
-          <div className="reviewlist3">
-          <div className="postslist6">
-            {reviewBlock}
-          </div>
-          </div>
+          <div className="reviewlist9999999">
+            <div className="reviews">Reviews</div>
+            <div className="reviews139">
+              {reviewBlock}
+            </div>
         </div>
         <MoviesContainer
           coordinates="/vector18.svg"
@@ -146,6 +146,7 @@ const FrameComponent9 = () => {
           onNavbarRHSContainerClick={onNavbarRHSContainerClick}
         />
       </div>
+    </div>
     </div>
   );
 };

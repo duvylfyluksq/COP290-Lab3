@@ -4,7 +4,7 @@ import {useState, useCallback, useEffect } from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 
 import ReviewContainer from "../components/ReviewContainer";
-import MoreMoviesLikeThisContainer from "../components/MoreMoviesLikeThisContainer";
+import MoreShowsLikeThis from "../components/MoreShowsLikeThis";
 import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent11.css";
 import {Tvshow} from "../model/Tvshow";
@@ -49,7 +49,7 @@ const FrameComponent11 = () => {
     if(!fetched){
       api.tvshowGet({genre: show.genres}, (error, data, response) => {
         if (response.status === 200) {
-          const showList = data.slice(0, 11).map((showData) =>
+          const showList = data.slice(0,11).map((showData) =>
           Tvshow.constructFromObject(showData)
           );
           console.log(showList);
@@ -90,22 +90,6 @@ const FrameComponent11 = () => {
     navigate("/duvylfyluksqout");
   }, [navigate]);
 
-  const onPictureIcon1Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqText1Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onPictureIcon2Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqText2Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
@@ -127,7 +111,7 @@ const FrameComponent11 = () => {
   }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
-    navigate("/reviewsmovieout");
+    navigate("/reviewsshowout", {state:{show}});
   }, [navigate]);
 
   const reviewBlock = reviews.map((review, index) => (
@@ -205,8 +189,8 @@ const FrameComponent11 = () => {
             </div>
             <div className="reviews1">More Like This</div>
             <div className="more-like-this">
-            <MoreMoviesLikeThisContainer
-              movies = {shows}
+            <MoreShowsLikeThis
+              shows = {shows}
             />
             </div>
           </div>

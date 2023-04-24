@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import MoreMoviesLikeThisContainer from "../components/MoreMoviesLikeThisContainer";
 import NavbarContainer from '../components/NavbarContainer';
 import "./FrameComponent10.css";
@@ -8,6 +8,8 @@ import ReviewForm from '../components/ReviewForm';
 
 const FrameComponent23 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const user = location.state.user;
 
   const onPictureIconClick = useCallback(() => {
     navigate("/duvylfyluksqin");
@@ -59,30 +61,6 @@ const FrameComponent23 = () => {
 
   const onTVShowCardContainer3Click = useCallback(() => {
     navigate("/tvshowin");
-  }, [navigate]);
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedin");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowsein");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowsein");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresin");
-  }, [navigate]);
-
-  const onFluentcompose24FilledClick = useCallback(() => {
-    navigate("/makepost");
-  }, [navigate]);
-
-  const onProfileMenuClick = useCallback(() => {
-    navigate("/bobdylaninself")
   }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
@@ -191,16 +169,11 @@ const FrameComponent23 = () => {
           </div>
         </div>
         <NavbarContainer
+          user = {user}
           dimensions="/vector16.svg"
           dimensionsText="/fluentcompose24filled1.svg"
           dimensionsId="/profilemenu5.svg"
           propBoxShadow="unset"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
-          onProfileMenuClick={onProfileMenuClick}
         />
       </div>
     </div>

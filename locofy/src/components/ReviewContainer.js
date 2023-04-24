@@ -52,7 +52,9 @@ const ReviewContainer = ({review ,user}) => {
         <div className="rating12">
           <div className="rating-xy101">
             <span className="rating13">Rating:</span>
-            <span> {review.rating}/10</span>
+            <span> {review.rating}/10</span><br />
+            <span className = "rating13">Sentiment:  </span>
+            <span>Positive </span>
           </div>
           <img className="vector-icon28" alt="" src="/vector8.svg" />
         </div>

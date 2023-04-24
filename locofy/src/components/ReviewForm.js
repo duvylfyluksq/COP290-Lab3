@@ -82,7 +82,9 @@ const ReviewForm = ({
             <div className="rating10">
               <div className="rating-xy10">
                 <span className="rating11">Rating:</span>
-                <span> x.y/10</span>
+                <span> x.y/10</span><br />
+            <span className = "rating13">Sentiment:  </span>
+            <span>Positive </span>
               </div>
               <img className="vector-icon24" alt="" src="/vector8.svg" />
             </div>

@@ -105,30 +105,6 @@ const FrameComponent16 = () => {
 
  
 
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedin");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowsein");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowsein");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresin");
-  }, [navigate]);
-
-  const onFluentcompose24FilledClick = useCallback(() => {
-    navigate("/makepost");
-  }, [navigate]);
-
-  const onProfileMenuClick = useCallback(() => {
-    navigate("/bobdylaninself")
-  }, []);
-
   return (
     <div className="home-signedin-parent">
       <div className="home-signedin">
@@ -187,12 +163,7 @@ const FrameComponent16 = () => {
           dimensionsText="/fluentcompose24filled1.svg"
           dimensionsId="/profilemenu8.svg"
           propBoxShadow="unset"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
-          onProfileMenuClick={onProfileMenuClick}
+        
         />
       </div>
     </div>

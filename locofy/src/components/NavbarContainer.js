@@ -10,12 +10,6 @@ const NavbarContainer = ({
   dimensionsText,
   dimensions,
   propBoxShadow,
-  onLogoContainerClick,
-  onMoviesTextClick,
-  onTVShowsTextClick,
-  onGenresTextClick,
-  onFluentcompose24FilledClick,
-  onProfileMenuClick,
 }) => {
   const logoStyle = useMemo(() => {
     return {
@@ -24,6 +18,29 @@ const NavbarContainer = ({
   }, [propBoxShadow]);
   
   const navigate = useNavigate();
+  const onLogoContainerClick = useCallback(() => {
+    navigate("/homesignedin", {state: {user}});
+  }, [navigate]);
+
+  const onMoviesTextClick = useCallback(() => {
+    navigate("/moviebrowsein", {state: {user}});
+  }, [navigate]);
+
+  const onTVShowsTextClick = useCallback(() => {
+    navigate("/tvshowbrowsein", {state: {user}});
+  }, [navigate]);
+
+  const onGenresTextClick = useCallback(() => {
+    navigate("/genresin", {state: {user}});
+  }, [navigate]);
+
+  const onFluentcompose24FilledClick = useCallback(() => {
+    navigate("/makepost", {state: {user}});
+  }, [navigate]);
+
+  const onProfileMenuClick = useCallback(() => {
+    navigate("/bobdylaninself", {state: {user}})
+  }, []);
 
   const onWatchlistClick = useCallback(() => {
     navigate("/watchlistinself");

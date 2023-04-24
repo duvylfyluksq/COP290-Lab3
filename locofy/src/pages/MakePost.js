@@ -4,11 +4,19 @@ import { useCallback } from "react";
 import MovieNavbar from "../components/MovieNavbar";
 import "./MakePost.css";
 import NavbarContainer from '../components/NavbarContainer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 
 const MakePost = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const user = location.state.user;
+
+  const [char1, setchar1] = useState("");
+  const [char2, setchar2] = useState("");
+  const [rating, setrating] = useState();
+
   const onPostClick = useCallback(() => {
     // Please sync "State=SignedIn" to the project
   }, []);
@@ -29,31 +37,7 @@ const MakePost = () => {
     }
     buttons[buttonNumber - 1].classList.add('colored');
   }
-  const navigate = useNavigate();
-
-const onLogoContainerClick = useCallback(() => {
-  navigate("/homesignedin");
-}, [navigate]);
-
-const onMoviesTextClick = useCallback(() => {
-  navigate("/moviebrowsein");
-}, [navigate]);
-
-const onTVShowsTextClick = useCallback(() => {
-  navigate("/tvshowbrowsein");
-}, [navigate]);
-
-const onGenresTextClick = useCallback(() => {
-  navigate("/genresin");
-}, [navigate]);
-
-const onFluentcompose24FilledClick = useCallback(() => {
-  navigate("/makepost");
-}, [navigate]);
-
-const onProfileMenuClick = useCallback(() => {
-  navigate("/bobdylaninself")
-}, [navigate]);
+  
   
   return (
     <div className="makepost">
@@ -113,16 +97,11 @@ const onProfileMenuClick = useCallback(() => {
         </div>
       </div>
       <NavbarContainer
+          user = {user}
           dimensions="/vector35.svg"
           dimensionsText="/fluentcompose24filled1.svg"
           dimensionsId="/profilemenu8.svg"
           propBoxShadow="unset"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
-          onProfileMenuClick={onProfileMenuClick}
         />
     </div>
   );

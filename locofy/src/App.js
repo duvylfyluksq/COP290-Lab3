@@ -35,6 +35,7 @@ import MakePost from "./pages/MakePost";
 import SignUp from "./pages/SignUp";
 import SignInTile from "./pages/SignInTile";
 import { useEffect } from "react";
+import ReviewsShowOut from './pages/ReviewsShowOut';
 
 function App(){
   const action = useNavigationType();
@@ -196,6 +197,7 @@ function App(){
       <Route path="/bobdylaninself" element={<FrameComponent7 />} />
       <Route path="/duvylfyluksqout" element={<FrameComponent8 />} />
       <Route path="/reviewsmovieout" element={<FrameComponent9 />} />
+      <Route path="/reviewsshowout" element={<ReviewsShowOut />} />
       <Route path="/movieout" element={<FrameComponent10 />} />
       <Route path="/tvshowout" element={<FrameComponent11 />} />
       <Route path="/genresout" element={<FrameComponent12 />} />
