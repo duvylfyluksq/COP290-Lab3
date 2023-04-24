@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import ReviewContainer from "../components/ReviewContainer";
+import ReviewForm from "../components/ReviewForm";
 import MoreMoviesLikeThisContainer from "../components/MoreMoviesLikeThisContainer";
 import NavbarContainer from "../components/NavbarContainer";
 import "./FrameComponent10.css";
@@ -145,11 +145,11 @@ const FrameComponent23 = () => {
   
   const reviewBlock = reviews.map((review, index) => (
     users && users.length === reviews.length ? (
-      <ReviewContainer
+      <ReviewForm
         review={review}
         key={index}
-        host={user}
         user={users[index]}
+        host={user}
         onPictureIconClick={onPictureIconClick}
         onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
       />

@@ -28,12 +28,10 @@ const FrameComponent7 = () => {
 
   console.log(user);
   useEffect(() => {
-    revapi.reviewUserUserIdGet(user.user_id, {}, (error, data, response) => {
+    revapi.reviewUserUserIdGet(user.user_id, {sortOrder:true}, (error, data, response) => {
       console.log("rip");
       if (response.status === 200) {
-        const reviewlist = data
-          .slice(0, 3)
-          .map((reviewData) => Review.constructFromObject(reviewData));
+        const reviewlist = data.map((reviewData) => Review.constructFromObject(reviewData));
         console.log(reviewlist);
         setReviews(reviewlist);
         console.log("hello");
@@ -43,7 +41,6 @@ const FrameComponent7 = () => {
             console.log("rip");
             if (response.status === 200) {
               const watchlist = data
-              .slice(0, 10)
                 .map((watchlistData) =>
                   Title.constructFromObject(watchlistData)
                 );
@@ -63,12 +60,12 @@ const FrameComponent7 = () => {
   
 
   const onWatchlistText1Click = useCallback(() => {
-    navigate("/watchlistinself");
-  }, [navigate]);
+    navigate("/watchlistinself", {state:{watchlist, user}});
+  }, [navigate,watchlist]);
 
   const onPostsText1Click = useCallback(() => {
-    navigate("/reviewsbobdylanin");
-  }, [navigate]);
+    navigate("/reviewsbobdylanin",{state:{reviews,user}});
+  }, [navigate,reviews]);
 
   return (
     <div className="bobdylan-inself-parent">
@@ -81,7 +78,7 @@ const FrameComponent7 = () => {
               <img className="vector-icon4" alt="" src="/watchlist.svg" />
             </div>
             <div className="watchlistdisplay4">
-              {watchlist.map((title, index) => {
+              {watchlist.slice(0,10).map((title, index) => {
                 if (!!title.movie) {
                   return (
                     <WatchListMovieContainer
@@ -108,7 +105,7 @@ const FrameComponent7 = () => {
           <div className="recentposts2">
             <div className="recentposts3">Recent Posts</div>
             <div className="review1390">
-              {reviews.map((review) => (
+              {reviews.slice(0,3).map((review) => (
                 <ReviewForm
                 picture="/picture1@2x.png"
                 duvylfyluksq="bobdylan"

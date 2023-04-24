@@ -17,6 +17,19 @@ const ReviewForm = ({
   const [comments, setcomments] = useState([]);
   const commentInputRef = useRef(null);
 
+
+  const countTrueValues = (likes) => {
+    let trueCount = 0;
+    for (const value of Object.values(likes)) {
+      if (value === true) {
+        trueCount++;
+      }
+    }
+    return trueCount;
+  };
+
+  const [likes,setLikes] = useState(countTrueValues(review.likes));
+
   function comm() {
     const reviewId = review.review_id;
     const userId = user.user_id;
@@ -45,16 +58,6 @@ const ReviewForm = ({
   }
   
 
-  function liking(){
-    var like= document.querySelectorAll("#likebutton-icon1");
-    if(like[0].classList.contains('liked')){
-      like[0].classList.remove('liked');
-      like[0].setAttribute("src","/likebutton.svg");
-    }else{
-      like[0].classList.add('liked');
-      like[0].setAttribute("src","/likedbutton.svg");
-    }
-  }
 
   const [charCount2, setCharCount2] = useState(0);
   function handleInputChange2(event) {
@@ -81,16 +84,20 @@ const ReviewForm = ({
   }
 
   function liking(){
-    var like= document.querySelectorAll("#likebutton-icon");
+    
+
+    var like= document.querySelectorAll("#likebutton-icon1");
     if(like[0].classList.contains('liked')){
       like[0].classList.remove('liked');
       like[0].setAttribute("src","/likebutton.svg");
+     
     }else{
       like[0].classList.add('liked');
       like[0].setAttribute("src","/likedbutton.svg");
     }
     handleLike();
   }
+  
 
   
   const reviewContainerRef = useRef(null);
@@ -158,7 +165,7 @@ const ReviewForm = ({
           <img className="vector-icon29" alt="" src="/vector9.svg" onClick={()=>toggleComments()} />
         </div>
         <div className="likes5">
-          <div className="likes6">424242</div>
+          <div className="likes6">{likes}</div>
           <img id="likebutton-icon1" className="likebutton-icon1" alt="" src="/likebutton.svg" onClick={()=>liking()}/>
         </div>
           </div>
