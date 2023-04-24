@@ -39,6 +39,7 @@ import SignInTile from "./pages/SignInTile";
 import { useEffect } from "react";
 import ReviewsShowOut from './pages/ReviewsShowOut';
 import SearchOut from './pages/SearchOut';
+import Searchin from './pages/Searchin';
 
 // const useScrollToTop = () => {
 //   const history = useHistory();
@@ -242,6 +243,7 @@ function App(){
       <Route path="/" element={<FrameComponent17 />} />
       <Route path="/homesignedout" element={<FrameComponent17 />} />
       <Route path="/searchout" element={<SearchOut />} />
+      <Route path="/searchin" element={<Searchin />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/continue" element={<Continue />} />
       <Route path="/makepost" element={<MakePost />} />

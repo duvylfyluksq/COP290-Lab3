@@ -105,19 +105,15 @@ export class ReviewsApi {
      * @param {Date} creationTime creation time
      * @param {module:api/ReviewsApi~reviewPostCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    reviewPost(movieId, showId, userId, rating, title, content, creationTime, callback) {
+    reviewPost(movie_id, show_id, user_id, rating, title, content, creation_time, callback) {
       
       let postBody = null;
       // verify the required parameter 'movieId' is set
-      if (movieId === undefined || movieId === null) {
-        throw new Error("Missing the required parameter 'movieId' when calling reviewPost");
-      }
-      // verify the required parameter 'showId' is set
-      if (showId === undefined || showId === null) {
-        throw new Error("Missing the required parameter 'showId' when calling reviewPost");
+      if ((movie_id === undefined || movie_id === null) && (show_id === undefined || show_id === null)) {
+        throw new Error("Both show_id and movie_id can't be null");
       }
       // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
+      if (user_id === undefined || user_id === null) {
         throw new Error("Missing the required parameter 'userId' when calling reviewPost");
       }
       // verify the required parameter 'rating' is set
@@ -133,7 +129,7 @@ export class ReviewsApi {
         throw new Error("Missing the required parameter 'content' when calling reviewPost");
       }
       // verify the required parameter 'creationTime' is set
-      if (creationTime === undefined || creationTime === null) {
+      if (creation_time === undefined || creation_time === null) {
         throw new Error("Missing the required parameter 'creationTime' when calling reviewPost");
       }
 
@@ -141,7 +137,7 @@ export class ReviewsApi {
         
       };
       let queryParams = {
-        'movie_id': movieId,'show_id': showId,'user_id': userId,'rating': rating,'title': title,'content': content,'creation_time': creationTime
+        'movie_id': movie_id,'show_id': show_id,'user_id': user_id,'rating': rating,'title': title,'content': content,'creation_time': creation_time
       };
       let headerParams = {
         

@@ -1,0 +1,17 @@
+  .review9034 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .review9034 {
+    border-radius: var(--br-11xl) var(--br-11xl) 0 0;
+    text-align: left;
+    font-size: var(--font-size-xl);
+    color: var(--color-darkorchid-100);
+    font-family: var(--font-roboto);
+    width:100%;
+    gap:var(--gap-11xl);
+    padding:var(--padding-11xl);
+    margin-left:-2%;
+  }

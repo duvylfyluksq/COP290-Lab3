@@ -4,9 +4,11 @@
   flex-shrink: 0;
 }
 .picture-icon3 {
-  width: 50%;
-  height: width;
+  width: 90%;
+  aspect-ratio: 1;
   object-fit: cover;
+  border-radius: 50%;
+  
 }
 .imageicon {
   width: 35px;
@@ -27,6 +29,8 @@
   width: 194px;
   height: 31px;
   flex-shrink: 0;
+  font-size:40px;
+  margin-top:5%;
 }
 .username3 {
   display: flex;
@@ -41,7 +45,7 @@
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   width: 20%;
-  height: 390px;
+  height: 290px;
   flex-shrink: 0;
   overflow: hidden;
   display: flex;
@@ -201,8 +205,8 @@
   border-radius: var(--br-56xl);
   background-color: var(--color-white);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 43%;
-  height: 390px;
+  width: 63%;
+  height: 290px;
   flex-shrink: 0;
   overflow: hidden;
   flex-direction: column;

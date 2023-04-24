@@ -153,14 +153,14 @@ const ReviewForm = ({
             {review.content}
           </div>
           <div className="reviewfooter">
-            <div className="commentsdropdown">
-              <div className="comments">Comments</div>
-              <img className="vector-icon25" alt="" src="/vector9.svg" onClick={()=>toggleComments()} />
-            </div>
-            <div className="options">
-              <div className="likes2">424242</div>
-              <img id="likebutton-icon" className="likebutton-icon" alt="" src="/likebutton.svg" onClick={()=>liking()} />
-            </div>
+          <div className="commentsdropdown1">
+          <div className="comments1">Comments</div>
+          <img className="vector-icon29" alt="" src="/vector9.svg" onClick={()=>toggleComments()} />
+        </div>
+        <div className="likes5">
+          <div className="likes6">424242</div>
+          <img id="likebutton-icon1" className="likebutton-icon1" alt="" src="/likebutton.svg" onClick={()=>liking()}/>
+        </div>
           </div>
               {showComments && (
             <div className="commentt-container"

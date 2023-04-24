@@ -130,8 +130,17 @@ const FrameComponent23 = () => {
   const onSeeAllReviewsClick = useCallback(() => {
     navigate("/reviewsmoviein", {state:{mov, user}});
   }, [navigate]);
-  // const onWatchlistClick = useCallback(() => {
-  // }, []);
+  const onWatchlistClick = useCallback(() => {
+    userapi.watchlistTvshowUserIdPut(user.user_id, mov.movie_id,(error, data, response) => {
+      if (response === 200) {
+        console.log("Watchlist updated");
+      }
+      else
+      {
+        console.log(error);
+      }
+    });
+  }, [mov, user]);
 
   
   const reviewBlock = reviews.map((review, index) => (
@@ -164,10 +173,12 @@ const FrameComponent23 = () => {
         />
         <img className="watchlist12345"
         alt=""
-        src="/watchlist.svg" />
+        src="/watchlist.svg" 
+        onClick={onWatchlistClick}/>
         <img className="plus5678"
         alt=""
         src="/plus.svg" />
+        
             </div>
             <div className="right50">
               <div className="descriptionheader50">

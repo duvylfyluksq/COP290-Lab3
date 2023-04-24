@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMemo } from "react";
+import { useMemo,useState } from "react";
 import "./NavbarContainer.css";
 import { useNavigate } from 'react-router-dom';
 import { useCallback } from "react";
@@ -18,6 +18,19 @@ const NavbarContainer = ({
   }, [propBoxShadow]);
   
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState("");
+
+  const onSearchEnter = useCallback((e) => {
+    if (e.key === "Enter") {
+      navigate("/searchin", { state: { pref: searchText, user } });
+    }
+  }, [navigate, searchText]);
+
+  const onSearchTextChange = useCallback((e) => {
+    setSearchText(e.target.value);
+    
+  }, []);
+  
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedin", {state: {user}});
   }, [navigate]);
@@ -70,7 +83,14 @@ const NavbarContainer = ({
       </div>
       <div className="searchbar2">
         <img className="vector-icon18" alt="" src="/vector4.svg" />
-        <input type="text" placeholder="What's on your mind?" class="type" />
+        <input 
+            type="text" 
+            placeholder="What's on your mind?" 
+            className="type" 
+            value={searchText}
+            onChange={onSearchTextChange}
+            onKeyDown={onSearchEnter}
+          />
       </div>
       <div className="navbar-rhs2">
         

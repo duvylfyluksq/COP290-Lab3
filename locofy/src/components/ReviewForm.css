@@ -172,6 +172,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   resize: none;
+  width:100%;
 }
 .bodyframe {
   border-radius: var(--br-8xs);
@@ -266,7 +267,6 @@
   width:62%;
   gap:var(--gap-11xl);
   padding:var(--padding-11xl);
-  margin-left:-2%;
 }
 
 .indocked{

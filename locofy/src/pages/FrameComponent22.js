@@ -92,18 +92,6 @@ const FrameComponent22 = () => {
     navigate("/duvylfyluksqout");
   }, [navigate]);
 
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
   const onMakepostClick = useCallback(() => {
     navigate("/makepost", {state:{content: show, user}});
   }, [navigate]);
@@ -113,7 +101,16 @@ const FrameComponent22 = () => {
   }, [navigate]);
 
   const onWatchlistClick = useCallback(() => {
-  }, []);
+    userapi.watchlistTvshowUserIdPut(user.user_id, show.show_id,(error, data, response) => {
+      if (response === 200) {
+        console.log("Watchlist updated");
+      }
+      else
+      {
+        console.log(error);
+      }
+    });
+  }, [user, show]);
 
   const reviewBlock = reviews.map((review, index) => (
     users && users.length === reviews.length ? (
@@ -147,10 +144,12 @@ const FrameComponent22 = () => {
         />
         <img className="watchlist12345"
         alt=""
-        src="/watchlist.svg" />
+        src="/watchlist.svg" 
+        onClick={onWatchlistClick}/>
         <img className="plus5678"
         alt=""
         src="/plus.svg" />
+        
             </div>
             <div className="right100">
               <div className="descriptionheader60">

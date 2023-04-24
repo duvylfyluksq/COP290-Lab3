@@ -1,41 +1,67 @@
-import React from 'react';
-import { useState } from 'react';
-import { useCallback } from "react";
-import MovieNavbar from "../components/MovieNavbar";
-import "./MakePost.css";
-import NavbarContainer from '../components/NavbarContainer';
+import React, { useState, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import MovieNavbar from '../components/MovieNavbar';
+import NavbarContainer from '../components/NavbarContainer';
+import { Review } from '../model/Review';
+import { MovieId } from '../model/MovieId';
+import { ShowId } from '../model/ShowId';
+import { ReviewsApi } from '../api/ReviewsApi';
+import './MakePost.css';
 
-
+const reviewsApi = new ReviewsApi();
 
 
 const MakePost = () => {
+
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.state.user;
   const content = location.state.content;
+  console.log(JSON.stringify(content.show_id));
+  console 
 
-  const [char1, setchar1] = useState("");
-  const [char2, setchar2] = useState("");
+  const isMovie = content.hasOwnProperty('movie_id');
+  const [reviewtitle, setreviewtitle] = useState("");
+  const [reviewbody, setreviewbody] = useState("");
   const [rating, setrating] = useState(0);
 
-  const onPostClick = useCallback(() => {
 
-    navigate("/homesignedin", {state: {user}});
-  }, [navigate]);
+  const postReview = () => {
+    const user_id = user.user_id;
+    const movieId = isMovie ? JSON.stringify(content.movie_id) : JSON.stringify(null);
+    const showId = !isMovie ? JSON.stringify(content.show_id) : JSON.stringify(null);
+    const title = reviewtitle;
+    const body = reviewbody;
+    const now = new Date();
+    const isoString = now.toISOString();
+    // const readableString = now.toString();
+
+    reviewsApi.reviewPost(movieId, showId, user_id, rating, title, body, isoString, (error, data, response) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log('Review posted successfully.');
+        navigate('/homesignedin', { state: { user } });
+      }
+    });
+  };
+
+  const onPostClick = useCallback(() => {
+    postReview();
+  }, [postReview]);
 
 
   const [charCount1, setCharCount1] = useState(0);
   function handleInputChange1(event) {
     const inputValue = event.target.value;
     setCharCount1(inputValue.length);
-    setchar1(inputValue);
+    setreviewtitle(inputValue);
   }
   const [charCount2, setCharCount2] = useState(0);
   function handleInputChange2(event) {
     const inputValue = event.target.value;
     setCharCount2(inputValue.length);
-    setchar2(inputValue);
+    setreviewbody(inputValue);
   }
   function changeColor(buttonNumber){
     var buttons = document.querySelectorAll("#rating");

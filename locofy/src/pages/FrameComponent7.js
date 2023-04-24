@@ -1,4 +1,6 @@
 import React from "react";
+import  { useEffect, useState } from 'react';
+
 import { useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import BobDylanContainer from "../components/BobDylanContainer";
@@ -7,34 +9,58 @@ import Footer from "../components/Footer";
 import ReviewForm from "../components/ReviewForm";
 import NavbarContainer from "../components/NavbarContainer";
 import "./FrameComponent7.css";
+import { Title } from "../model/Title";
+import {Review} from "../model/Review";
+import { User } from "../model/User";
+import { ReviewsApi } from '../api/ReviewsApi';
+import { UserApi } from '../api/UserApi';
+
+
+const revapi = new ReviewsApi();
+const userapi =  new  UserApi();
 
 const FrameComponent7 = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const user = location.state.user;
+  const [reviews,setReviews] = useState([]);
+  const [watchlist,setWatchlist] = useState([]);
 
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedin");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowsein");
-  }, [navigate]);
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowsein");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresin");
-  }, [navigate]);
-
-  const onFluentcompose24FilledClick = useCallback(() => {
-    navigate("/makepost");
-  }, [navigate]);
-
-  const onProfileMenuClick = useCallback(() => {
-    navigate("/bobdylaninself")
-  }, [navigate]);
+  console.log(user);
+  useEffect(() => {
+    revapi.reviewUserUserIdGet(user.user_id, {}, (error, data, response) => {
+      console.log("rip");
+      if (response.status === 200) {
+        const reviewlist = data
+          .slice(0, 3)
+          .map((reviewData) => Review.constructFromObject(reviewData));
+        console.log(reviewlist);
+        setReviews(reviewlist);
+        console.log("hello");
+        userapi.watchlistUserIdGet(
+          user.user_id,
+          (error, data, response) => {
+            console.log("rip");
+            if (response.status === 200) {
+              const watchlist = data
+              .slice(0, 10)
+                .map((watchlistData) =>
+                  Title.constructFromObject(watchlistData)
+                );
+              console.log(watchlist);
+              setWatchlist(watchlist);
+              console.log("hello");
+            } else {
+              console.log(error);
+            }
+          }
+        ); 
+      } else {
+        console.log(error);
+      }
+    });
+  }, []);
+  
 
   const onWatchlistText1Click = useCallback(() => {
     navigate("/watchlistinself");
@@ -52,39 +78,28 @@ const FrameComponent7 = () => {
           <div className="watchlist6">
             <div className="watchlistheader4">
               <div className="watchlist7">Watchlist</div>
-              <img className="vector-icon4" alt="" src="/vector.svg" />
+              <img className="vector-icon4" alt="" src="/watchlist.svg" />
             </div>
             <div className="watchlistdisplay4">
-            <WatchListMovieContainer
-              image="/joker@2x.png"
-              rating="x.y"
-              title="Eternal Sunshine Of The Sjloawidhwoadqoih"
-              productId="/materialsymbolsdeleteoutline.svg"
-            />
-            <Footer 
-              image="/joker@2x.png"
-              rating="a.b"
-              title="How I Met Your Mother"
-              season="Season 5"
-              productId="/materialsymbolsdeleteoutline.svg" />
-            <WatchListMovieContainer
-              image="/joker@2x.png"
-              rating="x.y"
-              title="Eternal Sunshine Of The Spotless.. "
-              productId="/materialsymbolsdeleteoutline.svg"
-            />
-            <Footer 
-              image="/joker@2x.png"
-              rating="a.b"
-              title="How I Met Your Mother"
-              season="Season 5"
-              productId="/materialsymbolsdeleteoutline.svg" />
-            <Footer 
-              image="/joker@2x.png"
-              rating="a.b"
-              title="How I Met Your Mother"
-              season="Season 5"
-              productId="/materialsymbolsdeleteoutline.svg" />
+              {watchlist.map((title, index) => {
+                if (!!title.movie) {
+                  return (
+                    <WatchListMovieContainer
+                      key={index}
+                      user = {user}
+                      movie={title.movie}
+                    />
+                  );
+                } else {
+                  return (
+                    <Footer
+                      key={index}
+                      user ={user}
+                      show={title.tvshow}
+                    />
+                  );
+                }
+              })}
             </div>
             <div className="watchlist8" onClick={onWatchlistText1Click}>
               View Entire Watchlist
@@ -92,25 +107,19 @@ const FrameComponent7 = () => {
           </div>
           <div className="recentposts2">
             <div className="recentposts3">Recent Posts</div>
-            <div className="watchlistdisplay4">
-              <ReviewForm
+            <div className="review1390">
+              {reviews.map((review) => (
+                <ReviewForm
                 picture="/picture1@2x.png"
                 duvylfyluksq="bobdylan"
                 bodyCursor="unset"
                 bodyFrameCursor="unset"
+                host = {user}
+                user = {user}
+                review = {review}
               />
-              <ReviewForm
-                picture="/picture1@2x.png"
-                duvylfyluksq="bobdylan"
-                bodyCursor="unset"
-                bodyFrameCursor="unset"
-              />
-              <ReviewForm
-                picture="/picture1@2x.png"
-                duvylfyluksq="bobdylan"
-                bodyCursor="unset"
-                bodyFrameCursor="unset"
-              />
+              ))}
+              
             </div>
             <div className="posts1" onClick={onPostsText1Click}>
               View All Posts
@@ -118,16 +127,12 @@ const FrameComponent7 = () => {
           </div>
         </div>
         <NavbarContainer
+          user = {user}
           dimensions="/vector16.svg"
           dimensionsText="/fluentcompose24filled1.svg"
           dimensionsId="/profilemenu5.svg"
           propBoxShadow="unset"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
-          onProfileMenuClick={onProfileMenuClick}
+          
         />
       </div>
     </div>
