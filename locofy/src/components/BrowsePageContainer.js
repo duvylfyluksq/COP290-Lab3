@@ -5,11 +5,14 @@ import "./BrowsePageContainer.css";
 const BrowsePageContainer = ({
   show,
   dimensions,
+  user = [],
 }) => {
   const navigate = useNavigate();
 
   const onTVShowDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/tvshowout", {state: {show}})
+    const isUser = (user.length != 0);
+    const path = isUser ? '/showin' : '/showout';
+    navigate(path, { state: { show, user } });
   }, [navigate,show]);
 
   return (
@@ -25,9 +28,9 @@ const BrowsePageContainer = ({
       </div>
       <div className="right10">
         <div className="header1">
-          <div className="title18">Title</div>
+          <div className="title18">{show.title}</div>
           <div className="season7">
-            <p className="season-z">Season {show.season}</p>
+            Season {show.season}
           </div>
           <div className="year3">(Year)</div>
         </div>

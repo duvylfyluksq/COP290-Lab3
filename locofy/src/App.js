@@ -29,6 +29,8 @@ import FrameComponent20 from "./pages/FrameComponent20";
 import FrameComponent21 from "./pages/FrameComponent21";
 import FrameComponent22 from "./pages/FrameComponent22";
 import FrameComponent23 from "./pages/FrameComponent23";
+import FrameComponent24 from "./pages/FrameComponent24";
+import FrameComponent25 from "./pages/FrameComponent25";
 import SignIn from "./pages/SignIn";
 import Continue from "./pages/Continue";
 import MakePost from "./pages/MakePost";
@@ -55,6 +57,14 @@ function App(){
 
     switch (pathname) {
       case "/":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/frame-24":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/frame-24":
         title = "";
         metaDescription = "";
         break;
@@ -220,6 +230,8 @@ function App(){
       <Route path="/genresin" element={<FrameComponent21 />} />
       <Route path="/tvshowin" element={<FrameComponent22 />} />
       <Route path="/moviein" element={<FrameComponent23 />} />
+      <Route path="/reviewsmoviein" element={<FrameComponent24 />} />
+      <Route path="/reviewsshowin" element={<FrameComponent25 />} /> 
     </Routes>
   );
 }

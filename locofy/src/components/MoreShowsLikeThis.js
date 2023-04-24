@@ -31,7 +31,9 @@ const MoreShowsLikeThis = ({
   }, [propWidth, propAlignSelf1]);
 
   const onTVShowCardContainerClick = useCallback((show) => {
-    navigate("/tvshowout", {state: {show}});
+    const isUser = (user.length != 0);
+    const path = isUser ? '/showin' : '/showout';
+    navigate(path, { state: { show, user } });
   }, [navigate]);
 
   return (

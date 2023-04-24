@@ -1,84 +1,118 @@
 import React from 'react';
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback,useState,useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import MovieDescriptionContainerBrows from "../components/MovieDescriptionContainerBrows";
-import NavbarContainer from '../components/NavbarContainer';
+import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent15.css";
+import { Movie } from '../model/Movie';
+import { TitlesApi } from '../api/TitlesApi';
 
+
+const api = new TitlesApi();
 const FrameComponent18 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const user = location.state.user;
 
-  const onMovieDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/moviein");
-  }, [navigate]);
+  const [movies, setMovies] = useState([]);
+  const [selectedgenre, setSelectedGenre] = useState([]);
+  const [sortparam, setSortparam] = useState("Rat");
+  const [sortype,setsorttype] = useState(false);
+ 
+  useEffect(() => {
+   
+    api.movieGet({sortTypeBrowse: sortparam, genre: selectedgenre, sortOrder: sortype},(error, data, response) => {
+      if (response.status === 200) {
+        const movieList = data.map((movieData) =>
+        Movie.constructFromObject(movieData)
+        );
+        console.log(movieList);
+        setMovies(movieList);
 
-  const onMovieDescriptionBrowsePageContainer1Click = useCallback(() => {
-    navigate("/moviein");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer2Click = useCallback(() => {
-    navigate("/moviein");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer3Click = useCallback(() => {
-    navigate("/moviein");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer4Click = useCallback(() => {
-    navigate("/moviein");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer5Click = useCallback(() => {
-    navigate("/moviein");
-  }, [navigate]);
-
-  const onMovieDescriptionBrowsePageContainer6Click = useCallback(() => {
-    navigate("/moviein");
-  }, [navigate]);
+      } else {
+        console.log(error);
+      }
+    });
+  }, [selectedgenre,sortparam,sortype]);
 
   const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedin");
+    navigate("/homesignedout");
   }, [navigate]);
 
   const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowsein");
+    navigate("/moviebrowseout");
   }, [navigate]);
 
   const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowsein");
+    navigate("/tvshowbrowseout");
   }, [navigate]);
 
   const onGenresTextClick = useCallback(() => {
-    navigate("/genresin");
+    navigate("/genresout");
   }, [navigate]);
 
-  const onFluentcompose24FilledClick = useCallback(() => {
-    navigate("/makepost");
+  const onNavbarRHSContainerClick = useCallback(() => {
+    navigate("/signin");
   }, [navigate]);
 
-  const onProfileMenuClick = useCallback(() => {
-    navigate("/bobdylaninself")
-  }, [navigate]);
   function changeColor(buttonNumber){
-    var buttons = document.querySelectorAll("#button");
+    
+    switch(buttonNumber){
+      case 1:
+        setSortparam("Rat");
+        break;
+      case 2:
+        setSortparam("Pop");
+        break;
+      case 3:
+        setSortparam("Rel");
+        break;
+      case 4:
+      setSortparam("Lex")
+      break;
+      default:
+        setSortparam("Rat");
+    }
+      var buttons = document.querySelectorAll("#button");
     for (var i = 0; i < buttons.length; i++) {
       if (i == buttonNumber - 1) {
         buttons[i].classList.add('colored');
+        
     } else {
         buttons[i].classList.remove('colored');
     }
     }
   }
 
-  function changecolour(buttonNumber){
+  function changecolour(buttonNumber) {
     var genres = document.querySelectorAll("#adventure");
-    if(genres[buttonNumber].classList.contains('colored2')){
-    genres[buttonNumber].classList.remove('colored2');
-    }else{
-    genres[buttonNumber].classList.add('colored2');
+    var genreText = genres[buttonNumber].innerText;
+  
+    if (genres[buttonNumber].classList.contains('colored2')) {
+      genres[buttonNumber].classList.remove('colored2');
+      setSelectedGenre((prevSelectedGenre) => {
+        return prevSelectedGenre.filter((genre) => genre !== genreText);
+      });
+    } else {
+      genres[buttonNumber].classList.add('colored2');
+      setSelectedGenre((prevSelectedGenre) => {
+        return [...prevSelectedGenre, genreText];
+      });
     }
   }
+  
+
   function active(buttonNumber){
+    switch(buttonNumber){
+      case 1:
+        setsorttype(false);
+        break;
+      case 2:
+        setsorttype(true);
+        break;
+      default:
+        setsorttype(false);
+    }
     var logos = document.querySelectorAll("#sorting");
     for (var i = 0; i < logos.length; i++) {
       if (i == buttonNumber - 1) {
@@ -88,53 +122,24 @@ const FrameComponent18 = () => {
     }
     }
   }
+
+
+  
+
   return (
     // <div className="moviebrowse-out-parent">
       <div className="moviebrowse-out">
         <div className="scrolllist2">
-          <MovieDescriptionContainerBrows
-            productId="/vector31.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainerClick
-            }
-          />
-          <MovieDescriptionContainerBrows
-            productId="/vector31.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainer1Click
-            }
-          />
-          <MovieDescriptionContainerBrows
-            productId="/vector31.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainer2Click
-            }
-          />
-          <MovieDescriptionContainerBrows
-            productId="/vector32.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainer3Click
-            }
-          />
-          <MovieDescriptionContainerBrows
-            productId="/vector32.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainer4Click
-            }
-          />
-          <MovieDescriptionContainerBrows
-            productId="/vector32.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainer5Click
-            }
-          />
-          <MovieDescriptionContainerBrows
-            productId="/vector32.svg"
-            onMovieDescriptionBrowsePageContainerClick={
-              onMovieDescriptionBrowsePageContainer6Click
-            }
-          />
+          {movies.map((movie, index) => (
+            <MovieDescriptionContainerBrows
+              user = {user}
+              key={index}
+              movie = {movie}
+              productId="/vector31.svg"
+            />
+          ))}
         </div>
+
         <div className="left2">
           <div className="sort">
             <div className="sortbyheader">
@@ -178,92 +183,88 @@ const FrameComponent18 = () => {
                   <div className="adventure">Adventure</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(1)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Action</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(2)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Drama</div>
                 </div>
               </div>
               <div className="horizontalrow">
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(3)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Comedy</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(4)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Romance</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(5)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Horror</div>
                 </div>
               </div>
               <div className="horizontalrow">
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(6)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Thriller</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(7)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Sci-Fi</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(8)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Mystery</div>
                 </div>
               </div>
               <div className="horizontalrow">
               <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(9)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Crime</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(10)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Animation</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(11)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Biography</div>
                 </div>
               </div>
               <div className="horizontalrow">
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(12)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">History</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(13)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">War</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(14)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Sport</div>
                 </div>
               </div>
               <div className="horizontalrow">
               <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(15)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Fantasy</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(16)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Documentary</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(17)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Dark</div>
                 </div>
               </div>
               <div className="horizontalrow">
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(18)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Psychological</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(19)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Western</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(20)}>
-                  <div className="adventure">Adventure</div>
+                  <div className="adventure">Musical</div>
                 </div>
               </div>
             </div>
           </div>
 
           <NavbarContainer
+          user = {user}
           dimensions="/vector35.svg"
           dimensionsText="/fluentcompose24filled1.svg"
           dimensionsId="/profilemenu8.svg"
           propBoxShadow="unset"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
-          onProfileMenuClick={onProfileMenuClick}
+        
         />
       </div>
     </div>

@@ -7,19 +7,19 @@ import { Movie } from '../model/Movie';
 const SuggestedContainer = ({ user, suggested }) => {
   const navigate = useNavigate();
 
-  const onCardClick = useCallback((item) => {
-    const isMovie = item instanceof Movie;
-    const content = isMovie ? item.movie : item.tvshow;
+  const onCardClick = useCallback((suggested) => {
+    const isMovie = suggested instanceof Movie;
+    const content = isMovie ? suggested.movie : suggested.tvshow;
     const path = isMovie ? '/moviein' : '/tvshowin';
     navigate(path, { state: { object: content, user } });
   }, [navigate, user]);
   
 
-  const renderCard = (item, index) => {
-    const isMovie = !!item.movie;
-    const content = isMovie ? item.movie : item.tvshow;
+  const renderCard = (suggested, index) => {
+    const isMovie = !!suggested.movie;
+    const content = isMovie ? suggested.movie : suggested.tvshow;
     return (
-      <div key={index} className="moviecard3" onClick={() => onCardClick(item)}>
+      <div key={index} className="moviecard3" onClick={() => onCardClick(suggested)}>
         <img className="moviecard-icon3" alt="" src={content.poster} />
         <div className="gradient-overlay"></div>
         <div className={isMovie ? 'linearfill10' : 'linearfill11'}>
@@ -44,7 +44,7 @@ const SuggestedContainer = ({ user, suggested }) => {
     <div className="recommendations">
       <div className="recommendations1">Recommended For You</div>
       <div className="recommendations2">
-        {suggested.map((item, index) => renderCard(item, index))}
+        {suggested.map((suggested, index) => renderCard(suggested, index))}
       </div>
     </div>
   );

@@ -163,7 +163,7 @@ def sortLikes_Review_Title(id: Union[MovieId, ShowId]) -> List[Review]:
         L = getReviews_forMovie(getMovie(id.id))
     elif (isinstance(id, ShowId)):
         L = getReviews_forShow(getTvshow(id.id))
-    return sorted(L, key=lambda x: sum(x.likes.values()), reverse=True)
+    return sorted(L, key=lambda x: sum((x.likes).values()), reverse=True)
 
 
 def sortRecent_Review_Title(id: Union[MovieId, ShowId]) -> List[Review]:

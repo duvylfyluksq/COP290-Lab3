@@ -5,13 +5,19 @@ import "./MovieDescriptionContainerBrows.css";
 const MovieDescriptionContainerBrows = ({
   productId,
   movie,
+  user = [],
 }) => {
 
   const navigate = useNavigate();
 
   const onMovieDescriptionBrowsePageContainerClick = useCallback(() => {
-    navigate("/movieout", {state: {movie} });
+    const isUser = (user.length != 0);
+    const path = isUser ? '/moviein' : '/movieout';
+    navigate(path, { state: { movie, user } });
   }, [navigate,movie]);
+
+  const title = movie.title.length > 20 ? movie.title.slice(0, 20) + "..." : movie.title;
+
 
   return (
     <div
@@ -22,7 +28,7 @@ const MovieDescriptionContainerBrows = ({
       </div>
       <div className="right11">
         <div className="header2">
-          <div className="title19">Title</div>
+          <div className="title19">{title}</div>
           <div className="year4">({movie.release_date.getFullYear()})</div>
         </div>
         <div className="subheader1">

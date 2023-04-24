@@ -4,13 +4,15 @@ import { useLocation, useNavigate} from 'react-router-dom';
 import "./MoreMoviesLikeThisContainer.css";
 
 const MoreMoviesLikeThisContainer = ({
-  propCursor, movies,
+  propCursor, movies, user = [],
 }) => {
 
   const navigate = useNavigate();
 
   const onMovieCardContainerClick = useCallback((movie) => {
-    navigate("/movieout", {state:{movie}});
+    const isUser = (user.length != 0);
+    const path = isUser ? '/moviein' : '/movieout';
+    navigate(path, { state: { movie, user } });
   }, [navigate]);
 
   return (

@@ -54,6 +54,7 @@
   left: 3px;
   width: 63px;
   height: 22px;
+  display: inline-block;
 }
 .genre2 {
   position: relative;
@@ -68,10 +69,10 @@
 .genres {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
 }
 .genres {
   align-items: flex-start;
-  justify-content: flex-start;
   gap: var(--gap-9xl);
   text-align: center;
   color: var(--color-goldenrod);
@@ -88,11 +89,11 @@
 .title200 {
   align-self: stretch;
   font-weight: 500;
-  font-size:60px;
+  font-size:55px;
 }
 .year500 {
   font-weight: 300;
-  font-size:30px;
+  font-size:20px;
   display: inline-block;
   /* width: 94px;
   height: 36px; */
@@ -108,7 +109,7 @@
   gap: var(--gap-3xs);
 }
 .plotsynopsis50 {
-  height:125px;
+  height:96px;
   align-self: stretch;
   position: relative;
   font-size: 20px;
@@ -139,6 +140,7 @@
   flex: 1;
   position: relative;
   gap:var(--gap-31xl);
+  margin-top:2%;
 }
 .subsublayout50 {
   width:120%;
@@ -147,6 +149,7 @@
   align-items: flex-start;
   gap: var(--gap-11xl);
   font-size: 25px;
+  margin-top:4%;
 }
 .moviedescription50,
 .right50,
@@ -179,6 +182,7 @@
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   width: 85%;
   overflow-x:auto;
+  overflow-y:hidden;
   height: 400px;
   flex-direction: row;
   align-items: center;
@@ -267,6 +271,7 @@
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
   overflow-x: hidden;
+  margin-top:5%;
 }
 
 .more-like-this{

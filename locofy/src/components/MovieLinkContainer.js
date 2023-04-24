@@ -7,7 +7,7 @@ import { Movie } from "../model/Movie";
 const api = new TitlesApi();
 
 const MovieLinkContainer = ({movies, user = []}) => {
-  const isUser = !(user === []);
+  const isUser = (user.length != 0);
   const navigate = useNavigate(); 
   const onMovieCardClick = useCallback((movie) => {
     const path = isUser ? '/moviein' : '/movieout';

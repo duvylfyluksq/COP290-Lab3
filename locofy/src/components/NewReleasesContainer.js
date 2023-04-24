@@ -33,7 +33,7 @@ const NewReleasesContainer = ({
 
   const onCardClick = useCallback((release) => {
     const isMovie = release instanceof Movie;
-    const isUser = !(user === []);
+    const isUser = (user.length != 0);
     const content = release;
     if (isMovie) {
       if (isUser){

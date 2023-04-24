@@ -3,8 +3,20 @@ import "./SortPanelReviewsPageRadios.css";
 import {useState, useCallback, useEffect } from "react";
 
 
-const SortPanelReviewsPageRadios = () => {
+
+const SortPanelReviewsPageRadios = ({ onSortTypeChange ,onFilterChange}) => {
+  
+
   function changeColor(buttonNumber){
+
+    switch(buttonNumber){
+      case 1: 
+        onFilterChange("Likes");
+        break;
+      case 2: 
+        onFilterChange("Recent");
+        break;
+    }
     var buttons = document.querySelectorAll("#button");
     for (var i = 0; i < buttons.length; i++) {
       if (i == buttonNumber - 1) {
@@ -15,15 +27,19 @@ const SortPanelReviewsPageRadios = () => {
     }
   }
 
-  function changecolour(buttonNumber){
-    var genres = document.querySelectorAll("#adventure");
-    if(genres[buttonNumber].classList.contains('colored2')){
-    genres[buttonNumber].classList.remove('colored2');
-    }else{
-    genres[buttonNumber].classList.add('colored2');
-    }
-  }
   function active(buttonNumber){
+
+    switch(buttonNumber){
+      case 1: 
+        onSortTypeChange(false)
+        break;
+      case 2: 
+        onSortTypeChange(true)
+        break;
+      default:
+        onSortTypeChange(false)
+
+    }
     var logos = document.querySelectorAll("#sorting");
     for (var i = 0; i < logos.length; i++) {
       if (i == buttonNumber - 1) {

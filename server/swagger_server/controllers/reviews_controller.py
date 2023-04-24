@@ -26,7 +26,7 @@ def review_movie_id_get(id_, sort_type_reviews=None, sort_order=None):  # noqa: 
             L = db.getReviews_forMovie(db.getMovie(id))
         else:
             raise TypeError
-        if (sort_order):
+        if (sort_order == True):
             L.reverse()
         return (L, 200)
     except Exception as err:
@@ -90,7 +90,7 @@ def review_tvshow_id_get(id_, sort_type_reviews=None, sort_order=None):  # noqa:
             L = db.getReviews_forShow(db.getTvshow(id))
         else:
             raise TypeError
-        if (sort_order):
+        if (sort_order == True):
             L.reverse()
         return (L, 200)
     except Exception as err:

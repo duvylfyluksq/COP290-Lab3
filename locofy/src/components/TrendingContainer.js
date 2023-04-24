@@ -31,7 +31,7 @@ const TrendingContainer = ({
   }, [propWidth, propAlignSelf1]);
 
   const onTVShowCardContainerClick = useCallback((show) => {
-    const isUser = !(user === []);
+    const isUser = (user.length != 0);
     if (isUser){
       navigate("/tvshowin", { state: { show: content, user} });
     }
