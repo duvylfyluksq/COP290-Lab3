@@ -5,6 +5,7 @@ import LeftContainer from "../components/LeftContainer";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./FrameComponent13.css";
 import MoviesContainer from '../components/MoviesContainer';
+import NavbarContainer from '../components/NavbarContainer';
 import MovieDescriptionContainerBrows from '../components/MovieDescriptionContainerBrows';
 import {Title} from '../model/Title';
 import { TitlesApi } from '../api/TitlesApi';

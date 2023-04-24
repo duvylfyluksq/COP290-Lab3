@@ -22,31 +22,31 @@ const ReviewContainer = ({review ,user}) => {
   const [comments, setcomments] = useState([]);
   const reviewContainerRef = useRef(null);
 
-  const document = {
-    type: 'PLAIN_TEXT',
-    content: review.content,
-    };
+  // const document = {
+  //   type: 'PLAIN_TEXT',
+  //   content: review.content,
+  //   };
 
-  useEffect(()=>{
-    async function analyzeSentiment() {
-      const language = require('@google-cloud/language');
-      const opts = { 
-        credentials : require('./apikey.json'),
-        projectId : "fmd-cop290"
-      };
-      const client = new language.LanguageServiceClient(opts);
-      try {
-        const results = await client.analyzeSentiment({
-          document: document,
-        });
-        setSentiment(results[0]["documentSentiment"]["score"]);
-        console.log(results);
-      } catch (error) {
-        console.error("Failed to analyze sentiment:", error);
-      }
-    }
-    analyzeSentiment();
-  },[review]);
+  // useEffect(()=>{
+  //   async function analyzeSentiment() {
+  //     const language = require('@google-cloud/language');
+  //     const opts = { 
+  //       credentials : require('./apikey.json'),
+  //       projectId : "fmd-cop290"
+  //     };
+  //     const client = new language.LanguageServiceClient(opts);
+  //     try {
+  //       const results = await client.analyzeSentiment({
+  //         document: document,
+  //       });
+  //       setSentiment(results[0]["documentSentiment"]["score"]);
+  //       console.log(results);
+  //     } catch (error) {
+  //       console.error("Failed to analyze sentiment:", error);
+  //     }
+  //   }
+  //   analyzeSentiment();
+  // },[review]);
 
   useEffect(() => {
     const reviewContainer = reviewContainerRef.current;

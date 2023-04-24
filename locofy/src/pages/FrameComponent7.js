@@ -56,12 +56,12 @@ const FrameComponent7 = () => {
         console.log(error);
       }
     });
-  }, []);
+  }, [user]);
   
 
   const onWatchlistText1Click = useCallback(() => {
-    navigate("/watchlistinself", {state:{watchlist, user}});
-  }, [navigate,watchlist]);
+    navigate("/watchlistinself", {state:{user}});
+  }, [navigate]);
 
   const onPostsText1Click = useCallback(() => {
     navigate("/reviewsbobdylanin",{state:{reviews,user}});

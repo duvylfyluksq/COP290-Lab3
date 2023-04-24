@@ -47,10 +47,6 @@ const NavbarContainer = ({
     navigate("/genresin", {state: {user}});
   }, [navigate]);
 
-  const onFluentcompose24FilledClick = useCallback(() => {
-    navigate("/makepost", {state: {user}});
-  }, [navigate]);
-
   const onProfileMenuClick = useCallback(() => {
     navigate("/bobdylaninself", {state: {user}})
   }, [navigate]);

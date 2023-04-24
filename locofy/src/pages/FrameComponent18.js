@@ -2,7 +2,7 @@ import React from 'react';
 import { useCallback,useState,useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import MovieDescriptionContainerBrows from "../components/MovieDescriptionContainerBrows";
-import MoviesContainer from "../components/MoviesContainer";
+import NavbarContainer from '../components/NavbarContainer';
 import "./FrameComponent15.css";
 import { Movie } from '../model/Movie';
 import { TitlesApi } from '../api/TitlesApi';

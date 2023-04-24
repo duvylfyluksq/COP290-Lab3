@@ -32,7 +32,7 @@ const BrowsePageContainer = ({
           <div className="season7">
             Season {show.season}
           </div>
-          <div className="year3">(Year)</div>
+          <div className="year3">({show.release_date.getFullYear()})</div>
         </div>
         <div className="subheader">
           <div className="rating21">

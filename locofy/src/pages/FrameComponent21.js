@@ -1,13 +1,14 @@
 import React from 'react';
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import HorizontalRowContainer from "../components/HorizontalRowContainer";
 import NavbarContainer from '../components/NavbarContainer';
 import "./FrameComponent12.css";
 
 const FrameComponent20 = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const user = location.state.user;
   const onGenreCardContainerClick = useCallback(() => {
     navigate("/mixedbrwosein")
   }, [navigate]);
@@ -123,39 +124,46 @@ const FrameComponent20 = () => {
           <div className="genres2">Genres</div>
           <div className="list">
             <HorizontalRowContainer
-              onGenreCardContainerClick={onGenreCardContainerClick}
-              onGenreCardContainer1Click={onGenreCardContainer1Click}
-              onGenreCardContainer2Click={onGenreCardContainer2Click}
+              a='Adventure'
+              b='Action'
+              c='Drama'
+              user={user}
             />
             <HorizontalRowContainer
-              onGenreCardContainerClick={onGenreCardContainer3Click}
-              onGenreCardContainer1Click={onGenreCardContainer4Click}
-              onGenreCardContainer2Click={onGenreCardContainer5Click}
+              a='Comedy'
+              b='Romance'
+              c='Horror'
+              user={user}
             />
             <HorizontalRowContainer
-              onGenreCardContainerClick={onGenreCardContainer6Click}
-              onGenreCardContainer1Click={onGenreCardContainer7Click}
-              onGenreCardContainer2Click={onGenreCardContainer8Click}
+              a='Thriller'
+              b='Sci-Fi'
+              c='Mystery'
+              user={user}
             />
             <HorizontalRowContainer
-              onGenreCardContainerClick={onGenreCardContainer9Click}
-              onGenreCardContainer1Click={onGenreCardContainer10Click}
-              onGenreCardContainer2Click={onGenreCardContainer11Click}
+              a='Crime'
+              b='Animation'
+              c='Biography'
+              user={user}
             />
             <HorizontalRowContainer
-              onGenreCardContainerClick={onGenreCardContainer12Click}
-              onGenreCardContainer1Click={onGenreCardContainer13Click}
-              onGenreCardContainer2Click={onGenreCardContainer14Click}
+              a='History'
+              b='War'
+              c='Sport'
+              user={user}
             />
             <HorizontalRowContainer
-              onGenreCardContainerClick={onGenreCardContainer15Click}
-              onGenreCardContainer1Click={onGenreCardContainer16Click}
-              onGenreCardContainer2Click={onGenreCardContainer17Click}
+              a='Fantasy'
+              b='Documentary'
+              c='Dark'
+              user={user}
             />
             <HorizontalRowContainer
-              onGenreCardContainerClick={onGenreCardContainer18Click}
-              onGenreCardContainer1Click={onGenreCardContainer19Click}
-              onGenreCardContainer2Click={onGenreCardContainer20Click}
+              a='Psychological'
+              b='Western'
+              c='Musical'
+              user={user}
             />
           </div>
         </div>
@@ -170,6 +178,7 @@ const FrameComponent20 = () => {
           onGenresTextClick={onGenresTextClick}
           onFluentcompose24FilledClick={onFluentcompose24FilledClick}
           onProfileMenuClick={onProfileMenuClick}
+          user={user}
         />
       </div>
     </div>

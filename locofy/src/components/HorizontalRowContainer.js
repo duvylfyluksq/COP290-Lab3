@@ -3,13 +3,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./HorizontalRowContainer.css";
 
 const HorizontalRowContainer = ({
-  a,b,c,
+  a,b,c,user
 }) => {
   const navigate = useNavigate();
 
   const onGenreCardContainerClick1 = useCallback(() => {
     const genre = a;
-    navigate("/mixedbrowseout", {state: {genre}})
+    if(user.length!==0){
+      navigate("/mixedbrowsein", {state: {genre,user}})
+    }
+    else{
+      navigate("/mixedbrowseout", {state: {genre}})
+    }
   }, [navigate]);
 
   const onGenreCardContainerClick2 = useCallback(() => {
