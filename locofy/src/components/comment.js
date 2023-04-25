@@ -1,40 +1,48 @@
 import React from 'react';
 import "./comment.css";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {UserApi} from "../api/UserApi";
 import {User} from "../model/User";
 
 const userapi = new UserApi();
+
+
+
 const Comment = ({
+  user,
   comment,
-  picture,
-  duvylfyluksq}) => {
-    const [user, setUser] = useState({});
+  host = [],
+  }) => {
 
-    
-  
-    useEffect(() => {
-      userapi.userUserIdGet(comment.user_id, (error, data, response) => {
-        if (error) {
-          console.log(error);
-          return;
-        }
-        
-        if (response.status === 200) {
-          const newUser = User.constructFromObject(data); // define User class first
-          console.log(newUser);
-          setUser(newUser);
-        } else {
-          console.log(response.statusText);
-        }
-      });
-    }, [comment.user_id]);
+    const navigate = useNavigate();
 
+    const onUserClick = useCallback(() => {
+      const isUser = host.length !== 0;
+      var isHost; 
+      if (host.length != 0) {
+        isHost = (host.user_id === user.user_id);
+      }
+      else {
+        isHost = false;
+      }
+      if (isUser) {
+        if (isHost){
+          navigate("/bobdylaninself", {state: {user, host}});
+        }
+        else {
+          navigate("/duvylfyluksqinother", {state: {user, host}});
+        }
+      }
+      else {
+        navigate("/duvylfyluksqout", {state: {user, host}});
+      }
+    }, [navigate]);
 
   return (
     <div className="commenttttt">
       <div className="reviewername1">
-          <div className="sublayout7">
+          <div className="sublayout7" onClick={onUserClick}>
             <img
               className="picture-icon1"
               alt=""

@@ -474,12 +474,12 @@ export class UserApi {
      * @param {Number} id ID of the movie
      * @param {module:api/UserApi~watchlistMovieUserIdPutCallback} callback The callback function, accepting three arguments: error, data, response
      */
-    watchlistMovieUserIdPut(userId, id, callback) {
+    watchlistMovieUserIdPut(user_id, id, callback) {
       
       let postBody = null;
       // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling watchlistMovieUserIdPut");
+      if (user_id === undefined || user_id === null) {
+        throw new Error("Missing the required parameter 'user_id' when calling watchlistMovieUserIdPut");
       }
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
@@ -487,7 +487,7 @@ export class UserApi {
       }
 
       let pathParams = {
-        'user_id': userId
+        'user_id': user_id
       };
       let queryParams = {
         'id': id

@@ -3,10 +3,12 @@ import CommentContainer from './commentContainer';
 import React,{ useMemo, useRef,useState,useCallback, useEffect } from 'react';
 import {Comment} from '../model/Comment';
 import { ReviewsApi } from "../api/ReviewsApi";
-
+import {User} from "../model/User";
 import { useNavigate } from "react-router-dom";
+import { UserApi } from "../api/UserApi";
 
 const reviewsApi = new ReviewsApi();
+const userapi= new UserApi();
 
 const ReviewForm = ({
   review, user, host 
@@ -16,7 +18,39 @@ const ReviewForm = ({
   const [showComments, setShowComments] = useState(false);
   const [comments, setcomments] = useState([]);
   const commentInputRef = useRef(null);
+  const [sentiment,setSentiment] = useState("");
+  const [isliked,setisliked] = useState(review.likes[user.user_id]);
 
+  useEffect(() => {
+    async function analyzeSentiment() {
+      const url = 'http://localhost:3001/analyzeSentiment';
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ content: review.content }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to analyze sentiment');
+        }
+
+        const results = await response.json();
+        if(results.sentiment>0){
+          setSentiment("Positive");
+        }else{
+          setSentiment("Negative");
+        }
+        console.log(results);
+      } catch (error) {
+        console.error('Failed to analyze sentiment:', error);
+      }
+    }
+    analyzeSentiment();
+  }, [review]);
 
   const countTrueValues = (likes) => {
     let trueCount = 0;
@@ -32,7 +66,7 @@ const ReviewForm = ({
 
   function comm() {
     const reviewId = review.review_id;
-    const userId = user.user_id;
+    const userId = host.user_id;
     const content = commen;
   
     reviewsApi.reviewReviewIdCommentPost(reviewId, userId, content, (error, data, response) => {
@@ -47,16 +81,35 @@ const ReviewForm = ({
             const commentlist = data.map((comment) =>
               Comment.constructFromObject(comment)
             );
-            console.log(commentlist);
             setcomments(commentlist);
+            fetchUsersSequentially(commentlist, 0, [], (userList) => {
+              setUsers(userList);
+            });
           } else {
             console.log(error);
           }
-        },[comments]);
+        }),[comments];
       }
     });
   }
-  
+  const navigate = useNavigate();
+
+    const onUserClick = useCallback(() => {
+      var isHost; 
+      
+       isHost = (host.user_id === user.user_id);
+      
+      
+        if (isHost){
+          navigate("/bobdylaninself", {state: {user, host}});
+        }
+        else {
+          navigate("/duvylfyluksqinother", {state: {user, host}});
+        }
+      
+      
+    }, [navigate]);
+
 
 
   const [charCount2, setCharCount2] = useState(0);
@@ -85,7 +138,15 @@ const ReviewForm = ({
 
   function liking(){
     
-
+  
+    if (isliked === true){
+      setLikes(likes-1);
+      setisliked(false);
+    }
+    else{
+      setLikes(likes+1);
+      setisliked(true);
+    }
     var like= document.querySelectorAll("#likebutton-icon1");
     if(like[0].classList.contains('liked')){
       like[0].classList.remove('liked');
@@ -101,7 +162,7 @@ const ReviewForm = ({
 
   
   const reviewContainerRef = useRef(null);
-  React.useEffect(() => {
+    useEffect(() => {
     const reviewContainer = reviewContainerRef.current;
     if (showComments) {
       reviewContainer.style.height = `$calc(100vh - 200px + ${commentHeight}px)`;
@@ -111,20 +172,45 @@ const ReviewForm = ({
   }, [showComments],
   );
 
-  const toggleComments = useCallback(() => {
-    reviewsApi.reviewReviewIdCommentGet(review.review_id, (error, data, response) => {
-      if (response.status == 200) {
-        const commentlist = data.map((comment) =>
-          Comment.constructFromObject(comment)
-        );
-        console.log(commentlist);
-        setcomments(commentlist);
+  const [users,setUsers] = useState([]);  
+  const [fetched, setFetched] = useState(false);
+
+  const fetchUsersSequentially = (commentlist, index, userList, callback) => {
+    if (index >= commentlist.length) {
+      callback(userList);
+      return;
+    }
+    const comment = commentlist[index];
+    userapi.userUserIdGet(comment.user_id, (error, data, response) => {
+      if (response.status === 200) {
+        const newUser = User.constructFromObject(data);
+        userList.push(newUser);
+        fetchUsersSequentially(commentlist, index + 1, userList, callback);
       } else {
         console.log(error);
       }
     });
-    setShowComments(!showComments);
-  }, [showComments,comments]);
+  };
+
+  const toggleComments = useCallback(() => {
+    if(!fetched){
+      reviewsApi.reviewReviewIdCommentGet(review.review_id, (error, data, response) => {
+        if (response.status == 200) {
+          const commentlist = data.map((comment) =>
+            Comment.constructFromObject(comment)
+          );
+          setcomments(commentlist);
+          fetchUsersSequentially(commentlist, 0, [], (userList) => {
+            setUsers(userList);
+          });
+        } else {
+          console.log(error);
+        }
+      });
+      setShowComments(!showComments);
+    }
+  }, [showComments,comments,users]);
+
   return (
     <div className="review" ref={reviewContainerRef}>
       <div className="indocked">
@@ -133,7 +219,7 @@ const ReviewForm = ({
             <div className="review-title">{review.title}</div>
             <div className="reviewername">
               <div className="by">by</div>
-              <div className="sublayout6">
+              <div className="sublayout6" onClick={onUserClick} >
                 <img
                   className="picture-icon"
                   alt=""
@@ -151,7 +237,7 @@ const ReviewForm = ({
                 <span className="rating11">Rating:</span>
                 <span> {review.rating}/10</span><br />
             <span className = "rating13">Sentiment:  </span>
-            <span>Positive </span>
+            <span>{sentiment}</span>
               </div>
               <img className="vector-icon24" alt="" src="/vector8.svg" />
             </div>
@@ -166,13 +252,13 @@ const ReviewForm = ({
         </div>
         <div className="likes5">
           <div className="likes6">{likes}</div>
-          <img id="likebutton-icon1" className="likebutton-icon1" alt="" src="/likebutton.svg" onClick={()=>liking()}/>
+          <img id="likebutton-icon1" className="likebutton-icon1" alt="" src= {is}"/likebutton.svg" onClick={()=>liking()}/>
         </div>
           </div>
               {showComments && (
             <div className="commentt-container"
             ref={el => el && setCommentHeight(el.offsetHeight)}
-            ><CommentContainer comments = {comments} />
+            ><CommentContainer comments = {comments} userlist={users} host = {host}/>
             </div>)}
         </div>
         <div className="addcomment">

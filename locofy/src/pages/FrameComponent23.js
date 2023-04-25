@@ -91,37 +91,6 @@ const FrameComponent23 = () => {
     navigate("/duvylfyluksqout");
   }, [navigate]);
 
-  const onPictureIcon1Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqText1Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onPictureIcon2Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqText2Click = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
 
   const onMakepostClick = useCallback(() => {
     navigate("/makepost", {state: {content: mov, user}});
@@ -130,17 +99,28 @@ const FrameComponent23 = () => {
   const onSeeAllReviewsClick = useCallback(() => {
     navigate("/reviewsmoviein", {state:{mov, user}});
   }, [navigate]);
+  
+  const [isInWatchlist, setIsInWatchlist] = useState(() => {
+    if (user.watchlist_movies && user.watchlist_movies.hasOwnProperty(user.user_id)) {
+       if(user.watchlist_movies[user.user_id]){return "minus.svg";}
+       else {return "plus.svg";}
+    } else {
+      return "plus.svg";
+    }
+  });  
+
   const onWatchlistClick = useCallback(() => {
-    userapi.watchlistTvshowUserIdPut(user.user_id, mov.movie_id,(error, data, response) => {
+    userapi.watchlistMovieUserIdPut(user.user_id, mov.movie_id.id, (error, data, response) => {
       if (response === 200) {
         console.log("Watchlist updated");
-      }
-      else
-      {
+        if(isInWatchlist === "plus.svg"){setIsInWatchlist("minus.svg");}
+        else{setIsInWatchlist("plus.svg");}
+      } else {
         console.log(error);
       }
     });
   }, [mov, user]);
+  
 
   
   const reviewBlock = reviews.map((review, index) => (
@@ -174,10 +154,11 @@ const FrameComponent23 = () => {
         <img className="watchlist12345"
         alt=""
         src="/watchlist.svg" 
-        onClick={onWatchlistClick}/>
+        />
         <img className="plus5678"
         alt=""
-        src="/plus.svg" />
+        onClick={onWatchlistClick}
+        src={isInWatchlist}/>
         
             </div>
             <div className="right50">
