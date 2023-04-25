@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCallback, useState, useEffect } from "react";
-import BrowsePageContainer from "../components/BrowsePageContainer";
+import BrowsePageContainer1 from "../components/BrowsePageContainer1";
 import LeftContainer from "../components/LeftContainer";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./SearchOut.css";
@@ -70,7 +70,7 @@ const SearchOut = () => {
                   productId="/vector29.svg"
                 />
               ) : (
-                <BrowsePageContainer
+                <BrowsePageContainer1
                   key={index}
                   show={title.tvshow}
                   dimensions="/vector29.svg"

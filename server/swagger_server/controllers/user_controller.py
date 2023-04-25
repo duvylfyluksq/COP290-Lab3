@@ -138,7 +138,7 @@ def watchlist_movie_user_id_put(user_id, id=None):  # noqa: E501
     try:
         try:
             db.addOrDelete_fromWatchlist(db.getUser(user_id), db.getMovie(id))
-            return ('Watchlist updated successfully', 200)
+            return ('Watchlist updated successfully', 201)
         except Exception as err:
             return (f'Error modifying watchlist: {err}', 400)
     except Exception as err:
@@ -162,7 +162,7 @@ def watchlist_tvshow_user_id_put(user_id, id=None):  # noqa: E501
     try:
         try:
             db.addOrDelete_fromWatchlist(db.getUser(user_id), db.getTvshow(id))
-            return ('Watchlist updated successfully', 200)
+            return ('Watchlist updated successfully', 201)
         except Exception as err:
             return (f'Error modifying watchlist: {err}', 400)
     except Exception as err:

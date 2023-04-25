@@ -231,7 +231,7 @@ const FrameComponent19 = () => {
               <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(15)}>
                   <div className="adventure">Fantasy</div>
                 </div>
-                <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(16)}>
+                <div id='adventure' className="filterbrowseinteraction904" onClick={() =>changecolour(16)}>
                   <div className="adventure">Documentary</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(17)}>
@@ -239,7 +239,7 @@ const FrameComponent19 = () => {
                 </div>
               </div>
               <div className="horizontalrow">
-                <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(18)}>
+                <div id='adventure' className="filterbrowseinteraction904" onClick={() =>changecolour(18)}>
                   <div className="adventure">Psychological</div>
                 </div>
                 <div id='adventure' className="filterbrowseinteraction" onClick={() =>changecolour(19)}>

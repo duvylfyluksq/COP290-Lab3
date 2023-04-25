@@ -27,8 +27,9 @@ const FrameComponent23 = () => {
   const [reviews,setReviews] = useState([]);
   const [users,setUsers] = useState();  
   const [fetched, setFetched] = useState(false);
+  
 
-    
+
   const fetchUsersSequentially = (reviewList, index, userList, callback) => {
     if (index >= reviewList.length) {
       callback(userList);
@@ -100,26 +101,42 @@ const FrameComponent23 = () => {
     navigate("/reviewsmoviein", {state:{mov, user}});
   }, [navigate]);
   
-  const [isInWatchlist, setIsInWatchlist] = useState(() => {
-    if (user.watchlist_movies && user.watchlist_movies.hasOwnProperty(user.user_id)) {
-       if(user.watchlist_movies[user.user_id]){return "minus.svg";}
-       else {return "plus.svg";}
-    } else {
-      return "plus.svg";
-    }
-  });  
+  // const [isInWatchlist, setIsInWatchlist] = useState(() => {
+  //   if (user.watchlist_movies && user.watchlist_movies.hasOwnProperty(user.user_id)) {
+  //      if(user.watchlist_movies[user.user_id]){return "minus.svg";}
+  //      else {return "plus.svg";}
+  //   } else {
+  //     return "plus.svg";
+  //   }
+  // });  
 
+  const [isadded,setisadded] = useState(user.watchlist_movies[mov.movie_id.id] !== undefined && user.watchlist_movies[mov.movie_id.id]);
+  useEffect(()=>{
+    if (user.watchlist_movies[mov.movie_id.id]){
+      setisadded(true);
+    }
+    else{
+      setisadded(false);
+    }
+  },[mov])
+  
   const onWatchlistClick = useCallback(() => {
+    console.log("Watchlist clicked");
+    if(isadded){
+      setisadded(false);
+    }
+    else{
+      setisadded(true);
+    }
+    console.log(isadded)
     userapi.watchlistMovieUserIdPut(user.user_id, mov.movie_id.id, (error, data, response) => {
-      if (response === 200) {
+      if (response === 201) {
         console.log("Watchlist updated");
-        if(isInWatchlist === "plus.svg"){setIsInWatchlist("minus.svg");}
-        else{setIsInWatchlist("plus.svg");}
       } else {
         console.log(error);
       }
     });
-  }, [mov, user]);
+  }, [mov, user, isadded]);
   
 
   
@@ -157,8 +174,8 @@ const FrameComponent23 = () => {
         />
         <img className="plus5678"
         alt=""
-        onClick={onWatchlistClick}
-        src={isInWatchlist}/>
+        onClick={() => onWatchlistClick()}
+        src={isadded ? "./plus.svg" : "./minus.svg"}/>
         
             </div>
             <div className="right50">

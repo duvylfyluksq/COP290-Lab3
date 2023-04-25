@@ -19,8 +19,19 @@ const ReviewForm = ({
   const [comments, setcomments] = useState([]);
   const commentInputRef = useRef(null);
   const [sentiment,setSentiment] = useState("");
-  const [isliked,setisliked] = useState(review.likes[user.user_id]);
-
+  const [isliked,setisliked] = useState(review.likes[host.user_id] !== undefined && review.likes[host.user_id]);
+  useEffect(()=>{
+    if (review.likes[host.user_id] === true){
+      setisliked(true);
+    }
+    else{
+      setisliked(false);
+    }
+  },[review])
+  
+  console.log(review.likes);
+  
+  
   useEffect(() => {
     async function analyzeSentiment() {
       const url = 'http://localhost:3001/analyzeSentiment';
@@ -94,21 +105,20 @@ const ReviewForm = ({
   }
   const navigate = useNavigate();
 
-    const onUserClick = useCallback(() => {
-      var isHost; 
-      
-       isHost = (host.user_id === user.user_id);
-      
-      
-        if (isHost){
-          navigate("/bobdylaninself", {state: {user, host}});
-        }
-        else {
-          navigate("/duvylfyluksqinother", {state: {user, host}});
-        }
-      
-      
-    }, [navigate]);
+  const onUserClick = useCallback(() => {
+  var isHost; 
+  
+  isHost = (host.user_id === user.user_id);
+
+  if (isHost){
+    navigate("/bobdylaninself", {state: {user, host}});
+  }
+  else {
+    navigate("/duvylfyluksqinother", {state: {user, host}});
+  }
+  
+    
+  }, [navigate]);
 
 
 
@@ -252,7 +262,7 @@ const ReviewForm = ({
         </div>
         <div className="likes5">
           <div className="likes6">{likes}</div>
-          <img id="likebutton-icon1" className="likebutton-icon1" alt="" src= {is}"/likebutton.svg" onClick={()=>liking()}/>
+          <img id="likebutton-icon1" className="likebutton-icon1" alt="" src= {isliked? "./likedbutton.svg" : "./likebutton.svg"} onClick={()=>liking()}/>
         </div>
           </div>
               {showComments && (

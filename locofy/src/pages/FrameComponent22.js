@@ -83,7 +83,15 @@ const FrameComponent22 = () => {
     }
     },[show, fetched]);
 
-
+  const [isadded,setisadded] = useState(user.watchlist_shows[show.show_id.id] !== undefined && user.watchlist_shows[show.show_id.id]);
+    useEffect(()=>{
+      if (user.watchlist_shows[show.show_id.id]){
+        setisadded(true);
+      }
+      else{
+        setisadded(false);
+      }
+    },[show])
   const onPictureIconClick = useCallback(() => {
     navigate("/duvylfyluksqout");
   }, [navigate]);
@@ -100,17 +108,25 @@ const FrameComponent22 = () => {
     navigate("/reviewsshowin", {state:{show,user}});
   }, [navigate,show,user]);
 
+  
+
   const onWatchlistClick = useCallback(() => {
-    userapi.watchlistTvshowUserIdPut(user.user_id, show.show_id,(error, data, response) => {
-      if (response === 200) {
+    console.log("Watchlist clicked");
+    if(isadded){
+      setisadded(false);
+    }
+    else{
+      setisadded(true);
+    }
+    userapi.watchlistTvshowUserIdPut(user.user_id, show.show_id.id, (error, data, response) => {
+      if (response === 201) {
         console.log("Watchlist updated");
-      }
-      else
-      {
+        
+      } else {
         console.log(error);
       }
     });
-  }, [user, show]);
+  }, [show, user,isadded]);
 
   const reviewBlock = reviews.slice(0,3).map((review, index) => (
     users && users.length === reviews.length ? (
@@ -145,10 +161,11 @@ const FrameComponent22 = () => {
         <img className="watchlist12345"
         alt=""
         src="/watchlist.svg" 
-        onClick={onWatchlistClick}/>
+        />
         <img className="plus5678"
         alt=""
-        src="/plus.svg" />
+        onClick={onWatchlistClick}
+        src = { isadded ? "./plus.svg" : "./minus.svg"} />
         
             </div>
             <div className="right100">

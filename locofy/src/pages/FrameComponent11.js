@@ -149,8 +149,8 @@ const FrameComponent11 = () => {
                 </div>
                 <div className="genres1">
                 {show.genres.map((genre) => (
-                <div className="genre2">
-                  <div className="genre">{genre}</div>
+                <div className="genre2509">
+                  <div className="genre509">{genre}</div>
                 </div>
               ))}
                 </div>

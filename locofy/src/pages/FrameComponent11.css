@@ -147,7 +147,7 @@
   flex: 1;
   position: relative;
   gap:var(--gap-31xl);
-  margin-top:1%;
+  margin-top:5%;
 }
 
 .subsublayout1001 {
@@ -192,7 +192,7 @@
   width: 85%;
   overflow-x:auto;
   overflow-y:hidden;
-  height: 400px;
+  height: 470px;
   flex-direction: row;
   align-items: center;
   gap: var(--gap-21xl);

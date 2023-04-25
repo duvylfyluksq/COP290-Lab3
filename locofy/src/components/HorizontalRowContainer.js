@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./HorizontalRowContainer.css";
 
 const HorizontalRowContainer = ({
-  a,b,c,user
+  a,b,c,user=[]
 }) => {
   const navigate = useNavigate();
 

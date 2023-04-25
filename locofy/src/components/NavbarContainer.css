@@ -119,20 +119,24 @@ input:focus{
 {
   position: relative;
   width: 40px;
-  aspect-ratio: 1;
+  aspect-ratio: 0.75;
   flex-shrink: 0;
   cursor: pointer;
   margin-left:60%;
+  z-index:100;
   /* margin-top:5%; */
 }
 
 .watchlist12345{
-  margin-top:-12%;
+  margin-top:-18%;
   margin-left:-60%;
+  aspect-ratio: 0.75;
+  width:40px;
 }
 .plus5678{
 margin-left:-35%;
-margin-top:-8%;
+margin-top:-10%;
+cursor:pointer;
 }
 .profilemenu-icon2 {
   position: relative;

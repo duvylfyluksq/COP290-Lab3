@@ -15,6 +15,8 @@ const BrowsePageContainer = ({
     navigate(path, { state: { show, user } });
   }, [navigate,show]);
 
+  const title = show.title.length > 20 ? show.title.slice(0, 20) + "..." : show.title;
+
   return (
     <div
       className="tvshowdescription-browsepage" onClick={onTVShowDescriptionBrowsePageContainerClick}
@@ -28,7 +30,7 @@ const BrowsePageContainer = ({
       </div>
       <div className="right10">
         <div className="header1">
-          <div className="title18">{show.title}</div>
+          <div className="title18">{title}</div>
           <div className="season7">
             Season {show.season}
           </div>
