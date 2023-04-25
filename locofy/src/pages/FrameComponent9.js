@@ -24,16 +24,7 @@ const FrameComponent9 = () => {
   const [users,setUsers] = useState();  
   const [fetched, setFetched] = useState(false);
 
-  const [sortType,setSortType] = useState(false);
-  const [filter,setFilter] = useState()
-  const onSortTypeChange = useCallback((s) => {
-    setSortType(s);
-  }, []);
-  const onFilterChange = useCallback((s)=> {
-      setFilter(s);
-  },[])
-
-  
+    
   const fetchUsersSequentially = (reviewList, index, userList, callback) => {
     if (index >= reviewList.length) {
       callback(userList);
@@ -54,7 +45,7 @@ const FrameComponent9 = () => {
   };
   useEffect(() => {
     if(!fetched){
-          revapi.reviewMovieIdGet(mov.movie_id.id, {'sortOrder': sortType,"sortTypeReviews" : filter},(error, data, response) => {
+          revapi.reviewMovieIdGet(mov.movie_id.id, {},(error, data, response) => {
             if (response.status === 200) {
               const reviewList = data.map((reviewData) =>
               Review.constructFromObject(reviewData)
@@ -71,9 +62,8 @@ const FrameComponent9 = () => {
               console.log(error);
             }
           });
-          setFetched(true);
         } 
-    },[mov,fetched,sortType,filter]);
+    },[mov, fetched]);
 
 
   const onPictureIconClick = useCallback(() => {
@@ -103,23 +93,18 @@ const FrameComponent9 = () => {
   const onNavbarRHSContainerClick = useCallback(() => {
     navigate("/signin");
   }, [navigate]);
-  const [reviewblock,setReviewBlock] = useState();
-  useEffect(() => {
-    // Call reviewBlock again when the reviews change
-    const reviewBlock = reviews.map((review, index) => (
-        users && users.length === reviews.length ? (
-          <ReviewContainer
-            review={review}
-            key={index}
-            user={users[index]}
-            onPictureIconClick={onPictureIconClick}
-            onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
-          />
-        ) : null
-      ));
-    
-    setReviewBlock(reviewBlock);
-  }, [reviews]);
+
+  const reviewBlock = reviews.map((review, index) => (
+    users && users.length === reviews.length ? (
+      <ReviewContainer
+        review={review}
+        key={index}
+        user={users[index]}
+        onPictureIconClick={onPictureIconClick}
+        onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
+      />
+    ) : null
+  ));
 
   return (
     <div className="reviews-movie-out-parent">
@@ -129,12 +114,9 @@ const FrameComponent9 = () => {
             <div className="showing3">Showing Reviews For</div>
             <div className="title">{mov.title}</div>
           </div>
-          <SortPanelReviewsPageRadios onSortTypeChange={onSortTypeChange} onFilterChange = {onFilterChange} />
-          
           <div className="reviewlist9999999">
-            <div className="reviews">Reviews</div>
             <div className="reviews139">
-              {reviewblock}
+              {reviewBlock}
             </div>
         </div>
         <MoviesContainer

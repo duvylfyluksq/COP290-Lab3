@@ -115,9 +115,7 @@ const ReviewsShowOut = () => {
             <div className="showing3">Showing Reviews For</div>
             <div className="title">{show.title}</div>
           </div>
-          <SortPanelReviewsPageRadios />
           <div className="reviewlist9999999">
-            <div className="reviews">Reviews</div>
             <div className="reviews139">
               {reviewBlock}
             </div>

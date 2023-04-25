@@ -19,12 +19,22 @@ const HorizontalRowContainer = ({
 
   const onGenreCardContainerClick2 = useCallback(() => {
     const genre = b;
-    navigate("/mixedbrowseout", {state: {genre}})
+    if(user.length!==0){
+      navigate("/mixedbrowsein", {state: {genre,user}})
+    }
+    else{
+      navigate("/mixedbrowseout", {state: {genre}})
+    }
   }, [navigate]);
 
   const onGenreCardContainerClick3 = useCallback(() => {
     const genre = c;
-    navigate("/mixedbrowseout", {state: {genre}})
+    if(user.length!==0){
+      navigate("/mixedbrowsein", {state: {genre,user}})
+    }
+    else{
+      navigate("/mixedbrowseout", {state: {genre}})
+    }
   }, [navigate]);
 
   return (

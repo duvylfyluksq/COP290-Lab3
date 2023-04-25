@@ -3,7 +3,7 @@ import {useState, useCallback, useEffect } from "react";
 
 import {useLocation, useNavigate} from "react-router-dom";
 
-import ReviewContainer from "../components/ReviewContainer";
+
 import MoreShowsLikeThis from "../components/MoreShowsLikeThis";
 import ReviewForm from '../components/ReviewForm';
 import NavbarContainer from '../components/NavbarContainer';
@@ -60,7 +60,7 @@ const FrameComponent22 = () => {
           
           revapi.reviewTvshowIdGet(show.show_id.id, {},(error, data, response) => {
             if (response.status === 200) {
-              const reviewList = data.slice(0, 3).map((reviewData) =>
+              const reviewList = data.map((reviewData) =>
               Review.constructFromObject(reviewData)
               );
               console.log(reviewList);
@@ -70,7 +70,7 @@ const FrameComponent22 = () => {
               fetchUsersSequentially(reviewList, 0, [], (userList) => {
                 setUsers(userList);
               });
-              
+              setFetched(true);
             } else {
               console.log(error);
             }
@@ -97,8 +97,8 @@ const FrameComponent22 = () => {
   }, [navigate]);
 
   const onSeeAllReviewsClick = useCallback(() => {
-    navigate("/reviewsshowin", {state:{show, user}});
-  }, [navigate]);
+    navigate("/reviewsshowin", {state:{show,user}});
+  }, [navigate,show,user]);
 
   const onWatchlistClick = useCallback(() => {
     userapi.watchlistTvshowUserIdPut(user.user_id, show.show_id,(error, data, response) => {
@@ -112,7 +112,7 @@ const FrameComponent22 = () => {
     });
   }, [user, show]);
 
-  const reviewBlock = reviews.map((review, index) => (
+  const reviewBlock = reviews.slice(0,3).map((review, index) => (
     users && users.length === reviews.length ? (
       <ReviewForm
         review={review}
