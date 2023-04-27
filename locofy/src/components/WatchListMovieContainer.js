@@ -5,9 +5,7 @@ import { UserApi } from '../api/UserApi';
 
 const api = new UserApi();
 
-const WatchListMovieContainer = ({
-  movie,user
-}) => {
+const WatchListMovieContainer = ({movie,user,updateUser}) => {
   const [showBox, setShowImage] = useState(true);
 
   const handleDelete = () => {
@@ -15,8 +13,8 @@ const WatchListMovieContainer = ({
       if (error) {
         console.error(error);
       } else {
-        console.log('TV show removed from watchlist successfully.');
         user.watchlist_movies[movie.movie_id.id] = false;
+        updateUser(user);
         setShowImage(false);
       }
     });

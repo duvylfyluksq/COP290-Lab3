@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useCallback } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import WatchListMovieContainer from "../components/WatchListMovieContainer";
 import Footer from "../components/Footer";
 import NavbarContainer from "../components/NavbarContainer";
@@ -11,11 +11,13 @@ import { Title } from '../model/Title';
 const userapi =  new  UserApi();
 
 const FrameComponent2 = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const [watchlist,setWatchlist] = useState([]);
-  const user = location.state.user;
+  const [user,setUser] = useState(location.state.user);
 
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+  };
 
   useEffect(()=> {
     userapi.watchlistUserIdGet(
@@ -37,29 +39,6 @@ const FrameComponent2 = () => {
     ); 
   },[user])
 
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedin");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowsein");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowsein");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresin");
-  }, [navigate]);
-
-  const onFluentcompose24FilledClick = useCallback(() => {
-    navigate("/makepost");
-  }, [navigate]);
-
-  const onProfileMenuClick = useCallback(() => {
-    navigate("/bobdylaninself")
-  }, [navigate]);
 
   return (
     <div className="watchlist-inself-parent">
@@ -77,6 +56,7 @@ const FrameComponent2 = () => {
                       key={index}
                       user = {user}
                       movie={title.movie}
+                      updateUser={updateUser}
                     />
                   );
                 } else {
@@ -85,6 +65,7 @@ const FrameComponent2 = () => {
                       key={index}
                       user ={user}
                       show={title.tvshow}
+                      updateUser={updateUser}
                     />
                   );
                 }
@@ -92,16 +73,7 @@ const FrameComponent2 = () => {
           </div>
         </div>
         <NavbarContainer
-          dimensions="/vector7.svg"
-          dimensionsText="/fluentcompose24filled.svg"
-          dimensionsId="/profilemenu1.svg"
           propBoxShadow="unset"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
-          onProfileMenuClick={onProfileMenuClick}
           user = {user}
         />
       </div>

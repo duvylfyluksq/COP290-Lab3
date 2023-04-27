@@ -11,7 +11,6 @@ import NavbarContainer from "../components/NavbarContainer";
 import "./FrameComponent7.css";
 import { Title } from "../model/Title";
 import {Review} from "../model/Review";
-import { User } from "../model/User";
 import { ReviewsApi } from '../api/ReviewsApi';
 import { UserApi } from '../api/UserApi';
 
@@ -22,31 +21,27 @@ const userapi =  new  UserApi();
 const FrameComponent7 = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const user = location.state.user;
+  const [user,setUser] = useState(location.state.user);
   const [reviews,setReviews] = useState([]);
   const [watchlist,setWatchlist] = useState([]);
 
-  console.log(user);
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+  };
+  
   useEffect(() => {
     revapi.reviewUserUserIdGet(user.user_id, {sortOrder:true}, (error, data, response) => {
       console.log("rip");
       if (response.status === 200) {
         const reviewlist = data.map((reviewData) => Review.constructFromObject(reviewData));
-        console.log(reviewlist);
         setReviews(reviewlist);
-        console.log("hello");
-        userapi.watchlistUserIdGet(
-          user.user_id,
+        userapi.watchlistUserIdGet(user.user_id,
           (error, data, response) => {
-            console.log("rip");
             if (response.status === 200) {
-              const watchlist = data
-                .map((watchlistData) =>
+              const watchlist = data.map((watchlistData) =>
                   Title.constructFromObject(watchlistData)
                 );
-              console.log(watchlist);
               setWatchlist(watchlist);
-              console.log("hello");
             } else {
               console.log(error);
             }
@@ -59,11 +54,11 @@ const FrameComponent7 = () => {
   }, [user]);
   
 
-  const onWatchlistText1Click = useCallback(() => {
+  const onWatchlistTextClick = useCallback(() => {
     navigate("/watchlistinself", {state:{user}});
   }, [navigate]);
 
-  const onPostsText1Click = useCallback(() => {
+  const onPostsTextClick = useCallback(() => {
     navigate("/reviewsbobdylanin",{state:{reviews,user}});
   }, [navigate,reviews]);
 
@@ -85,6 +80,7 @@ const FrameComponent7 = () => {
                       key={index}
                       user = {user}
                       movie={title.movie}
+                      updateUser = {updateUser}
                     />
                   );
                 } else {
@@ -93,12 +89,13 @@ const FrameComponent7 = () => {
                       key={index}
                       user ={user}
                       show={title.tvshow}
+                      updateUser = {updateUser}
                     />
                   );
                 }
               })}
             </div>
-            <div className="watchlist8" onClick={onWatchlistText1Click}>
+            <div className="watchlist8" onClick={onWatchlistTextClick}>
               View Entire Watchlist
             </div>
           </div>
@@ -118,18 +115,14 @@ const FrameComponent7 = () => {
               ))}
               
             </div>
-            <div className="posts1" onClick={onPostsText1Click}>
+            <div className="posts1" onClick={onPostsTextClick}>
               View All Posts
             </div>
           </div>
         </div>
         <NavbarContainer
           user = {user}
-          dimensions="/vector16.svg"
-          dimensionsText="/fluentcompose24filled1.svg"
-          dimensionsId="/profilemenu5.svg"
           propBoxShadow="unset"
-          
         />
       </div>
     </div>

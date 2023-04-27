@@ -16,7 +16,10 @@ const CreateAccountContainer = () => {
   const [confirm_password, setConfirm_password] = useState('');
 
   const onSignUpClick = useCallback(() => {
-    const userSignupBody = new UserSignupBody(username, password, confirm_password, "a" , "a", ["a","a","a"]);
+
+    const randomNumber = Math.floor(Math.random() * 1338) + 1;
+    const pfp = `${randomNumber}.jpeg`;
+    const userSignupBody = new UserSignupBody(username, password, confirm_password, pfp, "a", ["a","a","a"]);
     const opts = {
       body: userSignupBody,
     };
@@ -30,7 +33,7 @@ const CreateAccountContainer = () => {
       } else {
         console.log("Success, going to select bio and interests")
         const user = User.constructFromObject(response.body);
-        navigate('/continue', {state: {user: user} });
+        navigate('/continue', {state: {user}});
       }
     });
   }, [username, password, confirm_password,navigate,api]);

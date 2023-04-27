@@ -17,7 +17,6 @@ const Continue = () => {
 
   const location = useLocation();
   const user = location.state.user;
-  const user_id = user.user_id;
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedout");
@@ -46,14 +45,15 @@ const Continue = () => {
       const opts = {
         body: bioBody,
       };
-    api.profileUserIdBioPut(user_id, opts, (error, data, response) => {
+    api.profileUserIdBioPut(user.user_id, opts, (error, data, response) => {
       if (error) {
         console.error("Error occurred:", error);
         return;
       }
       if (response.status === 200) {
         console.log("Bio updated successfully");
-        navigate("/homesignedin", {state: {user: user}});
+        user.bio = bio;
+        navigate("/homesignedin", {state: {user}});
       } else {
         console.log("Failed to update bio:", response.body);
       }
@@ -65,13 +65,14 @@ const Continue = () => {
       const opts = {
         body: interestsBody,
       };
-    api.profileUserIdInterestsPut(user_id, opts, (error, data, response) => {
+    api.profileUserIdInterestsPut(user.user_id, opts, (error, data, response) => {
       if (error) {
         console.error("Error occurred:", error);
         return;
       }
       if (response.status === 200) {
         console.log("Interests updated successfully");
+        user.interests = interests;
         updateUserBio(bio);
       } else {
         console.log("Failed to update interests:", response.body);
