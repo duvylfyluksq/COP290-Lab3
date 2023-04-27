@@ -4,14 +4,13 @@ import  { useEffect, useState } from 'react';
 import { useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import BobDylanContainer from "../components/BobDylanContainer";
-import WatchListMovieContainer from "../components/WatchListMovieContainer";
-import Footer from "../components/Footer";
-import ReviewForm from "../components/ReviewForm";
-import NavbarContainer from "../components/NavbarContainer";
+import MovieWatchListContainer from "../components/MovieWatchListContainer";
+import BottomFooter from "../components/BottomFooter";
+import ReviewContainer from "../components/ReviewContainer";
+import MoviesContainer from "../components/MoviesContainer";
 import "./FrameComponent7.css";
 import { Title } from "../model/Title";
 import {Review} from "../model/Review";
-import { User } from "../model/User";
 import { ReviewsApi } from '../api/ReviewsApi';
 import { UserApi } from '../api/UserApi';
 
@@ -46,27 +45,20 @@ const FrameComponent8 = () => {
     navigate("/signin");
   }, [navigate]);
 
-  console.log(user);
   useEffect(() => {
     revapi.reviewUserUserIdGet(user.user_id, {sortOrder:true}, (error, data, response) => {
-      console.log("rip");
       if (response.status === 200) {
         const reviewlist = data.map((reviewData) => Review.constructFromObject(reviewData));
-        console.log(reviewlist);
         setReviews(reviewlist);
-        console.log("hello");
         userapi.watchlistUserIdGet(
           user.user_id,
           (error, data, response) => {
-            console.log("rip");
             if (response.status === 200) {
               const watchlist = data
                 .map((watchlistData) =>
                   Title.constructFromObject(watchlistData)
                 );
-              console.log(watchlist);
               setWatchlist(watchlist);
-              console.log("hello");
             } else {
               console.log(error);
             }
@@ -80,12 +72,12 @@ const FrameComponent8 = () => {
   
 
   const onWatchlistText1Click = useCallback(() => {
-    navigate("/watchlistinself", {state:{user}});
-  }, [navigate]);
+    navigate("/watchlistout", {state:{watchlist,user}});
+  }, [navigate,watchlist,user]);
 
   const onPostsText1Click = useCallback(() => {
-    navigate("/reviewsbobdylanin",{state:{reviews,user}});
-  }, [navigate,reviews]);
+    navigate("/reviewsduvylfyluksqout",{state:{reviews,user}});
+  }, [navigate,reviews,user]);
 
   return (
     <div className="bobdylan-inself-parent">
@@ -101,17 +93,15 @@ const FrameComponent8 = () => {
               {watchlist.slice(0,10).map((title, index) => {
                 if (!!title.movie) {
                   return (
-                    <WatchListMovieContainer
+                    <MovieWatchListContainer
                       key={index}
-                      user = {user}
                       movie={title.movie}
                     />
                   );
                 } else {
                   return (
-                    <Footer
+                    <BottomFooter
                       key={index}
-                      user ={user}
                       show={title.tvshow}
                     />
                   );
@@ -126,12 +116,11 @@ const FrameComponent8 = () => {
             <div className="recentposts3">Recent Posts</div>
             <div className="review1390">
               {reviews.slice(0,3).map((review) => (
-                <ReviewForm
+                <ReviewContainer
                 picture="/picture1@2x.png"
                 duvylfyluksq="bobdylan"
                 bodyCursor="unset"
                 bodyFrameCursor="unset"
-                host = {user}
                 user = {user}
                 review = {review}
               />

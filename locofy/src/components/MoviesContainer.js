@@ -2,14 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./MoviesContainer.css";
 
-const MoviesContainer = ({
-  coordinates,
-  onLogoContainerClick,
-  onMoviesTextClick,
-  onTVShowsTextClick,
-  onGenresTextClick,
-  onNavbarRHSContainerClick,
-}) => {
+const MoviesContainer = ({}) => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
 
@@ -24,10 +17,30 @@ const MoviesContainer = ({
     
   }, []);
 
+  const onLogoContainerClick = useCallback(() => {
+    navigate("/homesignedout");
+  }, [navigate]);
+
+  const onMoviesTextClick = useCallback(() => {
+    navigate("/moviebrowseout");
+  }, [navigate]);
+
+  const onTVShowsTextClick = useCallback(() => {
+    navigate("/tvshowbrowseout");
+  }, [navigate]);
+
+  const onGenresTextClick = useCallback(() => {
+    navigate("/genresout");
+  }, [navigate]);
+
+  const onNavbarRHSContainerClick = useCallback(() => {
+    navigate("/signin");
+  }, [navigate]);
+
   return (
     <div className="navbar3">
       <div className="logo3" onClick={onLogoContainerClick}>
-        <img className="vector-icon19" alt="" src={coordinates} />
+        <img className="vector-icon19" alt="" src="/vector5.svg"/>
       </div>
       <div className="navbar-lhs3">
         <div className="movies6" onClick={onMoviesTextClick}>

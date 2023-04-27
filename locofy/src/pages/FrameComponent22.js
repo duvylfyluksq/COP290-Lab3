@@ -91,14 +91,7 @@ const FrameComponent22 = () => {
       else{
         setisadded(false);
       }
-    },[show])
-  const onPictureIconClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqTextClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
+    },[show,user])
 
   const onMakepostClick = useCallback(() => {
     navigate("/makepost", {state:{content: show, user}});
@@ -114,9 +107,11 @@ const FrameComponent22 = () => {
     console.log("Watchlist clicked");
     if(isadded){
       setisadded(false);
+      user.watchlist_shows[show.show_id.id] = false;
     }
     else{
       setisadded(true);
+      user.watchlist_shows[show.show_id.id] = true;
     }
     userapi.watchlistTvshowUserIdPut(user.user_id, show.show_id.id, (error, data, response) => {
       if (response === 201) {
@@ -135,8 +130,6 @@ const FrameComponent22 = () => {
         key={index}
         user={users[index]}
         host={user}
-        onPictureIconClick={onPictureIconClick}
-        onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
       />
     ) : null
   ));
@@ -165,7 +158,7 @@ const FrameComponent22 = () => {
         <img className="plus5678"
         alt=""
         onClick={onWatchlistClick}
-        src = { isadded ? "./plus.svg" : "./minus.svg"} />
+        src = { isadded ? "./minus.svg" : "./plus.svg"} />
         
             </div>
             <div className="right100">

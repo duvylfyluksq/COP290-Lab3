@@ -16,6 +16,7 @@ const WatchListMovieContainer = ({
         console.error(error);
       } else {
         console.log('TV show removed from watchlist successfully.');
+        user.watchlist_movies[movie.movie_id.id] = false;
         setShowImage(false);
       }
     });

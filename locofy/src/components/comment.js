@@ -35,7 +35,7 @@ const Comment = ({
         }
       }
       else {
-        navigate("/duvylfyluksqout", {state: {user, host}});
+        navigate("/duvylfyluksqout", {state: {user}});
       }
     }, [navigate]);
 

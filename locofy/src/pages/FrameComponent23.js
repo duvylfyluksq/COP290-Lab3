@@ -84,13 +84,6 @@ const FrameComponent23 = () => {
     }
     },[mov, fetched]);
 
-  const onPictureIconClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqTextClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
 
 
   const onMakepostClick = useCallback(() => {
@@ -100,17 +93,9 @@ const FrameComponent23 = () => {
   const onSeeAllReviewsClick = useCallback(() => {
     navigate("/reviewsmoviein", {state:{mov, user}});
   }, [navigate]);
-  
-  // const [isInWatchlist, setIsInWatchlist] = useState(() => {
-  //   if (user.watchlist_movies && user.watchlist_movies.hasOwnProperty(user.user_id)) {
-  //      if(user.watchlist_movies[user.user_id]){return "minus.svg";}
-  //      else {return "plus.svg";}
-  //   } else {
-  //     return "plus.svg";
-  //   }
-  // });  
 
   const [isadded,setisadded] = useState(user.watchlist_movies[mov.movie_id.id] !== undefined && user.watchlist_movies[mov.movie_id.id]);
+
   useEffect(()=>{
     if (user.watchlist_movies[mov.movie_id.id]){
       setisadded(true);
@@ -118,17 +103,17 @@ const FrameComponent23 = () => {
     else{
       setisadded(false);
     }
-  },[mov])
+  },[mov,user])
   
   const onWatchlistClick = useCallback(() => {
-    console.log("Watchlist clicked");
     if(isadded){
       setisadded(false);
+      user.watchlist_movies[mov.movie_id.id] = false;
     }
     else{
       setisadded(true);
+      user.watchlist_movies[mov.movie_id.id] = true;
     }
-    console.log(isadded)
     userapi.watchlistMovieUserIdPut(user.user_id, mov.movie_id.id, (error, data, response) => {
       if (response === 201) {
         console.log("Watchlist updated");
@@ -147,8 +132,6 @@ const FrameComponent23 = () => {
         key={index}
         user={users[index]}
         host={user}
-        onPictureIconClick={onPictureIconClick}
-        onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
       />
     ) : null
   ));
@@ -175,7 +158,7 @@ const FrameComponent23 = () => {
         <img className="plus5678"
         alt=""
         onClick={() => onWatchlistClick()}
-        src={isadded ? "./plus.svg" : "./minus.svg"}/>
+        src={isadded ? "./minus.svg" : "./plus.svg"}/>
         
             </div>
             <div className="right50">

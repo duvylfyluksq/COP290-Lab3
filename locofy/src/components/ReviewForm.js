@@ -106,19 +106,15 @@ const ReviewForm = ({
   const navigate = useNavigate();
 
   const onUserClick = useCallback(() => {
-  var isHost; 
-  
-  isHost = (host.user_id === user.user_id);
-
-  if (isHost){
-    navigate("/bobdylaninself", {state: {user, host}});
-  }
-  else {
-    navigate("/duvylfyluksqinother", {state: {user, host}});
-  }
-  
-    
-  }, [navigate]);
+    var isHost; 
+    isHost = (host.user_id === user.user_id);
+    if (isHost){
+      navigate("/bobdylaninself", {state: {user, host}});
+    }
+    else {
+      navigate("/duvylfyluksqinother", {state: {user, host}});
+    }
+  }, [navigate,user,host]);
 
 
 

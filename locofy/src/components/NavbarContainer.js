@@ -7,8 +7,6 @@ import { useCallback } from "react";
 
 const NavbarContainer = ({
   user,
-  dimensionsText,
-  dimensions,
   propBoxShadow,
 }) => {
   const logoStyle = useMemo(() => {
@@ -28,7 +26,6 @@ const NavbarContainer = ({
 
   const onSearchTextChange = useCallback((e) => {
     setSearchText(e.target.value);
-    
   }, []);
   
   const onLogoContainerClick = useCallback(() => {
@@ -49,14 +46,14 @@ const NavbarContainer = ({
 
   const onProfileMenuClick = useCallback(() => {
     navigate("/bobdylaninself", {state: {user}})
-  }, [navigate]);
+  }, [navigate,user]);
 
   const onWatchlistClick = useCallback(() => {
     navigate("/watchlistinself", {state: {user}});
-  }, [navigate]);
+  }, [navigate,user]);
   const onViewProfileClick = useCallback(() => {
     navigate("/bobdylaninself", {state: {user}});
-  }, [navigate]);
+  }, [navigate,user]);
   const onLogoutClick = useCallback(() => {
     navigate("/homesignedout");
   }, [navigate]);
@@ -64,7 +61,7 @@ const NavbarContainer = ({
   return (
     <div className="navbar2">
       <div className="logo2" onClick={onLogoContainerClick} style={logoStyle}>
-        <img className="vector-icon17" alt="" src={dimensions} />
+        <img className="vector-icon17" alt="" src="/vector15.svg" />
       </div>
       <div className="navbar-lhs2">
         <div className="movies4" onClick={onMoviesTextClick}>
