@@ -1,3 +1,4 @@
 .DS_Store
 locofy/node_modules/
 __pycache__/
+.vscode
