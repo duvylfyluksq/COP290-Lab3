@@ -34,26 +34,6 @@ const FrameComponent18 = () => {
     });
   }, [selectedgenre,sortparam,sortype]);
 
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
-  }, [navigate]);
-
   function changeColor(buttonNumber){
     
     switch(buttonNumber){
@@ -126,7 +106,6 @@ const FrameComponent18 = () => {
   
 
   return (
-    // <div className="moviebrowse-out-parent">
       <div className="moviebrowse-out">
         <div className="scrolllist2">
           {movies.map((movie, index) => (
@@ -258,13 +237,9 @@ const FrameComponent18 = () => {
           </div>
 
           <NavbarContainer
-          user = {user}
-          dimensions="/vector35.svg"
-          dimensionsText="/fluentcompose24filled1.svg"
-          dimensionsId="/profilemenu8.svg"
-          propBoxShadow="unset"
-        
-        />
+            user = {user}
+            propBoxShadow="unset"
+          />
       </div>
     </div>
   );

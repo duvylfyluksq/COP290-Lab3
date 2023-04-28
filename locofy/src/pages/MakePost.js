@@ -75,16 +75,7 @@ const MakePost = () => {
         <div className="write-a-review-container">
           <p className="write-a-review"><center>Write a Review for {content.title}</center></p>
         </div>
-        {/* <div className="movieorshow">
-          <div className="what-are-you-container">
-            <p className="write-a-review">What are you reviewing?</p>
-          </div>
-          <input
-            className="select2"
-            type="text"
-            placeholder="Search Movies, TV Shows"
-          />
-        </div> */}
+        
         <div className="movieorshow">
           <div className="rating5">Rating</div>
           <div className="ratinglist">
@@ -128,9 +119,7 @@ const MakePost = () => {
       </div>
       <NavbarContainer
           user = {user}
-          dimensions="/vector35.svg"
-          dimensionsText="/fluentcompose24filled1.svg"
-          dimensionsId="/profilemenu8.svg"
+          
           propBoxShadow="unset"
         />
     </div>

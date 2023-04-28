@@ -36,7 +36,6 @@ const Searchin = () => {
     });
   }, [pref]);
 
-  
 
 
   return (
@@ -62,13 +61,9 @@ const Searchin = () => {
           </div>
 
           <NavbarContainer
-          user = {user}
-          dimensions="/vector35.svg"
-          dimensionsText="/fluentcompose24filled1.svg"
-          dimensionsId="/profilemenu8.svg"
-          propBoxShadow="unset"
-        
-        />
+            user = {user}
+            propBoxShadow="unset"
+          />
         
 
       </div>

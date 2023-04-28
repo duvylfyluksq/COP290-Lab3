@@ -66,38 +66,6 @@ const FrameComponent20 = () => {
     });
   }, [selectedgenre,sortparam,sortype]);
 
-  
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
-  }, [navigate]);
-
-  function changeColor(buttonNumber){
-    var buttons = document.querySelectorAll("#button");
-    for (var i = 0; i < buttons.length; i++) {
-      if (i == buttonNumber - 1) {
-        buttons[i].classList.add('colored');
-    } else {
-        buttons[i].classList.remove('colored');
-    }
-    }
-  }
 
   function changecolour(buttonNumber) {
   const genres = [
@@ -310,15 +278,7 @@ function active(buttonNumber){
             </div>
           </div>
         </div>
-        <MoviesContainer
-          coordinates="/vector33.svg"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onNavbarRHSContainerClick={onNavbarRHSContainerClick}
-        />
-        
+        <MoviesContainer/>
 
       </div>
   );

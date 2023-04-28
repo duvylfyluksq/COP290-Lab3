@@ -31,12 +31,6 @@ const TVShowsContainer = ({
   propAlignSelf,
   propWidth,
   propAlignSelf1,
-  // onTVShowCardClick,
-  onTVShowCardContainer4Click,
-  onTVShowCardContainer5Click,
-  onTVShowCardContainer6Click,
-  onTVShowCardContainer7Click,
-  onTVShowCardContainer8Click,
 }) => {
   const topTVShowsStyle = useMemo(() => {
     return {

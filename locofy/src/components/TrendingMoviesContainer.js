@@ -11,7 +11,6 @@ const TrendingMoviesContainer = ({
   propAlignSelf,
   propWidth,
   propAlignSelf1,
-  onMovieCardClick,
 }) => {
   
   const navigate = new useNavigate();

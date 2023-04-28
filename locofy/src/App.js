@@ -49,6 +49,7 @@ function App(){
   const action = useNavigationType();
   const location = useLocation();
 
+
   const pathname = location.pathname;
   useEffect(() => {
     if (action !== "POP") {
@@ -229,7 +230,6 @@ function App(){
       <Route path="/continue" element={<Continue />} />
       <Route path="/makepost" element={<MakePost />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/signintile" element={<SignInTile />} />
       <Route path="/moviebrowsein" element={<FrameComponent18 />} />
       <Route path="/tvshowbrowseout" element={<FrameComponent19 />} />
       <Route path="/mixedbrowseout" element={<FrameComponent20 />} />

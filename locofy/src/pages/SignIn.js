@@ -42,25 +42,6 @@ const SignIn = () => {
     navigate("/signup");
   }, [navigate]);
 
-  const onLogoClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
-  }, [navigate]);
   function toggleVisibility1() {  
     var getPassword = document.getElementById("Password1");
     var image = document.getElementById("your-img");
@@ -99,14 +80,7 @@ const SignIn = () => {
         />
       </div>
       </div>
-      <MoviesContainer
-        coordinates="/vector38.svg"
-        onLogoClick={onLogoClick}
-        onMoviesTextClick={onMoviesTextClick}
-        onTVShowsTextClick={onTVShowsTextClick}
-        onGenresText1Click={onGenresTextClick}
-        onNavbarRHSContainerClick={onNavbarRHSContainerClick}
-      />
+      <MoviesContainer/>
     </div>
   );
 };

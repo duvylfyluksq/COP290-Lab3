@@ -17,8 +17,6 @@ const SearchOut = () => {
   const pref  = location.state.pref;
   const [titles, setTitles] = useState([]);
 
-
-
   useEffect(() => {
     api.searchGet(pref,(error, data, response) => {
       if (response.status === 200) {
@@ -35,27 +33,6 @@ const SearchOut = () => {
     });
   }, [pref]);
 
-  
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
-  }, [navigate]);
 
   return (
       <div className="mixedbrowse-in790">
@@ -79,16 +56,7 @@ const SearchOut = () => {
           ))}
           </div>
 
-        <MoviesContainer
-          coordinates="/vector33.svg"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onNavbarRHSContainerClick={onNavbarRHSContainerClick}
-        />
-        
-
+        <MoviesContainer/>
       </div>
   );
 };

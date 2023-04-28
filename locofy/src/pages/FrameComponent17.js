@@ -6,10 +6,10 @@ import TVShowsContainer from "../components/TVShowsContainer";
 import NewReleasesContainer from "../components/NewReleasesContainer";
 import TrendingMoviesContainer from "../components/TrendingMoviesContainer";
 import TrendingContainer from "../components/TrendingContainer";
-import Navbar2 from "../components/Navbar2";
+
 import "./FrameComponent17.css";
 import MoviesContainer from '../components/MoviesContainer';
-// import Left from './images/left_arrow.jpg'
+
 import { useState } from 'react';
 import { TitlesApi } from '../api/TitlesApi';
 import {Movie} from "../model/Movie";
@@ -81,79 +81,6 @@ const FrameComponent17 = () => {
     });
   }, []);
 
-  const onTVShowCardContainerClick = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer1Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer2Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer3Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer4Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onMovieCardContainer5Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onTVShowCardContainer5Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer6Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onTVShowCardContainer6Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer7Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onTVShowCardContainer7Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onTVShowCardContainer8Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer8Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer9Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer10Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer11Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer12Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  const onMovieCardContainer13Click = useCallback(() => {
-    navigate("/movieout");
-  }, [navigate]);
-
-  
 
   return (
     <div className="home-signedout-parent">
@@ -167,11 +94,6 @@ const FrameComponent17 = () => {
             propAlignSelf="stretch"
             propWidth="unset"
             propAlignSelf1="stretch"
-            onTVShowCardContainer4Click={onTVShowCardContainerClick}
-            onTVShowCardContainer5Click={onTVShowCardContainer1Click}
-            onTVShowCardContainer6Click={onTVShowCardContainer2Click}
-            onTVShowCardContainer7Click={onTVShowCardContainer3Click}
-            onTVShowCardContainer8Click={onTVShowCardContainer4Click}
           />
           <NewReleasesContainer
             releases = {release}
@@ -180,13 +102,6 @@ const FrameComponent17 = () => {
             propAlignSelf="stretch"
             propWidth="unset"
             propAlignSelf1="stretch"
-            onMovieCardContainer9Click={onMovieCardContainer5Click}
-            onTVShowCardContainer9Click={onTVShowCardContainer5Click}
-            onMovieCardContainer10Click={onMovieCardContainer6Click}
-            onTVShowCardContainer10Click={onTVShowCardContainer6Click}
-            onMovieCardContainer11Click={onMovieCardContainer7Click}
-            onTVShowCardContainer11Click={onTVShowCardContainer7Click}
-            onTVShowCardContainer12Click={onTVShowCardContainer8Click}
           />
           <TrendingMoviesContainer
             movies={trmovie}
@@ -195,12 +110,6 @@ const FrameComponent17 = () => {
             propAlignSelf="stretch"
             propWidth="unset"
             propAlignSelf1="stretch"
-            onMovieCardContainer12Click={onMovieCardContainer8Click}
-            onMovieCardContainer13Click={onMovieCardContainer9Click}
-            onMovieCardContainer14Click={onMovieCardContainer10Click}
-            onMovieCardContainer15Click={onMovieCardContainer11Click}
-            onMovieCardContainer16Click={onMovieCardContainer12Click}
-            onMovieCardContainer17Click={onMovieCardContainer13Click}
           />
           <TrendingContainer
             shows = {trshow}

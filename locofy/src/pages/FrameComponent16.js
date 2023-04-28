@@ -116,8 +116,6 @@ const FrameComponent16 = () => {
             propAlignSelf="stretch"
             propWidth="unset"
             propAlignSelf1="stretch"
-           
-      
           />
           <NewReleasesContainer
             releases = {release}
