@@ -27,7 +27,6 @@ const FrameComponent14 = () => {
         const showList = data.map((showdata) =>
         Tvshow.constructFromObject(showdata)
         );
-        console.log(showList);
         setShows(showList);
 
       } else {

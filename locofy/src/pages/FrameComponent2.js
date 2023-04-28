@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import WatchListMovieContainer from "../components/WatchListMovieContainer";
 import Footer from "../components/Footer";
@@ -23,15 +22,12 @@ const FrameComponent2 = () => {
     userapi.watchlistUserIdGet(
       user.user_id,
       (error, data, response) => {
-        console.log("rip");
         if (response.status === 200) {
           const watchlist = data
             .map((watchlistData) =>
               Title.constructFromObject(watchlistData)
             );
-          console.log(watchlist);
           setWatchlist(watchlist);
-          console.log("hello");
         } else {
           console.log(error);
         }

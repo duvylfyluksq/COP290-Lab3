@@ -33,35 +33,30 @@ const FrameComponent17 = () => {
         const movieList = data.slice(0, 5).map((movieData) =>
           Movie.constructFromObject(movieData)
         );
-        console.log(movieList);
         setMovies(movieList);
     api.tvshowGet(opts, (error, data, response) => {
           if (response.status === 200) {
             const showList = data.slice(0, 5).map((showData) =>
               Tvshow.constructFromObject(showData)
             );
-            console.log(showList);
             setShows(showList);
             api.titleGet({sortTypeBrowse:"Rel"}, (error, data, response) => {
               if (response.status === 200) {
                 const newreleaselist = data.slice(0, 5).map((releaseData) =>
                 Title.constructFromObject(releaseData)
                 );
-                console.log(newreleaselist);
                 setRelease(newreleaselist);
                 api.movieGet({sortTypeBrowse:"Pop"}, (error, data, response) => {
                   if (response.status === 200) {
                     const trmovieList = data.slice(0, 5).map((trmovieData) =>
                     Movie.constructFromObject(trmovieData)
                     );
-                    console.log(trmovieList);
                     setTrmovie(trmovieList);
                     api.tvshowGet({sortTypeBrowse:"Pop"}, (error, data, response) => {
                       if (response.status === 200) {
                         const trshowList = data.slice(0, 5).map((trshowDaata) =>
                         Tvshow.constructFromObject(trshowDaata)
                         );
-                        console.log(trshowList);
                         setTrshow(trshowList);
                         
                       } else {

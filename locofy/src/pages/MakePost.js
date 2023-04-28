@@ -17,8 +17,6 @@ const MakePost = () => {
   const location = useLocation();
   const user = location.state.user;
   const content = location.state.content;
-  console.log(JSON.stringify(content.show_id));
-  console 
 
   const isMovie = content.hasOwnProperty('movie_id');
   const [reviewtitle, setreviewtitle] = useState("");
@@ -34,13 +32,11 @@ const MakePost = () => {
     const body = reviewbody;
     const now = new Date();
     const isoString = now.toISOString();
-    // const readableString = now.toString();
 
     reviewsApi.reviewPost(movieId, showId, user_id, rating, title, body, isoString, (error, data, response) => {
       if (error) {
         console.error(error);
       } else {
-        console.log('Review posted successfully.');
         navigate('/homesignedin', { state: { user } });
       }
     });

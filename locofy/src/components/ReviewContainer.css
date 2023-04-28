@@ -3,7 +3,8 @@
   font-size: var(--font-size-26xl);
   font-weight: 500;
   display: flex;
-  width: 80%;
+  width:120%;
+  overflow-y:hidden;
 }
 .by1 {
   position: relative;
@@ -117,6 +118,7 @@
   display: inline-block;
   width: 70px;
   height: 18px;
+  margin-left:20%;
 }
 .likebutton-icon1 {
   width: 25px;

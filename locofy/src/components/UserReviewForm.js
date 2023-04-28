@@ -26,7 +26,7 @@ const UserReviewForm = ({
       if (error) {
         console.error(error);
       } else {
-        console.log("Comment posted successfully.");
+
         commentInputRef.current.value = "";
         setCharCount2(0);
         reviewsApi.reviewReviewIdCommentGet(review.review_id, (error, data, response) => {
@@ -34,7 +34,7 @@ const UserReviewForm = ({
             const commentlist = data.map((comment) =>
               Comment.constructFromObject(comment)
             );
-            console.log(commentlist);
+            
             setcomments(commentlist);
           } else {
             console.log(error);
@@ -110,7 +110,6 @@ const UserReviewForm = ({
         const commentlist = data.map((comment) =>
           Comment.constructFromObject(comment)
         );
-        console.log(commentlist);
         setcomments(commentlist);
       } else {
         console.log(error);

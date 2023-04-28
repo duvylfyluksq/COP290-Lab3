@@ -28,7 +28,6 @@ const Searchin = () => {
         Title.constructFromObject(titleData)
         
         );
-        console.log(titleList);
         setTitles(titleList);
 
       } else {

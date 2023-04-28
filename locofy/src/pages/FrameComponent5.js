@@ -19,8 +19,8 @@ const FrameComponent5 = () => {
             <div className="showing2">Showing Reviews By</div>
             <div className="username2">{user.username}</div>
           </div>
-            <div className="reviewlist2">
-            <div className="postslist2">
+          <div className="reviewlist9999999">
+            <div className="reviews139">
             {reviews.map((review) => (
                 <ReviewContainer
                 picture="/picture1@2x.png"
@@ -32,7 +32,8 @@ const FrameComponent5 = () => {
               />
               ))}   
             </div>
-          </div>
+        </div>
+            
         </div>
         <MoviesContainer/>
       </div>

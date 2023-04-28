@@ -6,6 +6,7 @@ import MovieWatchListContainer from "../components/MovieWatchListContainer";
 import BottomFooter from "../components/BottomFooter";
 import ReviewForm from "../components/ReviewForm";
 import NavbarContainer from "../components/NavbarContainer";
+import BobDylanContainer1 from "../components/BobDylanContainer1";
 import "./FrameComponent6.css";
 import { Title } from "../model/Title";
 import {Review} from "../model/Review";
@@ -62,7 +63,7 @@ const FrameComponent6 = () => {
     <div className="duvylfyluksq-inother-parent">
       <div className="duvylfyluksq-inother">
         <div className="body6">
-          <UserProfile user = {user}/>
+          <BobDylanContainer1 user = {user}/>
           <div className="watchlist3">
             <div className="watchlistheader3">
               <div className="watchlist4">Watchlist</div>
@@ -93,7 +94,7 @@ const FrameComponent6 = () => {
           </div>
           <div className="recentposts">
             <div className="recentposts1">Recent Posts</div>
-            <div className="watchlistdisplay3">
+            <div className="review13901">
             {reviews.slice(0,3).map((review) => (
                 <ReviewForm
                 user = {user}

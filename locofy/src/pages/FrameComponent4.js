@@ -11,7 +11,6 @@ const FrameComponent4 = () => {
   const location = useLocation();
   const user = location.state.user;
   const reviews = location.state.reviews;
-  console.log(reviews);
 
   const onLogoContainerClick = useCallback(() => {
     navigate("/homesignedin");

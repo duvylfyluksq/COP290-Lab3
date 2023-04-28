@@ -3,9 +3,7 @@ import "./commentContainer.css";
 import Comment from './comment';
 
 const CommentContainer = ({ comments, userlist, host = [], }) => {
-  console.log('rip');
-  console.log(comments);
-  console.log(userlist);
+
 
   if (userlist.length === 0) {
     return null;

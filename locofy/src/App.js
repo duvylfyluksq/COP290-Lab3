@@ -41,19 +41,6 @@ import ReviewsShowOut from './pages/ReviewsShowOut';
 import SearchOut from './pages/SearchOut';
 import Searchin from './pages/Searchin';
 
-// const useScrollToTop = () => {
-//   const history = useHistory();
-
-//   useEffect(() => {
-//     const unlisten = history.listen(() => {
-//       window.scrollTo(0, 0);
-//     });
-
-//     return () => {
-//       unlisten();
-//     };
-//   }, [history]);
-// };
 
 
 function App(){
@@ -61,12 +48,6 @@ function App(){
 
   const action = useNavigationType();
   const location = useLocation();
-
-  // const { pathname } = useLocation();
-
-  // // useEffect(() => {
-  // //   window.scrollTo(0, 0);
-  // // }, [pathname]);
 
   const pathname = location.pathname;
   useEffect(() => {

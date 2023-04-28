@@ -24,7 +24,7 @@ with open('tvseries_only.tsv', 'r') as f:
             type = columns[1]
             if (type == 'movie' or type == 'tvSeries'):
                 response = requests.get(
-                    f'https://www.omdbapi.com/?i={id}&apikey=d1eddf7d&plot=full')
+                    f'https://www.omdbapi.com/?i={id}&apikey=9a688456&plot=full')
                 print("Request Sent")
                 if response.status_code == 200:
                     print("Response Ok")
@@ -50,10 +50,10 @@ with open('tvseries_only.tsv', 'r') as f:
                                 data['imdbRating']), genres, date, data['Runtime'], data['Poster'], data['Plot'], 1)
                             cursor.execute(query, values)
                             print("Added")
+                            i += 1
                             connection.commit()
                 else:
                     break
-                i += 1
         else:
             break
     print(l, i)

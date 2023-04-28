@@ -29,7 +29,7 @@ const ReviewForm = ({
     }
   },[review])
   
-  console.log(review.likes);
+
   
   
   useEffect(() => {
@@ -55,7 +55,7 @@ const ReviewForm = ({
         }else{
           setSentiment("Negative");
         }
-        console.log(results);
+     
       } catch (error) {
         console.error('Failed to analyze sentiment:', error);
       }
@@ -84,7 +84,7 @@ const ReviewForm = ({
       if (error) {
         console.error(error);
       } else {
-        console.log("Comment posted successfully.");
+        
         commentInputRef.current.value = "";
         setCharCount2(0);
         reviewsApi.reviewReviewIdCommentGet(review.review_id, (error, data, response) => {

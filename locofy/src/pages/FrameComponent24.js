@@ -46,10 +46,7 @@ const FrameComponent24 = () => {
                 const reviewList = data.map((reviewData) =>
                 Review.constructFromObject(reviewData)
                 );
-                console.log(reviewList);
                 setReviews(reviewList);
-                console.log("lmao");
-                console.log(reviews);
                 fetchUsersSequentially(reviewList, 0, [], (userList) => {
                   setUsers(userList);
                 });
@@ -87,9 +84,6 @@ const FrameComponent24 = () => {
             </div>
         </div>
         <NavbarContainer
-          dimensions="/vector35.svg"
-          dimensionsText="/fluentcompose24filled1.svg"
-          dimensionsId="/profilemenu8.svg"
           propBoxShadow="unset"
           user = {user}
         />

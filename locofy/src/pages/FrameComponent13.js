@@ -60,7 +60,6 @@ const FrameComponent13 = () => {
         const titleList = data.map((titleData) =>
         Title.constructFromObject(titleData)
         );
-        console.log(titleList);
         setTitles(titleList);
 
       } else {

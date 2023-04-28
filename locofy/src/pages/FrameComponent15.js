@@ -25,7 +25,6 @@ const FrameComponent15 = () => {
         const movieList = data.map((movieData) =>
         Movie.constructFromObject(movieData)
         );
-        console.log(movieList);
         setMovies(movieList);
 
       } else {

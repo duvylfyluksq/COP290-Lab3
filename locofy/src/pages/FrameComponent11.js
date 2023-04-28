@@ -37,7 +37,6 @@ const FrameComponent11 = () => {
     userapi.userUserIdGet(review.user_id, (error, data, response) => {
       if (response.status === 200) {
         const newUser = User.constructFromObject(data);
-        console.log(newUser);
         userList.push(newUser);
         fetchUsersSequentially(reviewList, index + 1, userList, callback);
       } else {
@@ -52,7 +51,6 @@ const FrameComponent11 = () => {
           const showList = data.slice(0,11).map((showData) =>
           Tvshow.constructFromObject(showData)
           );
-          console.log(showList);
           const updatedShows = showList.filter((m) => m.title !== show.title);
           setShows(updatedShows);
           
@@ -61,10 +59,7 @@ const FrameComponent11 = () => {
               const reviewList = data.slice(0, 3).map((reviewData) =>
               Review.constructFromObject(reviewData)
               );
-              console.log(reviewList);
               setReviews(reviewList);
-              console.log("lmao");
-              console.log(reviews);
               fetchUsersSequentially(reviewList, 0, [], (userList) => {
                 setUsers(userList);
               });

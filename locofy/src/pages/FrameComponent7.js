@@ -31,7 +31,6 @@ const FrameComponent7 = () => {
   
   useEffect(() => {
     revapi.reviewUserUserIdGet(user.user_id, {sortOrder:true}, (error, data, response) => {
-      console.log("rip");
       if (response.status === 200) {
         const reviewlist = data.map((reviewData) => Review.constructFromObject(reviewData));
         setReviews(reviewlist);

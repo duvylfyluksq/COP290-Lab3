@@ -39,7 +39,6 @@ const FrameComponent22 = () => {
     userapi.userUserIdGet(review.user_id, (error, data, response) => {
       if (response.status === 200) {
         const newUser = User.constructFromObject(data);
-        console.log(newUser);
         userList.push(newUser);
         fetchUsersSequentially(reviewList, index + 1, userList, callback);
       } else {
@@ -54,7 +53,6 @@ const FrameComponent22 = () => {
           const showList = data.slice(0,11).map((showData) =>
           Tvshow.constructFromObject(showData)
           );
-          console.log(showList);
           const updatedShows = showList.filter((m) => m.title !== show.title);
           setShows(updatedShows);
           
@@ -63,10 +61,7 @@ const FrameComponent22 = () => {
               const reviewList = data.map((reviewData) =>
               Review.constructFromObject(reviewData)
               );
-              console.log(reviewList);
               setReviews(reviewList);
-              console.log("lmao");
-              console.log(reviews);
               fetchUsersSequentially(reviewList, 0, [], (userList) => {
                 setUsers(userList);
               });
@@ -104,7 +99,6 @@ const FrameComponent22 = () => {
   
 
   const onWatchlistClick = useCallback(() => {
-    console.log("Watchlist clicked");
     if(isadded){
       setisadded(false);
       user.watchlist_shows[show.show_id.id] = false;
@@ -115,7 +109,6 @@ const FrameComponent22 = () => {
     }
     userapi.watchlistTvshowUserIdPut(user.user_id, show.show_id.id, (error, data, response) => {
       if (response === 201) {
-        console.log("Watchlist updated");
         
       } else {
         console.log(error);
@@ -221,11 +214,7 @@ const FrameComponent22 = () => {
         </div>
         <NavbarContainer
           user = {user}
-          dimensions="/vector35.svg"
-          dimensionsText="/fluentcompose24filled1.svg"
-          dimensionsId="/profilemenu8.svg"
           propBoxShadow="unset"
-        
         />
       </div>
     </div>

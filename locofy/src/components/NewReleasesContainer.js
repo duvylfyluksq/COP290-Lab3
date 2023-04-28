@@ -57,7 +57,7 @@ const NewReleasesContainer = ({
     
     const isMovie = !!release.movie;
     const content = isMovie ? release.movie : release.tvshow;
-    console.log(isMovie);
+  
     return (
       <a
         key={index}

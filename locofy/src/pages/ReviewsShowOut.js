@@ -35,7 +35,6 @@ const ReviewsShowOut = () => {
     userapi.userUserIdGet(review.user_id, (error, data, response) => {
       if (response.status === 200) {
         const newUser = User.constructFromObject(data);
-        console.log(newUser);
         userList.push(newUser);
         fetchUsersSequentially(reviewList, index + 1, userList, callback);
       } else {
@@ -50,10 +49,7 @@ const ReviewsShowOut = () => {
               const reviewList = data.map((reviewData) =>
               Review.constructFromObject(reviewData)
               );
-              console.log(reviewList);
               setReviews(reviewList);
-              console.log("lmao");
-              console.log(reviews);
               fetchUsersSequentially(reviewList, 0, [], (userList) => {
                 setUsers(userList);
               });

@@ -20,7 +20,7 @@ const FrameComponent3 = () => {
             <div className="usrnamee">{user.username}</div>
           </div>
           <div className="reviewlist">
-            <div className="postslist">
+            <div className="reviews139">
             {reviews.map((review) => (
                 <ReviewForm
                 host = {host}

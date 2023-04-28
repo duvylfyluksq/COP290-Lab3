@@ -3,7 +3,7 @@ import  { useEffect, useState } from 'react';
 
 import { useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import BobDylanContainer from "../components/BobDylanContainer";
+import BobDylanContainer1 from "../components/BobDylanContainer1.js";
 import MovieWatchListContainer from "../components/MovieWatchListContainer";
 import BottomFooter from "../components/BottomFooter";
 import ReviewContainer from "../components/ReviewContainer";
@@ -83,7 +83,9 @@ const FrameComponent8 = () => {
     <div className="bobdylan-inself-parent">
       <div className="bobdylan-inself">
         <div className="body7">
-          <BobDylanContainer user = {user}/>
+          <div className="changewidth">
+          <BobDylanContainer1 user = {user}/>
+          </div>
           <div className="watchlist6">
             <div className="watchlistheader4">
               <div className="watchlist7">Watchlist</div>
