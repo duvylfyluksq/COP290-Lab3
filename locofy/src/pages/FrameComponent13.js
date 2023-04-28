@@ -296,11 +296,7 @@ function active(buttonNumber){
         </div>
         <NavbarContainer
           user = {user}
-          dimensions="/vector35.svg"
-          dimensionsText="/fluentcompose24filled1.svg"
-          dimensionsId="/profilemenu8.svg"
           propBoxShadow="unset"
-        
         />
         
 

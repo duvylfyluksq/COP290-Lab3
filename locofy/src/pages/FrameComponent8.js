@@ -119,12 +119,8 @@ const FrameComponent8 = () => {
             <div className="review1390">
               {reviews.slice(0,3).map((review) => (
                 <ReviewContainer
-                picture="/picture1@2x.png"
-                duvylfyluksq="bobdylan"
-                bodyCursor="unset"
-                bodyFrameCursor="unset"
-                user = {user}
-                review = {review}
+                  review = {review}
+                  user = {user}
               />
               ))}
               
@@ -134,14 +130,7 @@ const FrameComponent8 = () => {
             </div>
           </div>
         </div>
-        <MoviesContainer
-          coordinates="/vector14.svg"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onNavbarRHSContainerClick={onNavbarRHSContainerClick}
-        />
+        <MoviesContainer/>
       </div>
     </div>
   );

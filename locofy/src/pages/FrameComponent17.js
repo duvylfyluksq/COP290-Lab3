@@ -153,46 +153,6 @@ const FrameComponent17 = () => {
     navigate("/movieout");
   }, [navigate]);
 
-  const onTVShowCardContainer9Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer10Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer11Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer12Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onTVShowCardContainer13Click = useCallback(() => {
-    navigate("/tvshowout");
-  }, [navigate]);
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
-  }, [navigate]);
-
   
 
   return (
@@ -251,14 +211,7 @@ const FrameComponent17 = () => {
             propAlignSelf1="stretch"
           />
         </div>
-        <MoviesContainer
-          coordinates="/vector21.svg"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onNavbarRHSContainerClick={onNavbarRHSContainerClick}
-        />
+        <MoviesContainer/>
       </div>
     </div>
   );

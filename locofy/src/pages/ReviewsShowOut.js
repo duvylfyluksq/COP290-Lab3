@@ -61,44 +61,12 @@ const ReviewsShowOut = () => {
         } 
     },[show, fetched]);
 
-
-  const onPictureIconClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqTextClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
-  }, [navigate]);
-
   const reviewBlock = reviews.map((review, index) => (
     users && users.length === reviews.length ? (
       <ReviewContainer
         review={review}
-        key={index}
         user={users[index]}
-        onPictureIconClick={onPictureIconClick}
-        onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
+        key={index}
       />
     ) : null
   ));
@@ -116,14 +84,7 @@ const ReviewsShowOut = () => {
               {reviewBlock}
             </div>
         </div>
-        <MoviesContainer
-          coordinates="/vector18.svg"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onNavbarRHSContainerClick={onNavbarRHSContainerClick}
-        />
+        <MoviesContainer/>
       </div>
     </div>
     </div>

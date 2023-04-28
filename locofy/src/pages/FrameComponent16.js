@@ -12,9 +12,7 @@ import "./FrameComponent16.css";
 import {Movie} from "../model/Movie";
 import {Tvshow} from "../model/Tvshow";
 import {Title} from "../model/Title";
-import {User } from "../model/User";
 import { TitlesApi } from '../api/TitlesApi';
-import {UserApi} from "../api/UserApi";
 
 const api = new TitlesApi();
 
@@ -152,11 +150,7 @@ const FrameComponent16 = () => {
         </div>
         <NavbarContainer
           user = {user}
-          dimensions="/vector35.svg"
-          dimensionsText="/fluentcompose24filled1.svg"
-          dimensionsId="/profilemenu8.svg"
           propBoxShadow="unset"
-        
         />
       </div>
     </div>

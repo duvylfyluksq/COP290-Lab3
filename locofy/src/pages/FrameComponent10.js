@@ -77,34 +77,6 @@ const FrameComponent10 = () => {
     }
     },[mov, fetched]);
 
-  const onPictureIconClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onDuvylfyluksqTextClick = useCallback(() => {
-    navigate("/duvylfyluksqout");
-  }, [navigate]);
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
-  }, [navigate]);
-
   const onSeeAllReviewsClick = useCallback(() => {
     navigate("/reviewsmovieout", {state:{mov}});
   }, [navigate]);
@@ -114,10 +86,8 @@ const FrameComponent10 = () => {
     users && users.length === reviews.length ? (
       <ReviewContainer
         review={review}
-        key={index}
         user={users[index]}
-        onPictureIconClick={onPictureIconClick}
-        onDuvylfyluksqTextClick={onDuvylfyluksqTextClick}
+        key={index}
       />
     ) : null
   ));
@@ -188,14 +158,7 @@ const FrameComponent10 = () => {
             </div>
           </div>
         </div>
-        <MoviesContainer
-          coordinates="/vector20.svg"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onNavbarRHSContainerClick={onNavbarRHSContainerClick}
-        />
+        <MoviesContainer/>
       </div>
     </div>
   );

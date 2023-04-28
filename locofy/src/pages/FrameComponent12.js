@@ -6,31 +6,6 @@ import MoviesContainer from '../components/MoviesContainer';
 import "./FrameComponent12.css";
 
 const FrameComponent12 = ({genre}) => {
-  const navigate = useNavigate();
-
-  const onGenreCardContainerClick = useCallback(() => {
-    navigate("/mixedbrowseout")
-  }, [navigate]);
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedout");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowseout");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowseout")
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresout");
-  }, [navigate]);
-
-  const onNavbarRHSContainerClick = useCallback(() => {
-    navigate("/signin");
-  }, [navigate]);
 
   return (
     <div className="genres-out-parent">
@@ -81,14 +56,7 @@ const FrameComponent12 = ({genre}) => {
             />
           </div>
         </div>
-        <MoviesContainer
-          coordinates="/vector21.svg"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onNavbarRHSContainerClick={onNavbarRHSContainerClick}
-        />
+        <MoviesContainer/>
       </div>
     </div>
   );

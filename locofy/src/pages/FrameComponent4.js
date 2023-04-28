@@ -1,7 +1,6 @@
 import React from 'react';
 import { useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import SortPanelReviewsPageRadios from "../components/SortPanelReviewsPageRadios";
 import ReviewForm from "../components/ReviewForm";
 import NavbarContainer from "../components/NavbarContainer";
 import "./FrameComponent4.css";
@@ -11,30 +10,6 @@ const FrameComponent4 = () => {
   const location = useLocation();
   const user = location.state.user;
   const reviews = location.state.reviews;
-
-  const onLogoContainerClick = useCallback(() => {
-    navigate("/homesignedin");
-  }, [navigate]);
-
-  const onMoviesTextClick = useCallback(() => {
-    navigate("/moviebrowsein");
-  }, [navigate]);
-
-  const onTVShowsTextClick = useCallback(() => {
-    navigate("/tvshowbrowsein");
-  }, [navigate]);
-
-  const onGenresTextClick = useCallback(() => {
-    navigate("/genresin");
-  }, [navigate]);
-
-  const onFluentcompose24FilledClick = useCallback(() => {
-    navigate("/makepost");
-  }, [navigate]);
-
-  const onProfileMenuClick = useCallback(() => {
-    navigate("/bobdylaninself");
-  }, [navigate]);
 
   return (
     <div className="reviews-bobdylan-in-parent">
@@ -61,16 +36,7 @@ const FrameComponent4 = () => {
           </div>
         </div>
         <NavbarContainer
-          dimensions="/vector11.svg"
-          dimensionsText="/fluentcompose24filled.svg"
-          dimensionsId="/profilemenu3.svg"
           propBoxShadow="unset"
-          onLogoContainerClick={onLogoContainerClick}
-          onMoviesTextClick={onMoviesTextClick}
-          onTVShowsTextClick={onTVShowsTextClick}
-          onGenresTextClick={onGenresTextClick}
-          onFluentcompose24FilledClick={onFluentcompose24FilledClick}
-          onProfileMenuClick={onProfileMenuClick}
           user = {user}
         />
       </div>

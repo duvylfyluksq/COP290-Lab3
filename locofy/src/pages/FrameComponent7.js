@@ -103,13 +103,9 @@ const FrameComponent7 = () => {
             <div className="review1390">
               {reviews.slice(0,3).map((review) => (
                 <ReviewForm
-                picture="/picture1@2x.png"
-                duvylfyluksq="bobdylan"
-                bodyCursor="unset"
-                bodyFrameCursor="unset"
-                host = {user}
-                user = {user}
-                review = {review}
+                  review = {review}
+                  user = {user}
+                  host = {user}
               />
               ))}
               
