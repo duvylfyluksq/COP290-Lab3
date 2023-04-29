@@ -20,6 +20,7 @@ const ReviewForm = ({
   const commentInputRef = useRef(null);
   const [sentiment,setSentiment] = useState("");
   const [isliked,setisliked] = useState(review.likes[host.user_id] !== undefined && review.likes[host.user_id]);
+
   useEffect(()=>{
     if (review.likes[host.user_id] === true){
       setisliked(true);
@@ -73,7 +74,8 @@ const ReviewForm = ({
     return trueCount;
   };
 
-  const [likes,setLikes] = useState(countTrueValues(review.likes));
+  const [likes,setLikes] = useState(countTrueValues(review.likes));  
+  
 
   function comm() {
     const reviewId = review.review_id;
@@ -84,25 +86,13 @@ const ReviewForm = ({
       if (error) {
         console.error(error);
       } else {
-        
         commentInputRef.current.value = "";
         setCharCount2(0);
-        reviewsApi.reviewReviewIdCommentGet(review.review_id, (error, data, response) => {
-          if (response.status == 200) {
-            const commentlist = data.map((comment) =>
-              Comment.constructFromObject(comment)
-            );
-            setcomments(commentlist);
-            fetchUsersSequentially(commentlist, 0, [], (userList) => {
-              setUsers(userList);
-            });
-          } else {
-            console.log(error);
-          }
-        }),[comments];
+        fetchAndUpdateComments();
       }
     });
   }
+
   const navigate = useNavigate();
 
   const onUserClick = useCallback(() => {
@@ -198,24 +188,31 @@ const ReviewForm = ({
     });
   };
 
+  const fetchAndUpdateComments = useCallback(() => {
+    reviewsApi.reviewReviewIdCommentGet(review.review_id, (error, data, response) => {
+      if (response.status == 200) {
+        const commentlist = data.map((comment) =>
+          Comment.constructFromObject(comment)
+        );
+        setcomments(commentlist);
+        fetchUsersSequentially(commentlist, 0, [], (userList) => {
+          setUsers(userList);
+          console.log(userList);
+          console.log(commentlist);
+        });
+      } else {
+        console.log(error);
+      }
+    });
+  }, [comments,users]);
+  
+
   const toggleComments = useCallback(() => {
     if(!fetched){
-      reviewsApi.reviewReviewIdCommentGet(review.review_id, (error, data, response) => {
-        if (response.status == 200) {
-          const commentlist = data.map((comment) =>
-            Comment.constructFromObject(comment)
-          );
-          setcomments(commentlist);
-          fetchUsersSequentially(commentlist, 0, [], (userList) => {
-            setUsers(userList);
-          });
-        } else {
-          console.log(error);
-        }
-      });
+      fetchAndUpdateComments();
       setShowComments(!showComments);
     }
-  }, [showComments,comments,users]);
+  }, [showComments]);
 
   return (
     <div className="review" ref={reviewContainerRef}>

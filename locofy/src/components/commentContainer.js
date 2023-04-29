@@ -2,10 +2,10 @@ import React from 'react';
 import "./commentContainer.css";
 import Comment from './comment';
 
-const CommentContainer = ({ comments, userlist, host = [], }) => {
+const CommentContainer = ({ comments, userlist = [], host = [], }) => {
 
 
-  if (userlist.length === 0) {
+  if (userlist.length !== comments.length || (userlist.length === 0)) {
     return null;
   }
 

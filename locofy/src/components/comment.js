@@ -7,10 +7,8 @@ import {User} from "../model/User";
 
 const userapi = new UserApi();
 
-
-
 const Comment = ({
-  user,
+  user ,
   comment,
   host = [],
   }) => {
