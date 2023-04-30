@@ -13,6 +13,7 @@
   color: var(--color-darkorchid-100);
   font-family: var(--font-roboto);
   overflow-y:hidden;
+  overflow-x: hidden;
 }
 .contentt{
     top:-10%;

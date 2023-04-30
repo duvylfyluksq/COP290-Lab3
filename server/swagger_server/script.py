@@ -12,13 +12,13 @@ connection = pymysql.connect(
 )
 cursor = connection.cursor()
 
-with open('tvseries_only.tsv', 'r') as f:
+with open('movie_only.tsv', 'r') as f:
     i = 0
     next(f)
     l = 0
     for line in f:
         l += 1
-        if (i < 1000):
+        if (i < 600):
             columns = line.strip().split('\t')
             id = columns[0]
             type = columns[1]
@@ -43,6 +43,7 @@ with open('tvseries_only.tsv', 'r') as f:
                                 data['imdbRating']), genres, date, data['Runtime'], data['Poster'], data['Plot'])
                             cursor.execute(query, values)
                             print("Added")
+                            i += 1
                             connection.commit()
                         else:
                             query = "INSERT INTO `tvshow` (title, cast, director, writer, rating, genres, release_date, duration, poster, plot, season) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
