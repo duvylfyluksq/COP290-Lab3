@@ -47,34 +47,8 @@ const TVShowsContainer = ({
     };
   }, [propWidth, propAlignSelf1]);
 
-  const tvShows = [
-    {
-      title: 'Title 1',
-      season: 'Season 1',
-      rating: '8.5',
-      imageSrc: '/moviecard@2x.png',
-      ratingIconSrc: '/vector19.svg',
-    },
-    // Add more TV shows here
-  ];
 
   const navigate = useNavigate();
-  // const [shows, setShows] = useState([]);
-
-  // useEffect(() => {
-  //   const opts = { sortTypeBrowse: "Rat" };
-  //   api.tvshowGet(opts, (error, data, response) => {
-  //     if (response.status === 200) {
-  //       const showList = data.slice(0, 5).map((showData) =>
-  //         Tvshow.constructFromObject(showData)
-  //       );
-  //       console.log(showList);
-  //       setShows(showList);
-  //     } else {
-  //       console.log(error);
-  //     }
-  //   });
-  // }, []);
   
   const onTVShowCardClick = useCallback((show) => {
     const isUser = (user.length != 0);

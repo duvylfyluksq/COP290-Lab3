@@ -47,12 +47,14 @@ const Searchin = () => {
                 <MovieDescriptionContainerBrows
                   key={index}
                   movie={title.movie}
+                  user = {user}
                   productId="/vector29.svg"
                 />
               ) : (
                 <BrowsePageContainer1
                   key={index}
                   show={title.tvshow}
+                  user = {user}
                   dimensions="/vector29.svg"
                 />
               )}

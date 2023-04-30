@@ -33,10 +33,10 @@ const TrendingContainer = ({
   const onTVShowCardContainerClick = useCallback((show) => {
     const isUser = (user.length != 0);
     if (isUser){
-      navigate("/tvshowin", { state: { show: content, user} });
+      navigate("/tvshowin", { state: { show, user} });
     }
     else{
-      navigate("/tvshowout", { state: { show: content, user} });
+      navigate("/tvshowout", { state: { show, user} });
     }
   }, [navigate]);
 

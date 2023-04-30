@@ -143,7 +143,7 @@ const ReviewForm = ({
       setLikes(likes+1);
       setisliked(true);
     }
-    var like= document.querySelectorAll("#likebutton-icon1");
+    var like= document.querySelectorAll("#likebutton-icon");
     if(like[0].classList.contains('liked')){
       like[0].classList.remove('liked');
       like[0].setAttribute("src","/likebutton.svg");
@@ -255,7 +255,7 @@ const ReviewForm = ({
         </div>
         <div className="likes5">
           <div className="likes6">{likes}</div>
-          <img id="likebutton-icon1" className="likebutton-icon1" alt="" src= {isliked? "./likedbutton.svg" : "./likebutton.svg"} onClick={()=>liking()}/>
+          <img id="likebutton-icon" className="likebutton-icon" alt="" src= {isliked? "./likedbutton.svg" : "./likebutton.svg"} onClick={()=>liking()}/>
         </div>
           </div>
               {showComments && (

@@ -12,13 +12,13 @@ connection = pymysql.connect(
 )
 cursor = connection.cursor()
 
-with open('movie_only.tsv', 'r') as f:
+with open('tvseries_only.tsv', 'r') as f:
     i = 0
     next(f)
     l = 0
     for line in f:
         l += 1
-        if (i < 600):
+        if (i < 1000):
             columns = line.strip().split('\t')
             id = columns[0]
             type = columns[1]
